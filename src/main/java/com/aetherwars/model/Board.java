@@ -1,15 +1,19 @@
+package com.aetherwars.model;
+
+import java.util.List;
+
 public class Board {
     private List<Card> onBoardCards;
 
-    public isEmpty() {
+    public boolean isEmpty() {
         return this.onBoardCards == 0;
     }
 
-    public addCardtoBoard(Card card) {
+    public void addCardtoBoard(Card card) {
         this.onBoardCards.add(card);
     }
 
-    public removeCardfromBoard(Card card) {
+    public void removeCardfromBoard(Card card) {
         this.onBoardCards.remove(card);
     }    
 }

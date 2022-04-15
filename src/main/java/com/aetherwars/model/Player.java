@@ -1,5 +1,11 @@
+package com.aetherwars.model;
+
+import com.aetherwars.model.Card.*;
+
+
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Random;
 
 // import class Card, Deck, Hand, Board
 
@@ -13,10 +19,10 @@ public class Player {
     // private List<Card> Deck;
 
     // constructor
-    public player(String name) {
+    public void player(String name, int mana) {
         this.Name = name;
         this.hp = 80;
-        // this.Mana = mana;
+        this.Mana = mana;
         this.onHandCards = new ArrayList<Card>(5);
         this.onBoardCards = new ArrayList<Card>(5);
         // this.Deck = new ArrayList<Card>();
@@ -70,23 +76,18 @@ public class Player {
 
     // Getter onHandCards
     public List<Card> getOnHand() {
-        return this.onHand;
+        return this.onHandCards;
     }
 
     // Getter onBoardCards
     public List<Card> getOnBoard() {
-        return this.onBoard
-    }
-
-    // Mengambil kartu baru
-    public void drawCard(Deck deck) {
-        this.onHand.add(deck.drawCard());
+        return this.onBoardCards;
     }
 
     // Melihat deskripsi dan atribut kartu hand maupun board
     public void showCard(Card card) {
         System.out.println("Name : " + card.getName());
-        System.out.println("Description : " + card.getDescription());
+        System.out.println("Description : " + card.getDesc());
         System.out.println("Type : " + card.getType());
     }
 
