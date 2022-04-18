@@ -1,5 +1,8 @@
 package com.aetherwars.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Character extends Card{
   private Type type;
   private int attack;
@@ -8,6 +11,8 @@ public class Character extends Card{
   private int healthUp;
   private int exp;
   private int level;
+  private boolean hasAttack;
+  private List<Spell> spellList;
 
 
   public Character(int id, String name, String desc, String path, int mana, Type type, int attack, int health, int attackUp, int healthUp) {
@@ -19,6 +24,8 @@ public class Character extends Card{
     this.healthUp = healthUp;
     this.exp = 0;
     this.level = 1;
+    this.hasAttack = false;
+    this.spellList = new ArrayList<>();
   }
 
   // getter
@@ -49,6 +56,10 @@ public class Character extends Card{
 
   public int getLevel(){
     return this.level;
+  }
+
+  public boolean hasAttack(){
+    return this.hasAttack;
   }
 
   private boolean isStrongerThan(Character c){
@@ -90,6 +101,33 @@ public class Character extends Card{
 
   public boolean isDead(){
     return this.health == 0;
+  }
+
+  public boolean isCharacter() { return true;}
+
+  public void addSpell() {}
+
+  public void LvlEffect(LvlSpell s){
+    this.exp = 0;
+    int predictLvl = s.getAdd() + this.getLevel();
+    if (predictLvl >= 1 && predictLvl <= 10){
+      this.level = predictLvl;
+    } else if (predictLvl > 10){
+      this.level = 10;
+    } else {
+      this.level = 1;
+    }
+  }
+
+  public void MorphEffect(Character c){
+    this.id = c.getId(); this.name = c.getName();
+    this.desc = c.getDesc(); this.imagePath = c.getImagePath();
+    this.mana = c.getMana(); this.type = c.getType();
+    this.attack = c.getAttack(); this.health = c.getHealth();
+    this.attackUp = c.getAttackUp(); this.healthUp = c.getHealthUp();
+    this.exp = 0; this.level = 1;
+    this.hasAttack = false;
+    this.spellList = new ArrayList<>();
   }
 
 
