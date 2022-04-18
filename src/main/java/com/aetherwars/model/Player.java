@@ -1,21 +1,23 @@
 package com.aetherwars.model;
 
 import com.aetherwars.model.Card.*;
-
+import com.aetherwars.model.Character.*;
+import com.aetherwars.model.Board.*;
+import com.aetherwars.model.Hand.*;
 
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
 
-// import class Card, Deck, Hand, Board
 
 public class Player {
     private String Name;
     private int hp;
     private int Mana;
 
-    private List<Card> onHandCards;
-    private List<Card> onBoardCards;
+    private Board board;
+    private Hand hand;
+
     // private List<Card> Deck;
 
     // constructor
@@ -23,25 +25,15 @@ public class Player {
         this.Name = name;
         this.hp = 80;
         this.Mana = mana;
-        this.onHandCards = new ArrayList<Card>(5);
-        this.onBoardCards = new ArrayList<Card>(5);
-        // this.Deck = new ArrayList<Card>();
+
+        this.board = new Board();
+        this.hand = new Hand();
+
     }
 
-    // Draw card from deck
-    public void drawCard(Deck deck) {
-        this.onHandCards.add(deck.drawCard());
-        // Membuang kartu apabila kartu di Hand melebihi 5
-        if(this.onHandCards.size() > 5) {
-            Random rand = new Random();
-            int id = rand.nextInt(this.onHandCards.size());
-            this.onHandCards.remove(id);
-        }
-    }
-
-    // Remove card from hand
-    public void removeCard(Card card) {
-        this.onHandCards.remove(card);
+    // reset Mana
+    public void resetMana(int mana) {
+        this.Mana = mana;
     }
 
     // Getter name
@@ -55,7 +47,7 @@ public class Player {
     }
 
     // Setter HP
-    public int setHp(int hp) {
+    public void setHp(int hp) {
         this.hp = hp;
     }
 
@@ -64,55 +56,78 @@ public class Player {
         return this.Mana;
     }
 
-    // Setter Mana 
-    public int setMana(int mana) {
+    // Setter Mana
+    public void setMana(int mana) {
         this.Mana = mana;
     }
 
-    // Setter HP
-    public int setHp(int hp) {
-        this.hp = hp;
-    }
+    // Mengambil kartu dari Deck
+    public void drawCard() {
+        // draw 3 kartu teratas dari deck
+        this.deck.drawCard();
 
-    // Getter onHandCards
-    public List<Card> getOnHand() {
-        return this.onHandCards;
-    }
-
-    // Getter onBoardCards
-    public List<Card> getOnBoard() {
-        return this.onBoardCards;
+        // remove kartu dari hand kalo penuh
+        if(this.hand.isFull()) {
+            Random rand = new Random();
+            int id = rand.nextInt(this.hand.numberOfCards());
+            this.hand.removeCardfromHand(id);
+        }
     }
 
     // Melihat deskripsi dan atribut kartu hand maupun board
     public void showCard(Card card) {
         System.out.println("Name : " + card.getName());
         System.out.println("Description : " + card.getDesc());
-        System.out.println("Type : " + card.getType());
+        // System.out.println("Type : " + card.getType());
+        //atk
+        //hp
+        //level
+        //exp
+
     }
 
     // Mengeluarkan kartu / memindahkan kartu dari hand ke board
-    public void playCard(Card card) {
-        this.onBoardCards.add(card);
-        this.onHandCards.remove(card);
+    public void playCard(int idx) {
+        if (this.Mana >= this.hand.getCard(idx).getMana()) {
+            board.addCardtoBoard(this.hand.getCard(idx),idx);
+            this.Mana -= this.hand.getCard(idx).getMana();
+            this.hand.removeCardfromHand(idx);
+        } else {
+            System.out.println("This player doesn't have enough mana");
+        }
     }
 
-    // Menyerang musuh
-    public void attack(Board onBoardCard, Board enemyOnBoardCard, Player enemy) {
-        // Health karakter pemain berkurang sesuai dengan attack karakter
-        // musuh dan attack modifier tipe kedua karakter (tetap berkurang meskipun karakter musuh mati).        
-        if isAttckValid() {
-            enemy.setHp(enemy.getHp() - onBoardCard.getAttack());
-        } 
+    // Attack
+    // attackerCharacterIdx = indeks kartu yang digunakan untuk attack
+    // enemyCharacterIdx = indeks kartu musuh yang di attack
+    public void attack(int attackerCharacterIdx, int enemyCharacterIdx, Player enemy) {
+        int attack = this.board.getCard(attackerCharacterIdx).getAttack() ;
 
-        // Jika karakter musuh mati, exp karakter pemain akan bertambah sebesar level karakter musuh.
-        if enemy.getHp() == 0 {
-            this.onBoardCard.setExp(this.onBoardCard.getExp() + enemyOnBoardCard.getLevel());
-        }
+        Card attacker = this.board.getCard(attackerCharacterIdx);
+        Card enemyCharacter = enemy.board.getCard(enemyCharacterIdx);
 
-        // Jika exp karakter pemain melebihi batas yang diperlukan, level karakter pemain akan meningkat.
-        if this.onBoardCard.getExp() > this.onBoardCard.getLevel() * 10 {
-            this.onBoardCard.setLevel(this.onBoardCard.getLevel() + 1);
+        if (enemy.board.isEmpty()) {
+            enemy.setHp(enemy.getHp() - attacker.getAttack());
+        } else {
+            // Health karakter musuh berkurang sesuai dengan attack karakter
+            // pemain dan attack modifier tipe kedua karakter
+
+            // Health karakter pemain berkurang sesuai dengan attack karakter
+            // musuh dan attack modifier tipe kedua karakter (tetap berkurang
+            // meskipun karakter musuh mati).
+            enemyCharacter.setHealth(enemyCharacter.getAttack());
+
+
+            // Jika karakter musuh mati, exp karakter pemain akan bertamba sebesar level karakter musuh
+            if (enemyCharacter.getHealth() == 0) {
+                attacker.addExp(enemyCharacter.getLevel());
+            }
+
+            // Jika exp karakter pemain melebihi batas yang diperlukan, level karakter pemain akan meningkat
+            while (attacker.getExp() > (attacker.getLevel() * 2) - 1) {
+                attacker.level += 1;
+                attacker.Exp -= 2;
+            }
         }
     }
 
