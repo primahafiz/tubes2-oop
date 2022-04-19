@@ -7,7 +7,7 @@ public class Hand {
         this.onHandCards = new ArrayList<Card>(5);
     }
     
-    public void removeCardFromHand(int idx) {
+    public void removeCardfromHand(int idx) {
         this.onHandCards.remove(idx);
     }
 
