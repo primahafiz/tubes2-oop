@@ -72,7 +72,7 @@ public class Character extends Card  {
   }
 
   public void setHasAttackedTrue() {
-    this.hasAttack = true;
+    this.hasAttacked = true;
   }
 
   private boolean isStrongerThan(Character c){
@@ -142,7 +142,7 @@ public class Character extends Card  {
     this.attack = c.getAttack(); this.health = c.getHealth();
     this.attackUp = c.getAttackUp(); this.healthUp = c.getHealthUp();
     this.exp = 0; this.level = 1;
-    this.hasAttack = false;
+    this.hasAttacked = false;
     this.spellList = new ArrayList<>();
   }
 
