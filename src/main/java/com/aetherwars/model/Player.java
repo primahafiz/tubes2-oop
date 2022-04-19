@@ -114,8 +114,8 @@ public class Player {
 
             if (spellCard.getCardType() == Type.PTN) {
                 PtnSpell ptnSpellCard = (PtnSpell) spellCard;
-                System.out.println("Atk : " + ptnSpellCard.getSpellAttack());
-                System.out.println("HP : " + ptnSpellCard.getHp());
+                System.out.println("Atk : " + ptnSpellCard.getPtnAttack());
+                System.out.println("HP : " + ptnSpellCard.getPtnHp());
 
             } else if (spellCard.getCardType() == Type.LVL) {
                 LvlSpell lvlSpellCard = (LvlSpell) spellCard;
@@ -188,29 +188,36 @@ public class Player {
         Character attacker = (Character)this.board.getCard(attackerCharacterIdx);
         Character enemyCharacter = (Character)enemy.board.getCard(enemyCharacterIdx);
 
-        // Health karakter musuh berkurang sesuai dengan attack karakter
-        // pemain dan attack modifier tipe kedua karakter
+        // Character yang sudah pernah menyerang tidak bisa menyerang lagi
+        if (!attacker.hasAttacked()) {
+            // Health karakter musuh berkurang sesuai dengan attack karakter
+            // pemain dan attack modifier tipe kedua karakter
 
-        // Health karakter pemain berkurang sesuai dengan attack karakter
-        // musuh dan attack modifier tipe kedua karakter (tetap berkurang
-        // meskipun karakter musuh mati).
-        double damage = attacker.getDamage(enemyCharacter);
-        enemyCharacter.setHealth((int) (enemyCharacter.getHealth() - damage));
+            // Health karakter pemain berkurang sesuai dengan attack karakter
+            // musuh dan attack modifier tipe kedua karakter (tetap berkurang
+            // meskipun karakter musuh mati).
+            double damage = attacker.getDamage(enemyCharacter);
+            enemyCharacter.setHealth((int) (enemyCharacter.getHealth() - damage));
 
 
-        // Jika karakter musuh mati, exp karakter pemain akan bertamba sebesar level karakter musuh
-        if (enemyCharacter.getHealth() == 0) {
-            // jika sudah level 10 maka karakter tidak mendapatkan exp
-            if (attacker.getLevel() < 10) {
-                attacker.addExp(enemyCharacter.getLevel());
+            // Jika karakter musuh mati, exp karakter pemain akan bertamba sebesar level karakter musuh
+            if (enemyCharacter.getHealth() == 0) {
+                // jika sudah level 10 maka karakter tidak mendapatkan exp
+                if (attacker.getLevel() < 10) {
+                    attacker.addExp(enemyCharacter.getLevel());
+                }
             }
+
+            // Jika exp karakter pemain melebihi batas yang diperlukan, level karakter pemain akan meningkat
+            while ((attacker.getExp() > (attacker.getLevel() * 2) - 1) && (attacker.getLevel() < 10)) {
+                attacker.levelUp(1);
+                attacker.addExp(-2);
+            }
+
+            // satu karakter hanya dapat menyerang satu kali
+            attacker.setHasAttackedTrue();
         }
 
-        // Jika exp karakter pemain melebihi batas yang diperlukan, level karakter pemain akan meningkat
-        while ((attacker.getExp() > (attacker.getLevel() * 2) - 1) && (attacker.getLevel() < 10)) {
-            attacker.levelUp(1);
-            attacker.addExp(-2);
-        }
     }
 
     // Attack jika board lawan sudah tidak ada kartu
