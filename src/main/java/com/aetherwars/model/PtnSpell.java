@@ -10,11 +10,11 @@ public class PtnSpell extends Spell {
         this.hp = hp;
     }
 
-    public int getSpellAttack(){
+    public int getPtnAttack(){
         return this.attack;
     }
 
-    public int getHp(){
+    public int getPtnHp(){
         return this.hp;
     }
 

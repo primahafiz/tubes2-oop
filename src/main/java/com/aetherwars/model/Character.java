@@ -11,9 +11,10 @@ public class Character extends Card  {
   private int healthUp;
   private int exp;
   private int level;
-  private boolean hasAttack;
-  private List<Spell> spellList;
+  private boolean hasAttacked;
   private int swapDur;
+  private List<Spell> spellList;
+  // private List<>
 
 
   public Character(int id, String name, String desc, String path, int mana, Type type, int attack, int health, int attackUp, int healthUp) {
@@ -25,8 +26,10 @@ public class Character extends Card  {
     this.healthUp = healthUp;
     this.exp = 0;
     this.level = 1;
-    this.hasAttack = false;
+    this.hasAttacked = false;
+    this.swapDur = 0;
     this.spellList = new ArrayList<>(); //(id1, durasi), (id2, durasi)
+
     // list of health (id1, health1), (id2, health2) 1 2 3        1 2 4   123
     // list of attack 1 2                                         1 2 3   124
     // ngambil dr yg health positif
@@ -64,11 +67,13 @@ public class Character extends Card  {
     return this.level;
   }
 
-  public boolean hasAttack(){
-    return this.hasAttack;
+  public boolean hasAttacked(){
+    return this.hasAttacked;
   }
 
-  public void updateDur(int turn) {} // ngeupdate duration dari spell yang temp, ngubah this.mana
+  public void setHasAttackedTrue() {
+    this.hasAttack = true;
+  }
 
   private boolean isStrongerThan(Character c){
     boolean stronger = false;
@@ -141,13 +146,29 @@ public class Character extends Card  {
     this.spellList = new ArrayList<>();
   }
 
-  public void PtnEffect(){
-
+  public void PtnEffect(PtnSpell p){
+    this.spellList.add(p);
+    // add ke listAttackTemp
+    // add ke listHealthTemp
   }
 
-  public void MorphEffect(){
-
+  public void SwapEffect(SwapSpell s){
+    if (this.swapDur > 0){
+      this.swapDur += s.getDuration();
+    } else {
+      this.swapDur = s.getDuration();
+      // ngasal dulu
+      int val = this.attack;
+      this.attack = this.health;
+      this.health = val;
+      // ngeswap ptn effect juga!!!
+      // buat listattack jadi listhealthswap
+      // buat listhealth jadi listattackswap
+      // jadi kalo mau ngakses attack =
+    }
   }
+
+  public void updateDur(int turn) {} // ngeupdate duration dari spell yang temp, ngubah this.mana
 
   public Character getCharFromId (int id, List<Card> cards){
     int idx = 0;
