@@ -3,6 +3,7 @@ package com.aetherwars.model;
 import java.util.List;
 import java.util.ArrayList;
 import com.aetherwars.model.Card.*;
+import com.aetherwars.util.InvalidException;
 
 public class Board {
     private List<Card> onBoardCards;
@@ -13,17 +14,25 @@ public class Board {
     }
 
     // Menambahkan kartu ke Board
-    public void addCardtoBoard(Card card, int idx) {
+    public void addCardtoBoard(Card card, int idx) throws InvalidException{
         if (this.onBoardCards.size() < 5) {
-            this.onBoardCards.get(idx) = card;
+            if (isValidIdx(idx)) {
+                this.onBoardCards.add(idx, card);
+            } else {
+                throw new InvalidException("This slot has been occupied");
+            }
         } else {
-            System.out.println("Board is full");
+            throw new InvalidException("Board is full");
         }
     }
 
     // Menghapus card dari board
-    public void removeCardfromBoard(Card card) {
-        this.onBoardCards.remove(card);
+    public void removeCardfromBoard(int idx) throws InvalidException {
+        if (!isValidIdx(idx)) {
+            this.onBoardCards.remove(idx);
+        } else {
+            throw new InvalidException("There is no card in this slot");
+        }
     }
 
     // Getter Card yang terletak pada posisi id di Board
@@ -32,7 +41,14 @@ public class Board {
     }
 
     // Memeriksa apakah yang dipilih merupakan slot kosong
+    // True jika slot kosong
     public boolean isValidIdx(int idx) {
+        return (this.onBoardCards.get(idx) == null);
+    }
+
+    // Memeriksa apakah terdapat kartu character pada slot yang dipilih
+    // True jika terdapat character pada slot
+    public boolean isCharacterAvailable(int idx) {
         return (this.onBoardCards.get(idx) != null);
     }
 
