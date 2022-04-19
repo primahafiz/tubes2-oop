@@ -13,6 +13,7 @@ public class Character extends Card  {
   private int level;
   private boolean hasAttack;
   private List<Spell> spellList;
+  private int swapDur;
 
 
   public Character(int id, String name, String desc, String path, int mana, Type type, int attack, int health, int attackUp, int healthUp) {
@@ -128,7 +129,8 @@ public class Character extends Card  {
     }
   }
 
-  public void MorphEffect(Character c){
+  public void MorphEffect(int targetId, List<Card> cards){
+    Character c = getCharFromId(targetId, cards);
     this.id = c.getId(); this.name = c.getName();
     this.desc = c.getDesc(); this.imagePath = c.getImagePath();
     this.mana = c.getMana(); this.type = c.getType();
@@ -137,6 +139,14 @@ public class Character extends Card  {
     this.exp = 0; this.level = 1;
     this.hasAttack = false;
     this.spellList = new ArrayList<>();
+  }
+
+  public void PtnEffect(){
+
+  }
+
+  public void MorphEffect(){
+
   }
 
   public Character getCharFromId (int id, List<Card> cards){
