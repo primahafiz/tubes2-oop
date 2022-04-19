@@ -88,4 +88,5 @@ public class CardReader {
 
     }
 
+    // fungsi return card dengan id tertentu
 }

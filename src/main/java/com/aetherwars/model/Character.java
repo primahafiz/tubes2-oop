@@ -3,7 +3,7 @@ package com.aetherwars.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Character extends Card{
+public class Character extends Card implements Info {
   private Type type;
   private int attack;
   private int health;
@@ -25,7 +25,12 @@ public class Character extends Card{
     this.exp = 0;
     this.level = 1;
     this.hasAttack = false;
-    this.spellList = new ArrayList<>();
+    this.spellList = new ArrayList<>(); //(id1, durasi), (id2, durasi)
+    // list of health (id1, health1), (id2, health2) 1 2 3        1 2 4   123
+    // list of attack 1 2                                         1 2 3   124
+    // ngambil dr yg health positif
+    // swap duration
+    // list of attack swap, list of health swap
   }
 
   // getter
@@ -36,7 +41,7 @@ public class Character extends Card{
 
   public int getAttack(){
     return this.attack;
-  }
+  } // ngambil dr list of attack, list of swap attack, attack
 
   public int getHealth(){
     return this.health;
@@ -61,6 +66,8 @@ public class Character extends Card{
   public boolean hasAttack(){
     return this.hasAttack;
   }
+
+  public void updateDur(int turn) {} // ngeupdate duration dari spell yang temp, ngubah this.mana
 
   private boolean isStrongerThan(Character c){
     boolean stronger = false;
@@ -128,6 +135,11 @@ public class Character extends Card{
     this.exp = 0; this.level = 1;
     this.hasAttack = false;
     this.spellList = new ArrayList<>();
+  }
+
+  @Override
+  public Type getCardType() {
+    return Type.CHARACTER;
   }
 
 

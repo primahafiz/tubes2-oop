@@ -1,6 +1,6 @@
 package com.aetherwars.model;
 
-public class PtnSpell extends Spell{
+public class PtnSpell extends Spell implements Info {
     private int attack;
     private int hp;
 
@@ -16,5 +16,10 @@ public class PtnSpell extends Spell{
 
     public int getHp(){
         return this.hp;
+    }
+
+    @Override
+    public Type getCardType() {
+        return Type.PTN;
     }
 }
