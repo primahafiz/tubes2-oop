@@ -99,6 +99,10 @@ public class Character extends Card{
     this.health = health;
   }
 
+  public void levelUp(int lvl) {
+    this.level += lvl;
+  }
+
   public boolean isDead(){
     return this.health == 0;
   }
