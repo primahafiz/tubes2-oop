@@ -1,6 +1,6 @@
 package com.aetherwars.model;
 
-public class MorphSpell extends Spell implements Info{
+public class MorphSpell extends Spell {
     private int targetId;
 
     public MorphSpell(int id, String name, String desc, String path, int mana, int duration, int targetId){

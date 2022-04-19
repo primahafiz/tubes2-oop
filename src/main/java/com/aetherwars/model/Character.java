@@ -3,7 +3,7 @@ package com.aetherwars.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Character extends Card implements Info {
+public class Character extends Card  {
   private Type type;
   private int attack;
   private int health;
@@ -116,8 +116,6 @@ public class Character extends Card implements Info {
 
   public boolean isCharacter() { return true;}
 
-  public void addSpell() {}
-
   public void LvlEffect(LvlSpell s){
     this.exp = 0;
     int predictLvl = s.getAdd() + this.getLevel();
@@ -141,7 +139,18 @@ public class Character extends Card implements Info {
     this.spellList = new ArrayList<>();
   }
 
-  @Override
+  public Character getCharFromId (int id, List<Card> cards){
+    int idx = 0;
+    for (Card card: cards){
+      if (card.getId() == id){
+        break;
+      }
+      idx++;
+    }
+    return (Character) cards.get(idx);
+  }
+
+
   public Type getCardType() {
     return Type.CHARACTER;
   }

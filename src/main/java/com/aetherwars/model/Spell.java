@@ -1,6 +1,6 @@
 package com.aetherwars.model;
 
-public class Spell extends Card{
+abstract class Spell extends Card{
     protected int duration;
 
     public Spell (int id, String name, String desc, String path, int mana, int duration){
@@ -14,4 +14,5 @@ public class Spell extends Card{
         return this.duration;
     }
 
+    abstract Type getCardType();
 }

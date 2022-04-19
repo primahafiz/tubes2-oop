@@ -1,6 +1,6 @@
 package com.aetherwars.model;
 
-public class Card {
+abstract class Card {
     protected int id;
     protected String name;
     protected String desc;
@@ -36,4 +36,6 @@ public class Card {
     public int getMana(){
         return this.mana;
     }
+
+    abstract Type getCardType();
 }
