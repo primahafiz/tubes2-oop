@@ -76,13 +76,24 @@ public class Player {
 
     // Melihat deskripsi dan atribut kartu hand maupun board
     public void showCard(Card card) {
-        System.out.println("Name : " + card.getName());
-        System.out.println("Description : " + card.getDesc());
-        // System.out.println("Type : " + card.getType());
-        //atk
-        //hp
-        //level
-        //exp
+        if card.getType() == "Character" {
+            System.out.println("Name : " + card.getName());
+            System.out.println("Description : " + card.getDesc());
+            // System.out.println("Type : " + card.getType());
+            //atk
+            //hp
+            //level
+            //exp
+
+        } else { // kartu spell
+            System.out.println("Name : " + card.getName());
+            System.out.println("Description : " + card.getDesc());
+            // System.out.println("Type : " + card.getType());
+            //atk
+            //hp
+            //level
+            //exp
+        }
 
     }
 
@@ -101,33 +112,40 @@ public class Player {
     // attackerCharacterIdx = indeks kartu yang digunakan untuk attack
     // enemyCharacterIdx = indeks kartu musuh yang di attack
     public void attack(int attackerCharacterIdx, int enemyCharacterIdx, Player enemy) {
-        int attack = this.board.getCard(attackerCharacterIdx).getAttack() ;
+        // Card attacker = this.board.getCard(attackerCharacterIdx);
+        // Card enemyCharacter = enemy.board.getCard(enemyCharacterIdx);
 
-        Card attacker = this.board.getCard(attackerCharacterIdx);
-        Card enemyCharacter = enemy.board.getCard(enemyCharacterIdx);
+        Character attacker = (Character)this.board.getCard(attackerCharacterIdx);
+        Character enemyCharacter = (Character)this.board.getCard(enemyCharacterIdx);
+
+        // Health karakter musuh berkurang sesuai dengan attack karakter
+        // pemain dan attack modifier tipe kedua karakter
+
+        // Health karakter pemain berkurang sesuai dengan attack karakter
+        // musuh dan attack modifier tipe kedua karakter (tetap berkurang
+        // meskipun karakter musuh mati).
+        enemyCharacter.setHealth(enemyCharacter.getAttack());
+
+
+        // Jika karakter musuh mati, exp karakter pemain akan bertamba sebesar level karakter musuh
+        if (enemyCharacter.getHealth() == 0) {
+            attacker.addExp(enemyCharacter.getLevel());
+        }
+
+        // Jika exp karakter pemain melebihi batas yang diperlukan, level karakter pemain akan meningkat
+        while (attacker.getExp() > (attacker.getLevel() * 2) - 1) {
+                attacker.levelUp(1);
+                attacker.addExp(-2);
+        }
+
+    }
+
+    // Attack jika board lawan sudah tidak ada kartu
+    public void attackEnemy(int attackerIdx, Player enemy) {
+        Character attacker = (Character)this.board.getCard(attackerIdx);
 
         if (enemy.board.isEmpty()) {
             enemy.setHp(enemy.getHp() - attacker.getAttack());
-        } else {
-            // Health karakter musuh berkurang sesuai dengan attack karakter
-            // pemain dan attack modifier tipe kedua karakter
-
-            // Health karakter pemain berkurang sesuai dengan attack karakter
-            // musuh dan attack modifier tipe kedua karakter (tetap berkurang
-            // meskipun karakter musuh mati).
-            enemyCharacter.setHealth(enemyCharacter.getAttack());
-
-
-            // Jika karakter musuh mati, exp karakter pemain akan bertamba sebesar level karakter musuh
-            if (enemyCharacter.getHealth() == 0) {
-                attacker.addExp(enemyCharacter.getLevel());
-            }
-
-            // Jika exp karakter pemain melebihi batas yang diperlukan, level karakter pemain akan meningkat
-            while (attacker.getExp() > (attacker.getLevel() * 2) - 1) {
-                attacker.level += 1;
-                attacker.Exp -= 2;
-            }
         }
     }
 
