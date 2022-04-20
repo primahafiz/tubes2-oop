@@ -18,6 +18,12 @@ public class PtnSpell extends Spell {
         return this.hp;
     }
 
+    public void swapAttackHp(){
+        int temp = this.attack;
+        this.attack = this.hp;
+        this.hp = temp;
+    }
+
     public Type getCardType() {
         return Type.PTN;
     }

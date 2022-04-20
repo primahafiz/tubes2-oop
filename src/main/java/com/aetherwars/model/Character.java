@@ -1,6 +1,7 @@
 package com.aetherwars.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Character extends Card  {
@@ -13,7 +14,7 @@ public class Character extends Card  {
   private int level;
   private boolean hasAttacked;
   private int swapDur;
-  private List<Spell> spellList;
+  private List<PtnSpell> listPtnSpell;
   // private List<>
 
 
@@ -28,8 +29,8 @@ public class Character extends Card  {
     this.level = 1;
     this.hasAttacked = false;
     this.swapDur = 0;
-    this.spellList = new ArrayList<>(); //(id1, durasi), (id2, durasi)
-
+    this.listPtnSpell = new ArrayList<>(); //(id1, durasi), (id2, durasi)
+    // masih asumsi saat swapback
     // list of health (id1, health1), (id2, health2) 1 2 3        1 2 4   123
     // list of attack 1 2                                         1 2 3   124
     // ngambil dr yg health positif
@@ -44,11 +45,11 @@ public class Character extends Card  {
   }
 
   public int getAttack(){
-    return this.attack;
+    return this.attack + this.getTempAttack();
   } // ngambil dr list of attack, list of swap attack, attack
 
   public int getHealth(){
-    return this.health;
+    return this.health + this.getTempHealth();
   }
 
   public int getAttackUp(){
@@ -110,7 +111,7 @@ public class Character extends Card  {
 
   public void setHealth(int health){
     this.health = health;
-  }
+  } // perlu dimodify
 
   public void levelUp(int lvl) {
     this.level += lvl;
@@ -121,6 +122,56 @@ public class Character extends Card  {
   }
 
   public boolean isCharacter() { return true;}
+
+  private int getTempAttack(){
+    int tempAttack = 0;
+    for (PtnSpell s : this.listPtnSpell){
+      tempAttack += s.getPtnAttack();
+    }
+    System.out.println("Temp attack "+ tempAttack);
+    return tempAttack;
+  }
+
+  private int getTempHealth(){
+    int tempHealth = 0;
+    for (PtnSpell s : this.listPtnSpell){
+      tempHealth += s.getPtnHp();
+    }
+    System.out.println("Temp Health "+ tempHealth);
+    return tempHealth;
+  }
+
+  public List<PtnSpell> getListSpell(){
+    return this.listPtnSpell;
+  }
+
+  public void addSpell(PtnSpell s){
+    this.listPtnSpell.add(s);
+  }
+
+  /*
+  public void printSpell(){
+    for (PtnSpell s : this.listPtnSpell){
+      s.print();
+    }
+  }
+  */
+
+  private void updateSpellList(){
+    for (PtnSpell s : this.listPtnSpell){
+      s.minusDur();
+      if (s.getDuration() == 0){
+        this.listPtnSpell.remove(s);
+      }
+    }
+  }
+
+  private void swapPtnSpellList(){
+    // swap attack and duration in list
+    for (PtnSpell s : this.listPtnSpell){
+      s.swapAttackHp();
+    }
+  }
 
   public void LvlEffect(LvlSpell s){
     this.exp = 0;
@@ -142,12 +193,12 @@ public class Character extends Card  {
     this.attack = c.getAttack(); this.health = c.getHealth();
     this.attackUp = c.getAttackUp(); this.healthUp = c.getHealthUp();
     this.exp = 0; this.level = 1;
-    this.hasAttacked = false;
-    this.spellList = new ArrayList<>();
+    this.hasAttacked = false; this.swapDur = 0;
+    this.listPtnSpell = new ArrayList<>();
   }
 
   public void PtnEffect(PtnSpell p){
-    this.spellList.add(p);
+    this.addSpell(p);
     // add ke listAttackTemp
     // add ke listHealthTemp
   }
@@ -157,10 +208,10 @@ public class Character extends Card  {
       this.swapDur += s.getDuration();
     } else {
       this.swapDur = s.getDuration();
-      // ngasal dulu
       int val = this.attack;
       this.attack = this.health;
       this.health = val;
+      this.swapPtnSpellList();
       // ngeswap ptn effect juga!!!
       // buat listattack jadi listhealthswap
       // buat listhealth jadi listattackswap
@@ -168,7 +219,25 @@ public class Character extends Card  {
     }
   }
 
-  public void updateDur(int turn) {} // ngeupdate duration dari spell yang temp, ngubah this.mana
+  public void swapBack(){
+    int val = this.attack;
+    this.attack = this.health;
+    this.health = val;
+    this.swapPtnSpellList();
+  }
+
+  // ngeupdate duration dari spell yang temp, ngubah this.mana
+  // kayaknya mana dihandle player
+  public void updateDur(int turn) {
+    this.updateSpellList();
+    if (swapDur > 0){
+      this.swapDur -= 1;
+      if (this.swapDur == 0){
+        this.swapBack();
+      }
+    }
+
+  }
 
   public Character getCharFromId (int id, List<Card> cards){
     int idx = 0;

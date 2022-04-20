@@ -14,5 +14,11 @@ abstract class Spell extends Card{
         return this.duration;
     }
 
+    public void minusDur(){
+        if (this.duration > 0){
+            this.duration -= 1;
+        }
+    }
+
     abstract Type getCardType();
 }
