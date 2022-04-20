@@ -188,20 +188,22 @@ public class Player {
         Character attacker = (Character)this.board.getCard(attackerCharacterIdx);
         Character enemyCharacter = (Character)enemy.board.getCard(enemyCharacterIdx);
 
-        // Character yang sudah pernah menyerang tidak bisa menyerang lagi
+        // Character hanya dapat menyerang maksimal 1 kali
         if (!attacker.hasAttacked()) {
             // Health karakter musuh berkurang sesuai dengan attack karakter
             // pemain dan attack modifier tipe kedua karakter
+            double damageByAttacker = attacker.getDamage(enemyCharacter);
+            enemyCharacter.setHealth((int) (enemyCharacter.getHealth() - damageByAttacker));
 
             // Health karakter pemain berkurang sesuai dengan attack karakter
             // musuh dan attack modifier tipe kedua karakter (tetap berkurang
             // meskipun karakter musuh mati).
-            double damage = attacker.getDamage(enemyCharacter);
-            enemyCharacter.setHealth((int) (enemyCharacter.getHealth() - damage));
+            double damageByEnemy = enemyCharacter.getDamage(attacker);
+            attacker.setHealth((int) (attacker.getHealth() - damageByEnemy));
 
 
             // Jika karakter musuh mati, exp karakter pemain akan bertamba sebesar level karakter musuh
-            if (enemyCharacter.getHealth() == 0) {
+            if (enemyCharacter.isDead() && !attacker.isDead()) {
                 // jika sudah level 10 maka karakter tidak mendapatkan exp
                 if (attacker.getLevel() < 10) {
                     attacker.addExp(enemyCharacter.getLevel());
