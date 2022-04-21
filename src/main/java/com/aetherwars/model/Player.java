@@ -24,7 +24,7 @@ public class Player {
     private Deck deck;
 
     // constructor
-    public void Player(String name, int mana) {
+    public Player(String name, int mana) {
         this.Name = name;
         this.hp = 80;
         this.Mana = mana;
@@ -154,7 +154,7 @@ public class Player {
             switch (spellType) {
                 case PTN:
                     PtnSpell ptnSpellCard = (PtnSpell) spellCard;
-                    //ptn effect
+                    charCard.PtnEffect(ptnSpellCard);
                     break;
 
                 case LVL:
@@ -164,7 +164,7 @@ public class Player {
 
                 case SWAP:
                     SwapSpell swapSpellCard = (SwapSpell) spellCard;
-                    //swap effect
+                    charCard.SwapEffect(swapSpellCard);
                     break;
 
                 case MORPH:
