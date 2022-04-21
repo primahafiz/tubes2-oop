@@ -10,18 +10,22 @@ public class CardReader {
     private ArrayList<Card> cards;
     private static final int PERM = 0;
 
+    // constructor
     public CardReader(){
         this.cards = new ArrayList<>();
     }
 
-    public ArrayList<Card> addAllCards() throws IOException{
-        cards = new ArrayList<>();
+    // read and add all cards from csv
+    public void addAllCards() throws IOException{
         addCharacterCards();
-        addMorphSpellCards();
-        addSwapSpellCards();
         addPotionSpellCards();
+        addSwapSpellCards();
+        addMorphSpellCards();
         addLevelSpellCards();
-        return cards;
+    }
+
+    public ArrayList<Card> getCards(){
+        return this.cards;
     }
 
     public void addCharacterCards() throws IOException {
@@ -53,7 +57,7 @@ public class CardReader {
             // MorphSpell(int id, String name, String desc, String path, int mana, int duration, int targetId)
             MorphSpell morph = new MorphSpell(Integer.parseInt(line[0]), line[1], line[2], line[3],
                                               Integer.parseInt(line[5]), PERM, Integer.parseInt(line[4]));
-            cards.add(morph);
+            this.cards.add(morph);
         }
     }
 
@@ -66,7 +70,7 @@ public class CardReader {
         for (String[] line: swapLines){
             // SwapSpell(int id, String name, String desc, String path, int mana, int duration)
             SwapSpell swap = new SwapSpell(Integer.parseInt(line[0]), line[1], line[2], line[3], Integer.parseInt(line[5]), Integer.parseInt(line[4]));
-            cards.add(swap);
+            this.cards.add(swap);
         }
     }
 
@@ -80,11 +84,15 @@ public class CardReader {
             // PtnSpell(int id, String name, String desc, String path, int mana, int duration, int attack, int hp)
             PtnSpell ptn = new PtnSpell(Integer.parseInt(line[0]), line[1], line[2], line[3], Integer.parseInt(line[6]),
                     Integer.parseInt(line[7]), Integer.parseInt(line[4]), Integer.parseInt(line[5]));
-            cards.add(ptn);
+            this.cards.add(ptn);
         }
     }
 
     public void addLevelSpellCards(){
+        LvlSpell lvlUp = new LvlSpell(401, "LvlUp", "Level up by 1","card/image/spell/level/LevelUp.png", 0, PERM, 1);
+        LvlSpell lvlDown = new LvlSpell(402, "LvlDown", "Level down by 1","card/image/spell/level/LevelDown.png", 0, PERM, -1);
+        this.cards.add(lvlUp);
+        this.cards.add(lvlDown);
 
     }
 
