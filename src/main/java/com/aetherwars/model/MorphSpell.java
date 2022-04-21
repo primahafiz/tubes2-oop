@@ -12,7 +12,11 @@ public class MorphSpell extends Spell {
         return this.targetId;
     }
 
-    @Override
+    public void printCardInfo(){
+        super.printCardInfo();
+        System.out.println("TargetId: " + getTargetId());
+    }
+
     public Type getCardType() {
         return Type.MORPH;
     }

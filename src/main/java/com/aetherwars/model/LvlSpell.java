@@ -1,5 +1,7 @@
 package com.aetherwars.model;
 
+import com.aetherwars.model.Character;
+
 public class LvlSpell extends Spell {
     private int add;
 
@@ -8,8 +10,17 @@ public class LvlSpell extends Spell {
         this.add = add;
     }
 
+    public int getMana(Character c){
+        return (int) c.getLevel() / 2;
+    }
+
     public int getAdd(){
         return this.add;
+    }
+
+    public void printCardInfo(){
+        super.printCardInfo();
+        System.out.println("Add: " + getAdd());
     }
 
     public Type getCardType() {

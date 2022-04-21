@@ -9,7 +9,7 @@ public class Deck {
         int capacity = rand.nextInt(20) + 40;
         int i;
         for (i = 0; i < capacity; i++){
-            this.CardDeck.add();
+            //this.CardDeck.add();
         }
     }
 

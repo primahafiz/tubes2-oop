@@ -1,6 +1,6 @@
 package com.aetherwars.model;
 
-abstract class Card {
+abstract public class Card {
     protected int id;
     protected String name;
     protected String desc;
@@ -35,6 +35,14 @@ abstract class Card {
 
     public int getMana(){
         return this.mana;
+    }
+
+    public void printCardInfo(){
+        System.out.println("Id: " + getId());
+        System.out.println("Name: " + getName());
+        System.out.println("Desc: " + getDesc());
+        System.out.println("Image Path: " + getImagePath());
+        System.out.println("Mana: " + getMana());
     }
 
     abstract Type getCardType();

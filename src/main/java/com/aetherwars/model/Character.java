@@ -128,7 +128,7 @@ public class Character extends Card  {
     for (PtnSpell s : this.listPtnSpell){
       tempAttack += s.getPtnAttack();
     }
-    System.out.println("Temp attack "+ tempAttack);
+    // System.out.println("Temp attack "+ tempAttack);
     return tempAttack;
   }
 
@@ -137,7 +137,7 @@ public class Character extends Card  {
     for (PtnSpell s : this.listPtnSpell){
       tempHealth += s.getPtnHp();
     }
-    System.out.println("Temp Health "+ tempHealth);
+    // System.out.println("Temp Health "+ tempHealth);
     return tempHealth;
   }
 
@@ -250,6 +250,15 @@ public class Character extends Card  {
     return (Character) cards.get(idx);
   }
 
+  public void printCardInfo(){
+    super.printCardInfo();
+    System.out.println("Attack: " + getAttack());
+    System.out.println("Health: " + getHealth());
+    System.out.println("AttackUp: " + getAttackUp());
+    System.out.println("HealthUp: " + getHealthUp());
+    System.out.println("CharLvl: " + getLevel());
+    System.out.println("CharExp: " + getExp());
+  }
 
   public Type getCardType() {
     return Type.CHARACTER;

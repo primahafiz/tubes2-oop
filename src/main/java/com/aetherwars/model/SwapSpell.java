@@ -5,6 +5,10 @@ public class SwapSpell extends Spell {
         super(id, name, desc, path, mana, duration);
     }
 
+    public void printCardInfo(){
+        super.printCardInfo();
+    }
+
     public Type getCardType() {
         return Type.SWAP;
     }
