@@ -1,9 +1,14 @@
 package com.gui.mainguiwindow;
 
+import com.aetherwars.model.*;
+import com.aetherwars.model.Character;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
@@ -19,11 +24,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import com.aetherwars.model.Type;
-import com.aetherwars.model.Character;
-import com.aetherwars.model.Card;
 import com.aetherwars.util.CSVReader;
-import com.aetherwars.model.CardReader;
+
+import com.aetherwars.*;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class guiController implements Initializable {
     @FXML
@@ -125,6 +131,17 @@ public class guiController implements Initializable {
     int idStage;
     int turn;
 
+    Board boardPemain1;
+    Board boardPemain2;
+
+    Hand handPemain1;
+    Hand handPemain2;
+
+    Deck deckPemain1;
+    Deck deckPemain2;
+
+
+
     public guiController(){
         // ini nanti buat masukin paramater inisialiasi gui
     }
@@ -132,6 +149,9 @@ public class guiController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // initialize board, hand,deck
+        deckPemain1 = new Deck();
+        deckPemain2 = new Deck();
 
         debugging();
 
@@ -497,6 +517,7 @@ public class guiController implements Initializable {
     public void changeStageClicked(){
         // kalau button untuk pindah stage diclick
         if(idStage==0){
+            displayWindowDraw();
             activateStageLabel(stageDrawLabel,stagePlanLabel);
         }else if(idStage==1){
             activateStageLabel(stagePlanLabel,stageAttackLabel);
@@ -520,6 +541,28 @@ public class guiController implements Initializable {
     public void activateStageLabel(Label lastStage,Label newStage){
         lastStage.getStyleClass().removeIf(style -> style.equals("backgroundBtnActive"));
         newStage.getStyleClass().addAll("backgroundBtnActive");
+    }
+
+    public void displayWindowDraw(){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("drawPhase.fxml"));
+
+            System.out.println(deckPemain1);
+
+            fxmlLoader.setController(new DrawController(deckPemain1));
+
+            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+            Stage stage = new Stage();
+            stage.setTitle("Draw Phase");
+            stage.setScene(scene);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            scene.setFill(Color.TRANSPARENT);
+            stage.setOpacity(0.8);
+            stage.show();
+        }catch (Exception err){
+            err.printStackTrace();
+        }
     }
 
     public static void debugging(){
