@@ -153,6 +153,9 @@ public class guiController implements Initializable {
         deckPemain1 = new Deck();
         deckPemain2 = new Deck();
 
+        handPemain1 = new Hand();
+        handPemain2 = new Hand();
+
         debugging();
 
         // initialize health
@@ -172,6 +175,7 @@ public class guiController implements Initializable {
         player2BoardB.setImage(new Image(getClass().getResourceAsStream("image/steve.jpeg")));
         initDragAndDropBoardPlayer1();
         initDragAndDropBoardPlayer2();
+
     }
 
     public void initDragAndDropBoardPlayer1(){
@@ -550,9 +554,10 @@ public class guiController implements Initializable {
 
             System.out.println(deckPemain1);
 
-            fxmlLoader.setController(new DrawController(deckPemain1));
+            fxmlLoader.setController(new DrawController(deckPemain1,handPemain1));
 
             Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+            scene.getStylesheets().add(getClass().getResource("styleDrawPhase.css").toExternalForm());
             Stage stage = new Stage();
             stage.setTitle("Draw Phase");
             stage.setScene(scene);

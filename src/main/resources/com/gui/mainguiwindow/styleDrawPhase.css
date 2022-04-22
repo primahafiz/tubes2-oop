@@ -1,0 +1,6 @@
+.boxDrawPhase:hover{
+    -fx-opacity:0.5;
+}
+.boxDrawPhase{
+    -fx-opacity:1;
+}

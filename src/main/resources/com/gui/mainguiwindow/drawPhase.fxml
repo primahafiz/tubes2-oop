@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@styleDrawPhase.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane fx:id="containerDeck1" layoutX="100.0" layoutY="123.0" prefHeight="153.0" prefWidth="107.0" style="-fx-background-color: #bbbbbb;">
+      <BorderPane fx:id="containerDeck1" layoutX="100.0" layoutY="123.0" prefHeight="153.0" prefWidth="107.0" style="-fx-background-color: #bbbbbb;" styleClass="boxDrawPhase">
          <top>
             <ImageView fx:id="imageDeck1" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
          </top>
@@ -18,7 +18,7 @@
             <Text fx:id="atkHealthDeck1" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: center; -fx-font-weight: bold;" text="Text" wrappingWidth="85.47003388404846" BorderPane.alignment="CENTER" />
          </bottom>
       </BorderPane>
-      <BorderPane fx:id="containerDeck2" layoutX="246.0" layoutY="123.0" prefHeight="153.0" prefWidth="107.0" style="-fx-background-color: #bbbbbb;">
+      <BorderPane fx:id="containerDeck2" layoutX="246.0" layoutY="123.0" prefHeight="153.0" prefWidth="107.0" style="-fx-background-color: #bbbbbb;" styleClass="boxDrawPhase">
          <top>
             <ImageView fx:id="imageDeck2" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
          </top>
@@ -29,7 +29,7 @@
             <Text fx:id="atkHealthDeck2" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: center; -fx-font-weight: bold;" text="Text" wrappingWidth="85.47003388404846" BorderPane.alignment="CENTER" />
          </bottom>
       </BorderPane>
-      <BorderPane fx:id="containerDeck3" layoutX="392.0" layoutY="123.0" prefHeight="153.0" prefWidth="107.0" style="-fx-background-color: #bbbbbb;">
+      <BorderPane fx:id="containerDeck3" layoutX="392.0" layoutY="123.0" prefHeight="153.0" prefWidth="107.0" style="-fx-background-color: #bbbbbb;" styleClass="boxDrawPhase">
          <top>
             <ImageView fx:id="imageDeck3" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
          </top>

@@ -26,4 +26,12 @@ public class Hand {
     public Card getCard(int id) {
         return this.onHandCards.get(id);
     }
+
+    public void addCard(Card c)throws HandFullExp{
+        if(onHandCards.size()<5){
+            onHandCards.add(c);
+            return;
+        }
+        throw new HandFullExp();
+    }
 }

@@ -33,4 +33,8 @@ public class Deck {
     public List<Card> getAll(){
         return this.CardDeck;
     }
+
+    public void addCard(Card c){
+        CardDeck.add(c);
+    }
 }
