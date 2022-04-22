@@ -24,6 +24,10 @@ public class PtnSpell extends Spell {
         this.hp = temp;
     }
 
+    public void setPtnHp(int hp){
+        this.hp = hp;
+    }
+
     public void printCardInfo(){
         super.printCardInfo();
         System.out.println("Ptn Attack: " + getPtnAttack());

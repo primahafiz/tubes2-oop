@@ -1,8 +1,8 @@
 package com.aetherwars.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.*;
 
 public class Character extends Card  {
   private Type type;
@@ -158,11 +158,15 @@ public class Character extends Card  {
   */
 
   private void updateSpellList(){
+    List<PtnSpell> object = new ArrayList<PtnSpell>();
     for (PtnSpell s : this.listPtnSpell){
       s.minusDur();
       if (s.getDuration() == 0){
-        this.listPtnSpell.remove(s);
+        object.add(s);
       }
+    }
+    for (PtnSpell s : object){
+      this.listPtnSpell.remove(s);
     }
   }
 
@@ -260,6 +264,80 @@ public class Character extends Card  {
     System.out.println("CharExp: " + getExp());
   }
 
+  public void minusHealth(int damage){
+    // kalo damage >= getHealth() -> langsung this.health = 0
+    // kalo damage < getHealth():
+      // kalo getTempHealth() > 0 -> minus dari tempHealth dulu
+        // kalo damage >= tempHealth -> set this.health jadi this.health -=  declare ArrayList baru
+        // kalo lebih kecil
+      // kalo ga ada langsung minus dari this.health
+        // kalo damage >= this.health set this.health = 0
+        // kalo damage < this.health set this.health -= damage
+    if (damage >= this.getHealth()){
+      this.health = 0;
+    } else {
+      if (this.getTempHealth() > 0){
+        if (damage >= this.getTempHealth()){
+          this.health -= (damage - this.getTempHealth());
+          this.listPtnSpell = new ArrayList<PtnSpell>();
+        } else {
+          this.minusHelper(damage);
+        }
+      } else {
+        if (damage >= this.health){
+          this.health = 0;
+        } else {
+          this.health -= damage;
+        }
+      }
+    }
+  }
+
+  private void minusHelper(int damage){
+    List<Integer> listidx = new ArrayList<Integer>();
+    int total = 0;
+    int i = 0;
+    // reverse
+    Collections.reverse(this.listPtnSpell);
+
+    // catat indeks temp health yang terpakai
+    for (PtnSpell p : this.listPtnSpell){
+      if (p.getPtnHp() > 0){
+        total += p.getPtnHp();
+        listidx.add(i);
+        if (total >= damage){
+          break;
+        }
+      }
+      i += 1;
+    }
+        /*
+        for (Integer k : listidx){
+            System.out.println(k);
+        }
+        System.out.println("total "+ total + " damage " + damage);
+        */
+    // memperbarui listPtnSpell
+    if (total > damage){
+      int lastidx = listidx.get(listidx.size() - 1);
+
+      this.listPtnSpell.get(lastidx).setPtnHp(total-damage);
+
+      for (int j = 0; j < listidx.size() - 1; j++){
+        int index = listidx.get(j);
+        this.listPtnSpell.remove(index);
+      }
+
+    } else if (total == damage){
+      for (Integer l : listidx){
+        this.listPtnSpell.remove((int) l);
+      }
+    }
+    // System.out.println(i);
+    // reverse back
+    Collections.reverse(this.listPtnSpell);
+  }
+  
   public Type getCardType() {
     return Type.CHARACTER;
   }
