@@ -289,7 +289,7 @@
             </AnchorPane>
             <AnchorPane layoutX="235.0" layoutY="115.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
                <children>
-                  <ImageView id="player2BoardCAttackImg" fitHeight="20.0" fitWidth="17.0" layoutX="3.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" smooth="false" visible="false">
+                  <ImageView fx:id="player2BoardCAttackImg" fitHeight="20.0" fitWidth="17.0" layoutX="3.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" smooth="false" visible="false">
                      <image>
                         <Image url="@image/attack.png" />
                      </image>

@@ -2,6 +2,7 @@ package com.gui.mainguiwindow;
 
 import com.aetherwars.model.*;
 import com.aetherwars.model.Character;
+import com.aetherwars.util.InvalidException;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -87,7 +88,67 @@ public class guiController implements Initializable {
     @FXML
     Label player1BoardELabel;
 
-    // Label A,B,C,D,E board 1
+    // Img Attack
+    @FXML
+    ImageView player1BoardAAttackImg;
+    @FXML
+    ImageView player1BoardBAttackImg;
+    @FXML
+    ImageView player1BoardCAttackImg;
+    @FXML
+    ImageView player1BoardDAttackImg;
+    @FXML
+    ImageView player1BoardEAttackImg;
+
+    // Attack
+    @FXML
+    Label player1BoardAAttack;
+    @FXML
+    Label player1BoardBAttack;
+    @FXML
+    Label player1BoardCAttack;
+    @FXML
+    Label player1BoardDAttack;
+    @FXML
+    Label player1BoardEAttack;
+
+    // Img Health
+    @FXML
+    ImageView player1BoardAHealthImg;
+    @FXML
+    ImageView player1BoardBHealthImg;
+    @FXML
+    ImageView player1BoardCHealthImg;
+    @FXML
+    ImageView player1BoardDHealthImg;
+    @FXML
+    ImageView player1BoardEHealthImg;
+
+    // Health
+    @FXML
+    Label player1BoardAHealth;
+    @FXML
+    Label player1BoardBHealth;
+    @FXML
+    Label player1BoardCHealth;
+    @FXML
+    Label player1BoardDHealth;
+    @FXML
+    Label player1BoardEHealth;
+
+    // Lvl
+    @FXML
+    Label player1BoardALvl;
+    @FXML
+    Label player1BoardBLvl;
+    @FXML
+    Label player1BoardCLvl;
+    @FXML
+    Label player1BoardDLvl;
+    @FXML
+    Label player1BoardELvl;
+
+    // Label A,B,C,D,E board 2
     @FXML
     Label player2BoardALabel;
     @FXML
@@ -98,6 +159,66 @@ public class guiController implements Initializable {
     Label player2BoardDLabel;
     @FXML
     Label player2BoardELabel;
+
+    // Img Attack
+    @FXML
+    ImageView player2BoardAAttackImg;
+    @FXML
+    ImageView player2BoardBAttackImg;
+    @FXML
+    ImageView player2BoardCAttackImg;
+    @FXML
+    ImageView player2BoardDAttackImg;
+    @FXML
+    ImageView player2BoardEAttackImg;
+
+    // Attack
+    @FXML
+    Label player2BoardAAttack;
+    @FXML
+    Label player2BoardBAttack;
+    @FXML
+    Label player2BoardCAttack;
+    @FXML
+    Label player2BoardDAttack;
+    @FXML
+    Label player2BoardEAttack;
+
+    // Img Health
+    @FXML
+    ImageView player2BoardAHealthImg;
+    @FXML
+    ImageView player2BoardBHealthImg;
+    @FXML
+    ImageView player2BoardCHealthImg;
+    @FXML
+    ImageView player2BoardDHealthImg;
+    @FXML
+    ImageView player2BoardEHealthImg;
+
+    // Health
+    @FXML
+    Label player2BoardAHealth;
+    @FXML
+    Label player2BoardBHealth;
+    @FXML
+    Label player2BoardCHealth;
+    @FXML
+    Label player2BoardDHealth;
+    @FXML
+    Label player2BoardEHealth;
+
+    // Lvl
+    @FXML
+    Label player2BoardALvl;
+    @FXML
+    Label player2BoardBLvl;
+    @FXML
+    Label player2BoardCLvl;
+    @FXML
+    Label player2BoardDLvl;
+    @FXML
+    Label player2BoardELvl;
 
     // hand card
     @FXML
@@ -148,7 +269,7 @@ public class guiController implements Initializable {
     @FXML
     Label manaNum;
 
-    ImageView currentDrag;
+    int currentDragHand;
 
     int idStage;
     int turn;
@@ -171,6 +292,24 @@ public class guiController implements Initializable {
         pemain1 = new Player("Steve",1);
         pemain2 = new Player("Alex",1);
 
+        List<Card> c1 = pemain1.getDeck().getCard();
+        for(int i=0;i<3;i++){
+            try{
+                (pemain1.getHand()).addCard(c1.get(i));
+            }catch (HandFullExp e){
+                e.getMessage();
+            }
+        }
+
+        List<Card> c2 = pemain2.getDeck().getCard();
+        for(int i=0;i<3;i++){
+            try{
+                (pemain2.getHand()).addCard(c2.get(i));
+            }catch (HandFullExp e){
+                e.getMessage();
+            }
+        }
+
         debugging();
 
         // initialize health
@@ -185,29 +324,13 @@ public class guiController implements Initializable {
         // initialize stage
         idStage = -1;
 
-        player1BoardA.setImage(new Image(getClass().getResourceAsStream("image/alex.jpeg")));
-        player2BoardB.setImage(new Image(getClass().getResourceAsStream("image/steve.jpeg")));
+        updateHand();
 
     }
 
     public void initDragAndDropBoardPlayer1(){
-        player1BoardA.setOnDragDetected((MouseEvent event) -> {
-            Dragboard db = player1BoardA.startDragAndDrop(TransferMode.ANY);
-            currentDrag = player1BoardA;
-            ClipboardContent content = new ClipboardContent();
-            content.putImage(player1BoardA.getImage());
-            db.setContent(content);
-            event.consume();
-        });
-
-        player1BoardA.setOnDragOver(new EventHandler<DragEvent>() {
-            public void handle(DragEvent event) {
-                if (event.getDragboard().hasImage()) {
-                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-                }
-                event.consume();
-            }
-        });
+        Hand currentHand=pemain1.getHand();
+        Board currentBoard=pemain1.getBoard();
 
         player1BoardA.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
@@ -215,26 +338,23 @@ public class guiController implements Initializable {
                 System.out.println("dropped");
                 System.out.println(event.getSource());
                 System.out.println(event.getTarget());
-                System.out.println(currentDrag);
-                if(currentDrag.getId().substring(6,7).equals("1")) {
-                    player1BoardA.setImage(db.getImage());
-                    player1BoardALabel.setVisible(false);
-                }
+                System.out.println(currentDragHand);
+                if(currentBoard.isCharacterAvailable(0) && currentHand.getCard(currentDragHand) instanceof Spell) {
+                    Spell s = (Spell) currentHand.getCard(currentDragHand);
+                    currentHand.removeCardfromHand(currentDragHand);
 
+                    // tambah spell ke character
+                }else if(!currentBoard.isCharacterAvailable(0) && currentHand.getCard(currentDragHand) instanceof Character){
+                    currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),0);
+                    currentHand.removeCardfromHand(currentDragHand);
+                }
+                updateBoard();
+                updateHand();
                 event.consume();
             }
         });
 
-        player1BoardB.setOnDragDetected((MouseEvent event) -> {
-            Dragboard db = player1BoardB.startDragAndDrop(TransferMode.ANY);
-            currentDrag = player1BoardB;
-            ClipboardContent content = new ClipboardContent();
-            content.putImage(player1BoardB.getImage());
-            db.setContent(content);
-            event.consume();
-        });
-
-        player1BoardB.setOnDragOver(new EventHandler<DragEvent>() {
+        player1BoardA.setOnDragOver(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
                 if (event.getDragboard().hasImage()) {
                     event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
@@ -249,26 +369,23 @@ public class guiController implements Initializable {
                 System.out.println("dropped");
                 System.out.println(event.getSource());
                 System.out.println(event.getTarget());
-                System.out.println(currentDrag);
-                if(currentDrag.getId().substring(6,7).equals("1")){
-                    player1BoardB.setImage(db.getImage());
-                    player1BoardBLabel.setVisible(false);
-                }
+                System.out.println(currentDragHand);
+                if(currentBoard.isCharacterAvailable(1) && currentHand.getCard(currentDragHand) instanceof Spell) {
+                    Spell s = (Spell) currentHand.getCard(currentDragHand);
+                    currentHand.removeCardfromHand(currentDragHand);
 
+                    // tambah spell ke character
+                }else if(!currentBoard.isCharacterAvailable(1) && currentHand.getCard(currentDragHand) instanceof Character){
+                    currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),1);
+                    currentHand.removeCardfromHand(currentDragHand);
+                }
+                updateBoard();
+                updateHand();
                 event.consume();
             }
         });
 
-        player1BoardC.setOnDragDetected((MouseEvent event) -> {
-            Dragboard db = player1BoardC.startDragAndDrop(TransferMode.ANY);
-            currentDrag = player1BoardC;
-            ClipboardContent content = new ClipboardContent();
-            content.putImage(player1BoardC.getImage());
-            db.setContent(content);
-            event.consume();
-        });
-
-        player1BoardC.setOnDragOver(new EventHandler<DragEvent>() {
+        player1BoardB.setOnDragOver(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
                 if (event.getDragboard().hasImage()) {
                     event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
@@ -283,23 +400,52 @@ public class guiController implements Initializable {
                 System.out.println("dropped");
                 System.out.println(event.getSource());
                 System.out.println(event.getTarget());
-                System.out.println(currentDrag);
-                if(currentDrag.getId().substring(6,7).equals("1")){
-                    player1BoardC.setImage(db.getImage());
-                    player1BoardCLabel.setVisible(false);
-                }
+                System.out.println(currentDragHand);
+                if(currentBoard.isCharacterAvailable(2) && currentHand.getCard(currentDragHand) instanceof Spell) {
+                    Spell s = (Spell) currentHand.getCard(currentDragHand);
+                    currentHand.removeCardfromHand(currentDragHand);
 
+                    // tambah spell ke character
+                }else if(!currentBoard.isCharacterAvailable(2) && currentHand.getCard(currentDragHand) instanceof Character){
+                    currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),2);
+                    currentHand.removeCardfromHand(currentDragHand);
+                }
+                updateBoard();
+                updateHand();
                 event.consume();
             }
         });
 
-        player1BoardD.setOnDragDetected((MouseEvent event) -> {
-            Dragboard db = player1BoardD.startDragAndDrop(TransferMode.ANY);
-            currentDrag = player1BoardD;
-            ClipboardContent content = new ClipboardContent();
-            content.putImage(player1BoardD.getImage());
-            db.setContent(content);
-            event.consume();
+        player1BoardC.setOnDragOver(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                if (event.getDragboard().hasImage()) {
+                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                }
+                event.consume();
+            }
+        });
+
+
+        player1BoardD.setOnDragDropped(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                Dragboard db = event.getDragboard();
+                System.out.println("dropped");
+                System.out.println(event.getSource());
+                System.out.println(event.getTarget());
+                System.out.println(currentDragHand);
+                if(currentBoard.isCharacterAvailable(3) && currentHand.getCard(currentDragHand) instanceof Spell) {
+                    Spell s = (Spell) currentHand.getCard(currentDragHand);
+                    currentHand.removeCardfromHand(currentDragHand);
+
+                    // tambah spell ke character
+                }else if(!currentBoard.isCharacterAvailable(3) && currentHand.getCard(currentDragHand) instanceof Character){
+                    currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),3);
+                    currentHand.removeCardfromHand(currentDragHand);
+                }
+                updateBoard();
+                updateHand();
+                event.consume();
+            }
         });
 
         player1BoardD.setOnDragOver(new EventHandler<DragEvent>() {
@@ -311,29 +457,27 @@ public class guiController implements Initializable {
             }
         });
 
-        player1BoardD.setOnDragDropped(new EventHandler<DragEvent>() {
+
+        player1BoardE.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
                 Dragboard db = event.getDragboard();
                 System.out.println("dropped");
                 System.out.println(event.getSource());
                 System.out.println(event.getTarget());
-                System.out.println(currentDrag);
-                if(currentDrag.getId().substring(6,7).equals("1")){
-                    player1BoardD.setImage(db.getImage());
-                    player1BoardDLabel.setVisible(false);
-                }
+                System.out.println(currentDragHand);
+                if (currentBoard.isCharacterAvailable(4) && currentHand.getCard(currentDragHand) instanceof Spell) {
+                    Spell s = (Spell) currentHand.getCard(currentDragHand);
+                    currentHand.removeCardfromHand(currentDragHand);
 
+                    // tambah spell ke character
+                } else if (!currentBoard.isCharacterAvailable(4) && currentHand.getCard(currentDragHand) instanceof Character) {
+                    currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand), 4);
+                    currentHand.removeCardfromHand(currentDragHand);
+                }
+                updateBoard();
+                updateHand();
                 event.consume();
             }
-        });
-
-        player1BoardE.setOnDragDetected((MouseEvent event) -> {
-            Dragboard db = player1BoardE.startDragAndDrop(TransferMode.ANY);
-            currentDrag = player1BoardE;
-            ClipboardContent content = new ClipboardContent();
-            content.putImage(player1BoardE.getImage());
-            db.setContent(content);
-            event.consume();
         });
 
         player1BoardE.setOnDragOver(new EventHandler<DragEvent>() {
@@ -344,42 +488,11 @@ public class guiController implements Initializable {
                 event.consume();
             }
         });
-
-        player1BoardE.setOnDragDropped(new EventHandler<DragEvent>() {
-            public void handle(DragEvent event) {
-                Dragboard db = event.getDragboard();
-                System.out.println("dropped");
-                System.out.println(event.getSource());
-                System.out.println(event.getTarget());
-                System.out.println(currentDrag);
-                if(currentDrag.getId().substring(6,7).equals("1")){
-                    player1BoardE.setImage(db.getImage());
-                    player1BoardELabel.setVisible(false);
-                }
-
-                event.consume();
-            }
-        });
     }
 
     public void initDragAndDropBoardPlayer2(){
-        player2BoardA.setOnDragDetected((MouseEvent event) -> {
-            Dragboard db = player2BoardA.startDragAndDrop(TransferMode.ANY);
-            currentDrag = player2BoardA;
-            ClipboardContent content = new ClipboardContent();
-            content.putImage(player2BoardA.getImage());
-            db.setContent(content);
-            event.consume();
-        });
-
-        player2BoardA.setOnDragOver(new EventHandler<DragEvent>() {
-            public void handle(DragEvent event) {
-                if (event.getDragboard().hasImage()) {
-                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-                }
-                event.consume();
-            }
-        });
+        Hand currentHand=pemain2.getHand();
+        Board currentBoard=pemain2.getBoard();
 
         player2BoardA.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
@@ -387,26 +500,23 @@ public class guiController implements Initializable {
                 System.out.println("dropped");
                 System.out.println(event.getSource());
                 System.out.println(event.getTarget());
-                System.out.println(currentDrag);
-                if(currentDrag.getId().substring(6,7).equals("2")) {
-                    player2BoardA.setImage(db.getImage());
-                    player2BoardALabel.setVisible(false);
-                }
+                System.out.println(currentDragHand);
+                if(currentBoard.isCharacterAvailable(0) && currentHand.getCard(currentDragHand) instanceof Spell) {
+                    Spell s = (Spell) currentHand.getCard(currentDragHand);
+                    currentHand.removeCardfromHand(currentDragHand);
 
+                    // tambah spell ke character
+                }else if(!currentBoard.isCharacterAvailable(0) && currentHand.getCard(currentDragHand) instanceof Character){
+                    currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),0);
+                    currentHand.removeCardfromHand(currentDragHand);
+                }
+                updateBoard();
+                updateHand();
                 event.consume();
             }
         });
 
-        player2BoardB.setOnDragDetected((MouseEvent event) -> {
-            Dragboard db = player2BoardB.startDragAndDrop(TransferMode.ANY);
-            currentDrag = player2BoardB;
-            ClipboardContent content = new ClipboardContent();
-            content.putImage(player2BoardB.getImage());
-            db.setContent(content);
-            event.consume();
-        });
-
-        player2BoardB.setOnDragOver(new EventHandler<DragEvent>() {
+        player2BoardA.setOnDragOver(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
                 if (event.getDragboard().hasImage()) {
                     event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
@@ -421,25 +531,23 @@ public class guiController implements Initializable {
                 System.out.println("dropped");
                 System.out.println(event.getSource());
                 System.out.println(event.getTarget());
-                System.out.println(currentDrag);
-                if(currentDrag.getId().substring(6,7).equals("2")) {
-                    player2BoardB.setImage(db.getImage());
-                    player2BoardBLabel.setVisible(false);
+                System.out.println(currentDragHand);
+                if(currentBoard.isCharacterAvailable(1) && currentHand.getCard(currentDragHand) instanceof Spell) {
+                    Spell s = (Spell) currentHand.getCard(currentDragHand);
+                    currentHand.removeCardfromHand(currentDragHand);
+
+                    // tambah spell ke character
+                }else if(!currentBoard.isCharacterAvailable(1) && currentHand.getCard(currentDragHand) instanceof Character){
+                    currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),1);
+                    currentHand.removeCardfromHand(currentDragHand);
                 }
+                updateBoard();
+                updateHand();
                 event.consume();
             }
         });
 
-        player2BoardC.setOnDragDetected((MouseEvent event) -> {
-            Dragboard db = player2BoardC.startDragAndDrop(TransferMode.ANY);
-            currentDrag = player2BoardC;
-            ClipboardContent content = new ClipboardContent();
-            content.putImage(player2BoardC.getImage());
-            db.setContent(content);
-            event.consume();
-        });
-
-        player2BoardC.setOnDragOver(new EventHandler<DragEvent>() {
+        player2BoardB.setOnDragOver(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
                 if (event.getDragboard().hasImage()) {
                     event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
@@ -454,22 +562,52 @@ public class guiController implements Initializable {
                 System.out.println("dropped");
                 System.out.println(event.getSource());
                 System.out.println(event.getTarget());
-                System.out.println(currentDrag);
-                if(currentDrag.getId().substring(6,7).equals("2")){
-                    player2BoardC.setImage(db.getImage());
-                    player2BoardCLabel.setVisible(false);
+                System.out.println(currentDragHand);
+                if(currentBoard.isCharacterAvailable(2) && currentHand.getCard(currentDragHand) instanceof Spell) {
+                    Spell s = (Spell) currentHand.getCard(currentDragHand);
+                    currentHand.removeCardfromHand(currentDragHand);
+
+                    // tambah spell ke character
+                }else if(!currentBoard.isCharacterAvailable(2) && currentHand.getCard(currentDragHand) instanceof Character){
+                    currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),2);
+                    currentHand.removeCardfromHand(currentDragHand);
+                }
+                updateBoard();
+                updateHand();
+                event.consume();
+            }
+        });
+
+        player2BoardC.setOnDragOver(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                if (event.getDragboard().hasImage()) {
+                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
                 }
                 event.consume();
             }
         });
 
-        player2BoardD.setOnDragDetected((MouseEvent event) -> {
-            Dragboard db = player2BoardD.startDragAndDrop(TransferMode.ANY);
-            currentDrag = player2BoardD;
-            ClipboardContent content = new ClipboardContent();
-            content.putImage(player2BoardD.getImage());
-            db.setContent(content);
-            event.consume();
+
+        player2BoardD.setOnDragDropped(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                Dragboard db = event.getDragboard();
+                System.out.println("dropped");
+                System.out.println(event.getSource());
+                System.out.println(event.getTarget());
+                System.out.println(currentDragHand);
+                if(currentBoard.isCharacterAvailable(3) && currentHand.getCard(currentDragHand) instanceof Spell) {
+                    Spell s = (Spell) currentHand.getCard(currentDragHand);
+                    currentHand.removeCardfromHand(currentDragHand);
+
+                    // tambah spell ke character
+                }else if(!currentBoard.isCharacterAvailable(3) && currentHand.getCard(currentDragHand) instanceof Character){
+                    currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),3);
+                    currentHand.removeCardfromHand(currentDragHand);
+                }
+                updateBoard();
+                updateHand();
+                event.consume();
+            }
         });
 
         player2BoardD.setOnDragOver(new EventHandler<DragEvent>() {
@@ -481,38 +619,6 @@ public class guiController implements Initializable {
             }
         });
 
-        player2BoardD.setOnDragDropped(new EventHandler<DragEvent>() {
-            public void handle(DragEvent event) {
-                Dragboard db = event.getDragboard();
-                System.out.println("dropped");
-                System.out.println(event.getSource());
-                System.out.println(event.getTarget());
-                System.out.println(currentDrag);
-                if(currentDrag.getId().substring(6,7).equals("2")) {
-                    player2BoardD.setImage(db.getImage());
-                    player2BoardDLabel.setVisible(false);
-                }
-                event.consume();
-            }
-        });
-
-        player2BoardE.setOnDragDetected((MouseEvent event) -> {
-            Dragboard db = player2BoardE.startDragAndDrop(TransferMode.ANY);
-            currentDrag = player2BoardE;
-            ClipboardContent content = new ClipboardContent();
-            content.putImage(player2BoardE.getImage());
-            db.setContent(content);
-            event.consume();
-        });
-
-        player2BoardE.setOnDragOver(new EventHandler<DragEvent>() {
-            public void handle(DragEvent event) {
-                if (event.getDragboard().hasImage()) {
-                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-                }
-                event.consume();
-            }
-        });
 
         player2BoardE.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
@@ -520,10 +626,26 @@ public class guiController implements Initializable {
                 System.out.println("dropped");
                 System.out.println(event.getSource());
                 System.out.println(event.getTarget());
-                System.out.println(currentDrag);
-                if(currentDrag.getId().substring(6,7).equals("2")){
-                    player2BoardE.setImage(db.getImage());
-                    player2BoardELabel.setVisible(false);
+                System.out.println(currentDragHand);
+                if (currentBoard.isCharacterAvailable(4) && currentHand.getCard(currentDragHand) instanceof Spell) {
+                    Spell s = (Spell) currentHand.getCard(currentDragHand);
+                    currentHand.removeCardfromHand(currentDragHand);
+
+                    // tambah spell ke character
+                } else if (!currentBoard.isCharacterAvailable(4) && currentHand.getCard(currentDragHand) instanceof Character) {
+                    currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand), 4);
+                    currentHand.removeCardfromHand(currentDragHand);
+                }
+                updateBoard();
+                updateHand();
+                event.consume();
+            }
+        });
+
+        player2BoardE.setOnDragOver(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                if (event.getDragboard().hasImage()) {
+                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
                 }
                 event.consume();
             }
@@ -574,6 +696,98 @@ public class guiController implements Initializable {
         player2BoardE.setOnDragDropped(null);
     }
 
+    public void initDragAndDropHand(){
+        handCard1.setOnDragDetected((MouseEvent event) -> {
+            Dragboard db = handCard1.startDragAndDrop(TransferMode.ANY);
+            currentDragHand = 0;
+            ClipboardContent content = new ClipboardContent();
+            content.putImage(handCard1.getImage());
+            db.setContent(content);
+            event.consume();
+        });
+
+        handCard1.setOnDragOver(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                if (event.getDragboard().hasImage()) {
+                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                }
+                event.consume();
+            }
+        });
+
+        handCard2.setOnDragDetected((MouseEvent event) -> {
+            Dragboard db = handCard2.startDragAndDrop(TransferMode.ANY);
+            currentDragHand = 1;
+            ClipboardContent content = new ClipboardContent();
+            content.putImage(handCard2.getImage());
+            db.setContent(content);
+            event.consume();
+        });
+
+        handCard2.setOnDragOver(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                if (event.getDragboard().hasImage()) {
+                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                }
+                event.consume();
+            }
+        });
+
+        handCard3.setOnDragDetected((MouseEvent event) -> {
+            Dragboard db = handCard3.startDragAndDrop(TransferMode.ANY);
+            currentDragHand = 2;
+            ClipboardContent content = new ClipboardContent();
+            content.putImage(handCard3.getImage());
+            db.setContent(content);
+            event.consume();
+        });
+
+        handCard3.setOnDragOver(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                if (event.getDragboard().hasImage()) {
+                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                }
+                event.consume();
+            }
+        });
+
+        handCard4.setOnDragDetected((MouseEvent event) -> {
+            Dragboard db = handCard4.startDragAndDrop(TransferMode.ANY);
+            currentDragHand = 3;
+            ClipboardContent content = new ClipboardContent();
+            content.putImage(handCard4.getImage());
+            db.setContent(content);
+            event.consume();
+        });
+
+        handCard4.setOnDragOver(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                if (event.getDragboard().hasImage()) {
+                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                }
+                event.consume();
+            }
+        });
+
+        handCard5.setOnDragDetected((MouseEvent event) -> {
+            Dragboard db = handCard5.startDragAndDrop(TransferMode.ANY);
+            currentDragHand = 4;
+            ClipboardContent content = new ClipboardContent();
+            content.putImage(handCard5.getImage());
+            db.setContent(content);
+            event.consume();
+        });
+
+        handCard5.setOnDragOver(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                if (event.getDragboard().hasImage()) {
+                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                }
+                event.consume();
+            }
+        });
+    }
+
     public void changeStageClicked(){
         // kalau button untuk pindah stage diclick
         if(idStage==-1){
@@ -592,6 +806,7 @@ public class guiController implements Initializable {
             }
             activateStageLabel(stageEndLabel,stageDrawLabel);
         } else if(idStage==0){
+            initDragAndDropHand();
             if(turn%2==1){
                 initDragAndDropBoardPlayer1();
             }else{
@@ -683,6 +898,14 @@ public class guiController implements Initializable {
             stage.showAndWait();
         }catch (Exception err){
             err.printStackTrace();
+        }
+    }
+
+    public void updateHand(){
+        if(turn%2==1){
+            updateHand1();
+        }else{
+            updateHand2();
         }
     }
 
@@ -810,6 +1033,245 @@ public class guiController implements Initializable {
             return "LEVEL";
         }else{ // swap
             return "ATK <--> HP";
+        }
+    }
+
+    public void updateBoard1(){
+        Board currentBoard = pemain1.getBoard();
+        for(int i=0;i<5;i++){
+            if(!currentBoard.isValidIdx(i)){
+                if(i==0){
+                    player1BoardAAttack.setVisible(true);
+                    player1BoardAAttackImg.setVisible(true);
+                    player1BoardAHealth.setVisible(true);
+                    player1BoardAHealthImg.setVisible(true);
+                    player1BoardALvl.setVisible(true);
+                    player1BoardALabel.setVisible(false);
+
+                    System.out.println("Board 1");
+                    System.out.println(currentBoard.getCard(i).getImagePath());
+
+                    player1BoardA.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
+                    player1BoardAAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
+                    player1BoardAHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
+                    player1BoardALvl.setText("Level");
+
+                }else if(i==1){
+                    player1BoardBAttack.setVisible(true);
+                    player1BoardBAttackImg.setVisible(true);
+                    player1BoardBHealth.setVisible(true);
+                    player1BoardBHealthImg.setVisible(true);
+                    player1BoardBLvl.setVisible(true);
+                    player1BoardBLabel.setVisible(false);
+
+                    player1BoardB.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
+                    player1BoardBAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
+                    player1BoardBHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
+                    player1BoardBLvl.setText("Level");
+
+                }else if(i==2){
+                    player1BoardCAttack.setVisible(true);
+                    player1BoardCAttackImg.setVisible(true);
+                    player1BoardCHealth.setVisible(true);
+                    player1BoardCHealthImg.setVisible(true);
+                    player1BoardCLvl.setVisible(true);
+                    player1BoardCLabel.setVisible(false);
+
+                    player1BoardC.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
+                    player1BoardCAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
+                    player1BoardCHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
+                    player1BoardCLvl.setText("Level");
+                }else if(i==3){
+                    player1BoardDAttack.setVisible(true);
+                    player1BoardDAttackImg.setVisible(true);
+                    player1BoardDHealth.setVisible(true);
+                    player1BoardDHealthImg.setVisible(true);
+                    player1BoardDLvl.setVisible(true);
+                    player1BoardDLabel.setVisible(false);
+
+                    player1BoardD.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
+                    player1BoardDAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
+                    player1BoardDHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
+                    player1BoardDLvl.setText("Level");
+                }else if(i==4){
+                    player1BoardEAttack.setVisible(true);
+                    player1BoardEAttackImg.setVisible(true);
+                    player1BoardEHealth.setVisible(true);
+                    player1BoardEHealthImg.setVisible(true);
+                    player1BoardELvl.setVisible(true);
+                    player1BoardELabel.setVisible(false);
+
+                    player1BoardE.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
+                    player1BoardEAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
+                    player1BoardEHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
+                    player1BoardELvl.setText("Level");
+                }
+
+            }else{
+                if(i==0){
+                    player1BoardA.setImage(null);
+                    player1BoardAAttack.setVisible(false);
+                    player1BoardAAttackImg.setVisible(false);
+                    player1BoardAHealth.setVisible(false);
+                    player1BoardAHealthImg.setVisible(false);
+                    player1BoardALvl.setVisible(false);
+                    player1BoardALabel.setVisible(true);
+                }else if(i==1){
+                    player1BoardB.setImage(null);
+                    player1BoardBAttack.setVisible(false);
+                    player1BoardBAttackImg.setVisible(false);
+                    player1BoardBHealth.setVisible(false);
+                    player1BoardBHealthImg.setVisible(false);
+                    player1BoardBLvl.setVisible(false);
+                    player1BoardBLabel.setVisible(true);
+                }else if(i==2){
+                    player1BoardC.setImage(null);
+                    player1BoardCAttack.setVisible(false);
+                    player1BoardCAttackImg.setVisible(false);
+                    player1BoardCHealth.setVisible(false);
+                    player1BoardCHealthImg.setVisible(false);
+                    player1BoardCLvl.setVisible(false);
+                    player1BoardCLabel.setVisible(true);
+                }else if(i==3){
+                    player1BoardD.setImage(null);
+                    player1BoardDAttack.setVisible(false);
+                    player1BoardDAttackImg.setVisible(false);
+                    player1BoardDHealth.setVisible(false);
+                    player1BoardDHealthImg.setVisible(false);
+                    player1BoardDLvl.setVisible(false);
+                    player1BoardDLabel.setVisible(true);
+                }else if(i==4){
+                    player1BoardE.setImage(null);
+                    player1BoardEAttack.setVisible(false);
+                    player1BoardEAttackImg.setVisible(false);
+                    player1BoardEHealth.setVisible(false);
+                    player1BoardEHealthImg.setVisible(false);
+                    player1BoardELvl.setVisible(false);
+                    player1BoardELabel.setVisible(true);
+                }
+            }
+        }
+    }
+
+    public void updateBoard2(){
+        Board currentBoard = pemain2.getBoard();
+        for(int i=0;i<5;i++){
+            if(!currentBoard.isValidIdx(i)){
+                if(i==0){
+                    player2BoardAAttack.setVisible(true);
+                    player2BoardAAttackImg.setVisible(true);
+                    player2BoardAHealth.setVisible(true);
+                    player2BoardAHealthImg.setVisible(true);
+                    player2BoardALvl.setVisible(true);
+                    player2BoardALabel.setVisible(false);
+
+                    player2BoardA.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
+                    player2BoardAAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
+                    player2BoardAHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
+                    player2BoardALvl.setText("Level");
+
+                }else if(i==1){
+                    player2BoardBAttack.setVisible(true);
+                    player2BoardBAttackImg.setVisible(true);
+                    player2BoardBHealth.setVisible(true);
+                    player2BoardBHealthImg.setVisible(true);
+                    player2BoardBLvl.setVisible(true);
+                    player2BoardBLabel.setVisible(false);
+
+                    player2BoardB.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
+                    player2BoardBAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
+                    player2BoardBHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
+                    player2BoardBLvl.setText("Level");
+
+                }else if(i==2){
+                    player2BoardCAttack.setVisible(true);
+                    player2BoardCAttackImg.setVisible(true);
+                    player2BoardCHealth.setVisible(true);
+                    player2BoardCHealthImg.setVisible(true);
+                    player2BoardCLvl.setVisible(true);
+                    player2BoardCLabel.setVisible(false);
+
+                    player2BoardC.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
+                    player2BoardCAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
+                    player2BoardCHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
+                    player2BoardCLvl.setText("Level");
+                }else if(i==3){
+                    player2BoardDAttack.setVisible(true);
+                    player2BoardDAttackImg.setVisible(true);
+                    player2BoardDHealth.setVisible(true);
+                    player2BoardDHealthImg.setVisible(true);
+                    player2BoardDLvl.setVisible(true);
+                    player2BoardDLabel.setVisible(false);
+
+                    player2BoardD.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
+                    player2BoardDAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
+                    player2BoardDHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
+                    player2BoardDLvl.setText("Level");
+                }else if(i==4){
+                    player2BoardEAttack.setVisible(true);
+                    player2BoardEAttackImg.setVisible(true);
+                    player2BoardEHealth.setVisible(true);
+                    player2BoardEHealthImg.setVisible(true);
+                    player2BoardELvl.setVisible(true);
+                    player2BoardELabel.setVisible(false);
+
+                    player2BoardE.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
+                    player2BoardEAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
+                    player2BoardEHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
+                    player2BoardELvl.setText("Level");
+                }
+
+            }else{
+                if(i==0){
+                    player2BoardA.setImage(null);
+                    player2BoardAAttack.setVisible(false);
+                    player2BoardAAttackImg.setVisible(false);
+                    player2BoardAHealth.setVisible(false);
+                    player2BoardAHealthImg.setVisible(false);
+                    player2BoardALvl.setVisible(false);
+                    player2BoardALabel.setVisible(true);
+                }else if(i==1){
+                    player2BoardB.setImage(null);
+                    player2BoardBAttack.setVisible(false);
+                    player2BoardBAttackImg.setVisible(false);
+                    player2BoardBHealth.setVisible(false);
+                    player2BoardBHealthImg.setVisible(false);
+                    player2BoardBLvl.setVisible(false);
+                    player2BoardBLabel.setVisible(true);
+                }else if(i==2){
+                    player2BoardC.setImage(null);
+                    player2BoardCAttack.setVisible(false);
+                    player2BoardCAttackImg.setVisible(false);
+                    player2BoardCHealth.setVisible(false);
+                    player2BoardCHealthImg.setVisible(false);
+                    player2BoardCLvl.setVisible(false);
+                    player2BoardCLabel.setVisible(true);
+                }else if(i==3){
+                    player2BoardD.setImage(null);
+                    player2BoardDAttack.setVisible(false);
+                    player2BoardDAttackImg.setVisible(false);
+                    player2BoardDHealth.setVisible(false);
+                    player2BoardDHealthImg.setVisible(false);
+                    player2BoardDLvl.setVisible(false);
+                    player2BoardDLabel.setVisible(true);
+                }else if(i==4){
+                    player2BoardE.setImage(null);
+                    player2BoardEAttack.setVisible(false);
+                    player2BoardEAttackImg.setVisible(false);
+                    player2BoardEHealth.setVisible(false);
+                    player2BoardEHealthImg.setVisible(false);
+                    player2BoardELvl.setVisible(false);
+                    player2BoardELabel.setVisible(true);
+                }
+            }
+        }
+    }
+
+    public void updateBoard(){
+        if(turn%2==1){
+            updateBoard1();
+        }else{
+            updateBoard2();
         }
     }
 
