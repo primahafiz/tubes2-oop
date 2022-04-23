@@ -25,7 +25,9 @@ public class Deck {
         int i;
         for (i =0; i< 3;i++){
              C.add(this.CardDeck.get(i));
-             this.CardDeck.remove(i);
+        }
+        for (i =0; i< 3;i++){
+            this.CardDeck.remove(i);
         }
         return C;
     }
