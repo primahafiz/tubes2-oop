@@ -53,12 +53,12 @@ public class AetherWars {
         System.out.println();
 
         // Ambil 3 kartu teratas dari deck (keknya getCard belum bisa)
-        int i;
+        int x;
         System.out.println("TOP 3 CARDS DECK PLAYER 1");
         List<Card> topDeck = player1.getDeck().getCard();
-        for (i = 0; i < topDeck.size(); i++) {
-            System.out.println("Kartu ke-" + (i+1));
-            topDeck.get(i).printCardInfo();
+        for (x = 0; x < topDeck.size(); x++) {
+            System.out.println("Kartu ke-" + (x+1));
+            topDeck.get(x).printCardInfo();
             System.out.println();
         }
 
