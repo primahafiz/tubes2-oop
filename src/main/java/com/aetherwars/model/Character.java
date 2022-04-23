@@ -123,6 +123,20 @@ public class Character extends Card  {
 
   public boolean isCharacter() { return true;}
 
+  public int getSwapDur(){
+    return this.swapDur;
+  }
+
+  public int getManaNeeded(Spell s){
+    int mana = 0;
+    if (s.getCardType() == Type.LVL) {
+      mana = (int) this.getLevel()/2;
+    } else {
+      mana = s.getMana();
+    }
+    return mana;
+  }
+
   private int getTempAttack(){
     int tempAttack = 0;
     for (PtnSpell s : this.listPtnSpell){
