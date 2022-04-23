@@ -222,6 +222,18 @@ public class Player {
                     attacker.addExp(enemyCharacter.getLevel());
                 }
                 enemy.board.removeCardfromBoard(enemyCharacterIdx);
+
+            } else if (attacker.isDead() && !enemyCharacter.isDead()) {
+                System.out.println("Karakter pemain mati");
+                // jika sudah level 10 maka karakter tidak mendapatkan exp
+                if (attacker.getLevel() < 10) {
+                    System.out.println("ded");
+                    enemyCharacter.addExp(attacker.getLevel());
+                }
+                this.board.removeCardfromBoard(attackerCharacterIdx);
+            } else { // duaduanya mati
+                this.board.removeCardfromBoard(attackerCharacterIdx);
+                enemy.board.removeCardfromBoard(enemyCharacterIdx);
             }
 
             // Jika exp karakter pemain melebihi batas yang diperlukan, level karakter pemain akan meningkat
