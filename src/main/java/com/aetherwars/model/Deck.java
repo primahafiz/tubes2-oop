@@ -2,9 +2,13 @@ package com.aetherwars.model;
 import java.util.*;
 public class Deck {
 
-    private List<Card> CardDeck= new ArrayList<Card>();
+    private List<Card> CardDeck;
 
     public Deck() {
+        this.CardDeck = new ArrayList<>();
+    }
+
+    public void initializeDeck() {
         try{
             Random rand = new Random();
             int capacity = rand.nextInt(20) + 40;
@@ -24,9 +28,7 @@ public class Deck {
         List<Card> C = new ArrayList<Card>();
         int i;
         for (i =0; i< 3;i++){
-             C.add(this.CardDeck.get(i));
-        }
-        for (i =0; i< 3;i++){
+            C.add(this.CardDeck.get(i));
             this.CardDeck.remove(i);
         }
         return C;
@@ -36,7 +38,12 @@ public class Deck {
         return this.CardDeck;
     }
 
-    public void addCard(Card c){
-        CardDeck.add(c);
+    public void printDeck() {
+        int i;
+        for (i = 0;i < this.CardDeck.size();i++){
+            System.out.println("Kartu ke-" + (i+1));
+            CardDeck.get(i).printCardInfo();
+            System.out.println();
+        }
     }
 }
