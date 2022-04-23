@@ -157,6 +157,7 @@ public class Player {
 
         int cost = charCard.getManaNeeded(spellCard);
         if (this.Mana >= cost ) {
+            this.Mana -= cost;
             if (this.board.isCharacterAvailable(charChardIdx)) {
                 switch (spellType) {
                     case PTN:
