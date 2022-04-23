@@ -307,6 +307,10 @@ public class Character extends Card  {
     }
   }
 
+  public void setLevel(int level){
+    this.level = level;
+  }
+
   private void minusHelper(int damage){
     List<Integer> listidx = new ArrayList<Integer>();
     int total = 0;
