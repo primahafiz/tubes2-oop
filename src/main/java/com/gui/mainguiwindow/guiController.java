@@ -153,14 +153,9 @@ public class guiController implements Initializable {
     int idStage;
     int turn;
 
-    Board boardPemain1;
-    Board boardPemain2;
+    Player pemain1;
+    Player pemain2;
 
-    Hand handPemain1;
-    Hand handPemain2;
-
-    Deck deckPemain1;
-    Deck deckPemain2;
 
 
 
@@ -172,11 +167,9 @@ public class guiController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // initialize board, hand,deck
-        deckPemain1 = new Deck();
-        deckPemain2 = new Deck();
 
-        handPemain1 = new Hand();
-        handPemain2 = new Hand();
+        pemain1 = new Player("Steve",1);
+        pemain2 = new Player("Alex",1);
 
         debugging();
 
@@ -584,11 +577,13 @@ public class guiController implements Initializable {
     public void changeStageClicked(){
         // kalau button untuk pindah stage diclick
         if(idStage==-1){
+            System.out.println(1);
             if(turn%2==1) {
                 updateHand1();
             }else{
                 updateHand2();
             }
+            System.out.println(2);
             displayWindowDraw();
             if(turn%2==1) {
                 updateHand1();
@@ -644,11 +639,11 @@ public class guiController implements Initializable {
         Hand currentHand;
         Deck currentDeck;
         if(turn%2==1){
-            currentHand=handPemain1;
-            currentDeck=deckPemain1;
+            currentHand=pemain1.getHand();
+            currentDeck=pemain1.getDeck();
         }else{
-            currentHand=handPemain2;
-            currentDeck=deckPemain2;
+            currentHand=pemain2.getHand();
+            currentDeck=pemain2.getDeck();
         }
         if(currentHand.isFull()){
             try {
@@ -692,6 +687,11 @@ public class guiController implements Initializable {
     }
 
     public void updateHand1(){
+        System.out.println(3);
+        Hand pemainx=pemain1.getHand();
+        System.out.println(3.5);
+        Hand handPemain1 = pemain1.getHand();
+        System.out.println(4);
         System.out.println("Hand 1 = "+handPemain1.numberOfCards());
         for(int i=0;i<handPemain1.numberOfCards();i++){
             System.out.println(handPemain1.getCard(i).getName());
@@ -746,6 +746,7 @@ public class guiController implements Initializable {
     }
 
     public void updateHand2(){
+        Hand handPemain2=pemain2.getHand();
         System.out.println("Hand 2 = "+handPemain2.numberOfCards());
         for(int i=0;i<handPemain2.numberOfCards();i++){
             System.out.println(handPemain2.getCard(i).getName());
