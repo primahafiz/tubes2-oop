@@ -194,8 +194,6 @@ public class guiController implements Initializable {
 
         player1BoardA.setImage(new Image(getClass().getResourceAsStream("image/alex.jpeg")));
         player2BoardB.setImage(new Image(getClass().getResourceAsStream("image/steve.jpeg")));
-        initDragAndDropBoardPlayer1();
-        initDragAndDropBoardPlayer2();
 
     }
 
@@ -539,6 +537,50 @@ public class guiController implements Initializable {
         });
     }
 
+    public void endDragAndDrop1(){
+        player1BoardA.setOnDragDetected(null);
+        player1BoardA.setOnDragOver(null);
+        player1BoardA.setOnDragDropped(null);
+
+        player1BoardB.setOnDragDetected(null);
+        player1BoardB.setOnDragOver(null);
+        player1BoardB.setOnDragDropped(null);
+
+        player1BoardC.setOnDragDetected(null);
+        player1BoardC.setOnDragOver(null);
+        player1BoardC.setOnDragDropped(null);
+
+        player1BoardD.setOnDragDetected(null);
+        player1BoardD.setOnDragOver(null);
+        player1BoardD.setOnDragDropped(null);
+
+        player1BoardE.setOnDragDetected(null);
+        player1BoardE.setOnDragOver(null);
+        player1BoardE.setOnDragDropped(null);
+    }
+
+    public void endDragAndDrop2(){
+        player2BoardA.setOnDragDetected(null);
+        player2BoardA.setOnDragOver(null);
+        player2BoardA.setOnDragDropped(null);
+
+        player2BoardB.setOnDragDetected(null);
+        player2BoardB.setOnDragOver(null);
+        player2BoardB.setOnDragDropped(null);
+
+        player2BoardC.setOnDragDetected(null);
+        player2BoardC.setOnDragOver(null);
+        player2BoardC.setOnDragDropped(null);
+
+        player2BoardD.setOnDragDetected(null);
+        player2BoardD.setOnDragOver(null);
+        player2BoardD.setOnDragDropped(null);
+
+        player2BoardE.setOnDragDetected(null);
+        player2BoardE.setOnDragOver(null);
+        player2BoardE.setOnDragDropped(null);
+    }
+
     public void changeStageClicked(){
         // kalau button untuk pindah stage diclick
         if(idStage==-1){
@@ -555,8 +597,18 @@ public class guiController implements Initializable {
             }
             activateStageLabel(stageEndLabel,stageDrawLabel);
         } else if(idStage==0){
+            if(turn%2==1){
+                initDragAndDropBoardPlayer1();
+            }else{
+                initDragAndDropBoardPlayer2();
+            }
             activateStageLabel(stageDrawLabel,stagePlanLabel);
         }else if(idStage==1){
+            if(turn%2==1){
+                endDragAndDrop1();
+            }else{
+                endDragAndDrop2();
+            }
             activateStageLabel(stagePlanLabel,stageAttackLabel);
         }else if(idStage==2){
             activateStageLabel(stageAttackLabel,stageEndLabel);
