@@ -81,6 +81,7 @@ public class DrawController implements Initializable {
                 if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
                     try{
                         hand.addCard(c.get(0));
+                        System.out.println(c.get(0).getName());
                         c.remove(0);
                         for(int i=0;i<c.size();i++){
                             deck.addCard(c.get(i));
@@ -100,6 +101,7 @@ public class DrawController implements Initializable {
                 if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
                     try{
                         hand.addCard(c.get(1));
+                        System.out.println(c.get(1).getName());
                         c.remove(1);
                         for(int i=0;i<c.size();i++){
                             deck.addCard(c.get(i));
@@ -119,6 +121,7 @@ public class DrawController implements Initializable {
                 if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
                     try{
                         hand.addCard(c.get(2));
+                        System.out.println(c.get(2).getName());
                         c.remove(2);
                         for(int i=0;i<c.size();i++){
                             deck.addCard(c.get(i));

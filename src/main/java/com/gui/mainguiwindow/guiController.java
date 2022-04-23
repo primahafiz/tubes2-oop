@@ -111,6 +111,29 @@ public class guiController implements Initializable {
     @FXML
     ImageView handCard5;
 
+    // hand card mana
+    @FXML
+    Label handCard1Mana;
+    @FXML
+    Label handCard2Mana;
+    @FXML
+    Label handCard3Mana;
+    @FXML
+    Label handCard4Mana;
+    @FXML
+    Label handCard5Mana;
+
+    @FXML
+    Label handCard1AtkHealth;
+    @FXML
+    Label handCard2AtkHealth;
+    @FXML
+    Label handCard3AtkHealth;
+    @FXML
+    Label handCard4AtkHealth;
+    @FXML
+    Label handCard5AtkHealth;
+
     // hovered card
     @FXML
     ImageView hoveredCard;
@@ -519,7 +542,17 @@ public class guiController implements Initializable {
     public void changeStageClicked(){
         // kalau button untuk pindah stage diclick
         if(idStage==-1){
+            if(turn%2==1) {
+                updateHand1();
+            }else{
+                updateHand2();
+            }
             displayWindowDraw();
+            if(turn%2==1) {
+                updateHand1();
+            }else{
+                updateHand2();
+            }
             activateStageLabel(stageEndLabel,stageDrawLabel);
         } else if(idStage==0){
             activateStageLabel(stageDrawLabel,stagePlanLabel);
@@ -528,16 +561,23 @@ public class guiController implements Initializable {
         }else if(idStage==2){
             activateStageLabel(stageAttackLabel,stageEndLabel);
         }else if(idStage==3){
+            turn++;
+            numTurn.setText(Integer.toString(turn));
+            if(turn%2==1) {
+                updateHand1();
+            }else{
+                updateHand2();
+            }
             displayWindowDraw();
+            if(turn%2==1) {
+                updateHand1();
+            }else{
+                updateHand2();
+            }
             activateStageLabel(stageEndLabel,stageDrawLabel);
         }
         idStage++;
         idStage%=4;
-
-        if(idStage==0){
-            turn++;
-            numTurn.setText(Integer.toString(turn));
-        }
 
 
         // panggil method sesuai dengan apa yang ingin dilakuin di stage itu
@@ -549,13 +589,40 @@ public class guiController implements Initializable {
     }
 
     public void displayWindowDraw(){
+        Hand currentHand;
+        Deck currentDeck;
+        if(turn%2==1){
+            currentHand=handPemain1;
+            currentDeck=deckPemain1;
+        }else{
+            currentHand=handPemain2;
+            currentDeck=deckPemain2;
+        }
+        if(currentHand.isFull()){
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("fullHand.fxml"));
+
+                fxmlLoader.setController(new FullHandController(currentHand));
+
+                Scene scene = new Scene(fxmlLoader.load(), 648, 400);
+                Stage stage = new Stage();
+                stage.setTitle("Full Hand");
+                stage.setScene(scene);
+                stage.initStyle(StageStyle.TRANSPARENT);
+                scene.setFill(Color.TRANSPARENT);
+                stage.setOpacity(0.8);
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.showAndWait();
+            }catch (Exception err){
+                err.printStackTrace();
+            }
+        }
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("drawPhase.fxml"));
 
-            System.out.println(deckPemain1);
-
-            fxmlLoader.setController(new DrawController(deckPemain1,handPemain1));
+            fxmlLoader.setController(new DrawController(currentDeck,currentHand));
 
             Scene scene = new Scene(fxmlLoader.load(), 600, 400);
             scene.getStylesheets().add(getClass().getResource("styleDrawPhase.css").toExternalForm());
@@ -569,6 +636,127 @@ public class guiController implements Initializable {
             stage.showAndWait();
         }catch (Exception err){
             err.printStackTrace();
+        }
+    }
+
+    public void updateHand1(){
+        System.out.println("Hand 1 = "+handPemain1.numberOfCards());
+        for(int i=0;i<handPemain1.numberOfCards();i++){
+            System.out.println(handPemain1.getCard(i).getName());
+        }
+        for(int i=0;i<handPemain1.numberOfCards();i++){
+            if(handPemain1.getCard(i)==null)continue;
+            if(i==0){
+                handCard1.setImage(new Image(getClass().getResourceAsStream(handPemain1.getCard(i).getImagePath())));
+                handCard1Mana.setText("MANA "+handPemain1.getCard(i).getMana());
+                handCard1AtkHealth.setText(getAtkHealth(handPemain1.getCard(i)));
+            }else if(i==1){
+                handCard2.setImage(new Image(getClass().getResourceAsStream(handPemain1.getCard(i).getImagePath())));
+                handCard2Mana.setText("MANA "+handPemain1.getCard(i).getMana());
+                handCard2AtkHealth.setText(getAtkHealth(handPemain1.getCard(i)));
+            }else if(i==2){
+                handCard3.setImage(new Image(getClass().getResourceAsStream(handPemain1.getCard(i).getImagePath())));
+                handCard3Mana.setText("MANA "+handPemain1.getCard(i).getMana());
+                handCard3AtkHealth.setText(getAtkHealth(handPemain1.getCard(i)));
+            }else if(i==3){
+                handCard4.setImage(new Image(getClass().getResourceAsStream(handPemain1.getCard(i).getImagePath())));
+                handCard4Mana.setText("MANA "+handPemain1.getCard(i).getMana());
+                handCard4AtkHealth.setText(getAtkHealth(handPemain1.getCard(i)));
+            }else if(i==4){
+                handCard5.setImage(new Image(getClass().getResourceAsStream(handPemain1.getCard(i).getImagePath())));
+                handCard5Mana.setText("MANA "+handPemain1.getCard(i).getMana());
+                handCard5AtkHealth.setText(getAtkHealth(handPemain1.getCard(i)));
+            }
+        }
+        for(int i=handPemain1.numberOfCards();i<5;i++){
+            if(i==0){
+                handCard1.setImage(null);
+                handCard1Mana.setText(null);
+                handCard1AtkHealth.setText(null);
+            }else if(i==1){
+                handCard2.setImage(null);
+                handCard2Mana.setText(null);
+                handCard2AtkHealth.setText(null);
+            }else if(i==2){
+                handCard3.setImage(null);
+                handCard3Mana.setText(null);
+                handCard3AtkHealth.setText(null);
+            }else if(i==3){
+                handCard4.setImage(null);
+                handCard4Mana.setText(null);
+                handCard4AtkHealth.setText(null);
+            }else if(i==4){
+                handCard5.setImage(null);
+                handCard5Mana.setText(null);
+                handCard5AtkHealth.setText(null);
+            }
+        }
+    }
+
+    public void updateHand2(){
+        System.out.println("Hand 2 = "+handPemain2.numberOfCards());
+        for(int i=0;i<handPemain2.numberOfCards();i++){
+            System.out.println(handPemain2.getCard(i).getName());
+        }
+        for(int i=0;i<handPemain2.numberOfCards();i++){
+            if(i==0){
+                handCard1.setImage(new Image(getClass().getResourceAsStream(handPemain2.getCard(i).getImagePath())));
+                handCard1Mana.setText("MANA "+handPemain2.getCard(i).getMana());
+                handCard1AtkHealth.setText(getAtkHealth(handPemain2.getCard(i)));
+            }else if(i==1){
+                handCard2.setImage(new Image(getClass().getResourceAsStream(handPemain2.getCard(i).getImagePath())));
+                handCard2Mana.setText("MANA "+handPemain2.getCard(i).getMana());
+                handCard2AtkHealth.setText(getAtkHealth(handPemain2.getCard(i)));
+            }else if(i==2){
+                handCard3.setImage(new Image(getClass().getResourceAsStream(handPemain2.getCard(i).getImagePath())));
+                handCard3Mana.setText("MANA "+handPemain2.getCard(i).getMana());
+                handCard3AtkHealth.setText(getAtkHealth(handPemain2.getCard(i)));
+            }else if(i==3){
+                handCard4.setImage(new Image(getClass().getResourceAsStream(handPemain2.getCard(i).getImagePath())));
+                handCard4Mana.setText("MANA "+handPemain2.getCard(i).getMana());
+                handCard4AtkHealth.setText(getAtkHealth(handPemain2.getCard(i)));
+            }else if(i==4){
+                handCard5.setImage(new Image(getClass().getResourceAsStream(handPemain2.getCard(i).getImagePath())));
+                handCard5Mana.setText("MANA "+handPemain2.getCard(i).getMana());
+                handCard5AtkHealth.setText(getAtkHealth(handPemain2.getCard(i)));
+            }
+        }
+        for(int i=handPemain2.numberOfCards();i<5;i++){
+            if(i==0){
+                handCard1.setImage(null);
+                handCard1Mana.setText(null);
+                handCard1AtkHealth.setText(null);
+            }else if(i==1){
+                handCard2.setImage(null);
+                handCard2Mana.setText(null);
+                handCard2AtkHealth.setText(null);
+            }else if(i==2){
+                handCard3.setImage(null);
+                handCard3Mana.setText(null);
+                handCard3AtkHealth.setText(null);
+            }else if(i==3){
+                handCard4.setImage(null);
+                handCard4Mana.setText(null);
+                handCard4AtkHealth.setText(null);
+            }else if(i==4){
+                handCard5.setImage(null);
+                handCard5Mana.setText(null);
+                handCard5AtkHealth.setText(null);
+            }
+        }
+    }
+
+    public String getAtkHealth(Card c){
+        if(c instanceof  Character){
+            return "ATK " + ((Character) c).getAttack() + "/HP "+((Character) c).getHealth();
+        }else if(c instanceof MorphSpell){
+            return "MORPH";
+        }else if(c instanceof  PtnSpell){
+            return "ATK+" + ((PtnSpell) c).getPtnAttack() + "/HP+"+((PtnSpell) c).getPtnHp();
+        }else if(c instanceof LvlSpell){
+            return "LEVEL";
+        }else{ // swap
+            return "ATK <--> HP";
         }
     }
 
