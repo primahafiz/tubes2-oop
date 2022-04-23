@@ -106,7 +106,12 @@ public class Character extends Card  {
   }
 
   public void addExp(int exp){
-    this.exp += exp;
+    int expAkhir = this.exp += exp;
+    if (expAkhir >= 0) {
+      this.exp = expAkhir;
+    } else {
+      this.exp = 0;
+    }
   }
 
   public void setHealth(int health){
