@@ -27,9 +27,17 @@ public class Deck {
     public List<Card> getCard() {
         List<Card> C = new ArrayList<Card>();
         int i;
-        for (i =0; i< 3;i++){
-             C.add(this.CardDeck.get(i));
-             this.CardDeck.remove(i);
+        if (this.CardDeck.size() >= 3){
+            for (i =0; i< 3;i++){
+                C.add(this.CardDeck.get(i));
+                this.CardDeck.remove(i);
+            }
+        }
+        else if(this.CardDeck.size() > 0){
+            for (i =0; i< this.CardDeck.size();i++){
+                C.add(this.CardDeck.get(i));
+                this.CardDeck.remove(i);
+            }
         }
         return C;
     }
