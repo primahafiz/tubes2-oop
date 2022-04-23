@@ -269,6 +269,40 @@ public class guiController implements Initializable {
     @FXML
     Label manaNum;
 
+    @FXML
+    ImageView hand1Delete;
+    @FXML
+    ImageView hand2Delete;
+    @FXML
+    ImageView hand3Delete;
+    @FXML
+    ImageView hand4Delete;
+    @FXML
+    ImageView hand5Delete;
+
+    @FXML
+    ImageView player1BoardADelete;
+    @FXML
+    ImageView player1BoardBDelete;
+    @FXML
+    ImageView player1BoardCDelete;
+    @FXML
+    ImageView player1BoardDDelete;
+    @FXML
+    ImageView player1BoardEDelete;
+
+    @FXML
+    ImageView player2BoardADelete;
+    @FXML
+    ImageView player2BoardBDelete;
+    @FXML
+    ImageView player2BoardCDelete;
+    @FXML
+    ImageView player2BoardDDelete;
+    @FXML
+    ImageView player2BoardEDelete;
+
+
     int currentDragHand;
 
     int idStage;
@@ -350,6 +384,8 @@ public class guiController implements Initializable {
                 }
                 updateBoard();
                 updateHand();
+                updateDeleteHand();
+                updateDeleteBoard1();
                 event.consume();
             }
         });
@@ -381,6 +417,8 @@ public class guiController implements Initializable {
                 }
                 updateBoard();
                 updateHand();
+                updateDeleteHand();
+                updateDeleteBoard1();
                 event.consume();
             }
         });
@@ -412,6 +450,8 @@ public class guiController implements Initializable {
                 }
                 updateBoard();
                 updateHand();
+                updateDeleteHand();
+                updateDeleteBoard1();
                 event.consume();
             }
         });
@@ -444,6 +484,8 @@ public class guiController implements Initializable {
                 }
                 updateBoard();
                 updateHand();
+                updateDeleteHand();
+                updateDeleteBoard1();
                 event.consume();
             }
         });
@@ -476,6 +518,8 @@ public class guiController implements Initializable {
                 }
                 updateBoard();
                 updateHand();
+                updateDeleteHand();
+                updateDeleteBoard1();
                 event.consume();
             }
         });
@@ -512,6 +556,8 @@ public class guiController implements Initializable {
                 }
                 updateBoard();
                 updateHand();
+                updateDeleteHand();
+                updateDeleteBoard2();
                 event.consume();
             }
         });
@@ -543,6 +589,8 @@ public class guiController implements Initializable {
                 }
                 updateBoard();
                 updateHand();
+                updateDeleteHand();
+                updateDeleteBoard2();
                 event.consume();
             }
         });
@@ -574,6 +622,8 @@ public class guiController implements Initializable {
                 }
                 updateBoard();
                 updateHand();
+                updateDeleteHand();
+                updateDeleteBoard2();
                 event.consume();
             }
         });
@@ -606,6 +656,8 @@ public class guiController implements Initializable {
                 }
                 updateBoard();
                 updateHand();
+                updateDeleteHand();
+                updateDeleteBoard2();
                 event.consume();
             }
         });
@@ -638,6 +690,8 @@ public class guiController implements Initializable {
                 }
                 updateBoard();
                 updateHand();
+                updateDeleteHand();
+                updateDeleteBoard2();
                 event.consume();
             }
         });
@@ -650,6 +704,298 @@ public class guiController implements Initializable {
                 event.consume();
             }
         });
+    }
+
+    public void initDelete(){
+        Hand currentHand;
+
+        if(turn%2==1){
+            currentHand=pemain1.getHand();
+        }else{
+            currentHand=pemain2.getHand();
+        }
+
+        hand1Delete.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                    currentHand.removeCardfromHand(0);
+                    updateHand();
+                    updateDeleteHand();
+                }
+            }
+        });
+
+        hand2Delete.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                    currentHand.removeCardfromHand(1);
+                    updateHand();
+                    updateDeleteHand();
+                }
+            }
+        });
+
+        hand3Delete.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                    currentHand.removeCardfromHand(2);
+                    updateHand();
+                    updateDeleteHand();
+                }
+            }
+        });
+
+        hand4Delete.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                    currentHand.removeCardfromHand(3);
+                    updateHand();
+                    updateDeleteHand();
+                }
+            }
+        });
+
+        hand5Delete.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                    currentHand.removeCardfromHand(4);
+                    updateHand();
+                    updateDeleteHand();
+                }
+            }
+        });
+
+        player1BoardADelete.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                    pemain1.getBoard().removeCardfromBoard(0);
+                    updateBoard1();
+                    updateDeleteBoard1();
+                }
+            }
+        });
+
+        player1BoardBDelete.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                    pemain1.getBoard().removeCardfromBoard(1);
+                    updateBoard1();
+                    updateDeleteBoard1();
+                }
+            }
+        });
+
+        player1BoardCDelete.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                    pemain1.getBoard().removeCardfromBoard(2);
+                    updateBoard1();
+                    updateDeleteBoard1();
+                }
+            }
+        });
+
+        player1BoardDDelete.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                    pemain1.getBoard().removeCardfromBoard(3);
+                    updateBoard1();
+                    updateDeleteBoard1();
+                }
+            }
+        });
+
+        player1BoardEDelete.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                    pemain1.getBoard().removeCardfromBoard(4);
+                    updateBoard1();
+                    updateDeleteBoard1();
+                }
+            }
+        });
+
+        player2BoardADelete.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                    pemain2.getBoard().removeCardfromBoard(0);
+                    updateBoard2();
+                    updateDeleteBoard2();
+                }
+            }
+        });
+
+        player2BoardBDelete.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                    pemain2.getBoard().removeCardfromBoard(1);
+                    updateBoard2();
+                    updateDeleteBoard2();
+                }
+            }
+        });
+
+        player2BoardCDelete.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                    pemain2.getBoard().removeCardfromBoard(2);
+                    updateBoard2();
+                    updateDeleteBoard2();
+                }
+            }
+        });
+
+        player2BoardDDelete.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                    pemain2.getBoard().removeCardfromBoard(3);
+                    updateBoard2();
+                    updateDeleteBoard2();
+                }
+            }
+        });
+
+        player2BoardEDelete.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                    pemain2.getBoard().removeCardfromBoard(4);
+                    updateBoard2();
+                    updateDeleteBoard2();
+                }
+            }
+        });
+    }
+
+    public void endDelete(){
+        hand1Delete.setVisible(false);
+        hand2Delete.setVisible(false);
+        hand3Delete.setVisible(false);
+        hand4Delete.setVisible(false);
+        hand5Delete.setVisible(false);
+
+        player1BoardADelete.setVisible(false);
+        player1BoardBDelete.setVisible(false);
+        player1BoardCDelete.setVisible(false);
+        player1BoardDDelete.setVisible(false);
+        player1BoardEDelete.setVisible(false);
+
+        player2BoardADelete.setVisible(false);
+        player2BoardBDelete.setVisible(false);
+        player2BoardCDelete.setVisible(false);
+        player2BoardDDelete.setVisible(false);
+        player2BoardEDelete.setVisible(false);
+    }
+
+    public void updateDeleteHand(){
+        Hand currentHand;
+        if(turn%2==1){
+            currentHand=pemain1.getHand();
+        }else{
+            currentHand=pemain2.getHand();
+        }
+        for(int i=0;i<currentHand.numberOfCards();i++){
+            if(i==0){
+                hand1Delete.setVisible(true);
+            }else if(i==1){
+                hand2Delete.setVisible(true);
+            }else if(i==2){
+                hand3Delete.setVisible(true);
+            }else if(i==3){
+                hand4Delete.setVisible(true);
+            }else if(i==4){
+                hand5Delete.setVisible(true);
+            }
+        }
+        for(int i=currentHand.numberOfCards();i<5;i++){
+            if(i==0){
+                hand1Delete.setVisible(false);
+            }else if(i==1){
+                hand2Delete.setVisible(false);
+            }else if(i==2){
+                hand3Delete.setVisible(false);
+            }else if(i==3){
+                hand4Delete.setVisible(false);
+            }else if(i==4){
+                hand5Delete.setVisible(false);
+            }
+        }
+    }
+
+    public void updateDeleteBoard1(){
+        Board currentBoard = pemain1.getBoard();
+        for(int i=0;i<5;i++){
+            if(currentBoard.isValidIdx(i)){
+                if(i==0){
+                    player1BoardADelete.setVisible(false);
+                }else if(i==1){
+                    player1BoardBDelete.setVisible(false);
+                }else if(i==2){
+                    player1BoardCDelete.setVisible(false);
+                }else if(i==3){
+                    player1BoardDDelete.setVisible(false);
+                }else if(i==4){
+                    player1BoardEDelete.setVisible(false);
+                }
+            }else{
+                if(i==0){
+                    player1BoardADelete.setVisible(true);
+                }else if(i==1){
+                    player1BoardBDelete.setVisible(true);
+                }else if(i==2){
+                    player1BoardCDelete.setVisible(true);
+                }else if(i==3){
+                    player1BoardDDelete.setVisible(true);
+                }else if(i==4){
+                    player1BoardEDelete.setVisible(true);
+                }
+            }
+        }
+    }
+
+    public void updateDeleteBoard2(){
+        Board currentBoard = pemain2.getBoard();
+        for(int i=0;i<5;i++){
+            if(currentBoard.isValidIdx(i)){
+                if(i==0){
+                    player2BoardADelete.setVisible(false);
+                }else if(i==1){
+                    player2BoardBDelete.setVisible(false);
+                }else if(i==2){
+                    player2BoardCDelete.setVisible(false);
+                }else if(i==3){
+                    player2BoardDDelete.setVisible(false);
+                }else if(i==4){
+                    player2BoardEDelete.setVisible(false);
+                }
+            }else{
+                if(i==0){
+                    player2BoardADelete.setVisible(true);
+                }else if(i==1){
+                    player2BoardBDelete.setVisible(true);
+                }else if(i==2){
+                    player2BoardCDelete.setVisible(true);
+                }else if(i==3){
+                    player2BoardDDelete.setVisible(true);
+                }else if(i==4){
+                    player2BoardEDelete.setVisible(true);
+                }
+            }
+        }
     }
 
     public void endDragAndDrop1(){
@@ -807,13 +1153,20 @@ public class guiController implements Initializable {
             activateStageLabel(stageEndLabel,stageDrawLabel);
         } else if(idStage==0){
             initDragAndDropHand();
+            initDelete();
+            updateHand();
+            updateDeleteHand();
+            System.out.println("Hand 1 besar : "+pemain1.getHand().numberOfCards());
             if(turn%2==1){
                 initDragAndDropBoardPlayer1();
+                updateDeleteBoard1();
             }else{
+                updateDeleteBoard2();
                 initDragAndDropBoardPlayer2();
             }
             activateStageLabel(stageDrawLabel,stagePlanLabel);
         }else if(idStage==1){
+            endDelete();
             if(turn%2==1){
                 endDragAndDrop1();
             }else{

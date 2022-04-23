@@ -95,10 +95,35 @@
                   <ImageView fx:id="handCard5" fitHeight="54.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
                </top>
             </BorderPane>
+            <ImageView fx:id="hand1Delete" fitHeight="21.0" fitWidth="21.0" layoutX="64.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@image/delete.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="hand2Delete" fitHeight="21.0" fitWidth="21.0" layoutX="147.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@image/delete.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="hand3Delete" fitHeight="21.0" fitWidth="21.0" layoutX="231.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@image/delete.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="hand4Delete" fitHeight="21.0" fitWidth="21.0" layoutX="314.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@image/delete.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="hand5Delete" fitHeight="21.0" fitWidth="21.0" layoutX="396.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@image/delete.jpg" />
+               </image>
+            </ImageView>
          </children></AnchorPane>
    </bottom>
    <left>
-      <AnchorPane prefHeight="229.0" prefWidth="487.0" styleClass="playerHand" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="240.0" prefWidth="487.0" styleClass="playerHand" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="90.0" fitWidth="90.0" layoutX="33.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -200,6 +225,31 @@
                   <Label fx:id="player1BoardELvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
                </children>
             </AnchorPane>
+            <ImageView fx:id="player1BoardDDelete" fitHeight="21.0" fitWidth="21.0" layoutX="337.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@image/delete.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="player1BoardCDelete" fitHeight="21.0" fitWidth="21.0" layoutX="123.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@image/delete.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="player1BoardADelete" fitHeight="21.0" fitWidth="21.0" layoutX="123.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@image/delete.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="player1BoardBDelete" fitHeight="21.0" fitWidth="21.0" layoutX="337.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@image/delete.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="player1BoardEDelete" fitHeight="21.0" fitWidth="21.0" layoutX="433.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@image/delete.jpg" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </left>
@@ -306,6 +356,31 @@
                   <Label fx:id="player2BoardCLvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
                </children>
             </AnchorPane>
+            <ImageView fx:id="player2BoardEDelete" fitHeight="21.0" fitWidth="21.0" layoutX="14.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@image/delete.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="player2BoardDDelete" fitHeight="21.0" fitWidth="21.0" layoutX="119.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@image/delete.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="player2BoardCDelete" fitHeight="21.0" fitWidth="21.0" layoutX="332.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@image/delete.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="player2BoardBDelete" fitHeight="21.0" fitWidth="21.0" layoutX="120.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@image/delete.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="player2BoardADelete" fitHeight="21.0" fitWidth="21.0" layoutX="332.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@image/delete.jpg" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </right>
