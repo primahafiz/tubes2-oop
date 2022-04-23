@@ -15,8 +15,6 @@ public class Character extends Card  {
   private boolean hasAttacked;
   private int swapDur;
   private List<PtnSpell> listPtnSpell;
-  // private List<>
-
 
   public Character(int id, String name, String desc, String path, int mana, Type type, int attack, int health, int attackUp, int healthUp) {
     super(id, name, desc, path, mana);
@@ -29,13 +27,7 @@ public class Character extends Card  {
     this.level = 1;
     this.hasAttacked = false;
     this.swapDur = 0;
-    this.listPtnSpell = new ArrayList<>(); //(id1, durasi), (id2, durasi)
-    // masih asumsi saat swapback
-    // list of health (id1, health1), (id2, health2) 1 2 3        1 2 4   123
-    // list of attack 1 2                                         1 2 3   124
-    // ngambil dr yg health positif
-    // swap duration
-    // list of attack swap, list of health swap
+    this.listPtnSpell = new ArrayList<>();
   }
 
   // getter
@@ -46,7 +38,7 @@ public class Character extends Card  {
 
   public int getAttack(){
     return this.attack + this.getTempAttack();
-  } // ngambil dr list of attack, list of swap attack, attack
+  }
 
   public int getHealth(){
     return this.health + this.getTempHealth();
@@ -116,7 +108,7 @@ public class Character extends Card  {
 
   public void setHealth(int health){
     this.health = health;
-  } // perlu dimodify
+  }
 
   public void levelUp(int lvl) {
     this.level += lvl;
@@ -147,7 +139,6 @@ public class Character extends Card  {
     for (PtnSpell s : this.listPtnSpell){
       tempAttack += s.getPtnAttack();
     }
-    // System.out.println("Temp attack "+ tempAttack);
     return tempAttack;
   }
 
@@ -156,7 +147,6 @@ public class Character extends Card  {
     for (PtnSpell s : this.listPtnSpell){
       tempHealth += s.getPtnHp();
     }
-    // System.out.println("Temp Health "+ tempHealth);
     return tempHealth;
   }
 
@@ -167,14 +157,6 @@ public class Character extends Card  {
   public void addSpell(PtnSpell s){
     this.listPtnSpell.add(s);
   }
-
-  /*
-  public void printSpell(){
-    for (PtnSpell s : this.listPtnSpell){
-      s.print();
-    }
-  }
-  */
 
   private void updateSpellList(){
     List<PtnSpell> object = new ArrayList<PtnSpell>();
@@ -222,8 +204,6 @@ public class Character extends Card  {
 
   public void PtnEffect(PtnSpell p){
     this.addSpell(p);
-    // add ke listAttackTemp
-    // add ke listHealthTemp
   }
 
   public void SwapEffect(SwapSpell s){
@@ -235,10 +215,6 @@ public class Character extends Card  {
       this.attack = this.health;
       this.health = val;
       this.swapPtnSpellList();
-      // ngeswap ptn effect juga!!!
-      // buat listattack jadi listhealthswap
-      // buat listhealth jadi listattackswap
-      // jadi kalo mau ngakses attack =
     }
   }
 
@@ -334,12 +310,7 @@ public class Character extends Card  {
       }
       i += 1;
     }
-        /*
-        for (Integer k : listidx){
-            System.out.println(k);
-        }
-        System.out.println("total "+ total + " damage " + damage);
-        */
+
     // memperbarui listPtnSpell
     if (total > damage){
       int lastidx = listidx.get(listidx.size() - 1);
@@ -364,7 +335,6 @@ public class Character extends Card  {
   public Type getCardType() {
     return Type.CHARACTER;
   }
-
 
   /*
   @Override
