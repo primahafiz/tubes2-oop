@@ -8,13 +8,10 @@ import com.aetherwars.model.Hand.*;
 import com.aetherwars.model.Deck.*;
 
 import com.aetherwars.util.InvalidException;
-import com.sun.tools.jdeprscan.scan.Scan;
 
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
-import java.util.spi.CalendarDataProvider;
 
 
 public class Player {
@@ -36,7 +33,6 @@ public class Player {
         this.hand = new Hand();
         this.deck = new Deck();
 
-        this.deck.initializeDeck();
     }
 
     // return player's Deck
@@ -89,17 +85,16 @@ public class Player {
         // draw 3 kartu teratas dari deck
         this.deck.getCard();
 
-        // remove kartu dari hand kalo penuh (asumsi removenya kartu random)
+        // remove kartu dari hand kalo penuh
         if(this.hand.isFull()) {
             Random rand = new Random();
-            int id = rand.nextInt(5) - 1;
+            int id = rand.nextInt(this.hand.numberOfCards());
             this.hand.removeCardfromHand(id);
-            // this.hand.addCardtoHand(choosenCard, id);
         }
     }
 
     // Melihat deskripsi dan atribut kartu hand maupun board
-    public void showDesc(Card card) {
+    public void showCard(Card card) {
         if (card.getCardType() == Type.CHARACTER) {
             Character charCard = (Character) card;
             System.out.println("Name : " + card.getName());
@@ -135,17 +130,17 @@ public class Player {
 
     }
 
-    // Mengeluarkan kartu / memindahkan kartu dari hand ke board [KARTU KARAKTER]
-    public void playCard(int handIdx, int boardIdx) {
-        Card cardPlayed = this.hand.getCard(handIdx);
+    // Mengeluarkan kartu / memindahkan kartu dari hand ke board
+    public void playCard(int idx) throws InvalidException {
+        Card cardPlayed = this.hand.getCard(idx);
 
         // Memeriksa apakah player mempunyai Mana yang cukup untuk mengeluarkan kartu
         if (this.Mana >= cardPlayed.getMana()) {
-            this.board.addCardtoBoard(cardPlayed, boardIdx);
+            board.addCardtoBoard(cardPlayed,idx);
             this.Mana -= cardPlayed.getMana();
-            this.hand.removeCardfromHand(handIdx);
+            this.hand.removeCardfromHand(idx);
         } else {
-            System.out.println("This player doesn't have enough mana to use card");
+            throw new InvalidException("This player doesn't have enough mana");
         }
     }
 
@@ -155,47 +150,40 @@ public class Player {
         Spell spellCard = (Spell)this.hand.getCard(spellCardIdx);
         Type spellType = spellCard.getCardType();
 
-        int cost = charCard.getManaNeeded(spellCard);
-        if (this.Mana >= cost ) {
-            this.Mana -= cost;
-            if (this.board.isCharacterAvailable(charChardIdx)) {
-                switch (spellType) {
-                    case PTN:
-                        PtnSpell ptnSpellCard = (PtnSpell) spellCard;
-                        charCard.PtnEffect(ptnSpellCard);
-                        break;
+        if (this.board.isCharacterAvailable(charChardIdx)) {
+            switch (spellType) {
+                case PTN:
+                    PtnSpell ptnSpellCard = (PtnSpell) spellCard;
+                    charCard.PtnEffect(ptnSpellCard);
+                    break;
 
-                    case LVL:
-                        LvlSpell lvlSpellCard = (LvlSpell) spellCard;
-                        charCard.LvlEffect(lvlSpellCard);
-                        break;
+                case LVL:
+                    LvlSpell lvlSpellCard = (LvlSpell) spellCard;
+                    charCard.LvlEffect(lvlSpellCard);
+                    break;
 
-                    case SWAP:
-                        SwapSpell swapSpellCard = (SwapSpell) spellCard;
-                        charCard.SwapEffect(swapSpellCard);
-                        break;
+                case SWAP:
+                    SwapSpell swapSpellCard = (SwapSpell) spellCard;
+                    charCard.SwapEffect(swapSpellCard);
+                    break;
 
-                    case MORPH:
-                        MorphSpell morphSpellCard = (MorphSpell) spellCard;
-                        int targetId = morphSpellCard.getTargetId();
-                        charCard.MorphEffect(targetId, card);
-                        break;
-                }
-                this.hand.removeCardfromHand(spellCardIdx);
-            } else {
-                System.out.println("Spell card can only be used to Character");
-                //throw new InvalidException("Spell card can only be used to Character");
+                case MORPH:
+                    MorphSpell morphSpellCard = (MorphSpell) spellCard;
+                    int targetId = morphSpellCard.getTargetId();
+                    charCard.MorphEffect(targetId, card);
+                    break;
             }
+            this.hand.removeCardfromHand(spellCardIdx);
 
         } else {
-            System.out.println("This player doesn't have enough mana to use spell card");
+            throw new InvalidException("Spell card can only be used to Character");
         }
 
     }
 
     // Attack
     // attackerCharacterIdx = indeks kartu yang digunakan untuk attack
-    // enemyCharacterIdx = indeks kartu musuh yang diattack
+    // enemyCharacterIdx = indeks kartu musuh yang di attack
     public void attack(int attackerCharacterIdx, int enemyCharacterIdx, Player enemy) {
         Character attacker = (Character)this.board.getCard(attackerCharacterIdx);
         Character enemyCharacter = (Character)enemy.board.getCard(enemyCharacterIdx);
@@ -205,40 +193,31 @@ public class Player {
             // Health karakter musuh berkurang sesuai dengan attack karakter
             // pemain dan attack modifier tipe kedua karakter
             double damageByAttacker = attacker.getDamage(enemyCharacter);
-            enemyCharacter.minusHealth((int)damageByAttacker);
-            // enemyCharacter.setHealth((int) (enemyCharacter.getHealth() - damageByAttacker));
-            System.out.println("Damage yang diberikan : " + damageByAttacker);
+            enemyCharacter.setHealth((int) (enemyCharacter.getHealth() - damageByAttacker));
 
             // Health karakter pemain berkurang sesuai dengan attack karakter
             // musuh dan attack modifier tipe kedua karakter (tetap berkurang
             // meskipun karakter musuh mati).
             double damageByEnemy = enemyCharacter.getDamage(attacker);
-            attacker.minusHealth((int)damageByEnemy);
-            // attacker.setHealth((int) (attacker.getHealth() - damageByEnemy));
-            System.out.println("Damage yang diterima : " + damageByEnemy);
+            attacker.setHealth((int) (attacker.getHealth() - damageByEnemy));
 
 
             // Jika karakter musuh mati, exp karakter pemain akan bertamba sebesar level karakter musuh
             if (enemyCharacter.isDead() && !attacker.isDead()) {
-                System.out.println("Karakter lawan mati");
                 // jika sudah level 10 maka karakter tidak mendapatkan exp
                 if (attacker.getLevel() < 10) {
-                    System.out.println("ded");
                     attacker.addExp(enemyCharacter.getLevel());
                 }
-                enemy.board.removeCardfromBoard(enemyCharacterIdx);
             }
 
             // Jika exp karakter pemain melebihi batas yang diperlukan, level karakter pemain akan meningkat
-            while ((attacker.getExp() >= (attacker.getLevel() * 2) - 1) && (attacker.getLevel() < 10)) {
+            while ((attacker.getExp() > (attacker.getLevel() * 2) - 1) && (attacker.getLevel() < 10)) {
                 attacker.levelUp(1);
                 attacker.addExp(-2);
             }
 
             // satu karakter hanya dapat menyerang satu kali
             attacker.setHasAttackedTrue();
-        } else {
-            System.out.println("A Character can only attack once");
         }
 
     }
@@ -250,8 +229,7 @@ public class Player {
         if (enemy.board.isEmpty()) {
             enemy.setHp(enemy.getHp() - attacker.getAttack());
         } else {
-            System.out.println("You have to attack enemy's character first");
-            // throw new InvalidException("You have to attack enemy's character first");
+            throw new InvalidException("You have to attack enemy's character first");
         }
     }
 

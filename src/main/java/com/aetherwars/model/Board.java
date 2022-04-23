@@ -1,95 +1,69 @@
 package com.aetherwars.model;
 
+import java.util.List;
+import java.util.ArrayList;
+import com.aetherwars.model.Card.*;
+import com.aetherwars.util.InvalidException;
+
 public class Board {
-    // private List<Card> onBoardCards;
-    private Card[] onBoardCards;
+    private List<Card> onBoardCards;
 
     // Constructor
     public Board() {
-        this.onBoardCards = new Card[5];
-        //this.onBoardCards = {null, null,null,null,null};
+        this.onBoardCards = new ArrayList<Card>(5);
     }
 
     // Menambahkan kartu ke Board
-    public void addCardtoBoard(Card card, int idx) {
-        int count = 0;
-        for (int i = 0; i< 5 ; i++){
-            if (this.onBoardCards[i] != null){
-                count++;
-            }
-        }
-
-        if (count < 5) {
+    public void addCardtoBoard(Card card, int idx) throws InvalidException{
+        if (this.onBoardCards.size() < 5) {
             if (isValidIdx(idx)) {
-                this.onBoardCards[idx] = card;
+                this.onBoardCards.add(idx, card);
+            } else {
+                throw new InvalidException("This slot has been occupied");
             }
+        } else {
+            throw new InvalidException("Board is full");
         }
     }
 
     // Menghapus card dari board
-    public void removeCardfromBoard(int idx) {
+    public void removeCardfromBoard(int idx) throws InvalidException {
         if (!isValidIdx(idx)) {
-            this.onBoardCards[idx] = null;
+            this.onBoardCards.remove(idx);
+        } else {
+            throw new InvalidException("There is no card in this slot");
         }
     }
 
     // Getter Card yang terletak pada posisi id di Board
     public Card getCard(int id) {
-        return this.onBoardCards[id];
+        return this.onBoardCards.get(id);
     }
 
     // Memeriksa apakah yang dipilih merupakan slot kosong
     // True jika slot kosong
     public boolean isValidIdx(int idx) {
-        return (this.onBoardCards[idx] == null);
+        return (this.onBoardCards.get(idx) == null);
     }
 
     // Memeriksa apakah terdapat kartu character pada slot yang dipilih
     // True jika terdapat character pada slot
     public boolean isCharacterAvailable(int idx) {
-        return (this.onBoardCards[idx] != null);
+        return (this.onBoardCards.get(idx) != null);
     }
 
     // Memeriksa apakah ada kartu di Board
     public boolean isEmpty() {
-        int count = 0;
-        for (int i = 0; i< 5 ; i++){
-            if (this.onBoardCards[i] == null){
-                count++;
-            }
-        }
-        return (count == 5);
+        return (this.onBoardCards.size() == 0);
     }
 
     // Board penuh
     public boolean isFull() {
-        int count = 0;
-        for (int i = 0; i< 5 ; i++){
-            if (this.onBoardCards[i] != null){
-                count++;
-            }
-        }
-        return (count == 5);
+        return (this.onBoardCards.size() == 5);
     }
 
-    public int countCard() {
-        int count = 0;
-        for (int i = 0; i< 5 ; i++){
-            if (this.onBoardCards[i] != null){
-                count++;
-            }
-        }
-        return count;
-    }
-
-    public void printBoard() {
-        int i;
-        for (i = 0;i < this.onBoardCards.length; i++){
-            if (this.onBoardCards[i] != null) {
-                System.out.println("Kartu ke-" + (i+1));
-                this.onBoardCards[i].printCardInfo();
-                System.out.println();
-            }
-        }
+    // Mengembalikan jumlah kartu di board
+    public int numberOfCards() {
+        return (this.onBoardCards.size());
     }
 }
