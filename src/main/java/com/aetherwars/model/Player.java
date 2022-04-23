@@ -8,10 +8,13 @@ import com.aetherwars.model.Hand.*;
 import com.aetherwars.model.Deck.*;
 
 import com.aetherwars.util.InvalidException;
+import com.sun.tools.jdeprscan.scan.Scan;
 
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
+import java.util.spi.CalendarDataProvider;
 
 
 public class Player {
@@ -33,6 +36,7 @@ public class Player {
         this.hand = new Hand();
         this.deck = new Deck();
 
+        this.deck.initializeDeck();
     }
 
     // return player's Deck
@@ -85,11 +89,12 @@ public class Player {
         // draw 3 kartu teratas dari deck
         this.deck.getCard();
 
-        // remove kartu dari hand kalo penuh
+        // remove kartu dari hand kalo penuh (asumsi removenya kartu random)
         if(this.hand.isFull()) {
             Random rand = new Random();
-            int id = rand.nextInt(this.hand.numberOfCards());
+            int id = rand.nextInt(5) - 1;
             this.hand.removeCardfromHand(id);
+            // this.hand.addCardtoHand(choosenCard, id);
         }
     }
 
@@ -131,16 +136,20 @@ public class Player {
     }
 
     // Mengeluarkan kartu / memindahkan kartu dari hand ke board
-    public void playCard(int idx) throws InvalidException {
-        Card cardPlayed = this.hand.getCard(idx);
+    public void playCard(int handIdx, int boardIdx) {
+        Card cardPlayed = this.hand.getCard(handIdx);
+        System.out.println("helo");
 
         // Memeriksa apakah player mempunyai Mana yang cukup untuk mengeluarkan kartu
         if (this.Mana >= cardPlayed.getMana()) {
-            board.addCardtoBoard(cardPlayed,idx);
+            System.out.println("hi");
+            // this.board.addCardtoBoard(cardPlayed,idx);
+            this.board.addCardtoBoard(cardPlayed, boardIdx);
+            System.out.println("1");
             this.Mana -= cardPlayed.getMana();
-            this.hand.removeCardfromHand(idx);
-        } else {
-            throw new InvalidException("This player doesn't have enough mana");
+            System.out.println("2");
+            this.hand.removeCardfromHand(handIdx);
+            System.out.println("hai");
         }
     }
 
@@ -184,7 +193,7 @@ public class Player {
     // Attack
     // attackerCharacterIdx = indeks kartu yang digunakan untuk attack
     // enemyCharacterIdx = indeks kartu musuh yang di attack
-    public void attack(int attackerCharacterIdx, int enemyCharacterIdx, Player enemy) {
+    public void attack(int attackerCharacterIdx, int enemyCharacterIdx, Player enemy) throws InvalidException {
         Character attacker = (Character)this.board.getCard(attackerCharacterIdx);
         Character enemyCharacter = (Character)enemy.board.getCard(enemyCharacterIdx);
 
@@ -194,20 +203,24 @@ public class Player {
             // pemain dan attack modifier tipe kedua karakter
             double damageByAttacker = attacker.getDamage(enemyCharacter);
             enemyCharacter.setHealth((int) (enemyCharacter.getHealth() - damageByAttacker));
+            System.out.println(damageByAttacker);
 
             // Health karakter pemain berkurang sesuai dengan attack karakter
             // musuh dan attack modifier tipe kedua karakter (tetap berkurang
             // meskipun karakter musuh mati).
             double damageByEnemy = enemyCharacter.getDamage(attacker);
             attacker.setHealth((int) (attacker.getHealth() - damageByEnemy));
+            System.out.println(damageByEnemy);
 
 
             // Jika karakter musuh mati, exp karakter pemain akan bertamba sebesar level karakter musuh
             if (enemyCharacter.isDead() && !attacker.isDead()) {
                 // jika sudah level 10 maka karakter tidak mendapatkan exp
                 if (attacker.getLevel() < 10) {
+                    System.out.println("ded");
                     attacker.addExp(enemyCharacter.getLevel());
                 }
+                enemy.board.removeCardfromBoard(enemyCharacterIdx);
             }
 
             // Jika exp karakter pemain melebihi batas yang diperlukan, level karakter pemain akan meningkat

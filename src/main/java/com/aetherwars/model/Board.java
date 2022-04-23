@@ -14,15 +14,13 @@ public class Board {
     }
 
     // Menambahkan kartu ke Board
-    public void addCardtoBoard(Card card, int idx) throws InvalidException{
+    public void addCardtoBoard(Card card, int idx) {
         if (this.onBoardCards.size() < 5) {
-            if (isValidIdx(idx)) {
+            // if (isValidIdx(idx)) {
                 this.onBoardCards.add(idx, card);
-            } else {
-                throw new InvalidException("This slot has been occupied");
-            }
-        } else {
-            throw new InvalidException("Board is full");
+            //} else {
+                // throw new InvalidException("This slot has been occupied");
+            // }
         }
     }
 
@@ -65,5 +63,14 @@ public class Board {
     // Mengembalikan jumlah kartu di board
     public int numberOfCards() {
         return (this.onBoardCards.size());
+    }
+
+    public void printBoard() {
+        int i;
+        for (i = 0;i < this.onBoardCards.size();i++){
+            System.out.println("Kartu ke-" + (i+1));
+            this.onBoardCards.get(i).printCardInfo();
+            System.out.println();
+        }
     }
 }
