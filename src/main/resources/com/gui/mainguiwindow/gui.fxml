@@ -14,8 +14,8 @@
       <AnchorPane prefHeight="121.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
             <Circle fill="WHITE" layoutX="480.0" layoutY="61.0" radius="33.0" stroke="BLACK" strokeType="INSIDE" />
-            <ProgressBar fx:id="lifeBar1" layoutX="59.0" layoutY="51.0" prefHeight="18.0" prefWidth="333.0" progress="0.0" style="-fx-accent: #00bb00;" />
-            <ProgressBar fx:id="lifeBar2" layoutX="572.0" layoutY="51.0" prefHeight="18.0" prefWidth="333.0" progress="0.0" style="-fx-accent: #00bb00;" />
+            <ProgressBar fx:id="lifeBar1" layoutX="59.0" layoutY="19.0" prefHeight="18.0" prefWidth="333.0" progress="0.0" style="-fx-accent: #00bb00;" />
+            <ProgressBar fx:id="lifeBar2" layoutX="570.0" layoutY="19.0" prefHeight="18.0" prefWidth="333.0" progress="0.0" style="-fx-accent: #00bb00;" />
             <Label layoutX="467.0" layoutY="44.0" prefHeight="17.0" prefWidth="30.0" text="Turn" />
             <Label fx:id="numTurn" alignment="CENTER" layoutX="467.0" layoutY="60.0" prefHeight="17.0" prefWidth="25.0" text="1" />
             <Label layoutX="59.0" layoutY="77.0" prefHeight="15.0" prefWidth="32.0" text="Steve" />
@@ -30,37 +30,7 @@
             <Label fx:id="stageEndLabel" layoutX="637.0" layoutY="18.0" prefHeight="25.0" prefWidth="200.0" styleClass="stage-label" text="END" />
             <Label fx:id="stageAttackLabel" layoutX="437.0" layoutY="18.0" prefHeight="25.0" prefWidth="200.0" styleClass="stage-label" text="ATTACK" />
             <Label fx:id="stagePlanLabel" layoutX="237.0" layoutY="18.0" prefHeight="25.0" prefWidth="200.0" styleClass="stage-label" text="PLAN" />
-            <Button id="nextStageBtn" layoutX="864.0" layoutY="17.0" mnemonicParsing="false" onAction="#changeStageClicked" prefHeight="5.0" prefWidth="61.0" style="-: grey;" text="&gt;&gt;" />
-            <ImageView fx:id="handCard1" fitHeight="150.0" fitWidth="70.0" layoutX="37.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/defaultBoard.jpeg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="handCard2" fitHeight="150.0" fitWidth="70.0" layoutX="109.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/defaultBoard.jpeg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="handCard3" fitHeight="150.0" fitWidth="70.0" layoutX="181.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/defaultBoard.jpeg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="handCard4" fitHeight="150.0" fitWidth="70.0" layoutX="253.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/defaultBoard.jpeg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="handCard5" fitHeight="150.0" fitWidth="70.0" layoutX="325.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/defaultBoard.jpeg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="handCard6" fitHeight="150.0" fitWidth="70.0" layoutX="397.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/defaultBoard.jpeg" />
-               </image>
-            </ImageView>
+            <Button fx:id="nextStageBtn" layoutX="864.0" layoutY="17.0" mnemonicParsing="false" onAction="#changeStageClicked" prefHeight="5.0" prefWidth="61.0" style="-: grey;" text="&gt;&gt;" />
             <ImageView fx:id="hoveredCard" fitHeight="140.0" fitWidth="126.0" layoutX="489.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@image/defaultBoard.jpeg" />
@@ -70,230 +40,272 @@
             <Label fx:id="cardDescription" layoutX="743.0" layoutY="73.0" prefHeight="126.0" prefWidth="99.0" text="DESCRIPTION" />
             <Label fx:id="deckNum" layoutX="864.0" layoutY="90.0" prefHeight="29.0" prefWidth="79.0" text="Deck" />
             <Label fx:id="manaNum" layoutX="864.0" layoutY="141.0" prefHeight="29.0" prefWidth="79.0" text="Mana" />
-            <Label id="handCard1Mana" alignment="CENTER" layoutX="39.0" layoutY="161.0" prefHeight="18.0" prefWidth="65.0" />
-            <Label id="handCard1Info" alignment="CENTER" layoutX="39.0" layoutY="178.0" prefHeight="18.0" prefWidth="65.0" />
-            <Label id="handCard2Mana" alignment="CENTER" layoutX="111.0" layoutY="161.0" prefHeight="18.0" prefWidth="65.0" />
-            <Label id="handCard2Info" alignment="CENTER" layoutX="111.0" layoutY="178.0" prefHeight="18.0" prefWidth="65.0" />
-            <Label id="handCard3Mana" alignment="CENTER" layoutX="183.0" layoutY="161.0" prefHeight="18.0" prefWidth="65.0" />
-            <Label id="handCard3Info" alignment="CENTER" layoutX="183.0" layoutY="178.0" prefHeight="18.0" prefWidth="65.0" />
-            <Label id="handCard4Mana" alignment="CENTER" layoutX="255.0" layoutY="161.0" prefHeight="18.0" prefWidth="65.0" />
-            <Label id="handCard4Info" alignment="CENTER" layoutX="255.0" layoutY="178.0" prefHeight="18.0" prefWidth="65.0" />
-            <Label id="handCard5Mana" alignment="CENTER" layoutX="327.0" layoutY="161.0" prefHeight="18.0" prefWidth="65.0" />
-            <Label id="handCard5Info" alignment="CENTER" layoutX="327.0" layoutY="178.0" prefHeight="18.0" prefWidth="65.0" />
-            <Label id="handCard6Mana" alignment="CENTER" layoutX="399.0" layoutY="161.0" prefHeight="18.0" prefWidth="65.0" />
-            <Label id="handCard6Info" alignment="CENTER" layoutX="399.0" layoutY="178.0" prefHeight="18.0" prefWidth="65.0" />
+            <BorderPane layoutX="34.0" layoutY="81.0" prefHeight="91.0" prefWidth="81.0" style="-fx-border-color: black;" styleClass="containerHand">
+               <top>
+                  <ImageView fx:id="handCard1" fitHeight="54.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+               </top>
+               <center>
+                  <Label fx:id="handCard1Mana" BorderPane.alignment="CENTER" />
+               </center>
+               <bottom>
+                  <Label fx:id="handCard1AtkHealth" BorderPane.alignment="CENTER" />
+               </bottom>
+            </BorderPane>
+            <BorderPane layoutX="118.0" layoutY="81.0" prefHeight="91.0" prefWidth="80.0" style="-fx-border-color: black;" styleClass="containerHand">
+               <top>
+                  <ImageView fx:id="handCard2" fitHeight="54.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+               </top>
+               <center>
+                  <Label fx:id="handCard2Mana" BorderPane.alignment="CENTER" />
+               </center>
+               <bottom>
+                  <Label fx:id="handCard2AtkHealth" BorderPane.alignment="CENTER" />
+               </bottom>
+            </BorderPane>
+            <BorderPane layoutX="201.0" layoutY="81.0" prefHeight="91.0" prefWidth="80.0" style="-fx-border-color: black;" styleClass="containerHand">
+               <top>
+                  <ImageView fx:id="handCard3" fitHeight="54.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+               </top>
+               <center>
+                  <Label fx:id="handCard3Mana" BorderPane.alignment="CENTER" />
+               </center>
+               <bottom>
+                  <Label fx:id="handCard3AtkHealth" BorderPane.alignment="CENTER" />
+               </bottom>
+            </BorderPane>
+            <BorderPane layoutX="284.0" layoutY="81.0" prefHeight="91.0" prefWidth="80.0" style="-fx-border-color: black;" styleClass="containerHand">
+               <center>
+                  <Label fx:id="handCard4Mana" BorderPane.alignment="CENTER" />
+               </center>
+               <bottom>
+                  <Label fx:id="handCard4AtkHealth" BorderPane.alignment="CENTER" />
+               </bottom>
+               <top>
+                  <ImageView fx:id="handCard4" fitHeight="54.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+               </top>
+            </BorderPane>
+            <BorderPane layoutX="367.0" layoutY="81.0" prefHeight="91.0" prefWidth="80.0" style="-fx-border-color: black;" styleClass="containerHand">
+               <center>
+                  <Label fx:id="handCard5Mana" BorderPane.alignment="CENTER" />
+               </center>
+               <bottom>
+                  <Label fx:id="handCard5AtkHealth" BorderPane.alignment="CENTER" />
+               </bottom>
+               <top>
+                  <ImageView fx:id="handCard5" fitHeight="54.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+               </top>
+            </BorderPane>
          </children></AnchorPane>
    </bottom>
    <left>
       <AnchorPane prefHeight="229.0" prefWidth="487.0" styleClass="playerHand" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="90.0" fitWidth="90.0" layoutX="147.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="player1BoardB" fitHeight="90.0" fitWidth="90.0" layoutX="241.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/defaultBoard.jpeg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="player1BoardD" fitHeight="90.0" fitWidth="90.0" layoutX="241.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/defaultBoard.jpeg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="player1BoardA" fitHeight="90.0" fitWidth="90.0" layoutX="151.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/defaultBoard.jpeg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="player1BoardC" fitHeight="90.0" fitWidth="90.0" layoutX="151.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/defaultBoard.jpeg" />
-               </image>
-            </ImageView>
             <ImageView fitHeight="90.0" fitWidth="90.0" layoutX="33.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@image/steve.jpeg" />
                </image>
             </ImageView>
-            <ImageView fx:id="player1BoardE" fitHeight="90.0" fitWidth="90.0" layoutX="336.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/defaultBoard.jpeg" />
-               </image>
-            </ImageView>
-            <Label fx:id="player1BoardALabel" layoutX="187.0" layoutY="49.0" styleClass="boardIdLabel" text="A" />
-            <Label fx:id="player1BoardBLabel" layoutX="277.0" layoutY="49.0" styleClass="boardIdLabel" text="B" />
-            <Label fx:id="player1BoardCLabel" layoutX="187.0" layoutY="139.0" styleClass="boardIdLabel" text="C" />
-            <Label fx:id="player1BoardDLabel" layoutX="276.0" layoutY="140.0" styleClass="boardIdLabel" text="D" />
-            <Label fx:id="player1BoardELabel" layoutX="372.0" layoutY="99.0" styleClass="boardIdLabel" text="E" />
-            <ImageView id="player1BoardAHealthImg" fitHeight="15.0" fitWidth="15.0" layoutX="153.0" layoutY="20.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/health.png" />
-               </image>
-            </ImageView>
-            <ImageView id="player1BoardAAttackImg" fitHeight="15.0" fitWidth="15.0" layoutX="220.0" layoutY="20.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/attack.png" />
-               </image>
-            </ImageView>
-            <ImageView id="player1BoardBHealthImg" fitHeight="15.0" fitWidth="15.0" layoutX="242.0" layoutY="20.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/health.png" />
-               </image>
-            </ImageView>
-            <ImageView id="player1BoardBAttackImg" fitHeight="15.0" fitWidth="15.0" layoutX="312.0" layoutY="20.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/attack.png" />
-               </image>
-            </ImageView>
-            <ImageView id="player1BoardCHealthImg" fitHeight="15.0" fitWidth="15.0" layoutX="153.0" layoutY="114.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/health.png" />
-               </image>
-            </ImageView>
-            <ImageView id="player1BoardCAttackImg" fitHeight="15.0" fitWidth="15.0" layoutX="221.0" layoutY="114.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/attack.png" />
-               </image>
-            </ImageView>
-            <ImageView id="player1BoardDHealthImg" fitHeight="15.0" fitWidth="15.0" layoutX="242.0" layoutY="114.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/health.png" />
-               </image>
-            </ImageView>
-            <ImageView id="player1BoardDAttackImg" fitHeight="15.0" fitWidth="15.0" layoutX="312.0" layoutY="114.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/attack.png" />
-               </image>
-            </ImageView>
-            <ImageView id="player1BoardEHealthImg" fitHeight="15.0" fitWidth="15.0" layoutX="338.0" layoutY="70.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/health.png" />
-               </image>
-            </ImageView>
-            <ImageView id="player1BoardEAttackImg" fitHeight="15.0" fitWidth="15.0" layoutX="407.0" layoutY="69.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/attack.png" />
-               </image>
-            </ImageView>
-            <Label id="player1BoardAHealth" alignment="CENTER" layoutX="151.0" layoutY="37.0" prefHeight="20.0" prefWidth="20.0" />
-            <Label id="player1BoardAAttack" alignment="CENTER" layoutX="217.0" layoutY="37.0" prefHeight="20.0" prefWidth="20.0" />
-            <Label id="player1BoardALvl" alignment="CENTER" layoutX="151.0" layoutY="90.0" prefHeight="18.0" prefWidth="85.0" />
-            <Label id="player1BoardBHealth" alignment="CENTER" layoutX="241.0" layoutY="37.0" prefHeight="20.0" prefWidth="20.0" />
-            <Label id="player1BoardBAttack" alignment="CENTER" layoutX="307.0" layoutY="37.0" prefHeight="20.0" prefWidth="20.0" />
-            <Label id="player1BoardBLvl" alignment="CENTER" layoutX="241.0" layoutY="90.0" prefHeight="18.0" prefWidth="85.0" />
-            <Label id="player1BoardCHealth" alignment="CENTER" layoutX="151.0" layoutY="129.0" prefHeight="20.0" prefWidth="20.0" />
-            <Label id="player1BoardCAttack" alignment="CENTER" layoutX="217.0" layoutY="129.0" prefHeight="20.0" prefWidth="20.0" />
-            <Label id="player1BoardCLvl" alignment="CENTER" layoutX="151.0" layoutY="185.0" prefHeight="18.0" prefWidth="85.0" />
-            <Label id="player1BoardDHealth" alignment="CENTER" layoutX="241.0" layoutY="129.0" prefHeight="20.0" prefWidth="20.0" />
-            <Label id="player1BoardDAttack" alignment="CENTER" layoutX="307.0" layoutY="129.0" prefHeight="20.0" prefWidth="20.0" />
-            <Label id="player1BoardDLvl" alignment="CENTER" layoutX="241.0" layoutY="185.0" prefHeight="18.0" prefWidth="85.0" />
-            <Label id="player1BoardEHealth" alignment="CENTER" layoutX="336.0" layoutY="86.0" prefHeight="20.0" prefWidth="20.0" />
-            <Label id="player1BoardEAttack" alignment="CENTER" layoutX="402.0" layoutY="86.0" prefHeight="20.0" prefWidth="20.0" />
-            <Label id="player1BoardELvl" alignment="CENTER" layoutX="336.0" layoutY="140.0" prefHeight="18.0" prefWidth="85.0" />
+            <AnchorPane layoutX="148.0" layoutY="19.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
+               <children>
+                  <ImageView fx:id="player1BoardAAttackImg" fitHeight="20.0" fitWidth="17.0" layoutX="3.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" smooth="false" visible="false">
+                     <image>
+                        <Image url="@image/attack.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="player1BoardAAttack" alignment="CENTER" layoutX="5.0" layoutY="36.0" prefHeight="17.0" prefWidth="14.0" text="1" visible="false" />
+                  <Label fx:id="player1BoardALabel" layoutX="36.0" layoutY="28.0" styleClass="boardIdLabel" text="A" />
+                  <ImageView fx:id="player1BoardA" fitHeight="55.0" fitWidth="46.0" layoutX="21.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player1BoardAHealthImg" fitHeight="18.0" fitWidth="19.0" layoutX="69.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@image/health.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="player1BoardAHealth" alignment="CENTER" layoutX="66.0" layoutY="35.0" prefHeight="20.0" prefWidth="20.0" text="1" visible="false" />
+                  <Label fx:id="player1BoardALvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="240.0" layoutY="19.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
+               <children>
+                  <ImageView fx:id="player1BoardBAttackImg" fitHeight="20.0" fitWidth="17.0" layoutX="3.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" smooth="false" visible="false">
+                     <image>
+                        <Image url="@image/attack.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="player1BoardBAttack" alignment="CENTER" layoutX="5.0" layoutY="36.0" prefHeight="17.0" prefWidth="14.0" text="1" visible="false" />
+                  <Label fx:id="player1BoardBLabel" layoutX="36.0" layoutY="28.0" styleClass="boardIdLabel" text="B" />
+                  <ImageView fx:id="player1BoardB" fitHeight="55.0" fitWidth="46.0" layoutX="21.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player1BoardBHealthImg" fitHeight="18.0" fitWidth="19.0" layoutX="69.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@image/health.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="player1BoardBHealth" alignment="CENTER" layoutX="66.0" layoutY="35.0" prefHeight="20.0" prefWidth="20.0" text="1" visible="false" />
+                  <Label fx:id="player1BoardBLvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="148.0" layoutY="111.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
+               <children>
+                  <ImageView fx:id="player1BoardCAttackImg" fitHeight="20.0" fitWidth="17.0" layoutX="3.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" smooth="false" visible="false">
+                     <image>
+                        <Image url="@image/attack.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="player1BoardCAttack" alignment="CENTER" layoutX="5.0" layoutY="36.0" prefHeight="17.0" prefWidth="14.0" text="1" visible="false" />
+                  <Label fx:id="player1BoardCLabel" layoutX="36.0" layoutY="28.0" styleClass="boardIdLabel" text="C" />
+                  <ImageView fx:id="player1BoardC" fitHeight="55.0" fitWidth="46.0" layoutX="21.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player1BoardCHealthImg" fitHeight="18.0" fitWidth="19.0" layoutX="69.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@image/health.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="player1BoardCHealth" alignment="CENTER" layoutX="66.0" layoutY="35.0" prefHeight="20.0" prefWidth="20.0" text="1" visible="false" />
+                  <Label fx:id="player1BoardCLvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="240.0" layoutY="111.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
+               <children>
+                  <ImageView fx:id="player1BoardDAttackImg" fitHeight="20.0" fitWidth="17.0" layoutX="3.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" smooth="false" visible="false">
+                     <image>
+                        <Image url="@image/attack.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="player1BoardDAttack" alignment="CENTER" layoutX="5.0" layoutY="36.0" prefHeight="17.0" prefWidth="14.0" text="1" visible="false" />
+                  <Label fx:id="player1BoardDLabel" layoutX="36.0" layoutY="28.0" styleClass="boardIdLabel" text="D" />
+                  <ImageView fx:id="player1BoardD" fitHeight="55.0" fitWidth="46.0" layoutX="21.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player1BoardDHealthImg" fitHeight="18.0" fitWidth="19.0" layoutX="69.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@image/health.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="player1BoardDHealth" alignment="CENTER" layoutX="66.0" layoutY="35.0" prefHeight="20.0" prefWidth="20.0" text="1" visible="false" />
+                  <Label fx:id="player1BoardDLvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="337.0" layoutY="65.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
+               <children>
+                  <ImageView fx:id="player1BoardEAttackImg" fitHeight="20.0" fitWidth="17.0" layoutX="3.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" smooth="false" visible="false">
+                     <image>
+                        <Image url="@image/attack.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="player1BoardEAttack" alignment="CENTER" layoutX="5.0" layoutY="36.0" prefHeight="17.0" prefWidth="14.0" text="1" visible="false" />
+                  <Label fx:id="player1BoardELabel" layoutX="36.0" layoutY="28.0" styleClass="boardIdLabel" text="E" />
+                  <ImageView fx:id="player1BoardE" fitHeight="55.0" fitWidth="46.0" layoutX="21.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player1BoardEHealthImg" fitHeight="18.0" fitWidth="19.0" layoutX="69.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@image/health.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="player1BoardEHealth" alignment="CENTER" layoutX="66.0" layoutY="35.0" prefHeight="20.0" prefWidth="20.0" text="1" visible="false" />
+                  <Label fx:id="player1BoardELvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </left>
    <right>
       <AnchorPane prefHeight="229.0" prefWidth="563.0" styleClass="playerHand" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="player2BoardA" fitHeight="90.0" fitWidth="90.0" layoutX="236.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/defaultBoard.jpeg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="player2BoardC" fitHeight="90.0" fitWidth="90.0" layoutX="236.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/defaultBoard.jpeg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="player2BoardB" fitHeight="90.0" fitWidth="90.0" layoutX="146.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/defaultBoard.jpeg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="player2BoardD" fitHeight="90.0" fitWidth="90.0" layoutX="146.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/defaultBoard.jpeg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="player2BoardE" fitHeight="90.0" fitWidth="90.0" layoutX="51.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/defaultBoard.jpeg" />
-               </image>
-            </ImageView>
             <ImageView fitHeight="90.0" fitWidth="90.0" layoutX="343.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@image/alex.jpeg" />
                </image>
             </ImageView>
-            <Label fx:id="player2BoardALabel" layoutX="272.0" layoutY="56.0" styleClass="boardIdLabel" text="A" />
-            <Label fx:id="player2BoardBLabel" layoutX="182.0" layoutY="56.0" styleClass="boardIdLabel" text="B" />
-            <Label fx:id="player2BoardCLabel" layoutX="272.0" layoutY="146.0" styleClass="boardIdLabel" text="C" />
-            <Label fx:id="player2BoardDLabel" layoutX="183.0" layoutY="146.0" styleClass="boardIdLabel" text="D" />
-            <Label fx:id="player2BoardELabel" layoutX="88.0" layoutY="101.0" styleClass="boardIdLabel" text="E" />
-            <ImageView id="player2BoardAHealthImg" fitHeight="15.0" fitWidth="15.0" layoutX="238.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/health.png" />
-               </image>
-            </ImageView>
-            <ImageView id="player2BoardAAttackImg" fitHeight="15.0" fitWidth="15.0" layoutX="306.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/attack.png" />
-               </image>
-            </ImageView>
-            <ImageView id="player2BoardBHealthImg" fitHeight="15.0" fitWidth="15.0" layoutX="148.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/health.png" />
-               </image>
-            </ImageView>
-            <ImageView id="player2BoardBAttackImg" fitHeight="15.0" fitWidth="15.0" layoutX="216.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/attack.png" />
-               </image>
-            </ImageView>
-            <ImageView id="player2BoardCHealthImg" fitHeight="15.0" fitWidth="15.0" layoutX="238.0" layoutY="117.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/health.png" />
-               </image>
-            </ImageView>
-            <ImageView id="player2BoardBAttackImg" fitHeight="15.0" fitWidth="15.0" layoutX="306.0" layoutY="117.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/attack.png" />
-               </image>
-            </ImageView>
-            <ImageView id="player2BoardDHealthImg" fitHeight="15.0" fitWidth="15.0" layoutX="148.0" layoutY="117.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/health.png" />
-               </image>
-            </ImageView>
-            <ImageView id="player2BoardDAttackImg" fitHeight="15.0" fitWidth="15.0" layoutX="216.0" layoutY="117.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/attack.png" />
-               </image>
-            </ImageView>
-            <ImageView id="player2BoardEHealthImg" fitHeight="15.0" fitWidth="15.0" layoutX="53.0" layoutY="73.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/health.png" />
-               </image>
-            </ImageView>
-            <ImageView id="player2BoardEAttackImg" fitHeight="15.0" fitWidth="15.0" layoutX="121.0" layoutY="73.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/attack.png" />
-               </image>
-            </ImageView>
-            <Label id="player2BoardAHealth" alignment="CENTER" layoutX="236.0" layoutY="38.0" prefHeight="20.0" prefWidth="20.0" />
-            <Label id="player2BoardAAttack" alignment="CENTER" layoutX="303.0" layoutY="38.0" prefHeight="20.0" prefWidth="20.0" />
-            <Label id="player2BoardALvl" alignment="CENTER" layoutX="236.0" layoutY="94.0" prefHeight="18.0" prefWidth="85.0" />
-            <Label id="player2BoardEHealth" alignment="CENTER" layoutX="146.0" layoutY="38.0" prefHeight="20.0" prefWidth="20.0" />
-            <Label id="player2BoardBAttack" alignment="CENTER" layoutX="212.0" layoutY="38.0" prefHeight="20.0" prefWidth="20.0" />
-            <Label id="player2BoardBLvl" alignment="CENTER" layoutX="146.0" layoutY="94.0" prefHeight="18.0" prefWidth="85.0" />
-            <Label id="player2BoardCHealth" alignment="CENTER" layoutX="236.0" layoutY="134.0" prefHeight="20.0" prefWidth="20.0" />
-            <Label id="player2BoardCAttack" alignment="CENTER" layoutX="303.0" layoutY="134.0" prefHeight="20.0" prefWidth="20.0" />
-            <Label id="player2BoardCLvl" alignment="CENTER" layoutX="236.0" layoutY="188.0" prefHeight="18.0" prefWidth="85.0" />
-            <Label id="player2BoardDHealth" alignment="CENTER" layoutX="146.0" layoutY="134.0" prefHeight="20.0" prefWidth="20.0" />
-            <Label id="player2BoardDAttack" alignment="CENTER" layoutX="212.0" layoutY="134.0" prefHeight="20.0" prefWidth="20.0" />
-            <Label id="player2BoardDLvl" alignment="CENTER" layoutX="146.0" layoutY="188.0" prefHeight="18.0" prefWidth="85.0" />
-            <Label id="player2BoardEHealth" alignment="CENTER" layoutX="52.0" layoutY="89.0" prefHeight="20.0" prefWidth="20.0" />
-            <Label id="player2BoardEAttack" alignment="CENTER" layoutX="117.0" layoutY="89.0" prefHeight="20.0" prefWidth="20.0" />
-            <Label id="player2BoardELvl" alignment="CENTER" layoutX="52.0" layoutY="143.0" prefHeight="18.0" prefWidth="85.0" />
+            <AnchorPane layoutX="40.0" layoutY="70.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
+               <children>
+                  <ImageView fx:id="player2BoardEAttackImg" fitHeight="20.0" fitWidth="17.0" layoutX="3.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" smooth="false" visible="false">
+                     <image>
+                        <Image url="@image/attack.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="player2BoardEAttack" alignment="CENTER" layoutX="5.0" layoutY="36.0" prefHeight="17.0" prefWidth="14.0" text="1" visible="false" />
+                  <Label fx:id="player2BoardELabel" layoutX="36.0" layoutY="28.0" styleClass="boardIdLabel" text="E" />
+                  <ImageView fx:id="player2BoardE" fitHeight="55.0" fitWidth="46.0" layoutX="21.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player2BoardEHealthImg" fitHeight="18.0" fitWidth="19.0" layoutX="69.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@image/health.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="player2BoardEHealth" alignment="CENTER" layoutX="66.0" layoutY="35.0" prefHeight="20.0" prefWidth="20.0" text="1" visible="false" />
+                  <Label fx:id="player2BoardELvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="143.0" layoutY="115.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
+               <children>
+                  <ImageView fx:id="player2BoardDAttackImg" fitHeight="20.0" fitWidth="17.0" layoutX="3.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" smooth="false" visible="false">
+                     <image>
+                        <Image url="@image/attack.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="player2BoardDAttack" alignment="CENTER" layoutX="5.0" layoutY="36.0" prefHeight="17.0" prefWidth="14.0" text="1" visible="false" />
+                  <Label fx:id="player2BoardDLabel" layoutX="36.0" layoutY="28.0" styleClass="boardIdLabel" text="D" />
+                  <ImageView fx:id="player2BoardD" fitHeight="55.0" fitWidth="46.0" layoutX="21.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player2BoardDHealthImg" fitHeight="18.0" fitWidth="19.0" layoutX="69.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@image/health.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="player2BoardDHealth" alignment="CENTER" layoutX="66.0" layoutY="35.0" prefHeight="20.0" prefWidth="20.0" text="1" visible="false" />
+                  <Label fx:id="player2BoardDLvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="143.0" layoutY="23.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
+               <children>
+                  <ImageView fx:id="player2BoardBAttackImg" fitHeight="20.0" fitWidth="17.0" layoutX="3.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" smooth="false" visible="false">
+                     <image>
+                        <Image url="@image/attack.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="player2BoardBAttack" alignment="CENTER" layoutX="5.0" layoutY="36.0" prefHeight="17.0" prefWidth="14.0" text="1" visible="false" />
+                  <Label fx:id="player2BoardBLabel" layoutX="36.0" layoutY="28.0" styleClass="boardIdLabel" text="B" />
+                  <ImageView fx:id="player2BoardB" fitHeight="55.0" fitWidth="46.0" layoutX="21.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player2BoardBHealthImg" fitHeight="18.0" fitWidth="19.0" layoutX="69.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@image/health.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="player2BoardBHealth" alignment="CENTER" layoutX="66.0" layoutY="35.0" prefHeight="20.0" prefWidth="20.0" text="1" visible="false" />
+                  <Label fx:id="player2BoardBLvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="235.0" layoutY="23.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
+               <children>
+                  <ImageView fx:id="player2BoardAAttackImg" fitHeight="20.0" fitWidth="17.0" layoutX="3.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" smooth="false" visible="false">
+                     <image>
+                        <Image url="@image/attack.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="player2BoardAAttack" alignment="CENTER" layoutX="5.0" layoutY="36.0" prefHeight="17.0" prefWidth="14.0" text="1" visible="false" />
+                  <Label fx:id="player2BoardALabel" layoutX="36.0" layoutY="28.0" styleClass="boardIdLabel" text="A" />
+                  <ImageView fx:id="player2BoardA" fitHeight="55.0" fitWidth="46.0" layoutX="21.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player2BoardAHealthImg" fitHeight="18.0" fitWidth="19.0" layoutX="69.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@image/health.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="player2BoardAHealth" alignment="CENTER" layoutX="66.0" layoutY="35.0" prefHeight="20.0" prefWidth="20.0" text="1" visible="false" />
+                  <Label fx:id="player2BoardALvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="235.0" layoutY="115.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
+               <children>
+                  <ImageView id="player2BoardCAttackImg" fitHeight="20.0" fitWidth="17.0" layoutX="3.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" smooth="false" visible="false">
+                     <image>
+                        <Image url="@image/attack.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="player2BoardCAttack" alignment="CENTER" layoutX="5.0" layoutY="36.0" prefHeight="17.0" prefWidth="14.0" text="1" visible="false" />
+                  <Label fx:id="player2BoardCLabel" layoutX="36.0" layoutY="28.0" styleClass="boardIdLabel" text="C" />
+                  <ImageView fx:id="player2BoardC" fitHeight="55.0" fitWidth="46.0" layoutX="21.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="player2BoardCHealthImg" fitHeight="18.0" fitWidth="19.0" layoutX="69.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@image/health.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="player2BoardCHealth" alignment="CENTER" layoutX="66.0" layoutY="35.0" prefHeight="20.0" prefWidth="20.0" text="1" visible="false" />
+                  <Label fx:id="player2BoardCLvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </right>

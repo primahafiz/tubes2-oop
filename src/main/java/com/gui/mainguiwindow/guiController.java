@@ -28,6 +28,7 @@ import com.aetherwars.util.CSVReader;
 
 import com.aetherwars.*;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -109,8 +110,6 @@ public class guiController implements Initializable {
     ImageView handCard4;
     @FXML
     ImageView handCard5;
-    @FXML
-    ImageView handCard6;
 
     // hovered card
     @FXML
@@ -168,8 +167,7 @@ public class guiController implements Initializable {
         numTurn.setText(Integer.toString(turn));
 
         // initialize stage
-        idStage = 0;
-        activateStageLabel(stageEndLabel, stageDrawLabel);
+        idStage = -1;
 
         player1BoardA.setImage(new Image(getClass().getResourceAsStream("image/alex.jpeg")));
         player2BoardB.setImage(new Image(getClass().getResourceAsStream("image/steve.jpeg")));
@@ -520,14 +518,17 @@ public class guiController implements Initializable {
 
     public void changeStageClicked(){
         // kalau button untuk pindah stage diclick
-        if(idStage==0){
+        if(idStage==-1){
             displayWindowDraw();
+            activateStageLabel(stageEndLabel,stageDrawLabel);
+        } else if(idStage==0){
             activateStageLabel(stageDrawLabel,stagePlanLabel);
         }else if(idStage==1){
             activateStageLabel(stagePlanLabel,stageAttackLabel);
         }else if(idStage==2){
             activateStageLabel(stageAttackLabel,stageEndLabel);
         }else if(idStage==3){
+            displayWindowDraw();
             activateStageLabel(stageEndLabel,stageDrawLabel);
         }
         idStage++;
@@ -564,7 +565,8 @@ public class guiController implements Initializable {
             stage.initStyle(StageStyle.TRANSPARENT);
             scene.setFill(Color.TRANSPARENT);
             stage.setOpacity(0.8);
-            stage.show();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
         }catch (Exception err){
             err.printStackTrace();
         }

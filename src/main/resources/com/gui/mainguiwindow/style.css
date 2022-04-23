@@ -22,6 +22,11 @@
     -fx-background-color:#e3e3e3 ;
 }
 
+.containerBoard{
+    -fx-border-color:black;
+    -fx-background-color:#bbbbbb;
+}
+
 #nextStageBtn:pressed{
     -fx-background-color:#c3c3c3 ;
 }
@@ -54,4 +59,9 @@
 #manaNum{
     -fx-border-color:black;
     -fx-background-color:#D3D3D3;
+}
+
+.containerHand{
+    -fx-border-color:black;
+    -fx-background-color:#bbbbbb;
 }
