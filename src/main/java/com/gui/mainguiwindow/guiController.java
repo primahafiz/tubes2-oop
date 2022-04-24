@@ -306,6 +306,7 @@ public class guiController implements Initializable {
 
 
     int currentDragHand;
+    int currentHoveredCard;
 
     int idStage;
     int turn;
@@ -369,6 +370,202 @@ public class guiController implements Initializable {
         updateHand();
 
     }
+
+    public String getCardAttributes(Card c) {
+        String attribute = "";
+        attribute += c.getName().toUpperCase();
+        attribute += "\nATK   :" + ((Character) c).getAttack();
+        attribute += "\nHP    :" + ((Character) c).getHealth();
+        attribute += "\nEXP   :" + ((Character) c).getExp();
+        attribute += "\nLVL   :" + ((Character) c).getLevel();
+        return attribute;
+    }
+
+    public void initHoveredCard(){
+        Board board1 = pemain1.getBoard();
+        Board board2 = pemain2.getBoard();
+        player1BoardA.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                hoveredCard.setImage(player1BoardA.getImage());
+                cardAttribute.setText(getCardAttributes(board1.getCard(0)));
+                cardDescription.setText("\"" + board1.getCard(0).getDesc() + "\"");
+                cardDescription.setStyle("-fx-font-style: italic;");
+            }
+        });
+        player1BoardA.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                hoveredCard.setImage(null);
+                cardAttribute.setText("");
+                cardDescription.setText("");
+            }
+        });         
+
+        player1BoardB.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                hoveredCard.setImage(player1BoardB.getImage());
+                cardAttribute.setText(getCardAttributes(board1.getCard(1)));
+                cardDescription.setText("\"" + board1.getCard(1).getDesc() + "\"");
+                cardDescription.setStyle("-fx-font-style: italic;");
+            }
+        });
+        player1BoardB.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                hoveredCard.setImage(null);
+                cardAttribute.setText("");
+                cardDescription.setText("");
+            }
+        });
+
+        player1BoardC.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                hoveredCard.setImage(player1BoardC.getImage());
+                cardAttribute.setText(getCardAttributes(board1.getCard(2)));
+                cardDescription.setText("\"" + board1.getCard(2).getDesc() + "\"");
+                cardDescription.setStyle("-fx-font-style: italic;");
+            }
+        }); 
+        player1BoardC.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                hoveredCard.setImage(null);
+                cardAttribute.setText("");
+                cardDescription.setText("");
+            }
+        });
+
+        player1BoardD.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                hoveredCard.setImage(player1BoardD.getImage());
+                cardAttribute.setText(getCardAttributes(board1.getCard(3)));
+                cardDescription.setText("\"" + board1.getCard(3).getDesc() + "\"");
+                cardDescription.setStyle("-fx-font-style: italic;");
+            }
+        });
+        player1BoardD.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                hoveredCard.setImage(null);
+                cardAttribute.setText("");
+                cardDescription.setText("");
+            }
+        });
+
+        player1BoardE.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                hoveredCard.setImage(player1BoardE.getImage());
+                cardAttribute.setText(getCardAttributes(board1.getCard(4)));
+                cardDescription.setText("\"" + board1.getCard(4).getDesc() + "\"");
+                cardDescription.setStyle("-fx-font-style: italic;");
+            }
+        });
+        player1BoardE.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                hoveredCard.setImage(null);
+                cardAttribute.setText("");
+                cardDescription.setText("");
+            }
+        });
+
+        player2BoardA.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                hoveredCard.setImage(player2BoardA.getImage());
+                cardAttribute.setText(getCardAttributes(board2.getCard(0)));
+                cardDescription.setText("\"" + board2.getCard(0).getDesc() + "\"");
+                cardDescription.setStyle("-fx-font-style: italic;");
+            }
+        });
+        player2BoardA.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                hoveredCard.setImage(null);
+                cardAttribute.setText("");
+                cardDescription.setText("");
+            }
+        });
+
+        player2BoardB.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                hoveredCard.setImage(player2BoardB.getImage());
+                cardAttribute.setText(getCardAttributes(board2.getCard(1)));
+                cardDescription.setText("\"" + board2.getCard(1).getDesc() + "\"");
+                cardDescription.setStyle("-fx-font-style: italic;");
+            }
+        });
+        player2BoardB.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                hoveredCard.setImage(null);
+                cardAttribute.setText("");
+                cardDescription.setText("");
+            }
+        });
+
+        player2BoardC.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                hoveredCard.setImage(player2BoardC.getImage());
+                cardAttribute.setText(getCardAttributes(board2.getCard(2)));
+                cardDescription.setText("\"" + board2.getCard(2).getDesc() + "\"");
+                cardDescription.setStyle("-fx-font-style: italic;");
+            }
+        });
+        player2BoardC.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                hoveredCard.setImage(null);
+                cardAttribute.setText("");
+                cardDescription.setText("");
+            }
+        });
+
+        player2BoardD.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                hoveredCard.setImage(player2BoardD.getImage());
+                cardAttribute.setText(getCardAttributes(board2.getCard(3)));
+                cardDescription.setText("\"" + board2.getCard(3).getDesc() + "\"");
+                cardDescription.setStyle("-fx-font-style: italic;");
+            }
+        });
+        player2BoardD.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                hoveredCard.setImage(null);
+                cardAttribute.setText("");
+                cardDescription.setText("");
+            }
+        });
+
+        player2BoardE.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                hoveredCard.setImage(player2BoardE.getImage());
+                cardAttribute.setText(getCardAttributes(board2.getCard(4)));
+                cardDescription.setText("\"" + board2.getCard(4).getDesc() + "\"");
+                cardDescription.setStyle("-fx-font-style: italic;");
+            }
+        });
+        player2BoardE.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                hoveredCard.setImage(null);
+                cardAttribute.setText("");
+                cardDescription.setText("");
+            }
+        });
+        
+    }
+
 
     public void initDragAndDropBoardPlayer1(){
         Hand currentHand=pemain1.getHand();
@@ -1143,6 +1340,7 @@ public class guiController implements Initializable {
 
     public void changeStageClicked(){
         // kalau button untuk pindah stage diclick
+        initHoveredCard();
         if(idStage==-1){
             turn++;
             numTurn.setText(Integer.toString((turn+1)/2));
