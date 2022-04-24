@@ -33,6 +33,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import static java.lang.Math.min;
+
 public class guiController implements Initializable {
     @FXML
     ProgressBar lifeBar1;
@@ -311,6 +313,9 @@ public class guiController implements Initializable {
     Player pemain1;
     Player pemain2;
 
+    int deckCapacityPemain1;
+    int deckCapacityPemain2;
+
 
 
 
@@ -325,6 +330,9 @@ public class guiController implements Initializable {
 
         pemain1 = new Player("Steve",1);
         pemain2 = new Player("Alex",1);
+
+        deckCapacityPemain1=pemain1.getDeck().getSize();
+        deckCapacityPemain2=pemain2.getDeck().getSize();
 
         List<Card> c1 = pemain1.getDeck().getCard();
         for(int i=0;i<3;i++){
@@ -352,7 +360,7 @@ public class guiController implements Initializable {
         lifeBar2.setRotate(180);
 
         // initialize number turn
-        turn = 1;
+        turn = 0;
         numTurn.setText(Integer.toString(turn));
 
         // initialize stage
@@ -373,15 +381,19 @@ public class guiController implements Initializable {
                 System.out.println(event.getSource());
                 System.out.println(event.getTarget());
                 System.out.println(currentDragHand);
-                if(currentBoard.isCharacterAvailable(0) && currentHand.getCard(currentDragHand) instanceof Spell) {
+                //System.out.println("Set mana, mana = "+pemain1.getMana()+" card = "+currentHand.getCard(currentDragHand).getMana()+" size hand = "+currentHand.numberOfCards());
+                if(currentBoard.isCharacterAvailable(0) && currentHand.getCard(currentDragHand) instanceof Spell && pemain1.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
                     Spell s = (Spell) currentHand.getCard(currentDragHand);
+                    pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
                     currentHand.removeCardfromHand(currentDragHand);
 
                     // tambah spell ke character
-                }else if(!currentBoard.isCharacterAvailable(0) && currentHand.getCard(currentDragHand) instanceof Character){
+                }else if(!currentBoard.isCharacterAvailable(0) && currentHand.getCard(currentDragHand) instanceof Character && pemain1.getMana()>=currentHand.getCard(currentDragHand).getMana()){
                     currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),0);
+                    pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
                     currentHand.removeCardfromHand(currentDragHand);
                 }
+                updateDisplayMana();
                 updateBoard();
                 updateHand();
                 updateDeleteHand();
@@ -406,15 +418,18 @@ public class guiController implements Initializable {
                 System.out.println(event.getSource());
                 System.out.println(event.getTarget());
                 System.out.println(currentDragHand);
-                if(currentBoard.isCharacterAvailable(1) && currentHand.getCard(currentDragHand) instanceof Spell) {
+                if(currentBoard.isCharacterAvailable(1) && currentHand.getCard(currentDragHand) instanceof Spell && pemain1.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
                     Spell s = (Spell) currentHand.getCard(currentDragHand);
+                    pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
                     currentHand.removeCardfromHand(currentDragHand);
 
                     // tambah spell ke character
-                }else if(!currentBoard.isCharacterAvailable(1) && currentHand.getCard(currentDragHand) instanceof Character){
+                }else if(!currentBoard.isCharacterAvailable(1) && currentHand.getCard(currentDragHand) instanceof Character && pemain1.getMana()>=currentHand.getCard(currentDragHand).getMana()){
                     currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),1);
+                    pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
                     currentHand.removeCardfromHand(currentDragHand);
                 }
+                updateDisplayMana();
                 updateBoard();
                 updateHand();
                 updateDeleteHand();
@@ -439,15 +454,18 @@ public class guiController implements Initializable {
                 System.out.println(event.getSource());
                 System.out.println(event.getTarget());
                 System.out.println(currentDragHand);
-                if(currentBoard.isCharacterAvailable(2) && currentHand.getCard(currentDragHand) instanceof Spell) {
+                if(currentBoard.isCharacterAvailable(2) && currentHand.getCard(currentDragHand) instanceof Spell && pemain1.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
                     Spell s = (Spell) currentHand.getCard(currentDragHand);
+                    pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
                     currentHand.removeCardfromHand(currentDragHand);
 
                     // tambah spell ke character
-                }else if(!currentBoard.isCharacterAvailable(2) && currentHand.getCard(currentDragHand) instanceof Character){
+                }else if(!currentBoard.isCharacterAvailable(2) && currentHand.getCard(currentDragHand) instanceof Character && pemain1.getMana()>=currentHand.getCard(currentDragHand).getMana()){
                     currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),2);
+                    pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
                     currentHand.removeCardfromHand(currentDragHand);
                 }
+                updateDisplayMana();
                 updateBoard();
                 updateHand();
                 updateDeleteHand();
@@ -473,15 +491,18 @@ public class guiController implements Initializable {
                 System.out.println(event.getSource());
                 System.out.println(event.getTarget());
                 System.out.println(currentDragHand);
-                if(currentBoard.isCharacterAvailable(3) && currentHand.getCard(currentDragHand) instanceof Spell) {
+                if(currentBoard.isCharacterAvailable(3) && currentHand.getCard(currentDragHand) instanceof Spell && pemain1.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
                     Spell s = (Spell) currentHand.getCard(currentDragHand);
+                    pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
                     currentHand.removeCardfromHand(currentDragHand);
 
                     // tambah spell ke character
-                }else if(!currentBoard.isCharacterAvailable(3) && currentHand.getCard(currentDragHand) instanceof Character){
+                }else if(!currentBoard.isCharacterAvailable(3) && currentHand.getCard(currentDragHand) instanceof Character && pemain1.getMana()>=currentHand.getCard(currentDragHand).getMana()){
                     currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),3);
+                    pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
                     currentHand.removeCardfromHand(currentDragHand);
                 }
+                updateDisplayMana();
                 updateBoard();
                 updateHand();
                 updateDeleteHand();
@@ -507,15 +528,18 @@ public class guiController implements Initializable {
                 System.out.println(event.getSource());
                 System.out.println(event.getTarget());
                 System.out.println(currentDragHand);
-                if (currentBoard.isCharacterAvailable(4) && currentHand.getCard(currentDragHand) instanceof Spell) {
+                if (currentBoard.isCharacterAvailable(4) && currentHand.getCard(currentDragHand) instanceof Spell && pemain1.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
                     Spell s = (Spell) currentHand.getCard(currentDragHand);
+                    pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
                     currentHand.removeCardfromHand(currentDragHand);
 
                     // tambah spell ke character
-                } else if (!currentBoard.isCharacterAvailable(4) && currentHand.getCard(currentDragHand) instanceof Character) {
+                } else if (!currentBoard.isCharacterAvailable(4) && currentHand.getCard(currentDragHand) instanceof Character && pemain1.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
                     currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand), 4);
+                    pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
                     currentHand.removeCardfromHand(currentDragHand);
                 }
+                updateDisplayMana();
                 updateBoard();
                 updateHand();
                 updateDeleteHand();
@@ -545,15 +569,18 @@ public class guiController implements Initializable {
                 System.out.println(event.getSource());
                 System.out.println(event.getTarget());
                 System.out.println(currentDragHand);
-                if(currentBoard.isCharacterAvailable(0) && currentHand.getCard(currentDragHand) instanceof Spell) {
+                if(currentBoard.isCharacterAvailable(0) && currentHand.getCard(currentDragHand) instanceof Spell && pemain2.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
                     Spell s = (Spell) currentHand.getCard(currentDragHand);
+                    pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
                     currentHand.removeCardfromHand(currentDragHand);
 
                     // tambah spell ke character
-                }else if(!currentBoard.isCharacterAvailable(0) && currentHand.getCard(currentDragHand) instanceof Character){
+                }else if(!currentBoard.isCharacterAvailable(0) && currentHand.getCard(currentDragHand) instanceof Character && pemain2.getMana()>=currentHand.getCard(currentDragHand).getMana()){
                     currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),0);
+                    pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
                     currentHand.removeCardfromHand(currentDragHand);
                 }
+                updateDisplayMana();
                 updateBoard();
                 updateHand();
                 updateDeleteHand();
@@ -578,15 +605,18 @@ public class guiController implements Initializable {
                 System.out.println(event.getSource());
                 System.out.println(event.getTarget());
                 System.out.println(currentDragHand);
-                if(currentBoard.isCharacterAvailable(1) && currentHand.getCard(currentDragHand) instanceof Spell) {
+                if(currentBoard.isCharacterAvailable(1) && currentHand.getCard(currentDragHand) instanceof Spell && pemain2.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
                     Spell s = (Spell) currentHand.getCard(currentDragHand);
+                    pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
                     currentHand.removeCardfromHand(currentDragHand);
 
                     // tambah spell ke character
-                }else if(!currentBoard.isCharacterAvailable(1) && currentHand.getCard(currentDragHand) instanceof Character){
+                }else if(!currentBoard.isCharacterAvailable(1) && currentHand.getCard(currentDragHand) instanceof Character && pemain2.getMana()>=currentHand.getCard(currentDragHand).getMana()){
                     currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),1);
+                    pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
                     currentHand.removeCardfromHand(currentDragHand);
                 }
+                updateDisplayMana();
                 updateBoard();
                 updateHand();
                 updateDeleteHand();
@@ -611,15 +641,18 @@ public class guiController implements Initializable {
                 System.out.println(event.getSource());
                 System.out.println(event.getTarget());
                 System.out.println(currentDragHand);
-                if(currentBoard.isCharacterAvailable(2) && currentHand.getCard(currentDragHand) instanceof Spell) {
+                if(currentBoard.isCharacterAvailable(2) && currentHand.getCard(currentDragHand) instanceof Spell && pemain2.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
                     Spell s = (Spell) currentHand.getCard(currentDragHand);
+                    pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
                     currentHand.removeCardfromHand(currentDragHand);
 
                     // tambah spell ke character
-                }else if(!currentBoard.isCharacterAvailable(2) && currentHand.getCard(currentDragHand) instanceof Character){
+                }else if(!currentBoard.isCharacterAvailable(2) && currentHand.getCard(currentDragHand) instanceof Character && pemain2.getMana()>=currentHand.getCard(currentDragHand).getMana()){
                     currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),2);
+                    pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
                     currentHand.removeCardfromHand(currentDragHand);
                 }
+                updateDisplayMana();
                 updateBoard();
                 updateHand();
                 updateDeleteHand();
@@ -645,15 +678,18 @@ public class guiController implements Initializable {
                 System.out.println(event.getSource());
                 System.out.println(event.getTarget());
                 System.out.println(currentDragHand);
-                if(currentBoard.isCharacterAvailable(3) && currentHand.getCard(currentDragHand) instanceof Spell) {
+                if(currentBoard.isCharacterAvailable(3) && currentHand.getCard(currentDragHand) instanceof Spell && pemain2.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
                     Spell s = (Spell) currentHand.getCard(currentDragHand);
+                    pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
                     currentHand.removeCardfromHand(currentDragHand);
 
                     // tambah spell ke character
-                }else if(!currentBoard.isCharacterAvailable(3) && currentHand.getCard(currentDragHand) instanceof Character){
+                }else if(!currentBoard.isCharacterAvailable(3) && currentHand.getCard(currentDragHand) instanceof Character && pemain2.getMana()>=currentHand.getCard(currentDragHand).getMana()){
                     currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),3);
+                    pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
                     currentHand.removeCardfromHand(currentDragHand);
                 }
+                updateDisplayMana();
                 updateBoard();
                 updateHand();
                 updateDeleteHand();
@@ -679,15 +715,18 @@ public class guiController implements Initializable {
                 System.out.println(event.getSource());
                 System.out.println(event.getTarget());
                 System.out.println(currentDragHand);
-                if (currentBoard.isCharacterAvailable(4) && currentHand.getCard(currentDragHand) instanceof Spell) {
+                if (currentBoard.isCharacterAvailable(4) && currentHand.getCard(currentDragHand) instanceof Spell && pemain2.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
                     Spell s = (Spell) currentHand.getCard(currentDragHand);
+                    pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
                     currentHand.removeCardfromHand(currentDragHand);
 
                     // tambah spell ke character
-                } else if (!currentBoard.isCharacterAvailable(4) && currentHand.getCard(currentDragHand) instanceof Character) {
+                } else if (!currentBoard.isCharacterAvailable(4) && currentHand.getCard(currentDragHand) instanceof Character && pemain2.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
                     currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand), 4);
+                    pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
                     currentHand.removeCardfromHand(currentDragHand);
                 }
+                updateDisplayMana();
                 updateBoard();
                 updateHand();
                 updateDeleteHand();
@@ -1052,14 +1091,6 @@ public class guiController implements Initializable {
             event.consume();
         });
 
-        handCard1.setOnDragOver(new EventHandler<DragEvent>() {
-            public void handle(DragEvent event) {
-                if (event.getDragboard().hasImage()) {
-                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-                }
-                event.consume();
-            }
-        });
 
         handCard2.setOnDragDetected((MouseEvent event) -> {
             Dragboard db = handCard2.startDragAndDrop(TransferMode.ANY);
@@ -1070,14 +1101,6 @@ public class guiController implements Initializable {
             event.consume();
         });
 
-        handCard2.setOnDragOver(new EventHandler<DragEvent>() {
-            public void handle(DragEvent event) {
-                if (event.getDragboard().hasImage()) {
-                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-                }
-                event.consume();
-            }
-        });
 
         handCard3.setOnDragDetected((MouseEvent event) -> {
             Dragboard db = handCard3.startDragAndDrop(TransferMode.ANY);
@@ -1088,14 +1111,6 @@ public class guiController implements Initializable {
             event.consume();
         });
 
-        handCard3.setOnDragOver(new EventHandler<DragEvent>() {
-            public void handle(DragEvent event) {
-                if (event.getDragboard().hasImage()) {
-                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-                }
-                event.consume();
-            }
-        });
 
         handCard4.setOnDragDetected((MouseEvent event) -> {
             Dragboard db = handCard4.startDragAndDrop(TransferMode.ANY);
@@ -1106,14 +1121,6 @@ public class guiController implements Initializable {
             event.consume();
         });
 
-        handCard4.setOnDragOver(new EventHandler<DragEvent>() {
-            public void handle(DragEvent event) {
-                if (event.getDragboard().hasImage()) {
-                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-                }
-                event.consume();
-            }
-        });
 
         handCard5.setOnDragDetected((MouseEvent event) -> {
             Dragboard db = handCard5.startDragAndDrop(TransferMode.ANY);
@@ -1124,20 +1131,22 @@ public class guiController implements Initializable {
             event.consume();
         });
 
-        handCard5.setOnDragOver(new EventHandler<DragEvent>() {
-            public void handle(DragEvent event) {
-                if (event.getDragboard().hasImage()) {
-                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-                }
-                event.consume();
-            }
-        });
+    }
+    
+    public void endDragAndDropHand(){
+        handCard1.setOnDragDetected(null);
+        handCard2.setOnDragDetected(null);
+        handCard3.setOnDragDetected(null);
+        handCard4.setOnDragDetected(null);
+        handCard5.setOnDragDetected(null);
     }
 
     public void changeStageClicked(){
         // kalau button untuk pindah stage diclick
         if(idStage==-1){
-            System.out.println(1);
+            turn++;
+            numTurn.setText(Integer.toString((turn+1)/2));
+            setDisplayDeckNum();
             if(turn%2==1) {
                 updateHand1();
             }else{
@@ -1151,6 +1160,8 @@ public class guiController implements Initializable {
                 updateHand2();
             }
             activateStageLabel(stageEndLabel,stageDrawLabel);
+            setDisplayMana();
+            setDisplayDeckNum();
         } else if(idStage==0){
             initDragAndDropHand();
             initDelete();
@@ -1164,9 +1175,11 @@ public class guiController implements Initializable {
                 updateDeleteBoard2();
                 initDragAndDropBoardPlayer2();
             }
+            setDisplayDeckNum();
             activateStageLabel(stageDrawLabel,stagePlanLabel);
         }else if(idStage==1){
             endDelete();
+            endDragAndDropHand();
             if(turn%2==1){
                 endDragAndDrop1();
             }else{
@@ -1177,7 +1190,9 @@ public class guiController implements Initializable {
             activateStageLabel(stageAttackLabel,stageEndLabel);
         }else if(idStage==3){
             turn++;
-            numTurn.setText(Integer.toString(turn));
+            numTurn.setText(Integer.toString((turn+1)/2));
+            setDisplayDeckNum();
+            setDisplayMana();
             if(turn%2==1) {
                 updateHand1();
             }else{
@@ -1189,6 +1204,7 @@ public class guiController implements Initializable {
             }else{
                 updateHand2();
             }
+            setDisplayDeckNum();
             activateStageLabel(stageEndLabel,stageDrawLabel);
         }
         idStage++;
@@ -1628,6 +1644,35 @@ public class guiController implements Initializable {
         }
     }
 
+    public void setDisplayMana(){
+        System.out.println("Set mana");
+        if(turn%2==1){
+            pemain1.setMana(min((turn+1)/2,10));
+            manaNum.setText("Mana\n"+pemain1.getMana()+"/"+(turn+1)/2);
+        }else{
+            pemain2.setMana(min((turn+1)/2,10));
+            manaNum.setText("Mana\n"+pemain2.getMana()+"/"+(turn+1)/2);
+        }
+    }
+
+    public void updateDisplayMana(){
+        if(turn%2==1){
+            manaNum.setText("Mana\n"+pemain1.getMana()+"/"+min((turn+1)/2,10));
+        }else{
+            manaNum.setText("Mana\n"+pemain2.getMana()+"/"+min((turn+1)/2,10));
+        }
+    }
+
+    public void setDisplayDeckNum(){
+        System.out.println("Set mana");
+        if(turn%2==1){
+            deckNum.setText("Deck\n"+pemain1.getDeck().getSize()+"/"+deckCapacityPemain1);
+        }else{
+            deckNum.setText("Deck\n"+pemain2.getDeck().getSize()+"/"+deckCapacityPemain2);
+        }
+    }
+
+
     public static void debugging(){
         try {
             System.out.println("Hello World");
@@ -1640,6 +1685,7 @@ public class guiController implements Initializable {
                 card.printCardInfo(); // print setiap card
                 System.out.println();
             }
+
 
             // kalo mau debug di sini
 

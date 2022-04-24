@@ -43,6 +43,10 @@ public class Deck {
         return C;
     }
 
+    public int getSize(){
+        return this.CardDeck.size();
+    }
+
     public List<Card> getAll(){
         return this.CardDeck;
     }

@@ -38,8 +38,8 @@
             </ImageView>
             <Label fx:id="cardAttribute" layoutX="644.0" layoutY="73.0" prefHeight="126.0" prefWidth="99.0" text="ATTRIBUTE" />
             <Label fx:id="cardDescription" layoutX="743.0" layoutY="73.0" prefHeight="126.0" prefWidth="99.0" text="DESCRIPTION" />
-            <Label fx:id="deckNum" layoutX="864.0" layoutY="90.0" prefHeight="29.0" prefWidth="79.0" text="Deck" />
-            <Label fx:id="manaNum" layoutX="864.0" layoutY="141.0" prefHeight="29.0" prefWidth="79.0" text="Mana" />
+            <Label fx:id="deckNum" layoutX="864.0" layoutY="90.0" prefHeight="38.0" prefWidth="79.0" style="-fx-alignment: center;" text="Deck" />
+            <Label fx:id="manaNum" layoutX="864.0" layoutY="141.0" prefHeight="35.0" prefWidth="79.0" style="-fx-alignment: center;" text="Mana" />
             <BorderPane layoutX="34.0" layoutY="81.0" prefHeight="91.0" prefWidth="81.0" style="-fx-border-color: black;" styleClass="containerHand">
                <top>
                   <ImageView fx:id="handCard1" fitHeight="54.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
