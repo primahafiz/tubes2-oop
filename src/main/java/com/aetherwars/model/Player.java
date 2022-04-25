@@ -258,7 +258,7 @@ public class Player {
             enemy.setHp(enemy.getHp() - attacker.getAttack());
         } else {
             System.out.println("You have to attack enemy's character first");
-            // throw new InvalidException("You have to attack enemy's character first");
+            throw new InvalidException("You have to attack enemy's character first");
         }
     }
 

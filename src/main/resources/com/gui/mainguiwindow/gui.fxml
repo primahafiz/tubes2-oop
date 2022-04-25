@@ -139,12 +139,12 @@
    <left>
       <AnchorPane prefHeight="240.0" prefWidth="487.0" styleClass="playerHand" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="90.0" fitWidth="90.0" layoutX="33.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="player1Img" fitHeight="90.0" fitWidth="90.0" layoutX="33.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@image/steve.jpeg" />
                </image>
             </ImageView>
-            <AnchorPane layoutX="148.0" layoutY="19.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
+            <AnchorPane fx:id="player1BoardAFrame" layoutX="148.0" layoutY="19.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
                <children>
                   <ImageView fx:id="player1BoardAAttackImg" fitHeight="20.0" fitWidth="17.0" layoutX="3.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" smooth="false" visible="false">
                      <image>
@@ -163,7 +163,7 @@
                   <Label fx:id="player1BoardALvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="240.0" layoutY="19.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
+            <AnchorPane fx:id="player1BoardBFrame" layoutX="240.0" layoutY="19.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
                <children>
                   <ImageView fx:id="player1BoardBAttackImg" fitHeight="20.0" fitWidth="17.0" layoutX="3.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" smooth="false" visible="false">
                      <image>
@@ -182,7 +182,7 @@
                   <Label fx:id="player1BoardBLvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="148.0" layoutY="111.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
+            <AnchorPane fx:id="player1BoardCFrame" layoutX="148.0" layoutY="111.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
                <children>
                   <ImageView fx:id="player1BoardCAttackImg" fitHeight="20.0" fitWidth="17.0" layoutX="3.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" smooth="false" visible="false">
                      <image>
@@ -201,7 +201,7 @@
                   <Label fx:id="player1BoardCLvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="240.0" layoutY="111.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
+            <AnchorPane fx:id="player1BoardDFrame" layoutX="240.0" layoutY="111.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
                <children>
                   <ImageView fx:id="player1BoardDAttackImg" fitHeight="20.0" fitWidth="17.0" layoutX="3.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" smooth="false" visible="false">
                      <image>
@@ -220,7 +220,7 @@
                   <Label fx:id="player1BoardDLvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="337.0" layoutY="65.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
+            <AnchorPane fx:id="player1BoardEFrame" layoutX="337.0" layoutY="65.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
                <children>
                   <ImageView fx:id="player1BoardEAttackImg" fitHeight="20.0" fitWidth="17.0" layoutX="3.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" smooth="false" visible="false">
                      <image>
@@ -270,12 +270,12 @@
    <right>
       <AnchorPane prefHeight="229.0" prefWidth="563.0" styleClass="playerHand" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="90.0" fitWidth="90.0" layoutX="343.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="player2Img" fitHeight="90.0" fitWidth="90.0" layoutX="343.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@image/alex.jpeg" />
                </image>
             </ImageView>
-            <AnchorPane layoutX="40.0" layoutY="70.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
+            <AnchorPane fx:id="player2BoardEFrame" layoutX="40.0" layoutY="70.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
                <children>
                   <ImageView fx:id="player2BoardEAttackImg" fitHeight="20.0" fitWidth="17.0" layoutX="3.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" smooth="false" visible="false">
                      <image>
@@ -294,7 +294,7 @@
                   <Label fx:id="player2BoardELvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="143.0" layoutY="115.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
+            <AnchorPane fx:id="player2BoardDFrame" layoutX="143.0" layoutY="115.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
                <children>
                   <ImageView fx:id="player2BoardDAttackImg" fitHeight="20.0" fitWidth="17.0" layoutX="3.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" smooth="false" visible="false">
                      <image>
@@ -313,7 +313,7 @@
                   <Label fx:id="player2BoardDLvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="143.0" layoutY="23.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
+            <AnchorPane fx:id="player2BoardBFrame" layoutX="143.0" layoutY="23.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
                <children>
                   <ImageView fx:id="player2BoardBAttackImg" fitHeight="20.0" fitWidth="17.0" layoutX="3.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" smooth="false" visible="false">
                      <image>
@@ -332,7 +332,7 @@
                   <Label fx:id="player2BoardBLvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="235.0" layoutY="23.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
+            <AnchorPane fx:id="player2BoardAFrame" layoutX="235.0" layoutY="23.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
                <children>
                   <ImageView fx:id="player2BoardAAttackImg" fitHeight="20.0" fitWidth="17.0" layoutX="3.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" smooth="false" visible="false">
                      <image>
@@ -351,7 +351,7 @@
                   <Label fx:id="player2BoardALvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="235.0" layoutY="115.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
+            <AnchorPane fx:id="player2BoardCFrame" layoutX="235.0" layoutY="115.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
                <children>
                   <ImageView fx:id="player2BoardCAttackImg" fitHeight="20.0" fitWidth="17.0" layoutX="3.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" smooth="false" visible="false">
                      <image>

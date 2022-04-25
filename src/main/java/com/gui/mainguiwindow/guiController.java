@@ -44,6 +44,33 @@ public class guiController implements Initializable {
     @FXML
     Label numTurn;
 
+    @FXML
+    ImageView player1Img;
+    @FXML
+    ImageView player2Img;
+
+    @FXML
+    AnchorPane player1BoardAFrame;
+    @FXML
+    AnchorPane player1BoardBFrame;
+    @FXML
+    AnchorPane player1BoardCFrame;
+    @FXML
+    AnchorPane player1BoardDFrame;
+    @FXML
+    AnchorPane player1BoardEFrame;
+
+    @FXML
+    AnchorPane player2BoardAFrame;
+    @FXML
+    AnchorPane player2BoardBFrame;
+    @FXML
+    AnchorPane player2BoardCFrame;
+    @FXML
+    AnchorPane player2BoardDFrame;
+    @FXML
+    AnchorPane player2BoardEFrame;
+
     // card image for board player 1
     @FXML
     ImageView player1BoardA;
@@ -317,7 +344,7 @@ public class guiController implements Initializable {
     int deckCapacityPemain1;
     int deckCapacityPemain2;
 
-
+    boolean hasAttacked = false;
 
 
     public guiController(){
@@ -368,6 +395,8 @@ public class guiController implements Initializable {
         idStage = -1;
 
         updateHand();
+        initHoveredCardBoard();
+        initHoveredCardHand();
     }
 
 
@@ -1524,10 +1553,371 @@ public class guiController implements Initializable {
     }
 
 
+    public void initSelectAttack() {
+        if (turn % 2 == 1) {
+            initSelectP1AttackP2();
+            updateBoard1();
+            updateBoard2();
+        } else {
+            initSelectP2AttackP1();
+            updateBoard1();
+            updateBoard2();
+        }
+    }
+    
+
+    public void selectBoardCard(int id) {
+        switch (id) {
+            case 0:
+                player1BoardAFrame.getStyleClass().add("backgroundBtnActive");
+                break;
+            case 1:
+                player1BoardBFrame.getStyleClass().add("backgroundBtnActive");
+                break;
+            case 2:
+                player1BoardCFrame.getStyleClass().add("backgroundBtnActive");
+                break;
+            case 3:
+                player1BoardDFrame.getStyleClass().add("backgroundBtnActive");
+                break;
+            case 4:
+                player1BoardEFrame.getStyleClass().add("backgroundBtnActive");
+                break;
+            case 5:
+                player2BoardAFrame.getStyleClass().add("backgroundBtnActive");
+                break;
+            case 6:
+                player2BoardBFrame.getStyleClass().add("backgroundBtnActive");
+                break;
+            case 7:
+                player2BoardCFrame.getStyleClass().add("backgroundBtnActive");
+                break;
+            case 8:
+                player2BoardDFrame.getStyleClass().add("backgroundBtnActive");
+                break;
+            case 9:
+                player2BoardEFrame.getStyleClass().add("backgroundBtnActive");
+                break;
+            case 10:
+                player1Img.getStyleClass().add("backgroundBtnActive");
+                break;
+            case 11:
+                player2Img.getStyleClass().add("backgroundBtnActive");
+                break;
+            default:
+                break;
+        }
+
+    }
+
+
+    public void unselectBoardCard(int id) {
+        switch (id) {
+            case 0:
+                player1BoardAFrame.getStyleClass().removeIf(style -> style.equals("backgroundBtnActive"));
+                break;
+            case 1:
+                player1BoardBFrame.getStyleClass().removeIf(style -> style.equals("backgroundBtnActive"));
+                break;
+            case 2:
+                player1BoardCFrame.getStyleClass().removeIf(style -> style.equals("backgroundBtnActive"));
+                break;
+            case 3:
+                player1BoardDFrame.getStyleClass().removeIf(style -> style.equals("backgroundBtnActive"));
+                break;
+            case 4:
+                player1BoardEFrame.getStyleClass().removeIf(style -> style.equals("backgroundBtnActive"));
+                break;
+            case 5:
+                player2BoardAFrame.getStyleClass().removeIf(style -> style.equals("backgroundBtnActive"));
+                break;
+            case 6:
+                player2BoardBFrame.getStyleClass().removeIf(style -> style.equals("backgroundBtnActive"));
+                break;
+            case 7:
+                player2BoardCFrame.getStyleClass().removeIf(style -> style.equals("backgroundBtnActive"));
+                break;
+            case 8:
+                player2BoardDFrame.getStyleClass().removeIf(style -> style.equals("backgroundBtnActive"));
+                break;
+            case 9:
+                player2BoardEFrame.getStyleClass().removeIf(style -> style.equals("backgroundBtnActive"));
+                break;
+            case 10:
+                player1Img.getStyleClass().removeIf(style -> style.equals("backgroundBtnActive"));
+                break;
+            case 11:
+                player2Img.getStyleClass().removeIf(style -> style.equals("backgroundBtnActive"));
+                break;
+            default:
+                break;
+        }
+    }
+
+    
+    public void initSelectP1AttackP2() {
+        Board attackerBoard = pemain1.getBoard();
+        Board defenderBoard = pemain2.getBoard();
+        final int[] selectedAttCard = {-1}; 
+        final int[] selectedDefCard = {-1};
+
+        player1BoardA.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (attackerBoard.isCharacterAvailable(0) && !hasAttacked && idStage == 2) {
+                    if (selectedAttCard[0] == -1) {
+                        selectBoardCard(0);
+                        selectedAttCard[0] = 0;
+                    } else if (selectedAttCard[0] == 0) {
+                        unselectBoardCard(0);
+                        selectedAttCard[0] = -1;
+                    } else {
+                        unselectBoardCard(selectedAttCard[0]);
+                        selectBoardCard(0);
+                        selectedAttCard[0] = 0;   
+                    }
+                }
+            }
+        });
+
+        player1BoardB.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (attackerBoard.isCharacterAvailable(1) && !hasAttacked && idStage == 2) {
+                    if (selectedAttCard[0] == -1) {
+                        selectBoardCard(1);
+                        selectedAttCard[0] = 1;
+                    } else if (selectedAttCard[0] == 1) {
+                        unselectBoardCard(1);
+                        selectedAttCard[0] = -1;
+                    } else {
+                        unselectBoardCard(selectedAttCard[0]);
+                        selectBoardCard(1);
+                        selectedAttCard[0] = 1;   
+                    }
+                }
+            }
+        });
+
+        player1BoardC.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (attackerBoard.isCharacterAvailable(2) && !hasAttacked && idStage == 2) {
+                    if (selectedAttCard[0] == -1) {
+                        selectBoardCard(2);
+                        selectedAttCard[0] = 2;
+                    } else if (selectedAttCard[0] == 2) {
+                        unselectBoardCard(2);
+                        selectedAttCard[0] = -1;
+                    } else {
+                        unselectBoardCard(selectedAttCard[0]);
+                        selectBoardCard(2);
+                        selectedAttCard[0] = 2;   
+                    }
+                }
+            }
+        });
+
+        player1BoardD.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (attackerBoard.isCharacterAvailable(3) && !hasAttacked && idStage == 2) {
+                    if (selectedAttCard[0] == -1) {
+                        selectBoardCard(3);
+                        selectedAttCard[0] = 3;
+                    } else if (selectedAttCard[0] == 3) {
+                        unselectBoardCard(3);
+                        selectedAttCard[0] = -1;
+                    } else {
+                        unselectBoardCard(selectedAttCard[0]);
+                        selectBoardCard(3);
+                        selectedAttCard[0] = 3;   
+                    }
+                }
+            }
+        });
+
+        player1BoardE.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (attackerBoard.isCharacterAvailable(4) && !hasAttacked && idStage == 2) {
+                    if (selectedAttCard[0] == -1) {
+                        selectBoardCard(4);
+                        selectedAttCard[0] = 4;
+                    } else if (selectedAttCard[0] == 4) {
+                        unselectBoardCard(4);
+                        selectedAttCard[0] = -1;
+                    } else {
+                        unselectBoardCard(selectedAttCard[0]);
+                        selectBoardCard(4);
+                        selectedAttCard[0] = 4;   
+                    }
+                }
+            }
+        });
+
+        player2BoardA.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (defenderBoard.isCharacterAvailable(0) && selectedAttCard[0] != -1 && !hasAttacked) {
+                    if (selectedDefCard[0] == -1) {
+                        selectBoardCard(5);
+                        selectedDefCard[0] = 0;
+                    } else if (selectedDefCard[0] == 0) {
+                        pemain1.attack(selectedAttCard[0], selectedDefCard[0], pemain2);
+                        unselectBoardCard(selectedAttCard[0]);
+                        selectedAttCard[0] = -1;
+                        unselectBoardCard(selectedDefCard[0]+5);
+                        selectedDefCard[0] = -1;
+                        hasAttacked = true;
+                    } else {
+                        unselectBoardCard(selectedDefCard[0]+5);
+                        selectBoardCard(5);
+                        selectedDefCard[0] = 0;   
+                    }
+                }
+            }
+        });
+
+        player2BoardB.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (defenderBoard.isCharacterAvailable(1) && selectedAttCard[0] != -1 && !hasAttacked) {
+                    if (selectedDefCard[0] == -1) {
+                        selectBoardCard(6);
+                        selectedDefCard[0] = 1;
+                    } else if (selectedDefCard[0] == 1) {
+                        pemain1.attack(selectedAttCard[0], selectedDefCard[0], pemain2);
+                        unselectBoardCard(selectedAttCard[0]);
+                        selectedAttCard[0] = -1;
+                        unselectBoardCard(selectedDefCard[0]+5);
+                        selectedDefCard[0] = -1;
+                        hasAttacked = true;
+                    } else {
+                        unselectBoardCard(selectedDefCard[0]+5);
+                        selectBoardCard(6);
+                        selectedDefCard[0] = 1;   
+                    }
+                }
+            }
+        });
+
+        player2BoardC.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (defenderBoard.isCharacterAvailable(2) && selectedAttCard[0] != -1 && !hasAttacked) {
+                    if (selectedDefCard[0] == -1) {
+                        selectBoardCard(7);
+                        selectedDefCard[0] = 2;
+                    } else if (selectedDefCard[0] == 2) {
+                        pemain1.attack(selectedAttCard[0], selectedDefCard[0], pemain2);
+                        unselectBoardCard(selectedAttCard[0]);
+                        selectedAttCard[0] = -1;
+                        unselectBoardCard(selectedDefCard[0]+5);
+                        selectedDefCard[0] = -1;
+                        hasAttacked = true;
+                    } else {
+                        unselectBoardCard(selectedDefCard[0]+5);
+                        selectBoardCard(7);
+                        selectedDefCard[0] = 2;   
+                    }
+                }
+            }
+        });
+
+        player2BoardD.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (defenderBoard.isCharacterAvailable(3) && selectedAttCard[0] != -1 && !hasAttacked) {
+                    if (selectedDefCard[0] == -1) {
+                        selectBoardCard(8);
+                        selectedDefCard[0] = 3;
+                    } else if (selectedDefCard[0] == 3) {
+                        pemain1.attack(selectedAttCard[0], selectedDefCard[0], pemain2);
+                        unselectBoardCard(selectedAttCard[0]);
+                        selectedAttCard[0] = -1;
+                        unselectBoardCard(selectedDefCard[0]+5);
+                        selectedDefCard[0] = -1;
+                        hasAttacked = true;
+                    } else {
+                        unselectBoardCard(selectedDefCard[0]+5);
+                        selectBoardCard(8);
+                        selectedDefCard[0] = 3;   
+                    }
+                }
+            }
+        });
+
+        player2BoardE.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (defenderBoard.isCharacterAvailable(4) && selectedAttCard[0] != -1 && !hasAttacked) {
+                    if (selectedDefCard[0] == -1) {
+                        selectBoardCard(9);
+                        selectedDefCard[0] = 4;
+                    } else if (selectedDefCard[0] == 4) {
+                        pemain1.attack(selectedAttCard[0], selectedDefCard[0], pemain2);
+                        unselectBoardCard(selectedAttCard[0]);
+                        selectedAttCard[0] = -1;
+                        unselectBoardCard(selectedDefCard[0]+5);
+                        selectedDefCard[0] = -1;
+                        hasAttacked = true;
+                    } else {
+                        unselectBoardCard(selectedDefCard[0]+5);
+                        selectBoardCard(9);
+                        selectedDefCard[0] = 4;   
+                    }
+                }
+            }
+        });
+
+        player2Img.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (selectedAttCard[0] != -1 && !hasAttacked && defenderBoard.isEmpty()) {
+                    if (selectedDefCard[0] == -1) {
+                        selectBoardCard(11);
+                        selectedDefCard[0] = 11;
+                    } else if (selectedDefCard[0] == 11) {
+                        try {
+                            pemain1.attackEnemy(selectedAttCard[0], pemain2);
+                            hasAttacked = true;
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        } finally {
+                            unselectBoardCard(11);
+                            selectedDefCard[0] = -1;
+                        }
+                    } 
+                }
+            }
+        });
+    }
+    
+    
+    public void initSelectP2AttackP1() {
+        Board attacker = pemain2.getBoard();
+        Board defender = pemain1.getBoard();
+
+    }
+
+
+    public void removeDeadCard() {
+        for (int i = 0; i < 5; i++) {
+            if (pemain1.getBoard().isCharacterAvailable(i) && ((Character) pemain1.getBoard().getCard(i)).getHealth() <= 0) {
+                pemain1.getBoard().removeCardfromBoard(i);
+            }
+        }
+        for (int i = 0; i < 5; i++) {
+            if (pemain2.getBoard().isCharacterAvailable(i) && ((Character) pemain2.getBoard().getCard(i)).getHealth() <= 0) {
+                pemain2.getBoard().removeCardfromBoard(i);
+            }
+        }
+    }
+
+
     public void changeStageClicked(){
         // kalau button untuk pindah stage diclick
-        initHoveredCardBoard();
-        initHoveredCardHand();
         if(idStage==-1){
             turn++;
             numTurn.setText(Integer.toString((turn+1)/2));
@@ -1572,8 +1962,10 @@ public class guiController implements Initializable {
             }
             activateStageLabel(stagePlanLabel,stageAttackLabel);
         }else if(idStage==2){
+            initSelectAttack();
             activateStageLabel(stageAttackLabel,stageEndLabel);
         }else if(idStage==3){
+            hasAttacked = false;
             turn++;
             numTurn.setText(Integer.toString((turn+1)/2));
             setDisplayDeckNum();
@@ -1808,6 +2200,7 @@ public class guiController implements Initializable {
 
     public void updateBoard1(){
         Board currentBoard = pemain1.getBoard();
+        removeDeadCard();
         for(int i=0;i<5;i++){
             if(!currentBoard.isValidIdx(i)){
                 if(i==0){
@@ -1933,6 +2326,7 @@ public class guiController implements Initializable {
 
     public void updateBoard2(){
         Board currentBoard = pemain2.getBoard();
+        removeDeadCard();
         for(int i=0;i<5;i++){
             if(!currentBoard.isValidIdx(i)){
                 if(i==0){
