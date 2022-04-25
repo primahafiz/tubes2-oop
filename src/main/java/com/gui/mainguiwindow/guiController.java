@@ -368,16 +368,16 @@ public class guiController implements Initializable {
         idStage = -1;
 
         updateHand();
-
     }
 
     public String getCardAttributes(Card c) {
         String attribute = "";
         attribute += c.getName().toUpperCase();
-        attribute += "\nATK   :" + ((Character) c).getAttack();
-        attribute += "\nHP    :" + ((Character) c).getHealth();
-        attribute += "\nEXP   :" + ((Character) c).getExp();
-        attribute += "\nLVL   :" + ((Character) c).getLevel();
+        attribute += "\nATK   : " + ((Character) c).getAttack();
+        attribute += "\nHP     : " + ((Character) c).getHealth();
+        attribute += "\nEXP    : " + ((Character) c).getExp();
+        attribute += "\nLVL    : " + ((Character) c).getLevel();
+        attribute += "\nTYPE  : " + ((Character) c).getType();
         return attribute;
     }
 
@@ -387,10 +387,13 @@ public class guiController implements Initializable {
         player1BoardA.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                hoveredCard.setImage(player1BoardA.getImage());
-                cardAttribute.setText(getCardAttributes(board1.getCard(0)));
-                cardDescription.setText("\"" + board1.getCard(0).getDesc() + "\"");
-                cardDescription.setStyle("-fx-font-style: italic;");
+                if (board1.isCharacterAvailable(0)) {
+                    hoveredCard.setImage(player1BoardA.getImage());
+                    alignImageCentre(hoveredCard);
+                    cardAttribute.setText(getCardAttributes(board1.getCard(0)));
+                    cardDescription.setText("\"" + board1.getCard(0).getDesc() + "\"");
+                    cardDescription.setStyle("-fx-font-style: italic;");
+                }
             }
         });
         player1BoardA.setOnMouseExited(new EventHandler<MouseEvent>() {
@@ -405,10 +408,13 @@ public class guiController implements Initializable {
         player1BoardB.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                hoveredCard.setImage(player1BoardB.getImage());
-                cardAttribute.setText(getCardAttributes(board1.getCard(1)));
-                cardDescription.setText("\"" + board1.getCard(1).getDesc() + "\"");
-                cardDescription.setStyle("-fx-font-style: italic;");
+                if (board1.isCharacterAvailable(1)) {
+                    hoveredCard.setImage(player1BoardB.getImage());
+                    alignImageCentre(hoveredCard);
+                    cardAttribute.setText(getCardAttributes(board1.getCard(1)));
+                    cardDescription.setText("\"" + board1.getCard(1).getDesc() + "\"");
+                    cardDescription.setStyle("-fx-font-style: italic;");
+                }
             }
         });
         player1BoardB.setOnMouseExited(new EventHandler<MouseEvent>() {
@@ -423,10 +429,13 @@ public class guiController implements Initializable {
         player1BoardC.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                hoveredCard.setImage(player1BoardC.getImage());
-                cardAttribute.setText(getCardAttributes(board1.getCard(2)));
-                cardDescription.setText("\"" + board1.getCard(2).getDesc() + "\"");
-                cardDescription.setStyle("-fx-font-style: italic;");
+                if (board1.isCharacterAvailable(2)) {
+                    hoveredCard.setImage(player1BoardC.getImage());
+                    alignImageCentre(hoveredCard);
+                    cardAttribute.setText(getCardAttributes(board1.getCard(2)));
+                    cardDescription.setText("\"" + board1.getCard(2).getDesc() + "\"");
+                    cardDescription.setStyle("-fx-font-style: italic;");
+                }
             }
         }); 
         player1BoardC.setOnMouseExited(new EventHandler<MouseEvent>() {
@@ -441,10 +450,13 @@ public class guiController implements Initializable {
         player1BoardD.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                hoveredCard.setImage(player1BoardD.getImage());
-                cardAttribute.setText(getCardAttributes(board1.getCard(3)));
-                cardDescription.setText("\"" + board1.getCard(3).getDesc() + "\"");
-                cardDescription.setStyle("-fx-font-style: italic;");
+                if (board1.isCharacterAvailable(3)) {
+                    hoveredCard.setImage(player1BoardD.getImage());
+                    alignImageCentre(hoveredCard);
+                    cardAttribute.setText(getCardAttributes(board1.getCard(3)));
+                    cardDescription.setText("\"" + board1.getCard(3).getDesc() + "\"");
+                    cardDescription.setStyle("-fx-font-style: italic;");
+                }
             }
         });
         player1BoardD.setOnMouseExited(new EventHandler<MouseEvent>() {
@@ -459,10 +471,13 @@ public class guiController implements Initializable {
         player1BoardE.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                hoveredCard.setImage(player1BoardE.getImage());
-                cardAttribute.setText(getCardAttributes(board1.getCard(4)));
-                cardDescription.setText("\"" + board1.getCard(4).getDesc() + "\"");
-                cardDescription.setStyle("-fx-font-style: italic;");
+                if (board1.isCharacterAvailable(4)) {
+                    hoveredCard.setImage(player1BoardE.getImage());
+                    alignImageCentre(hoveredCard);
+                    cardAttribute.setText(getCardAttributes(board1.getCard(4)));
+                    cardDescription.setText("\"" + board1.getCard(4).getDesc() + "\"");
+                    cardDescription.setStyle("-fx-font-style: italic;");
+                }
             }
         });
         player1BoardE.setOnMouseExited(new EventHandler<MouseEvent>() {
@@ -477,10 +492,13 @@ public class guiController implements Initializable {
         player2BoardA.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                hoveredCard.setImage(player2BoardA.getImage());
-                cardAttribute.setText(getCardAttributes(board2.getCard(0)));
-                cardDescription.setText("\"" + board2.getCard(0).getDesc() + "\"");
-                cardDescription.setStyle("-fx-font-style: italic;");
+                if (board2.isCharacterAvailable(0)) {
+                    hoveredCard.setImage(player2BoardA.getImage());
+                    alignImageCentre(hoveredCard);
+                    cardAttribute.setText(getCardAttributes(board2.getCard(0)));
+                    cardDescription.setText("\"" + board2.getCard(0).getDesc() + "\"");
+                    cardDescription.setStyle("-fx-font-style: italic;");
+                }
             }
         });
         player2BoardA.setOnMouseExited(new EventHandler<MouseEvent>() {
@@ -495,10 +513,13 @@ public class guiController implements Initializable {
         player2BoardB.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                hoveredCard.setImage(player2BoardB.getImage());
-                cardAttribute.setText(getCardAttributes(board2.getCard(1)));
-                cardDescription.setText("\"" + board2.getCard(1).getDesc() + "\"");
-                cardDescription.setStyle("-fx-font-style: italic;");
+                if (board2.isCharacterAvailable(1)) {
+                    hoveredCard.setImage(player2BoardB.getImage());
+                    alignImageCentre(hoveredCard);
+                    cardAttribute.setText(getCardAttributes(board2.getCard(1)));
+                    cardDescription.setText("\"" + board2.getCard(1).getDesc() + "\"");
+                    cardDescription.setStyle("-fx-font-style: italic;");
+                }
             }
         });
         player2BoardB.setOnMouseExited(new EventHandler<MouseEvent>() {
@@ -513,10 +534,13 @@ public class guiController implements Initializable {
         player2BoardC.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                hoveredCard.setImage(player2BoardC.getImage());
-                cardAttribute.setText(getCardAttributes(board2.getCard(2)));
-                cardDescription.setText("\"" + board2.getCard(2).getDesc() + "\"");
-                cardDescription.setStyle("-fx-font-style: italic;");
+                if (board2.isCharacterAvailable(2)) {
+                    hoveredCard.setImage(player2BoardC.getImage());
+                    alignImageCentre(hoveredCard);
+                    cardAttribute.setText(getCardAttributes(board2.getCard(2)));
+                    cardDescription.setText("\"" + board2.getCard(2).getDesc() + "\"");
+                    cardDescription.setStyle("-fx-font-style: italic;");
+                }
             }
         });
         player2BoardC.setOnMouseExited(new EventHandler<MouseEvent>() {
@@ -531,10 +555,13 @@ public class guiController implements Initializable {
         player2BoardD.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                hoveredCard.setImage(player2BoardD.getImage());
-                cardAttribute.setText(getCardAttributes(board2.getCard(3)));
-                cardDescription.setText("\"" + board2.getCard(3).getDesc() + "\"");
-                cardDescription.setStyle("-fx-font-style: italic;");
+                if (board2.isCharacterAvailable(3)) {
+                    hoveredCard.setImage(player2BoardD.getImage());
+                    alignImageCentre(hoveredCard);
+                    cardAttribute.setText(getCardAttributes(board2.getCard(3)));
+                    cardDescription.setText("\"" + board2.getCard(3).getDesc() + "\"");
+                    cardDescription.setStyle("-fx-font-style: italic;");
+                }
             }
         });
         player2BoardD.setOnMouseExited(new EventHandler<MouseEvent>() {
@@ -549,10 +576,13 @@ public class guiController implements Initializable {
         player2BoardE.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                hoveredCard.setImage(player2BoardE.getImage());
-                cardAttribute.setText(getCardAttributes(board2.getCard(4)));
-                cardDescription.setText("\"" + board2.getCard(4).getDesc() + "\"");
-                cardDescription.setStyle("-fx-font-style: italic;");
+                if (board2.isCharacterAvailable(4)) {
+                    hoveredCard.setImage(player2BoardE.getImage());
+                    alignImageCentre(hoveredCard);
+                    cardAttribute.setText(getCardAttributes(board2.getCard(4)));
+                    cardDescription.setText("\"" + board2.getCard(4).getDesc() + "\"");
+                    cardDescription.setStyle("-fx-font-style: italic;");
+                }
             }
         });
         player2BoardE.setOnMouseExited(new EventHandler<MouseEvent>() {
@@ -563,7 +593,30 @@ public class guiController implements Initializable {
                 cardDescription.setText("");
             }
         });
-        
+    }
+
+    public void alignImageCentre(ImageView imageView) {
+        Image img = imageView.getImage();
+        if (img != null) {
+            double w = 0;
+            double h = 0;
+
+            double ratioX = imageView.getFitWidth() / img.getWidth();
+            double ratioY = imageView.getFitHeight() / img.getHeight();
+
+            double reducCoeff = 0;
+            if (ratioX >= ratioY) {
+                reducCoeff = ratioY;
+            } else {
+                reducCoeff = ratioX;
+            }
+
+            w = img.getWidth() * reducCoeff;
+            h = img.getHeight() * reducCoeff;
+
+            imageView.setX((imageView.getFitWidth() - w) / 2);
+            imageView.setY((imageView.getFitHeight() - h) / 2);
+        }
     }
 
 
@@ -1490,22 +1543,27 @@ public class guiController implements Initializable {
             if(handPemain1.getCard(i)==null)continue;
             if(i==0){
                 handCard1.setImage(new Image(getClass().getResourceAsStream(handPemain1.getCard(i).getImagePath())));
+                alignImageCentre(handCard1);
                 handCard1Mana.setText("MANA "+handPemain1.getCard(i).getMana());
                 handCard1AtkHealth.setText(getAtkHealth(handPemain1.getCard(i)));
             }else if(i==1){
                 handCard2.setImage(new Image(getClass().getResourceAsStream(handPemain1.getCard(i).getImagePath())));
+                alignImageCentre(handCard2);
                 handCard2Mana.setText("MANA "+handPemain1.getCard(i).getMana());
                 handCard2AtkHealth.setText(getAtkHealth(handPemain1.getCard(i)));
             }else if(i==2){
                 handCard3.setImage(new Image(getClass().getResourceAsStream(handPemain1.getCard(i).getImagePath())));
+                alignImageCentre(handCard3);
                 handCard3Mana.setText("MANA "+handPemain1.getCard(i).getMana());
                 handCard3AtkHealth.setText(getAtkHealth(handPemain1.getCard(i)));
             }else if(i==3){
                 handCard4.setImage(new Image(getClass().getResourceAsStream(handPemain1.getCard(i).getImagePath())));
+                alignImageCentre(handCard4);
                 handCard4Mana.setText("MANA "+handPemain1.getCard(i).getMana());
                 handCard4AtkHealth.setText(getAtkHealth(handPemain1.getCard(i)));
             }else if(i==4){
                 handCard5.setImage(new Image(getClass().getResourceAsStream(handPemain1.getCard(i).getImagePath())));
+                alignImageCentre(handCard5);
                 handCard5Mana.setText("MANA "+handPemain1.getCard(i).getMana());
                 handCard5AtkHealth.setText(getAtkHealth(handPemain1.getCard(i)));
             }
@@ -1544,22 +1602,27 @@ public class guiController implements Initializable {
         for(int i=0;i<handPemain2.numberOfCards();i++){
             if(i==0){
                 handCard1.setImage(new Image(getClass().getResourceAsStream(handPemain2.getCard(i).getImagePath())));
+                alignImageCentre(handCard1);
                 handCard1Mana.setText("MANA "+handPemain2.getCard(i).getMana());
                 handCard1AtkHealth.setText(getAtkHealth(handPemain2.getCard(i)));
             }else if(i==1){
                 handCard2.setImage(new Image(getClass().getResourceAsStream(handPemain2.getCard(i).getImagePath())));
+                alignImageCentre(handCard2);
                 handCard2Mana.setText("MANA "+handPemain2.getCard(i).getMana());
                 handCard2AtkHealth.setText(getAtkHealth(handPemain2.getCard(i)));
             }else if(i==2){
                 handCard3.setImage(new Image(getClass().getResourceAsStream(handPemain2.getCard(i).getImagePath())));
+                alignImageCentre(handCard3);
                 handCard3Mana.setText("MANA "+handPemain2.getCard(i).getMana());
                 handCard3AtkHealth.setText(getAtkHealth(handPemain2.getCard(i)));
             }else if(i==3){
                 handCard4.setImage(new Image(getClass().getResourceAsStream(handPemain2.getCard(i).getImagePath())));
+                alignImageCentre(handCard4);
                 handCard4Mana.setText("MANA "+handPemain2.getCard(i).getMana());
                 handCard4AtkHealth.setText(getAtkHealth(handPemain2.getCard(i)));
             }else if(i==4){
                 handCard5.setImage(new Image(getClass().getResourceAsStream(handPemain2.getCard(i).getImagePath())));
+                alignImageCentre(handCard5);
                 handCard5Mana.setText("MANA "+handPemain2.getCard(i).getMana());
                 handCard5AtkHealth.setText(getAtkHealth(handPemain2.getCard(i)));
             }
@@ -1619,6 +1682,7 @@ public class guiController implements Initializable {
                     System.out.println(currentBoard.getCard(i).getImagePath());
 
                     player1BoardA.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
+                    alignImageCentre(player1BoardA);
                     player1BoardAAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
                     player1BoardAHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
                     player1BoardALvl.setText("Level");
@@ -1632,6 +1696,7 @@ public class guiController implements Initializable {
                     player1BoardBLabel.setVisible(false);
 
                     player1BoardB.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
+                    alignImageCentre(player1BoardB);
                     player1BoardBAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
                     player1BoardBHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
                     player1BoardBLvl.setText("Level");
@@ -1645,9 +1710,11 @@ public class guiController implements Initializable {
                     player1BoardCLabel.setVisible(false);
 
                     player1BoardC.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
+                    alignImageCentre(player1BoardC);
                     player1BoardCAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
                     player1BoardCHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
                     player1BoardCLvl.setText("Level");
+
                 }else if(i==3){
                     player1BoardDAttack.setVisible(true);
                     player1BoardDAttackImg.setVisible(true);
@@ -1657,9 +1724,11 @@ public class guiController implements Initializable {
                     player1BoardDLabel.setVisible(false);
 
                     player1BoardD.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
+                    alignImageCentre(player1BoardD);
                     player1BoardDAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
                     player1BoardDHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
                     player1BoardDLvl.setText("Level");
+
                 }else if(i==4){
                     player1BoardEAttack.setVisible(true);
                     player1BoardEAttackImg.setVisible(true);
@@ -1669,6 +1738,7 @@ public class guiController implements Initializable {
                     player1BoardELabel.setVisible(false);
 
                     player1BoardE.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
+                    alignImageCentre(player1BoardE);
                     player1BoardEAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
                     player1BoardEHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
                     player1BoardELvl.setText("Level");
@@ -1733,6 +1803,7 @@ public class guiController implements Initializable {
                     player2BoardALabel.setVisible(false);
 
                     player2BoardA.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
+                    alignImageCentre(player2BoardA);
                     player2BoardAAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
                     player2BoardAHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
                     player2BoardALvl.setText("Level");
@@ -1746,6 +1817,7 @@ public class guiController implements Initializable {
                     player2BoardBLabel.setVisible(false);
 
                     player2BoardB.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
+                    alignImageCentre(player2BoardB);
                     player2BoardBAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
                     player2BoardBHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
                     player2BoardBLvl.setText("Level");
@@ -1759,9 +1831,11 @@ public class guiController implements Initializable {
                     player2BoardCLabel.setVisible(false);
 
                     player2BoardC.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
+                    alignImageCentre(player2BoardC);
                     player2BoardCAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
                     player2BoardCHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
                     player2BoardCLvl.setText("Level");
+
                 }else if(i==3){
                     player2BoardDAttack.setVisible(true);
                     player2BoardDAttackImg.setVisible(true);
@@ -1771,9 +1845,11 @@ public class guiController implements Initializable {
                     player2BoardDLabel.setVisible(false);
 
                     player2BoardD.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
+                    alignImageCentre(player2BoardD);
                     player2BoardDAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
                     player2BoardDHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
                     player2BoardDLvl.setText("Level");
+
                 }else if(i==4){
                     player2BoardEAttack.setVisible(true);
                     player2BoardEAttackImg.setVisible(true);
@@ -1783,6 +1859,7 @@ public class guiController implements Initializable {
                     player2BoardELabel.setVisible(false);
 
                     player2BoardE.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
+                    alignImageCentre(player2BoardE);
                     player2BoardEAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
                     player2BoardEHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
                     player2BoardELvl.setText("Level");

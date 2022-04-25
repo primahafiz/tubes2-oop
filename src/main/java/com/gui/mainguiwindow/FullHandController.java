@@ -80,6 +80,11 @@ public class FullHandController implements Initializable {
         fullHand4.setOpacity(1);
         fullHand5.setOpacity(1);
         
+        alignImageCentre(fullHand1);
+        alignImageCentre(fullHand2);
+        alignImageCentre(fullHand3);
+        alignImageCentre(fullHand4);
+        alignImageCentre(fullHand5);
         
         fullHand1Mana.setText("MANA "+hand.getCard(0).getMana());
         fullHand2Mana.setText("MANA "+hand.getCard(1).getMana());
@@ -171,5 +176,29 @@ public class FullHandController implements Initializable {
                 stage.close();
             }
         });
+    }
+
+    public void alignImageCentre(ImageView imageView) {
+        Image img = imageView.getImage();
+        if (img != null) {
+            double w = 0;
+            double h = 0;
+
+            double ratioX = imageView.getFitWidth() / img.getWidth();
+            double ratioY = imageView.getFitHeight() / img.getHeight();
+
+            double reducCoeff = 0;
+            if (ratioX >= ratioY) {
+                reducCoeff = ratioY;
+            } else {
+                reducCoeff = ratioX;
+            }
+
+            w = img.getWidth() * reducCoeff;
+            h = img.getHeight() * reducCoeff;
+
+            imageView.setX((imageView.getFitWidth() - w) / 2);
+            imageView.setY((imageView.getFitHeight() - h) / 2);
+        }
     }
 }

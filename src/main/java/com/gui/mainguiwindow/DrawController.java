@@ -67,6 +67,9 @@ public class DrawController implements Initializable {
         imageDeck1.setOpacity(1);
         imageDeck2.setOpacity(1);
         imageDeck3.setOpacity(1);
+        alignImageCentre(imageDeck1);
+        alignImageCentre(imageDeck2);
+        alignImageCentre(imageDeck3);
         manaDeck1.setText("MANA "+Integer.toString(c.get(0).getMana()));
         manaDeck2.setText("MANA "+Integer.toString(c.get(1).getMana()));
         manaDeck3.setText("MANA "+Integer.toString(c.get(2).getMana()));
@@ -135,5 +138,29 @@ public class DrawController implements Initializable {
                 stage.close();
             }
         });
+    }
+
+    public void alignImageCentre(ImageView imageView) {
+        Image img = imageView.getImage();
+        if (img != null) {
+            double w = 0;
+            double h = 0;
+
+            double ratioX = imageView.getFitWidth() / img.getWidth();
+            double ratioY = imageView.getFitHeight() / img.getHeight();
+
+            double reducCoeff = 0;
+            if (ratioX >= ratioY) {
+                reducCoeff = ratioY;
+            } else {
+                reducCoeff = ratioX;
+            }
+
+            w = img.getWidth() * reducCoeff;
+            h = img.getHeight() * reducCoeff;
+
+            imageView.setX((imageView.getFitWidth() - w) / 2);
+            imageView.setY((imageView.getFitHeight() - h) / 2);
+        }
     }
 }
