@@ -36,19 +36,23 @@ import javafx.stage.StageStyle;
 import static java.lang.Math.min;
 
 public class guiController implements Initializable {
+    // Health Bar Pemain 1 dan Pemain 2
     @FXML
     ProgressBar lifeBar1;
     @FXML
     ProgressBar lifeBar2;
 
+    // Label untuk menampilkan turn saat ini
     @FXML
     Label numTurn;
 
+    // Foto pemain 1 dan pemain 2
     @FXML
     ImageView player1Img;
     @FXML
     ImageView player2Img;
 
+    // Frame untuk board A-E pemain 1
     @FXML
     AnchorPane player1BoardAFrame;
     @FXML
@@ -60,6 +64,7 @@ public class guiController implements Initializable {
     @FXML
     AnchorPane player1BoardEFrame;
 
+    // Frame untuk board A-E pemain 2
     @FXML
     AnchorPane player2BoardAFrame;
     @FXML
@@ -117,7 +122,7 @@ public class guiController implements Initializable {
     @FXML
     Label player1BoardELabel;
 
-    // Img Attack
+    // Img Attack Board A-E Pemain 1
     @FXML
     ImageView player1BoardAAttackImg;
     @FXML
@@ -129,7 +134,7 @@ public class guiController implements Initializable {
     @FXML
     ImageView player1BoardEAttackImg;
 
-    // Attack
+    // Attack Power Board A-E Pemain 1
     @FXML
     Label player1BoardAAttack;
     @FXML
@@ -141,7 +146,7 @@ public class guiController implements Initializable {
     @FXML
     Label player1BoardEAttack;
 
-    // Img Health
+    // Img Health Board A-E Pemain 1
     @FXML
     ImageView player1BoardAHealthImg;
     @FXML
@@ -153,7 +158,7 @@ public class guiController implements Initializable {
     @FXML
     ImageView player1BoardEHealthImg;
 
-    // Health
+    // Health Board A-E Pemain 1
     @FXML
     Label player1BoardAHealth;
     @FXML
@@ -165,7 +170,7 @@ public class guiController implements Initializable {
     @FXML
     Label player1BoardEHealth;
 
-    // Lvl
+    // Lvl Board A-E Pemain 1
     @FXML
     Label player1BoardALvl;
     @FXML
@@ -176,6 +181,20 @@ public class guiController implements Initializable {
     Label player1BoardDLvl;
     @FXML
     Label player1BoardELvl;
+
+    // tombol untuk menyerang pemain 2 dan kartu di boardnya
+    @FXML
+    ImageView P1atkBoardA;
+    @FXML
+    ImageView P1atkBoardB;
+    @FXML
+    ImageView P1atkBoardC;
+    @FXML
+    ImageView P1atkBoardD;
+    @FXML
+    ImageView P1atkBoardE;
+    @FXML
+    ImageView P1atkP2;
 
     // Label A,B,C,D,E board 2
     @FXML
@@ -189,7 +208,7 @@ public class guiController implements Initializable {
     @FXML
     Label player2BoardELabel;
 
-    // Img Attack
+    // Img Attack Board A-E Pemain 2
     @FXML
     ImageView player2BoardAAttackImg;
     @FXML
@@ -201,7 +220,7 @@ public class guiController implements Initializable {
     @FXML
     ImageView player2BoardEAttackImg;
 
-    // Attack
+    // Attack Power Board A-E Pemain 2
     @FXML
     Label player2BoardAAttack;
     @FXML
@@ -213,7 +232,7 @@ public class guiController implements Initializable {
     @FXML
     Label player2BoardEAttack;
 
-    // Img Health
+    // Img Health Board A-E Pemain 2
     @FXML
     ImageView player2BoardAHealthImg;
     @FXML
@@ -225,7 +244,7 @@ public class guiController implements Initializable {
     @FXML
     ImageView player2BoardEHealthImg;
 
-    // Health
+    // Health Board A-E Pemain 2
     @FXML
     Label player2BoardAHealth;
     @FXML
@@ -237,7 +256,7 @@ public class guiController implements Initializable {
     @FXML
     Label player2BoardEHealth;
 
-    // Lvl
+    // Lvl Board A-E Pemain 2
     @FXML
     Label player2BoardALvl;
     @FXML
@@ -249,7 +268,21 @@ public class guiController implements Initializable {
     @FXML
     Label player2BoardELvl;
 
-    // hand card
+    // tombol untuk menyerang pemain 1 dan kartu di boardnya
+    @FXML
+    ImageView P2atkBoardA;
+    @FXML
+    ImageView P2atkBoardB;
+    @FXML
+    ImageView P2atkBoardC;
+    @FXML
+    ImageView P2atkBoardD;
+    @FXML
+    ImageView P2atkBoardE;
+    @FXML
+    ImageView P2atkP1;
+
+    // Gambar hand card
     @FXML
     ImageView handCard1;
     @FXML
@@ -273,6 +306,7 @@ public class guiController implements Initializable {
     @FXML
     Label handCard5Mana;
 
+    // hand card attack & health
     @FXML
     Label handCard1AtkHealth;
     @FXML
@@ -288,16 +322,19 @@ public class guiController implements Initializable {
     @FXML
     ImageView hoveredCard;
 
-    // hovered card attribute
+    // hovered card attribute & description
     @FXML
     Label cardAttribute;
     @FXML
     Label cardDescription;
+
+    // label mana dan jumlah kartu di deck
     @FXML
     Label deckNum;
     @FXML
     Label manaNum;
 
+    // Tombol delete card di hand
     @FXML
     ImageView hand1Delete;
     @FXML
@@ -309,6 +346,7 @@ public class guiController implements Initializable {
     @FXML
     ImageView hand5Delete;
 
+    // Tombol delete card di board pemain 1
     @FXML
     ImageView player1BoardADelete;
     @FXML
@@ -320,6 +358,7 @@ public class guiController implements Initializable {
     @FXML
     ImageView player1BoardEDelete;
 
+    // Tombol delete card di board pemain 2
     @FXML
     ImageView player2BoardADelete;
     @FXML
@@ -333,7 +372,6 @@ public class guiController implements Initializable {
 
 
     int currentDragHand;
-    int currentHoveredCard;
 
     int idStage;
     int turn;
@@ -345,6 +383,8 @@ public class guiController implements Initializable {
     int deckCapacityPemain2;
 
     boolean hasAttacked = false;
+    int selectedAttCard = -1;
+    int selectedDefCard = -1;
 
 
     public guiController(){
@@ -354,7 +394,7 @@ public class guiController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // initialize board, hand,deck
+        // initialize board, hand, deck
 
         pemain1 = new Player("Steve",1);
         pemain2 = new Player("Alex",1);
@@ -401,23 +441,30 @@ public class guiController implements Initializable {
 
 
     public String getCardAttributes(Card c) {
+        // Menampilkan informasi kartu
         String attribute = "";
         attribute += c.getName().toUpperCase();
         if (c.getId() <= 100){
+            // Kartu karakter
             attribute += "\nATK   : " + ((Character) c).getAttack();
             attribute += "\nHP     : " + ((Character) c).getHealth();
             attribute += "\nEXP    : " + ((Character) c).getExp();
             attribute += "\nLVL    : " + ((Character) c).getLevel();
             attribute += "\nTYPE  : " + ((Character) c).getType();
         } else {
+            // Kartu spell
             attribute += "\nDURATION  : " + ((Spell) c).getDuration();
             if (c.getId() > 100 && c.getId() <= 200) {
+                // spell Potion
                 attribute += "\nTYPE      : " + ((PtnSpell) c).getCardType();
             } else if (c.getId() > 200 && c.getId() <= 300) {
+                // spell Swap
                 attribute += "\nTYPE      : " + ((SwapSpell) c).getCardType();
             } else if (c.getId() > 300 && c.getId() <= 400) {
+                // spell Morph
                 attribute += "\nTYPE      : " + ((MorphSpell) c).getCardType();
             } else {
+                // spell Level
                 attribute += "\nTYPE      : LVL";
             }
         }
@@ -426,6 +473,7 @@ public class guiController implements Initializable {
 
 
     public void initHoveredCardBoard() {
+        // Untuk hover card di board dan menampilkan informasi kartu yang di-hover
         Board board1 = pemain1.getBoard();
         Board board2 = pemain2.getBoard();
         player1BoardA.setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -641,7 +689,9 @@ public class guiController implements Initializable {
 
 
     public void initHoveredCardHand() {
+        // untuk hover card di hand
         Hand currHand;
+        
         if (turn % 2 == 1) {
             currHand = pemain1.getHand();
         } else {
@@ -756,6 +806,7 @@ public class guiController implements Initializable {
 
 
     public void alignImageCentre(ImageView imageView) {
+        // Mengatur posisi imageView agar posisinya di tengah
         Image img = imageView.getImage();
         if (img != null) {
             double w = 0;
@@ -1554,19 +1605,17 @@ public class guiController implements Initializable {
 
 
     public void initSelectAttack() {
+        // mekanisme pada stage attack
         if (turn % 2 == 1) {
             initSelectP1AttackP2();
-            updateBoard1();
-            updateBoard2();
         } else {
             initSelectP2AttackP1();
-            updateBoard1();
-            updateBoard2();
         }
     }
     
 
     public void selectBoardCard(int id) {
+        // meng-highlight kartu yang dipilih
         switch (id) {
             case 0:
                 player1BoardAFrame.getStyleClass().add("backgroundBtnActive");
@@ -1612,6 +1661,7 @@ public class guiController implements Initializable {
 
 
     public void unselectBoardCard(int id) {
+        // menghilangkan highlight kartu yang dipilih
         switch (id) {
             case 0:
                 player1BoardAFrame.getStyleClass().removeIf(style -> style.equals("backgroundBtnActive"));
@@ -1654,27 +1704,50 @@ public class guiController implements Initializable {
         }
     }
 
+
+    public void clearAttack() {
+        // set variabel yang akan digunakan saat stage attack
+        unselectBoardCard(selectedAttCard);
+        unselectBoardCard(selectedAttCard+5);
+        unselectBoardCard(selectedDefCard);
+        unselectBoardCard(selectedDefCard+5);
+        selectedAttCard = -1;
+        selectedDefCard = -1;
+        hasAttacked = false;
+        P1atkBoardA.setVisible(false);
+        P1atkBoardB.setVisible(false);
+        P1atkBoardC.setVisible(false);
+        P1atkBoardD.setVisible(false);
+        P1atkBoardE.setVisible(false);
+        P1atkP2.setVisible(false);
+        P2atkBoardA.setVisible(false);
+        P2atkBoardB.setVisible(false);
+        P2atkBoardC.setVisible(false);
+        P2atkBoardD.setVisible(false);
+        P2atkBoardE.setVisible(false);
+        P2atkP1.setVisible(false);
+    }
+
     
     public void initSelectP1AttackP2() {
+        // mekanisme attack pemain 1 kepada pemain 2
         Board attackerBoard = pemain1.getBoard();
         Board defenderBoard = pemain2.getBoard();
-        final int[] selectedAttCard = {-1}; 
-        final int[] selectedDefCard = {-1};
 
         player1BoardA.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 if (attackerBoard.isCharacterAvailable(0) && !hasAttacked && idStage == 2) {
-                    if (selectedAttCard[0] == -1) {
+                    if (selectedAttCard == -1) {
                         selectBoardCard(0);
-                        selectedAttCard[0] = 0;
-                    } else if (selectedAttCard[0] == 0) {
+                        selectedAttCard = 0;
+                    } else if (selectedAttCard == 0) {
                         unselectBoardCard(0);
-                        selectedAttCard[0] = -1;
+                        selectedAttCard = -1;
                     } else {
-                        unselectBoardCard(selectedAttCard[0]);
+                        unselectBoardCard(selectedAttCard);
                         selectBoardCard(0);
-                        selectedAttCard[0] = 0;   
+                        selectedAttCard = 0;   
                     }
                 }
             }
@@ -1684,16 +1757,16 @@ public class guiController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (attackerBoard.isCharacterAvailable(1) && !hasAttacked && idStage == 2) {
-                    if (selectedAttCard[0] == -1) {
+                    if (selectedAttCard == -1) {
                         selectBoardCard(1);
-                        selectedAttCard[0] = 1;
-                    } else if (selectedAttCard[0] == 1) {
+                        selectedAttCard = 1;
+                    } else if (selectedAttCard == 1) {
                         unselectBoardCard(1);
-                        selectedAttCard[0] = -1;
+                        selectedAttCard = -1;
                     } else {
-                        unselectBoardCard(selectedAttCard[0]);
+                        unselectBoardCard(selectedAttCard);
                         selectBoardCard(1);
-                        selectedAttCard[0] = 1;   
+                        selectedAttCard = 1;   
                     }
                 }
             }
@@ -1703,18 +1776,19 @@ public class guiController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (attackerBoard.isCharacterAvailable(2) && !hasAttacked && idStage == 2) {
-                    if (selectedAttCard[0] == -1) {
+                    if (selectedAttCard == -1) {
                         selectBoardCard(2);
-                        selectedAttCard[0] = 2;
-                    } else if (selectedAttCard[0] == 2) {
+                        selectedAttCard = 2;
+                    } else if (selectedAttCard == 2) {
                         unselectBoardCard(2);
-                        selectedAttCard[0] = -1;
+                        selectedAttCard = -1;
                     } else {
-                        unselectBoardCard(selectedAttCard[0]);
+                        unselectBoardCard(selectedAttCard);
                         selectBoardCard(2);
-                        selectedAttCard[0] = 2;   
+                        selectedAttCard = 2;   
                     }
                 }
+                //player1BoardC.setOnMouseClicked(null);
             }
         });
 
@@ -1722,16 +1796,16 @@ public class guiController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (attackerBoard.isCharacterAvailable(3) && !hasAttacked && idStage == 2) {
-                    if (selectedAttCard[0] == -1) {
+                    if (selectedAttCard == -1) {
                         selectBoardCard(3);
-                        selectedAttCard[0] = 3;
-                    } else if (selectedAttCard[0] == 3) {
+                        selectedAttCard = 3;
+                    } else if (selectedAttCard == 3) {
                         unselectBoardCard(3);
-                        selectedAttCard[0] = -1;
+                        selectedAttCard = -1;
                     } else {
-                        unselectBoardCard(selectedAttCard[0]);
+                        unselectBoardCard(selectedAttCard);
                         selectBoardCard(3);
-                        selectedAttCard[0] = 3;   
+                        selectedAttCard = 3;   
                     }
                 }
             }
@@ -1741,16 +1815,16 @@ public class guiController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (attackerBoard.isCharacterAvailable(4) && !hasAttacked && idStage == 2) {
-                    if (selectedAttCard[0] == -1) {
+                    if (selectedAttCard == -1) {
                         selectBoardCard(4);
-                        selectedAttCard[0] = 4;
-                    } else if (selectedAttCard[0] == 4) {
+                        selectedAttCard = 4;
+                    } else if (selectedAttCard == 4) {
                         unselectBoardCard(4);
-                        selectedAttCard[0] = -1;
+                        selectedAttCard = -1;
                     } else {
-                        unselectBoardCard(selectedAttCard[0]);
+                        unselectBoardCard(selectedAttCard);
                         selectBoardCard(4);
-                        selectedAttCard[0] = 4;   
+                        selectedAttCard = 4;   
                     }
                 }
             }
@@ -1759,21 +1833,25 @@ public class guiController implements Initializable {
         player2BoardA.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (defenderBoard.isCharacterAvailable(0) && selectedAttCard[0] != -1 && !hasAttacked) {
-                    if (selectedDefCard[0] == -1) {
+                if (defenderBoard.isCharacterAvailable(0) && selectedAttCard != -1 && !hasAttacked) {
+                    if (selectedDefCard == -1) {
                         selectBoardCard(5);
-                        selectedDefCard[0] = 0;
-                    } else if (selectedDefCard[0] == 0) {
-                        pemain1.attack(selectedAttCard[0], selectedDefCard[0], pemain2);
-                        unselectBoardCard(selectedAttCard[0]);
-                        selectedAttCard[0] = -1;
-                        unselectBoardCard(selectedDefCard[0]+5);
-                        selectedDefCard[0] = -1;
-                        hasAttacked = true;
+                        selectedDefCard = 0;
+                    } else if (selectedDefCard == 0) {
+                        P1atkBoardA.setVisible(true);
+                        P1atkBoardA.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                if (!hasAttacked) {
+                                    pemain1.attack(selectedAttCard, selectedDefCard, pemain2);
+                                    hasAttacked = true;
+                                }
+                            }
+                        });
                     } else {
-                        unselectBoardCard(selectedDefCard[0]+5);
+                        unselectBoardCard(selectedDefCard+5);
                         selectBoardCard(5);
-                        selectedDefCard[0] = 0;   
+                        selectedDefCard = 0;   
                     }
                 }
             }
@@ -1782,21 +1860,25 @@ public class guiController implements Initializable {
         player2BoardB.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (defenderBoard.isCharacterAvailable(1) && selectedAttCard[0] != -1 && !hasAttacked) {
-                    if (selectedDefCard[0] == -1) {
+                if (defenderBoard.isCharacterAvailable(1) && selectedAttCard != -1 && !hasAttacked) {
+                    if (selectedDefCard == -1) {
                         selectBoardCard(6);
-                        selectedDefCard[0] = 1;
-                    } else if (selectedDefCard[0] == 1) {
-                        pemain1.attack(selectedAttCard[0], selectedDefCard[0], pemain2);
-                        unselectBoardCard(selectedAttCard[0]);
-                        selectedAttCard[0] = -1;
-                        unselectBoardCard(selectedDefCard[0]+5);
-                        selectedDefCard[0] = -1;
-                        hasAttacked = true;
+                        selectedDefCard = 1;
+                    } else if (selectedDefCard == 1) {
+                        P1atkBoardB.setVisible(true);
+                        P1atkBoardB.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                if (!hasAttacked) {
+                                    pemain1.attack(selectedAttCard, selectedDefCard, pemain2);
+                                    hasAttacked = true;
+                                }
+                            }
+                        });
                     } else {
-                        unselectBoardCard(selectedDefCard[0]+5);
+                        unselectBoardCard(selectedDefCard+5);
                         selectBoardCard(6);
-                        selectedDefCard[0] = 1;   
+                        selectedDefCard = 1;   
                     }
                 }
             }
@@ -1805,21 +1887,25 @@ public class guiController implements Initializable {
         player2BoardC.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (defenderBoard.isCharacterAvailable(2) && selectedAttCard[0] != -1 && !hasAttacked) {
-                    if (selectedDefCard[0] == -1) {
+                if (defenderBoard.isCharacterAvailable(2) && selectedAttCard != -1 && !hasAttacked) {
+                    if (selectedDefCard == -1) {
                         selectBoardCard(7);
-                        selectedDefCard[0] = 2;
-                    } else if (selectedDefCard[0] == 2) {
-                        pemain1.attack(selectedAttCard[0], selectedDefCard[0], pemain2);
-                        unselectBoardCard(selectedAttCard[0]);
-                        selectedAttCard[0] = -1;
-                        unselectBoardCard(selectedDefCard[0]+5);
-                        selectedDefCard[0] = -1;
-                        hasAttacked = true;
+                        selectedDefCard = 2;
+                    } else if (selectedDefCard == 2) {
+                        P1atkBoardC.setVisible(true);
+                        P1atkBoardC.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                if (!hasAttacked) {
+                                    pemain1.attack(selectedAttCard, selectedDefCard, pemain2);
+                                    hasAttacked = true;
+                                }
+                            }
+                        });
                     } else {
-                        unselectBoardCard(selectedDefCard[0]+5);
+                        unselectBoardCard(selectedDefCard+5);
                         selectBoardCard(7);
-                        selectedDefCard[0] = 2;   
+                        selectedDefCard = 2;   
                     }
                 }
             }
@@ -1828,21 +1914,25 @@ public class guiController implements Initializable {
         player2BoardD.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (defenderBoard.isCharacterAvailable(3) && selectedAttCard[0] != -1 && !hasAttacked) {
-                    if (selectedDefCard[0] == -1) {
+                if (defenderBoard.isCharacterAvailable(3) && selectedAttCard != -1 && !hasAttacked) {
+                    if (selectedDefCard == -1) {
                         selectBoardCard(8);
-                        selectedDefCard[0] = 3;
-                    } else if (selectedDefCard[0] == 3) {
-                        pemain1.attack(selectedAttCard[0], selectedDefCard[0], pemain2);
-                        unselectBoardCard(selectedAttCard[0]);
-                        selectedAttCard[0] = -1;
-                        unselectBoardCard(selectedDefCard[0]+5);
-                        selectedDefCard[0] = -1;
-                        hasAttacked = true;
+                        selectedDefCard = 3;
+                    } else if (selectedDefCard == 3) {
+                        P1atkBoardD.setVisible(true);
+                        P1atkBoardD.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                if (!hasAttacked) {
+                                    pemain1.attack(selectedAttCard, selectedDefCard, pemain2);
+                                    hasAttacked = true;
+                                }
+                            }
+                        });
                     } else {
-                        unselectBoardCard(selectedDefCard[0]+5);
+                        unselectBoardCard(selectedDefCard+5);
                         selectBoardCard(8);
-                        selectedDefCard[0] = 3;   
+                        selectedDefCard = 3;   
                     }
                 }
             }
@@ -1851,21 +1941,25 @@ public class guiController implements Initializable {
         player2BoardE.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (defenderBoard.isCharacterAvailable(4) && selectedAttCard[0] != -1 && !hasAttacked) {
-                    if (selectedDefCard[0] == -1) {
+                if (defenderBoard.isCharacterAvailable(4) && selectedAttCard != -1 && !hasAttacked) {
+                    if (selectedDefCard == -1) {
                         selectBoardCard(9);
-                        selectedDefCard[0] = 4;
-                    } else if (selectedDefCard[0] == 4) {
-                        pemain1.attack(selectedAttCard[0], selectedDefCard[0], pemain2);
-                        unselectBoardCard(selectedAttCard[0]);
-                        selectedAttCard[0] = -1;
-                        unselectBoardCard(selectedDefCard[0]+5);
-                        selectedDefCard[0] = -1;
-                        hasAttacked = true;
+                        selectedDefCard = 4;
+                    } else if (selectedDefCard == 4) {
+                        P1atkBoardE.setVisible(true);
+                        P1atkBoardE.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                if (!hasAttacked) {
+                                    pemain1.attack(selectedAttCard, selectedDefCard, pemain2);
+                                    hasAttacked = true;
+                                }
+                            }
+                        });
                     } else {
-                        unselectBoardCard(selectedDefCard[0]+5);
+                        unselectBoardCard(selectedDefCard+5);
                         selectBoardCard(9);
-                        selectedDefCard[0] = 4;   
+                        selectedDefCard = 4;   
                     }
                 }
             }
@@ -1874,20 +1968,27 @@ public class guiController implements Initializable {
         player2Img.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (selectedAttCard[0] != -1 && !hasAttacked && defenderBoard.isEmpty()) {
-                    if (selectedDefCard[0] == -1) {
+                if (selectedAttCard != -1 && !hasAttacked && defenderBoard.isEmpty()) {
+                    if (selectedDefCard == -1) {
                         selectBoardCard(11);
-                        selectedDefCard[0] = 11;
-                    } else if (selectedDefCard[0] == 11) {
-                        try {
-                            pemain1.attackEnemy(selectedAttCard[0], pemain2);
-                            hasAttacked = true;
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        } finally {
-                            unselectBoardCard(11);
-                            selectedDefCard[0] = -1;
-                        }
+                        selectedDefCard = 11;
+                    } else if (selectedDefCard == 11) {
+                        P1atkP2.setVisible(true);
+                        P1atkP2.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                if (!hasAttacked) {
+                                    try {
+                                        pemain1.attackEnemy(selectedAttCard, pemain2);
+                                        hasAttacked = true;
+                                        lifeBar1.setProgress(((double) pemain1.getHp()) / 80.0);
+                                        lifeBar2.setProgress(((double) pemain2.getHp()) / 80.0);
+                                    } catch (Exception e) {
+                                        System.out.println(e.getMessage());
+                                    }
+                                }
+                            }
+                        });
                     } 
                 }
             }
@@ -1896,13 +1997,304 @@ public class guiController implements Initializable {
     
     
     public void initSelectP2AttackP1() {
-        Board attacker = pemain2.getBoard();
-        Board defender = pemain1.getBoard();
+        // mekanisme attack pemain 2 kepada pemain 1
+        Board attackerBoard = pemain2.getBoard();
+        Board defenderBoard = pemain1.getBoard();
+        
+        player2BoardA.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (attackerBoard.isCharacterAvailable(0) && !hasAttacked && idStage == 2) {
+                    if (selectedAttCard == -1) {
+                        selectBoardCard(5);
+                        selectedAttCard = 0;
+                    } else if (selectedAttCard == 0) {
+                        unselectBoardCard(5);
+                        selectedAttCard = -1;
+                    } else {
+                        unselectBoardCard(selectedAttCard + 5);
+                        selectBoardCard(5);
+                        selectedAttCard = 0;   
+                    }
+                }
+            }
+        });
 
+        player2BoardB.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (attackerBoard.isCharacterAvailable(1) && !hasAttacked && idStage == 2) {
+                    if (selectedAttCard == -1) {
+                        selectBoardCard(6);
+                        selectedAttCard = 1;
+                    } else if (selectedAttCard == 1) {
+                        unselectBoardCard(6);
+                        selectedAttCard = -1;
+                    } else {
+                        unselectBoardCard(selectedAttCard + 5);
+                        selectBoardCard(6);
+                        selectedAttCard = 1;   
+                    }
+                }
+            }
+        });
+
+        player2BoardC.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (attackerBoard.isCharacterAvailable(2) && !hasAttacked && idStage == 2) {
+                    if (selectedAttCard == -1) {
+                        selectBoardCard(7);
+                        selectedAttCard = 2;
+                    } else if (selectedAttCard == 2) {
+                        unselectBoardCard(7);
+                        selectedAttCard = -1;
+                    } else {
+                        unselectBoardCard(selectedAttCard + 5);
+                        selectBoardCard(7);
+                        selectedAttCard = 2;   
+                    }
+                }
+            }
+        });
+
+        player2BoardD.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (attackerBoard.isCharacterAvailable(3) && !hasAttacked && idStage == 2) {
+                    if (selectedAttCard == -1) {
+                        selectBoardCard(8);
+                        selectedAttCard = 3;
+                    } else if (selectedAttCard == 3) {
+                        unselectBoardCard(8);
+                        selectedAttCard = -1;
+                    } else {
+                        unselectBoardCard(selectedAttCard + 5);
+                        selectBoardCard(8);
+                        selectedAttCard = 3;   
+                    }
+                }
+            }
+        });
+
+        player2BoardE.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (attackerBoard.isCharacterAvailable(4) && !hasAttacked && idStage == 2) {
+                    if (selectedAttCard == -1) {
+                        selectBoardCard(9);
+                        selectedAttCard = 4;
+                    } else if (selectedAttCard == 4) {
+                        unselectBoardCard(9);
+                        selectedAttCard = -1;
+                    } else {
+                        unselectBoardCard(selectedAttCard + 5);
+                        selectBoardCard(9);
+                        selectedAttCard = 4;   
+                    }
+                }
+            }
+        });
+
+        player1BoardA.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (defenderBoard.isCharacterAvailable(0) && selectedAttCard != -1 && !hasAttacked) {
+                    if (selectedDefCard == -1) {
+                        selectBoardCard(0);
+                        selectedDefCard = 0;
+                    } else if (selectedDefCard == 0) {
+                        P2atkBoardA.setVisible(true);
+                        P2atkBoardA.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                if (!hasAttacked) {
+                                    pemain2.attack(selectedAttCard, selectedDefCard, pemain1);
+                                    hasAttacked = true;
+                                }
+                            }
+                        });
+                    } else {
+                        unselectBoardCard(selectedDefCard);
+                        selectBoardCard(0);
+                        selectedDefCard = 0;   
+                    }
+                }
+            }
+        });
+
+        player1BoardB.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (defenderBoard.isCharacterAvailable(1) && selectedAttCard != -1 && !hasAttacked) {
+                    if (selectedDefCard == -1) {
+                        selectBoardCard(1);
+                        selectedDefCard = 1;
+                    } else if (selectedDefCard == 1) {
+                        P2atkBoardB.setVisible(true);
+                        P2atkBoardB.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                if (!hasAttacked) {
+                                    pemain2.attack(selectedAttCard, selectedDefCard, pemain1);
+                                    hasAttacked = true;
+                                }
+                            }
+                        });
+                    } else {
+                        unselectBoardCard(selectedDefCard);
+                        selectBoardCard(1);
+                        selectedDefCard = 1;   
+                    }
+                }
+            }
+        });
+
+        player1BoardC.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (defenderBoard.isCharacterAvailable(2) && selectedAttCard != -1 && !hasAttacked) {
+                    if (selectedDefCard == -1) {
+                        selectBoardCard(2);
+                        selectedDefCard = 2;
+                    } else if (selectedDefCard == 2) {
+                        P2atkBoardC.setVisible(true);
+                        P2atkBoardC.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                if (!hasAttacked) {
+                                    pemain2.attack(selectedAttCard, selectedDefCard, pemain1);
+                                    hasAttacked = true;
+                                }
+                            }
+                        });
+                    } else {
+                        unselectBoardCard(selectedDefCard);
+                        selectBoardCard(2);
+                        selectedDefCard = 2;   
+                    }
+                }
+            }
+        });
+
+        player1BoardD.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (defenderBoard.isCharacterAvailable(3) && selectedAttCard != -1 && !hasAttacked) {
+                    if (selectedDefCard == -1) {
+                        selectBoardCard(3);
+                        selectedDefCard = 3;
+                    } else if (selectedDefCard == 3) {
+                        P2atkBoardD.setVisible(true);
+                        P2atkBoardD.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                if (!hasAttacked) {
+                                    pemain2.attack(selectedAttCard, selectedDefCard, pemain1);
+                                    hasAttacked = true;
+                                }
+                            }
+                        });
+                    } else {
+                        unselectBoardCard(selectedDefCard);
+                        selectBoardCard(3);
+                        selectedDefCard = 3;   
+                    }
+                }
+            }
+        });
+
+        player1BoardE.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (defenderBoard.isCharacterAvailable(4) && selectedAttCard != -1 && !hasAttacked) {
+                    if (selectedDefCard == -1) {
+                        selectBoardCard(4);
+                        selectedDefCard = 4;
+                    } else if (selectedDefCard == 4) {
+                        P2atkBoardE.setVisible(true);
+                        P2atkBoardE.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                if (!hasAttacked) {
+                                    pemain2.attack(selectedAttCard, selectedDefCard, pemain1);
+                                    hasAttacked = true;
+                                }
+                            }
+                        });
+                    } else {
+                        unselectBoardCard(selectedDefCard);
+                        selectBoardCard(4);
+                        selectedDefCard = 4;   
+                    }
+                }
+            }
+        });
+
+        player1Img.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (selectedAttCard != -1 && !hasAttacked && defenderBoard.isEmpty()) {
+                    if (selectedDefCard == -1) {
+                        selectBoardCard(10);
+                        selectedDefCard = 10;
+                    } else if (selectedDefCard == 10) {
+                        P2atkP1.setVisible(true);
+                        P2atkP1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                if (!hasAttacked) {
+                                    try {
+                                        pemain2.attackEnemy(selectedAttCard, pemain1);
+                                        hasAttacked = true;
+                                        lifeBar1.setProgress(((double) pemain1.getHp()) / 80.0);
+                                        lifeBar2.setProgress(((double) pemain2.getHp()) / 80.0);
+                                    } catch (Exception e) {
+                                        System.out.println(e.getMessage());
+                                    }
+                                }
+                            }
+                        });
+                    } 
+                }
+            }
+        });
+    }
+
+
+    public void endMouseClickAttack() {
+        player1BoardA.setOnMouseClicked(null);
+        player1BoardB.setOnMouseClicked(null);
+        player1BoardC.setOnMouseClicked(null);
+        player1BoardD.setOnMouseClicked(null);
+        player1BoardE.setOnMouseClicked(null);
+        player1Img.setOnMouseClicked(null);
+
+        player2BoardA.setOnMouseClicked(null);
+        player2BoardB.setOnMouseClicked(null);
+        player2BoardC.setOnMouseClicked(null);
+        player2BoardD.setOnMouseClicked(null);
+        player2BoardE.setOnMouseClicked(null);
+        player2Img.setOnMouseClicked(null);
+
+        P1atkBoardA.setOnMouseClicked(null);
+        P1atkBoardB.setOnMouseClicked(null);
+        P1atkBoardC.setOnMouseClicked(null);
+        P1atkBoardD.setOnMouseClicked(null);
+        P1atkBoardE.setOnMouseClicked(null);
+        P1atkP2.setOnMouseClicked(null);
+
+        P2atkBoardA.setOnMouseClicked(null);
+        P2atkBoardB.setOnMouseClicked(null);
+        P2atkBoardC.setOnMouseClicked(null);
+        P2atkBoardD.setOnMouseClicked(null);
+        P2atkBoardE.setOnMouseClicked(null);
+        P2atkP1.setOnMouseClicked(null);
     }
 
 
     public void removeDeadCard() {
+        // menghapus kartu yang sudah mati dari board
         for (int i = 0; i < 5; i++) {
             if (pemain1.getBoard().isCharacterAvailable(i) && ((Character) pemain1.getBoard().getCard(i)).getHealth() <= 0) {
                 pemain1.getBoard().removeCardfromBoard(i);
@@ -1961,11 +2353,14 @@ public class guiController implements Initializable {
                 endDragAndDrop2();
             }
             activateStageLabel(stagePlanLabel,stageAttackLabel);
-        }else if(idStage==2){
             initSelectAttack();
+        }else if(idStage==2){
+            endMouseClickAttack();
+            updateBoard1();
+            updateBoard2();
+            clearAttack();
             activateStageLabel(stageAttackLabel,stageEndLabel);
         }else if(idStage==3){
-            hasAttacked = false;
             turn++;
             numTurn.setText(Integer.toString((turn+1)/2));
             setDisplayDeckNum();
@@ -1983,6 +2378,7 @@ public class guiController implements Initializable {
             }
             setDisplayDeckNum();
             activateStageLabel(stageEndLabel,stageDrawLabel);
+            // endMouseClickAttack();
         }
         idStage++;
         idStage%=4;

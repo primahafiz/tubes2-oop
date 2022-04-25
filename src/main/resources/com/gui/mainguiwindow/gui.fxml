@@ -18,10 +18,22 @@
             <Circle fill="WHITE" layoutX="480.0" layoutY="61.0" radius="33.0" stroke="BLACK" strokeType="INSIDE" />
             <ProgressBar fx:id="lifeBar1" layoutX="59.0" layoutY="19.0" prefHeight="18.0" prefWidth="333.0" progress="0.0" style="-fx-accent: #00bb00;" />
             <ProgressBar fx:id="lifeBar2" layoutX="570.0" layoutY="19.0" prefHeight="18.0" prefWidth="333.0" progress="0.0" style="-fx-accent: #00bb00;" />
-            <Label layoutX="467.0" layoutY="44.0" prefHeight="17.0" prefWidth="30.0" text="Turn" />
-            <Label fx:id="numTurn" alignment="CENTER" layoutX="467.0" layoutY="60.0" prefHeight="17.0" prefWidth="25.0" text="1" />
-            <Label layoutX="59.0" layoutY="77.0" prefHeight="15.0" prefWidth="32.0" text="Steve" />
-            <Label layoutX="878.0" layoutY="77.0" prefHeight="17.0" prefWidth="26.0" text="Alex" />
+            <Label layoutX="464.0" layoutY="39.0" prefHeight="18.0" prefWidth="33.0" text="Turn">
+               <font>
+                  <Font name="Stencil" size="12.0" />
+               </font></Label>
+            <Label fx:id="numTurn" alignment="CENTER" layoutX="467.0" layoutY="54.0" prefHeight="17.0" prefWidth="25.0" text="1">
+               <font>
+                  <Font name="Impact" size="24.0" />
+               </font></Label>
+            <Label layoutX="59.0" layoutY="77.0" prefHeight="27.0" prefWidth="53.0" text="Steve">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Label>
+            <Label layoutX="854.0" layoutY="77.0" prefHeight="27.0" prefWidth="50.0" text="Alex">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Label>
          </children>
       </AnchorPane>
    </top>
@@ -139,7 +151,7 @@
    <left>
       <AnchorPane prefHeight="240.0" prefWidth="487.0" styleClass="playerHand" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="player1Img" fitHeight="90.0" fitWidth="90.0" layoutX="33.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="player1Img" fitHeight="90.0" fitWidth="90.0" layoutX="40.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@image/steve.jpeg" />
                </image>
@@ -220,7 +232,7 @@
                   <Label fx:id="player1BoardDLvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="player1BoardEFrame" layoutX="337.0" layoutY="65.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
+            <AnchorPane fx:id="player1BoardEFrame" layoutX="332.0" layoutY="65.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
                <children>
                   <ImageView fx:id="player1BoardEAttackImg" fitHeight="20.0" fitWidth="17.0" layoutX="3.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" smooth="false" visible="false">
                      <image>
@@ -264,18 +276,48 @@
                   <Image url="@image/delete.jpg" />
                </image>
             </ImageView>
+            <ImageView fx:id="P2atkBoardE" fitHeight="28.0" fitWidth="36.0" layoutX="408.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@image/attackCard.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="P2atkBoardB" fitHeight="28.0" fitWidth="36.0" layoutX="271.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@image/attackCard.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="P2atkBoardD" fitHeight="28.0" fitWidth="36.0" layoutX="271.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@image/attackCard.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="P2atkBoardC" fitHeight="28.0" fitWidth="36.0" layoutX="179.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@image/attackCard.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="P2atkBoardA" fitHeight="28.0" fitWidth="36.0" layoutX="179.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@image/attackCard.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="P2atkP1" fitHeight="28.0" fitWidth="36.0" layoutX="71.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@image/attackCard.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </left>
    <right>
       <AnchorPane prefHeight="229.0" prefWidth="563.0" styleClass="playerHand" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="player2Img" fitHeight="90.0" fitWidth="90.0" layoutX="343.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="player2Img" fitHeight="90.0" fitWidth="90.0" layoutX="343.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@image/alex.jpeg" />
                </image>
             </ImageView>
-            <AnchorPane fx:id="player2BoardEFrame" layoutX="40.0" layoutY="70.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
+            <AnchorPane fx:id="player2BoardEFrame" layoutX="51.0" layoutY="65.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
                <children>
                   <ImageView fx:id="player2BoardEAttackImg" fitHeight="20.0" fitWidth="17.0" layoutX="3.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" smooth="false" visible="false">
                      <image>
@@ -294,7 +336,7 @@
                   <Label fx:id="player2BoardELvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="player2BoardDFrame" layoutX="143.0" layoutY="115.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
+            <AnchorPane fx:id="player2BoardDFrame" layoutX="143.0" layoutY="111.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
                <children>
                   <ImageView fx:id="player2BoardDAttackImg" fitHeight="20.0" fitWidth="17.0" layoutX="3.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" smooth="false" visible="false">
                      <image>
@@ -313,7 +355,7 @@
                   <Label fx:id="player2BoardDLvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="player2BoardBFrame" layoutX="143.0" layoutY="23.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
+            <AnchorPane fx:id="player2BoardBFrame" layoutX="143.0" layoutY="19.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
                <children>
                   <ImageView fx:id="player2BoardBAttackImg" fitHeight="20.0" fitWidth="17.0" layoutX="3.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" smooth="false" visible="false">
                      <image>
@@ -332,7 +374,7 @@
                   <Label fx:id="player2BoardBLvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="player2BoardAFrame" layoutX="235.0" layoutY="23.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
+            <AnchorPane fx:id="player2BoardAFrame" layoutX="235.0" layoutY="19.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
                <children>
                   <ImageView fx:id="player2BoardAAttackImg" fitHeight="20.0" fitWidth="17.0" layoutX="3.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" smooth="false" visible="false">
                      <image>
@@ -351,7 +393,7 @@
                   <Label fx:id="player2BoardALvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="player2BoardCFrame" layoutX="235.0" layoutY="115.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
+            <AnchorPane fx:id="player2BoardCFrame" layoutX="235.0" layoutY="111.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
                <children>
                   <ImageView fx:id="player2BoardCAttackImg" fitHeight="20.0" fitWidth="17.0" layoutX="3.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" smooth="false" visible="false">
                      <image>
@@ -393,6 +435,36 @@
             <ImageView fx:id="player2BoardADelete" fitHeight="21.0" fitWidth="21.0" layoutX="332.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@image/delete.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="P1atkBoardB" fitHeight="28.0" fitWidth="36.0" layoutX="174.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@image/attackCard.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="P1atkBoardD" fitHeight="28.0" fitWidth="36.0" layoutX="174.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@image/attackCard.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="P1atkBoardC" fitHeight="28.0" fitWidth="36.0" layoutX="266.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@image/attackCard.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="P1atkBoardE" fitHeight="28.0" fitWidth="36.0" layoutX="37.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@image/attackCard.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="P1atkP2" fitHeight="28.0" fitWidth="36.0" layoutX="374.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@image/attackCard.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="P1atkBoardA" fitHeight="28.0" fitWidth="36.0" layoutX="267.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@image/attackCard.png" />
                </image>
             </ImageView>
          </children>
