@@ -370,18 +370,33 @@ public class guiController implements Initializable {
         updateHand();
     }
 
+
     public String getCardAttributes(Card c) {
         String attribute = "";
         attribute += c.getName().toUpperCase();
-        attribute += "\nATK   : " + ((Character) c).getAttack();
-        attribute += "\nHP     : " + ((Character) c).getHealth();
-        attribute += "\nEXP    : " + ((Character) c).getExp();
-        attribute += "\nLVL    : " + ((Character) c).getLevel();
-        attribute += "\nTYPE  : " + ((Character) c).getType();
+        if (c.getId() <= 100){
+            attribute += "\nATK   : " + ((Character) c).getAttack();
+            attribute += "\nHP     : " + ((Character) c).getHealth();
+            attribute += "\nEXP    : " + ((Character) c).getExp();
+            attribute += "\nLVL    : " + ((Character) c).getLevel();
+            attribute += "\nTYPE  : " + ((Character) c).getType();
+        } else {
+            attribute += "\nDURATION  : " + ((Spell) c).getDuration();
+            if (c.getId() > 100 && c.getId() <= 200) {
+                attribute += "\nTYPE      : " + ((PtnSpell) c).getCardType();
+            } else if (c.getId() > 200 && c.getId() <= 300) {
+                attribute += "\nTYPE      : " + ((SwapSpell) c).getCardType();
+            } else if (c.getId() > 300 && c.getId() <= 400) {
+                attribute += "\nTYPE      : " + ((MorphSpell) c).getCardType();
+            } else {
+                attribute += "\nTYPE      : LVL";
+            }
+        }
         return attribute;
     }
 
-    public void initHoveredCard(){
+
+    public void initHoveredCardBoard() {
         Board board1 = pemain1.getBoard();
         Board board2 = pemain2.getBoard();
         player1BoardA.setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -595,6 +610,122 @@ public class guiController implements Initializable {
         });
     }
 
+
+    public void initHoveredCardHand() {
+        Hand currHand;
+        if (turn % 2 == 1) {
+            currHand = pemain1.getHand();
+        } else {
+            currHand = pemain2.getHand();
+        }
+
+        handCard1.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (currHand.numberOfCards() > 0 && currHand.getCard(0) != null) {
+                    hoveredCard.setImage(handCard1.getImage());
+                    alignImageCentre(hoveredCard);
+                    cardAttribute.setText(getCardAttributes(currHand.getCard(0)));
+                    cardDescription.setText("\"" + currHand.getCard(0).getDesc() + "\"");
+                    cardDescription.setStyle("-fx-font-style: italic;");
+                }
+            }
+        });
+        handCard1.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                hoveredCard.setImage(null);
+                cardAttribute.setText("");
+                cardDescription.setText("");
+            }
+        });
+
+        handCard2.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (currHand.numberOfCards() > 1 && currHand.getCard(1) != null) {
+                    hoveredCard.setImage(handCard2.getImage());
+                    alignImageCentre(hoveredCard);
+                    cardAttribute.setText(getCardAttributes(currHand.getCard(1)));
+                    cardDescription.setText("\"" + currHand.getCard(1).getDesc() + "\"");
+                    cardDescription.setStyle("-fx-font-style: italic;");
+                }
+            }
+        });
+        handCard2.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                hoveredCard.setImage(null);
+                cardAttribute.setText("");
+                cardDescription.setText("");
+            }
+        });
+
+        handCard3.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (currHand.numberOfCards() > 2 && currHand.getCard(2) != null) {
+                    hoveredCard.setImage(handCard3.getImage());
+                    alignImageCentre(hoveredCard);
+                    cardAttribute.setText(getCardAttributes(currHand.getCard(2)));
+                    cardDescription.setText("\"" + currHand.getCard(2).getDesc() + "\"");
+                    cardDescription.setStyle("-fx-font-style: italic;");
+                }
+            }
+        });
+        handCard3.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                hoveredCard.setImage(null);
+                cardAttribute.setText("");
+                cardDescription.setText("");
+            }
+        });
+
+        handCard4.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (currHand.numberOfCards() > 3 && currHand.getCard(3) != null) {
+                    hoveredCard.setImage(handCard4.getImage());
+                    alignImageCentre(hoveredCard);
+                    cardAttribute.setText(getCardAttributes(currHand.getCard(3)));
+                    cardDescription.setText("\"" + currHand.getCard(3).getDesc() + "\"");
+                    cardDescription.setStyle("-fx-font-style: italic;");
+                }
+            }
+        });
+        handCard4.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                hoveredCard.setImage(null);
+                cardAttribute.setText("");
+                cardDescription.setText("");
+            }
+        });
+
+        handCard5.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (currHand.numberOfCards() > 4 && currHand.getCard(4) != null) {
+                    hoveredCard.setImage(handCard5.getImage());
+                    alignImageCentre(hoveredCard);
+                    cardAttribute.setText(getCardAttributes(currHand.getCard(4)));
+                    cardDescription.setText("\"" + currHand.getCard(4).getDesc() + "\"");
+                    cardDescription.setStyle("-fx-font-style: italic;");
+                }
+            }
+        });
+        handCard5.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                hoveredCard.setImage(null);
+                cardAttribute.setText("");
+                cardDescription.setText("");
+            }
+        });
+    }
+
+
     public void alignImageCentre(ImageView imageView) {
         Image img = imageView.getImage();
         if (img != null) {
@@ -733,7 +864,6 @@ public class guiController implements Initializable {
             }
         });
 
-
         player1BoardD.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
                 Dragboard db = event.getDragboard();
@@ -769,7 +899,6 @@ public class guiController implements Initializable {
                 event.consume();
             }
         });
-
 
         player1BoardE.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
@@ -807,6 +936,7 @@ public class guiController implements Initializable {
             }
         });
     }
+
 
     public void initDragAndDropBoardPlayer2(){
         Hand currentHand=pemain2.getHand();
@@ -920,7 +1050,6 @@ public class guiController implements Initializable {
             }
         });
 
-
         player2BoardD.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
                 Dragboard db = event.getDragboard();
@@ -956,7 +1085,6 @@ public class guiController implements Initializable {
                 event.consume();
             }
         });
-
 
         player2BoardE.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
@@ -994,6 +1122,7 @@ public class guiController implements Initializable {
             }
         });
     }
+
 
     public void initDelete(){
         Hand currentHand;
@@ -1170,6 +1299,7 @@ public class guiController implements Initializable {
         });
     }
 
+
     public void endDelete(){
         hand1Delete.setVisible(false);
         hand2Delete.setVisible(false);
@@ -1189,6 +1319,7 @@ public class guiController implements Initializable {
         player2BoardDDelete.setVisible(false);
         player2BoardEDelete.setVisible(false);
     }
+
 
     public void updateDeleteHand(){
         Hand currentHand;
@@ -1225,6 +1356,7 @@ public class guiController implements Initializable {
         }
     }
 
+
     public void updateDeleteBoard1(){
         Board currentBoard = pemain1.getBoard();
         for(int i=0;i<5;i++){
@@ -1255,6 +1387,7 @@ public class guiController implements Initializable {
             }
         }
     }
+
 
     public void updateDeleteBoard2(){
         Board currentBoard = pemain2.getBoard();
@@ -1287,6 +1420,7 @@ public class guiController implements Initializable {
         }
     }
 
+
     public void endDragAndDrop1(){
         player1BoardA.setOnDragDetected(null);
         player1BoardA.setOnDragOver(null);
@@ -1308,6 +1442,7 @@ public class guiController implements Initializable {
         player1BoardE.setOnDragOver(null);
         player1BoardE.setOnDragDropped(null);
     }
+
 
     public void endDragAndDrop2(){
         player2BoardA.setOnDragDetected(null);
@@ -1331,6 +1466,7 @@ public class guiController implements Initializable {
         player2BoardE.setOnDragDropped(null);
     }
 
+
     public void initDragAndDropHand(){
         handCard1.setOnDragDetected((MouseEvent event) -> {
             Dragboard db = handCard1.startDragAndDrop(TransferMode.ANY);
@@ -1341,7 +1477,6 @@ public class guiController implements Initializable {
             event.consume();
         });
 
-
         handCard2.setOnDragDetected((MouseEvent event) -> {
             Dragboard db = handCard2.startDragAndDrop(TransferMode.ANY);
             currentDragHand = 1;
@@ -1350,7 +1485,6 @@ public class guiController implements Initializable {
             db.setContent(content);
             event.consume();
         });
-
 
         handCard3.setOnDragDetected((MouseEvent event) -> {
             Dragboard db = handCard3.startDragAndDrop(TransferMode.ANY);
@@ -1361,7 +1495,6 @@ public class guiController implements Initializable {
             event.consume();
         });
 
-
         handCard4.setOnDragDetected((MouseEvent event) -> {
             Dragboard db = handCard4.startDragAndDrop(TransferMode.ANY);
             currentDragHand = 3;
@@ -1371,7 +1504,6 @@ public class guiController implements Initializable {
             event.consume();
         });
 
-
         handCard5.setOnDragDetected((MouseEvent event) -> {
             Dragboard db = handCard5.startDragAndDrop(TransferMode.ANY);
             currentDragHand = 4;
@@ -1380,9 +1512,9 @@ public class guiController implements Initializable {
             db.setContent(content);
             event.consume();
         });
-
     }
     
+
     public void endDragAndDropHand(){
         handCard1.setOnDragDetected(null);
         handCard2.setOnDragDetected(null);
@@ -1391,9 +1523,11 @@ public class guiController implements Initializable {
         handCard5.setOnDragDetected(null);
     }
 
+
     public void changeStageClicked(){
         // kalau button untuk pindah stage diclick
-        initHoveredCard();
+        initHoveredCardBoard();
+        initHoveredCardHand();
         if(idStage==-1){
             turn++;
             numTurn.setText(Integer.toString((turn+1)/2));
@@ -1461,14 +1595,15 @@ public class guiController implements Initializable {
         idStage++;
         idStage%=4;
 
-
         // panggil method sesuai dengan apa yang ingin dilakuin di stage itu
     }
+
 
     public void activateStageLabel(Label lastStage,Label newStage){
         lastStage.getStyleClass().removeIf(style -> style.equals("backgroundBtnActive"));
         newStage.getStyleClass().addAll("backgroundBtnActive");
     }
+
 
     public void displayWindowDraw(){
         Hand currentHand;
@@ -1521,6 +1656,7 @@ public class guiController implements Initializable {
         }
     }
 
+
     public void updateHand(){
         if(turn%2==1){
             updateHand1();
@@ -1528,6 +1664,7 @@ public class guiController implements Initializable {
             updateHand2();
         }
     }
+
 
     public void updateHand1(){
         System.out.println(3);
@@ -1593,6 +1730,7 @@ public class guiController implements Initializable {
         }
     }
 
+
     public void updateHand2(){
         Hand handPemain2=pemain2.getHand();
         System.out.println("Hand 2 = "+handPemain2.numberOfCards());
@@ -1652,6 +1790,7 @@ public class guiController implements Initializable {
         }
     }
 
+
     public String getAtkHealth(Card c){
         if(c instanceof  Character){
             return "ATK " + ((Character) c).getAttack() + "/HP "+((Character) c).getHealth();
@@ -1665,6 +1804,7 @@ public class guiController implements Initializable {
             return "ATK <--> HP";
         }
     }
+
 
     public void updateBoard1(){
         Board currentBoard = pemain1.getBoard();
@@ -1790,6 +1930,7 @@ public class guiController implements Initializable {
         }
     }
 
+
     public void updateBoard2(){
         Board currentBoard = pemain2.getBoard();
         for(int i=0;i<5;i++){
@@ -1911,6 +2052,7 @@ public class guiController implements Initializable {
         }
     }
 
+
     public void updateBoard(){
         if(turn%2==1){
             updateBoard1();
@@ -1918,6 +2060,7 @@ public class guiController implements Initializable {
             updateBoard2();
         }
     }
+
 
     public void setDisplayMana(){
         System.out.println("Set mana");
@@ -1930,6 +2073,7 @@ public class guiController implements Initializable {
         }
     }
 
+
     public void updateDisplayMana(){
         if(turn%2==1){
             manaNum.setText("Mana\n"+pemain1.getMana()+"/"+min((turn+1)/2,10));
@@ -1937,6 +2081,7 @@ public class guiController implements Initializable {
             manaNum.setText("Mana\n"+pemain2.getMana()+"/"+min((turn+1)/2,10));
         }
     }
+
 
     public void setDisplayDeckNum(){
         System.out.println("Set mana");
