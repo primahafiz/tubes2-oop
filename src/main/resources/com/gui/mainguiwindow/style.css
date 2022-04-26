@@ -65,3 +65,12 @@
     -fx-border-color:black;
     -fx-background-color:#bbbbbb;
 }
+
+.background{
+    -fx-content: "";
+    -fx-background-image:url('file:src/main/resources/com/gui/mainguiwindow/image/background.jpg');
+    -fx-background-size: cover;                      /* <------ */
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+    -fx-opacity: 0.9;
+}

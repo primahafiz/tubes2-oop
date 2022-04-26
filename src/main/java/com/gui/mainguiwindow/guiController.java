@@ -196,6 +196,18 @@ public class guiController implements Initializable {
     @FXML
     ImageView P1atkP2;
 
+    // tombol untuk menambah exp dengan mana
+    @FXML
+    ImageView levelUpBoardAP1;
+    @FXML
+    ImageView levelUpBoardBP1;
+    @FXML
+    ImageView levelUpBoardCP1;
+    @FXML
+    ImageView levelUpBoardDP1;
+    @FXML
+    ImageView levelUpBoardEP1;
+
     // Label A,B,C,D,E board 2
     @FXML
     Label player2BoardALabel;
@@ -281,6 +293,18 @@ public class guiController implements Initializable {
     ImageView P2atkBoardE;
     @FXML
     ImageView P2atkP1;
+
+    // tombol untuk menambah exp dengan mana
+    @FXML
+    ImageView levelUpBoardAP2;
+    @FXML
+    ImageView levelUpBoardBP2;
+    @FXML
+    ImageView levelUpBoardCP2;
+    @FXML
+    ImageView levelUpBoardDP2;
+    @FXML
+    ImageView levelUpBoardEP2;
 
     // Gambar hand card
     @FXML
@@ -1714,6 +1738,12 @@ public class guiController implements Initializable {
         selectedAttCard = -1;
         selectedDefCard = -1;
         hasAttacked = false;
+        disableAttackButton();
+    }
+
+
+    public void disableAttackButton() {
+        // menonaktifkan tombol attack
         P1atkBoardA.setVisible(false);
         P1atkBoardB.setVisible(false);
         P1atkBoardC.setVisible(false);
@@ -1788,7 +1818,6 @@ public class guiController implements Initializable {
                         selectedAttCard = 2;   
                     }
                 }
-                //player1BoardC.setOnMouseClicked(null);
             }
         });
 
@@ -1834,10 +1863,11 @@ public class guiController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (defenderBoard.isCharacterAvailable(0) && selectedAttCard != -1 && !hasAttacked) {
-                    if (selectedDefCard == -1) {
+                    if (selectedDefCard == -1 || selectedDefCard != 0) {
+                        unselectBoardCard(selectedDefCard + 5);
                         selectBoardCard(5);
                         selectedDefCard = 0;
-                    } else if (selectedDefCard == 0) {
+                        disableAttackButton();
                         P1atkBoardA.setVisible(true);
                         P1atkBoardA.setOnMouseClicked(new EventHandler<MouseEvent>() {
                             @Override
@@ -1848,10 +1878,10 @@ public class guiController implements Initializable {
                                 }
                             }
                         });
-                    } else {
-                        unselectBoardCard(selectedDefCard+5);
-                        selectBoardCard(5);
-                        selectedDefCard = 0;   
+                    } else if (selectedDefCard == 0) {
+                        unselectBoardCard(5);
+                        selectedDefCard = -1;
+                        disableAttackButton();
                     }
                 }
             }
@@ -1861,10 +1891,11 @@ public class guiController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (defenderBoard.isCharacterAvailable(1) && selectedAttCard != -1 && !hasAttacked) {
-                    if (selectedDefCard == -1) {
+                    if (selectedDefCard == -1 || selectedDefCard != 1) {
+                        unselectBoardCard(selectedDefCard + 5);
                         selectBoardCard(6);
                         selectedDefCard = 1;
-                    } else if (selectedDefCard == 1) {
+                        disableAttackButton();
                         P1atkBoardB.setVisible(true);
                         P1atkBoardB.setOnMouseClicked(new EventHandler<MouseEvent>() {
                             @Override
@@ -1875,10 +1906,10 @@ public class guiController implements Initializable {
                                 }
                             }
                         });
-                    } else {
-                        unselectBoardCard(selectedDefCard+5);
-                        selectBoardCard(6);
-                        selectedDefCard = 1;   
+                    } else if (selectedDefCard == 1) {
+                        unselectBoardCard(6);
+                        selectedDefCard = -1;
+                        disableAttackButton();
                     }
                 }
             }
@@ -1888,10 +1919,11 @@ public class guiController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (defenderBoard.isCharacterAvailable(2) && selectedAttCard != -1 && !hasAttacked) {
-                    if (selectedDefCard == -1) {
+                    if (selectedDefCard == -1 || selectedDefCard != 2) {
+                        unselectBoardCard(selectedDefCard + 5);
                         selectBoardCard(7);
                         selectedDefCard = 2;
-                    } else if (selectedDefCard == 2) {
+                        disableAttackButton();
                         P1atkBoardC.setVisible(true);
                         P1atkBoardC.setOnMouseClicked(new EventHandler<MouseEvent>() {
                             @Override
@@ -1902,10 +1934,10 @@ public class guiController implements Initializable {
                                 }
                             }
                         });
-                    } else {
-                        unselectBoardCard(selectedDefCard+5);
-                        selectBoardCard(7);
-                        selectedDefCard = 2;   
+                    } else if (selectedDefCard == 2) {
+                        unselectBoardCard(7);
+                        selectedDefCard = -1;
+                        disableAttackButton();
                     }
                 }
             }
@@ -1915,10 +1947,11 @@ public class guiController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (defenderBoard.isCharacterAvailable(3) && selectedAttCard != -1 && !hasAttacked) {
-                    if (selectedDefCard == -1) {
+                    if (selectedDefCard == -1 || selectedDefCard != 3) {
+                        unselectBoardCard(selectedDefCard + 5);
                         selectBoardCard(8);
                         selectedDefCard = 3;
-                    } else if (selectedDefCard == 3) {
+                        disableAttackButton();
                         P1atkBoardD.setVisible(true);
                         P1atkBoardD.setOnMouseClicked(new EventHandler<MouseEvent>() {
                             @Override
@@ -1929,10 +1962,10 @@ public class guiController implements Initializable {
                                 }
                             }
                         });
-                    } else {
-                        unselectBoardCard(selectedDefCard+5);
-                        selectBoardCard(8);
-                        selectedDefCard = 3;   
+                    } else if (selectedDefCard == 3) {
+                        unselectBoardCard(8);
+                        selectedDefCard = -1;
+                        disableAttackButton();
                     }
                 }
             }
@@ -1942,10 +1975,11 @@ public class guiController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (defenderBoard.isCharacterAvailable(4) && selectedAttCard != -1 && !hasAttacked) {
-                    if (selectedDefCard == -1) {
+                    if (selectedDefCard == -1 || selectedDefCard != 4) {
+                        unselectBoardCard(selectedDefCard + 5);
                         selectBoardCard(9);
                         selectedDefCard = 4;
-                    } else if (selectedDefCard == 4) {
+                        disableAttackButton();
                         P1atkBoardE.setVisible(true);
                         P1atkBoardE.setOnMouseClicked(new EventHandler<MouseEvent>() {
                             @Override
@@ -1956,10 +1990,10 @@ public class guiController implements Initializable {
                                 }
                             }
                         });
-                    } else {
-                        unselectBoardCard(selectedDefCard+5);
-                        selectBoardCard(9);
-                        selectedDefCard = 4;   
+                    } else if (selectedDefCard == 4) {
+                        unselectBoardCard(9);
+                        selectedDefCard = -1;
+                        disableAttackButton();
                     }
                 }
             }
@@ -1972,7 +2006,7 @@ public class guiController implements Initializable {
                     if (selectedDefCard == -1) {
                         selectBoardCard(11);
                         selectedDefCard = 11;
-                    } else if (selectedDefCard == 11) {
+                        disableAttackButton();
                         P1atkP2.setVisible(true);
                         P1atkP2.setOnMouseClicked(new EventHandler<MouseEvent>() {
                             @Override
@@ -1989,6 +2023,10 @@ public class guiController implements Initializable {
                                 }
                             }
                         });
+                    } else if (selectedDefCard == 11) {
+                        unselectBoardCard(11);
+                        selectedDefCard = -1;
+                        disableAttackButton();
                     } 
                 }
             }
@@ -2100,10 +2138,11 @@ public class guiController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (defenderBoard.isCharacterAvailable(0) && selectedAttCard != -1 && !hasAttacked) {
-                    if (selectedDefCard == -1) {
+                    if (selectedDefCard == -1 || selectedDefCard != 0) {
+                        unselectBoardCard(selectedDefCard);
                         selectBoardCard(0);
                         selectedDefCard = 0;
-                    } else if (selectedDefCard == 0) {
+                        disableAttackButton();
                         P2atkBoardA.setVisible(true);
                         P2atkBoardA.setOnMouseClicked(new EventHandler<MouseEvent>() {
                             @Override
@@ -2114,10 +2153,10 @@ public class guiController implements Initializable {
                                 }
                             }
                         });
-                    } else {
-                        unselectBoardCard(selectedDefCard);
-                        selectBoardCard(0);
-                        selectedDefCard = 0;   
+                    } else if (selectedDefCard == 0) {
+                        unselectBoardCard(0);
+                        selectedDefCard = -1;
+                        disableAttackButton();
                     }
                 }
             }
@@ -2127,10 +2166,11 @@ public class guiController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (defenderBoard.isCharacterAvailable(1) && selectedAttCard != -1 && !hasAttacked) {
-                    if (selectedDefCard == -1) {
+                    if (selectedDefCard == -1 || selectedDefCard != 1) {
+                        unselectBoardCard(selectedDefCard);
                         selectBoardCard(1);
                         selectedDefCard = 1;
-                    } else if (selectedDefCard == 1) {
+                        disableAttackButton();
                         P2atkBoardB.setVisible(true);
                         P2atkBoardB.setOnMouseClicked(new EventHandler<MouseEvent>() {
                             @Override
@@ -2141,11 +2181,11 @@ public class guiController implements Initializable {
                                 }
                             }
                         });
-                    } else {
-                        unselectBoardCard(selectedDefCard);
-                        selectBoardCard(1);
-                        selectedDefCard = 1;   
-                    }
+                    } else if (selectedDefCard == 1) {
+                        unselectBoardCard(1);
+                        selectedDefCard = -1;
+                        disableAttackButton();
+                    } 
                 }
             }
         });
@@ -2154,10 +2194,11 @@ public class guiController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (defenderBoard.isCharacterAvailable(2) && selectedAttCard != -1 && !hasAttacked) {
-                    if (selectedDefCard == -1) {
+                    if (selectedDefCard == -1 || selectedDefCard != 2) {
+                        unselectBoardCard(selectedDefCard);
                         selectBoardCard(2);
                         selectedDefCard = 2;
-                    } else if (selectedDefCard == 2) {
+                        disableAttackButton();
                         P2atkBoardC.setVisible(true);
                         P2atkBoardC.setOnMouseClicked(new EventHandler<MouseEvent>() {
                             @Override
@@ -2168,10 +2209,10 @@ public class guiController implements Initializable {
                                 }
                             }
                         });
-                    } else {
-                        unselectBoardCard(selectedDefCard);
-                        selectBoardCard(2);
-                        selectedDefCard = 2;   
+                    } else if (selectedDefCard == 2) {
+                        unselectBoardCard(2);
+                        selectedDefCard = -1;
+                        disableAttackButton();
                     }
                 }
             }
@@ -2181,10 +2222,11 @@ public class guiController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (defenderBoard.isCharacterAvailable(3) && selectedAttCard != -1 && !hasAttacked) {
-                    if (selectedDefCard == -1) {
+                    if (selectedDefCard == -1 || selectedDefCard != 3) {
+                        unselectBoardCard(selectedDefCard);
                         selectBoardCard(3);
                         selectedDefCard = 3;
-                    } else if (selectedDefCard == 3) {
+                        disableAttackButton();
                         P2atkBoardD.setVisible(true);
                         P2atkBoardD.setOnMouseClicked(new EventHandler<MouseEvent>() {
                             @Override
@@ -2195,10 +2237,10 @@ public class guiController implements Initializable {
                                 }
                             }
                         });
-                    } else {
-                        unselectBoardCard(selectedDefCard);
-                        selectBoardCard(3);
-                        selectedDefCard = 3;   
+                    } else if (selectedDefCard == 3) {
+                        unselectBoardCard(3);
+                        selectedDefCard = -1;
+                        disableAttackButton();
                     }
                 }
             }
@@ -2208,10 +2250,11 @@ public class guiController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (defenderBoard.isCharacterAvailable(4) && selectedAttCard != -1 && !hasAttacked) {
-                    if (selectedDefCard == -1) {
+                    if (selectedDefCard == -1 || selectedDefCard != 4) {
+                        unselectBoardCard(selectedDefCard);
                         selectBoardCard(4);
                         selectedDefCard = 4;
-                    } else if (selectedDefCard == 4) {
+                        disableAttackButton();
                         P2atkBoardE.setVisible(true);
                         P2atkBoardE.setOnMouseClicked(new EventHandler<MouseEvent>() {
                             @Override
@@ -2222,10 +2265,10 @@ public class guiController implements Initializable {
                                 }
                             }
                         });
-                    } else {
-                        unselectBoardCard(selectedDefCard);
-                        selectBoardCard(4);
-                        selectedDefCard = 4;   
+                    } else if (selectedDefCard == 4) {
+                        unselectBoardCard(4);
+                        selectedDefCard = -1;
+                        disableAttackButton();
                     }
                 }
             }
@@ -2238,7 +2281,7 @@ public class guiController implements Initializable {
                     if (selectedDefCard == -1) {
                         selectBoardCard(10);
                         selectedDefCard = 10;
-                    } else if (selectedDefCard == 10) {
+                        disableAttackButton();
                         P2atkP1.setVisible(true);
                         P2atkP1.setOnMouseClicked(new EventHandler<MouseEvent>() {
                             @Override
@@ -2255,6 +2298,10 @@ public class guiController implements Initializable {
                                 }
                             }
                         });
+                    } else if (selectedDefCard == 10) {
+                        unselectBoardCard(10);
+                        selectedDefCard = -1;
+                        disableAttackButton();
                     } 
                 }
             }
@@ -2308,6 +2355,282 @@ public class guiController implements Initializable {
     }
 
 
+    public void initLevelUpUseMana() {
+        if (turn % 2 == 1) {
+            initLevelUpUseManaP1();
+        } else {
+            initLevelUpUseManaP2();
+        }
+    }
+
+
+    public void initLevelUpUseManaP1() {
+        Board P1board = pemain1.getBoard();
+
+        levelUpBoardAP1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.getButton().equals(MouseButton.PRIMARY) && pemain1.getMana() > 0) {
+                    System.out.println("Level Up");
+                    ((Character) P1board.getCard(0)).addExp(1);
+                    pemain1.setMana(pemain1.getMana() - 1);
+                    if ((((Character) P1board.getCard(0)).getExp() >= ((Character) P1board.getCard(0)).getLevel() * 2 - 1) && (((Character) P1board.getCard(0)).getLevel() < 10)) {
+                        ((Character) P1board.getCard(0)).levelUp(1);
+                        ((Character) P1board.getCard(0)).addExp(-2);
+                    }
+                }
+                updateDisplayMana();
+                updateBoard1();
+            }
+        });
+
+        levelUpBoardBP1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.getButton().equals(MouseButton.PRIMARY) && pemain1.getMana() > 0) {
+                    System.out.println("Level Up");
+                    ((Character) P1board.getCard(1)).addExp(1);
+                    pemain1.setMana(pemain1.getMana() - 1);
+                    if ((((Character) P1board.getCard(1)).getExp() >= ((Character) P1board.getCard(1)).getLevel() * 2 - 1) && (((Character) P1board.getCard(1)).getLevel() < 10)) {
+                        ((Character) P1board.getCard(1)).levelUp(1);
+                        ((Character) P1board.getCard(1)).addExp(-2);
+                    }
+                }
+                updateDisplayMana();
+                updateBoard1();
+            }
+        });
+
+        levelUpBoardCP1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.getButton().equals(MouseButton.PRIMARY) && pemain1.getMana() > 0) {
+                    System.out.println("Level Up");
+                    ((Character) P1board.getCard(2)).addExp(1);
+                    pemain1.setMana(pemain1.getMana() - 1);
+                    if ((((Character) P1board.getCard(2)).getExp() >= ((Character) P1board.getCard(2)).getLevel() * 2 - 1) && (((Character) P1board.getCard(2)).getLevel() < 10)) {
+                        ((Character) P1board.getCard(2)).levelUp(1);
+                        ((Character) P1board.getCard(2)).addExp(-2);
+                    }
+                }
+                updateDisplayMana();
+                updateBoard1();
+            }
+        });
+
+        levelUpBoardDP1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.getButton().equals(MouseButton.PRIMARY) && pemain1.getMana() > 0) {
+                    System.out.println("Level Up");
+                    ((Character) P1board.getCard(3)).addExp(1);
+                    pemain1.setMana(pemain1.getMana() - 1);
+                    if ((((Character) P1board.getCard(3)).getExp() >= ((Character) P1board.getCard(3)).getLevel() * 2 - 1) && (((Character) P1board.getCard(3)).getLevel() < 10)) {
+                        ((Character) P1board.getCard(3)).levelUp(1);
+                        ((Character) P1board.getCard(3)).addExp(-2);
+                    }
+                }
+                updateDisplayMana();
+                updateBoard1();
+            }
+        });
+
+        levelUpBoardEP1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.getButton().equals(MouseButton.PRIMARY) && pemain1.getMana() > 0) {
+                    System.out.println("Level Up");
+                    ((Character) P1board.getCard(4)).addExp(1);
+                    pemain1.setMana(pemain1.getMana() - 1);
+                    if ((((Character) P1board.getCard(4)).getExp() >= ((Character) P1board.getCard(4)).getLevel() * 2 - 1) && (((Character) P1board.getCard(4)).getLevel() < 10)) {
+                        ((Character) P1board.getCard(4)).levelUp(1);
+                        ((Character) P1board.getCard(4)).addExp(-2);
+                    }
+                }
+                updateDisplayMana();
+                updateBoard1();
+            }
+        });
+    }
+
+
+    public void initLevelUpUseManaP2() {
+        Board P2board = pemain2.getBoard();
+
+        levelUpBoardAP2.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.getButton().equals(MouseButton.PRIMARY) && pemain2.getMana() > 0) {
+                    System.out.println("Level Up");
+                    ((Character) P2board.getCard(0)).addExp(1);
+                    pemain2.setMana(pemain2.getMana() - 1);
+                    if ((((Character) P2board.getCard(0)).getExp() >= ((Character) P2board.getCard(0)).getLevel() * 2 - 1) && (((Character) P2board.getCard(0)).getLevel() < 10)) {
+                        ((Character) P2board.getCard(0)).levelUp(1);
+                        ((Character) P2board.getCard(0)).addExp(-2);
+                    }
+                }
+                updateDisplayMana();
+                updateBoard2();
+            }
+        });
+
+        levelUpBoardBP2.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.getButton().equals(MouseButton.PRIMARY) && pemain2.getMana() > 0) {
+                    System.out.println("Level Up");
+                    ((Character) P2board.getCard(1)).addExp(1);
+                    pemain2.setMana(pemain2.getMana() - 1);
+                    if ((((Character) P2board.getCard(1)).getExp() >= ((Character) P2board.getCard(1)).getLevel() * 2 - 1) && (((Character) P2board.getCard(1)).getLevel() < 10)) {
+                        ((Character) P2board.getCard(1)).levelUp(1);
+                        ((Character) P2board.getCard(1)).addExp(-2);
+                    }
+                }
+                updateDisplayMana();
+                updateBoard2();
+            }
+        });
+
+        levelUpBoardCP2.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.getButton().equals(MouseButton.PRIMARY) && pemain2.getMana() > 0) {
+                    System.out.println("Level Up");
+                    ((Character) P2board.getCard(2)).addExp(1);
+                    pemain2.setMana(pemain2.getMana() - 1);
+                    if ((((Character) P2board.getCard(2)).getExp() >= ((Character) P2board.getCard(2)).getLevel() * 2 - 1) && (((Character) P2board.getCard(2)).getLevel() < 10)) {
+                        ((Character) P2board.getCard(2)).levelUp(1);
+                        ((Character) P2board.getCard(2)).addExp(-2);
+                    }
+                }
+                updateDisplayMana();
+                updateBoard2();
+            }
+        });
+
+        levelUpBoardDP2.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.getButton().equals(MouseButton.PRIMARY) && pemain2.getMana() > 0) {
+                    System.out.println("Level Up");
+                    ((Character) P2board.getCard(3)).addExp(1);
+                    pemain2.setMana(pemain2.getMana() - 1);
+                    if ((((Character) P2board.getCard(3)).getExp() >= ((Character) P2board.getCard(3)).getLevel() * 2 - 1) && (((Character) P2board.getCard(3)).getLevel() < 10)) {
+                        ((Character) P2board.getCard(3)).levelUp(1);
+                        ((Character) P2board.getCard(3)).addExp(-2);
+                    }
+                }
+                updateDisplayMana();
+                updateBoard2();
+            }
+        });
+
+        levelUpBoardEP2.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.getButton().equals(MouseButton.PRIMARY) && pemain2.getMana() > 0) {
+                    System.out.println("Level Up");
+                    ((Character) P2board.getCard(4)).addExp(1);
+                    pemain2.setMana(pemain2.getMana() - 1);
+                    if ((((Character) P2board.getCard(4)).getExp() >= ((Character) P2board.getCard(4)).getLevel() * 2 - 1) && (((Character) P2board.getCard(4)).getLevel() < 10)) {
+                        ((Character) P2board.getCard(4)).levelUp(1);
+                        ((Character) P2board.getCard(4)).addExp(-2);
+                    }
+                }
+                updateDisplayMana();
+                updateBoard2();
+            }
+        });
+    }
+
+
+    public void updateLevelUpButton() {
+        if (turn % 2 == 1) {
+            updateLevelUpButtonP1();
+        } else {
+            updateLevelUpButtonP2();
+        }
+    }
+
+
+    public void updateLevelUpButtonP1(){
+        Board currentBoard = pemain1.getBoard();
+        for(int i = 0; i < 5; i++){
+            if(!currentBoard.isValidIdx(i) && pemain1.getMana() > 0){
+                if ( i == 0 ) {
+                    levelUpBoardAP1.setVisible(true);
+                } else if (i == 1) {
+                    levelUpBoardBP1.setVisible(true);
+                } else if (i == 2) {
+                    levelUpBoardCP1.setVisible(true);
+                } else if (i == 3) {
+                    levelUpBoardDP1.setVisible(true);
+                } else if (i == 4) {
+                    levelUpBoardEP1.setVisible(true);
+                }
+            } else {
+                if (i == 0) {
+                    levelUpBoardAP1.setVisible(false);
+                } else if (i == 1) {
+                    levelUpBoardBP1.setVisible(false);
+                } else if (i == 2) {
+                    levelUpBoardCP1.setVisible(false);
+                } else if (i == 3) {
+                    levelUpBoardDP1.setVisible(false);
+                } else if (i == 4) {
+                    levelUpBoardEP1.setVisible(false);
+                }
+            }
+        }
+    }
+
+
+    public void updateLevelUpButtonP2(){
+        Board currentBoard = pemain2.getBoard();
+        for(int i = 0; i < 5; i++){
+            if(!currentBoard.isValidIdx(i) && pemain2.getMana() > 0){
+                if ( i == 0 ) {
+                    levelUpBoardAP2.setVisible(true);
+                } else if (i == 1) {
+                    levelUpBoardBP2.setVisible(true);
+                } else if (i == 2) {
+                    levelUpBoardCP2.setVisible(true);
+                } else if (i == 3) {
+                    levelUpBoardDP2.setVisible(true);
+                } else if (i == 4) {
+                    levelUpBoardEP2.setVisible(true);
+                }
+            } else {
+                if (i == 0) {
+                    levelUpBoardAP2.setVisible(false);
+                } else if (i == 1) {
+                    levelUpBoardBP2.setVisible(false);
+                } else if (i == 2) {
+                    levelUpBoardCP2.setVisible(false);
+                } else if (i == 3) {
+                    levelUpBoardDP2.setVisible(false);
+                } else if (i == 4) {
+                    levelUpBoardEP2.setVisible(false);
+                }
+            }
+        }
+    }
+
+    
+    public void endLevelUpButton () {
+        levelUpBoardAP1.setVisible(false);
+        levelUpBoardBP1.setVisible(false);
+        levelUpBoardCP1.setVisible(false);
+        levelUpBoardDP1.setVisible(false);
+        levelUpBoardEP1.setVisible(false);
+        levelUpBoardAP2.setVisible(false);
+        levelUpBoardBP2.setVisible(false);
+        levelUpBoardCP2.setVisible(false);
+        levelUpBoardDP2.setVisible(false);
+        levelUpBoardEP2.setVisible(false);
+    }
+
+
     public void changeStageClicked(){
         // kalau button untuk pindah stage diclick
         if(idStage==-1){
@@ -2332,19 +2655,26 @@ public class guiController implements Initializable {
         } else if(idStage==0){
             initDragAndDropHand();
             initDelete();
+            initLevelUpUseMana();
             updateHand();
             updateDeleteHand();
+            updateLevelUpButton();
             System.out.println("Hand 1 besar : "+pemain1.getHand().numberOfCards());
             if(turn%2==1){
                 initDragAndDropBoardPlayer1();
                 updateDeleteBoard1();
+                updateLevelUpButtonP1();
             }else{
+                initDragAndDropBoardPlayer2(); //
                 updateDeleteBoard2();
-                initDragAndDropBoardPlayer2();
+                updateLevelUpButtonP2();
             }
             setDisplayDeckNum();
             activateStageLabel(stageDrawLabel,stagePlanLabel);
         }else if(idStage==1){
+            updateBoard1();
+            updateBoard2();
+            endLevelUpButton();
             endDelete();
             endDragAndDropHand();
             if(turn%2==1){
@@ -2355,10 +2685,10 @@ public class guiController implements Initializable {
             activateStageLabel(stagePlanLabel,stageAttackLabel);
             initSelectAttack();
         }else if(idStage==2){
-            endMouseClickAttack();
             updateBoard1();
             updateBoard2();
             clearAttack();
+            endMouseClickAttack();
             activateStageLabel(stageAttackLabel,stageEndLabel);
         }else if(idStage==3){
             turn++;
@@ -2594,6 +2924,14 @@ public class guiController implements Initializable {
     }
 
 
+    public String expLevelInfo(Character c) {
+        String info = "";
+        int expNeeded = c.getLevel() * 2 - 1;
+        info += c.getExp() + "/" + expNeeded + " [" + c.getLevel() + "]";
+        return info;
+    }
+    
+
     public void updateBoard1(){
         Board currentBoard = pemain1.getBoard();
         removeDeadCard();
@@ -2614,7 +2952,7 @@ public class guiController implements Initializable {
                     alignImageCentre(player1BoardA);
                     player1BoardAAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
                     player1BoardAHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
-                    player1BoardALvl.setText("Level");
+                    player1BoardALvl.setText(expLevelInfo((Character)currentBoard.getCard(i)));
 
                 }else if(i==1){
                     player1BoardBAttack.setVisible(true);
@@ -2628,7 +2966,7 @@ public class guiController implements Initializable {
                     alignImageCentre(player1BoardB);
                     player1BoardBAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
                     player1BoardBHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
-                    player1BoardBLvl.setText("Level");
+                    player1BoardBLvl.setText(expLevelInfo((Character)currentBoard.getCard(i)));
 
                 }else if(i==2){
                     player1BoardCAttack.setVisible(true);
@@ -2642,7 +2980,7 @@ public class guiController implements Initializable {
                     alignImageCentre(player1BoardC);
                     player1BoardCAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
                     player1BoardCHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
-                    player1BoardCLvl.setText("Level");
+                    player1BoardCLvl.setText(expLevelInfo((Character)currentBoard.getCard(i)));
 
                 }else if(i==3){
                     player1BoardDAttack.setVisible(true);
@@ -2656,7 +2994,7 @@ public class guiController implements Initializable {
                     alignImageCentre(player1BoardD);
                     player1BoardDAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
                     player1BoardDHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
-                    player1BoardDLvl.setText("Level");
+                    player1BoardDLvl.setText(expLevelInfo((Character)currentBoard.getCard(i)));
 
                 }else if(i==4){
                     player1BoardEAttack.setVisible(true);
@@ -2670,7 +3008,7 @@ public class guiController implements Initializable {
                     alignImageCentre(player1BoardE);
                     player1BoardEAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
                     player1BoardEHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
-                    player1BoardELvl.setText("Level");
+                    player1BoardELvl.setText(expLevelInfo((Character)currentBoard.getCard(i)));
                 }
 
             }else{
@@ -2737,7 +3075,7 @@ public class guiController implements Initializable {
                     alignImageCentre(player2BoardA);
                     player2BoardAAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
                     player2BoardAHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
-                    player2BoardALvl.setText("Level");
+                    player2BoardALvl.setText(expLevelInfo((Character)currentBoard.getCard(i)));
 
                 }else if(i==1){
                     player2BoardBAttack.setVisible(true);
@@ -2751,7 +3089,7 @@ public class guiController implements Initializable {
                     alignImageCentre(player2BoardB);
                     player2BoardBAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
                     player2BoardBHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
-                    player2BoardBLvl.setText("Level");
+                    player2BoardBLvl.setText(expLevelInfo((Character)currentBoard.getCard(i)));
 
                 }else if(i==2){
                     player2BoardCAttack.setVisible(true);
@@ -2765,7 +3103,7 @@ public class guiController implements Initializable {
                     alignImageCentre(player2BoardC);
                     player2BoardCAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
                     player2BoardCHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
-                    player2BoardCLvl.setText("Level");
+                    player2BoardCLvl.setText(expLevelInfo((Character)currentBoard.getCard(i)));
 
                 }else if(i==3){
                     player2BoardDAttack.setVisible(true);
@@ -2779,7 +3117,7 @@ public class guiController implements Initializable {
                     alignImageCentre(player2BoardD);
                     player2BoardDAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
                     player2BoardDHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
-                    player2BoardDLvl.setText("Level");
+                    player2BoardDLvl.setText(expLevelInfo((Character)currentBoard.getCard(i)));
 
                 }else if(i==4){
                     player2BoardEAttack.setVisible(true);
@@ -2793,7 +3131,7 @@ public class guiController implements Initializable {
                     alignImageCentre(player2BoardE);
                     player2BoardEAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
                     player2BoardEHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
-                    player2BoardELvl.setText("Level");
+                    player2BoardELvl.setText(expLevelInfo((Character)currentBoard.getCard(i)));
                 }
 
             }else{
