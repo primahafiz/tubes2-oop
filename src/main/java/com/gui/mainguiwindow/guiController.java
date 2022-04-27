@@ -2,6 +2,7 @@ package com.gui.mainguiwindow;
 
 import com.aetherwars.model.*;
 import com.aetherwars.model.Character;
+import com.aetherwars.model.CardReader;
 import com.aetherwars.util.InvalidException;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -29,11 +30,14 @@ import com.aetherwars.util.CSVReader;
 
 import com.aetherwars.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import static java.lang.Math.min;
+
+import java.io.IOException;
 
 public class guiController implements Initializable {
     // Health Bar Pemain 1 dan Pemain 2
@@ -41,6 +45,10 @@ public class guiController implements Initializable {
     ProgressBar lifeBar1;
     @FXML
     ProgressBar lifeBar2;
+    @FXML
+    Label hpPlayer1;
+    @FXML
+    Label hpPlayer2;
 
     // Label untuk menampilkan turn saat ini
     @FXML
@@ -51,6 +59,14 @@ public class guiController implements Initializable {
     ImageView player1Img;
     @FXML
     ImageView player2Img;
+    @FXML
+    Rectangle framePlayer1;
+    @FXML
+    Rectangle framePlayer2;
+    @FXML
+    Label namaPlayer1;
+    @FXML
+    Label namaPlayer2;
 
     // Frame untuk board A-E pemain 1
     @FXML
@@ -208,6 +224,18 @@ public class guiController implements Initializable {
     @FXML
     ImageView levelUpBoardEP1;
 
+    // label damage
+    @FXML
+    Label damagetoBoardAP1;
+    @FXML
+    Label damagetoBoardBP1;
+    @FXML
+    Label damagetoBoardCP1;
+    @FXML
+    Label damagetoBoardDP1;
+    @FXML
+    Label damagetoBoardEP1;
+
     // Label A,B,C,D,E board 2
     @FXML
     Label player2BoardALabel;
@@ -306,6 +334,18 @@ public class guiController implements Initializable {
     @FXML
     ImageView levelUpBoardEP2;
 
+    // label damage
+    @FXML
+    Label damagetoBoardAP2;
+    @FXML
+    Label damagetoBoardBP2;
+    @FXML
+    Label damagetoBoardCP2;
+    @FXML
+    Label damagetoBoardDP2;
+    @FXML
+    Label damagetoBoardEP2;
+
     // Gambar hand card
     @FXML
     ImageView handCard1;
@@ -394,6 +434,9 @@ public class guiController implements Initializable {
     @FXML
     ImageView player2BoardEDelete;
 
+    // All types of card
+
+    CardReader cardReader = new CardReader();
 
     int currentDragHand;
 
@@ -413,6 +456,11 @@ public class guiController implements Initializable {
 
     public guiController(){
         // ini nanti buat masukin paramater inisialiasi gui
+        try {
+            cardReader.addAllCards();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -464,37 +512,11 @@ public class guiController implements Initializable {
     }
 
 
-    public String getCardAttributes(Card c) {
-        // Menampilkan informasi kartu
-        String attribute = "";
-        attribute += c.getName().toUpperCase();
-        if (c.getId() <= 100){
-            // Kartu karakter
-            attribute += "\nATK   : " + ((Character) c).getAttack();
-            attribute += "\nHP     : " + ((Character) c).getHealth();
-            attribute += "\nEXP    : " + ((Character) c).getExp();
-            attribute += "\nLVL    : " + ((Character) c).getLevel();
-            attribute += "\nTYPE  : " + ((Character) c).getType();
-        } else {
-            // Kartu spell
-            attribute += "\nDURATION  : " + ((Spell) c).getDuration();
-            if (c.getId() > 100 && c.getId() <= 200) {
-                // spell Potion
-                attribute += "\nTYPE      : " + ((PtnSpell) c).getCardType();
-            } else if (c.getId() > 200 && c.getId() <= 300) {
-                // spell Swap
-                attribute += "\nTYPE      : " + ((SwapSpell) c).getCardType();
-            } else if (c.getId() > 300 && c.getId() <= 400) {
-                // spell Morph
-                attribute += "\nTYPE      : " + ((MorphSpell) c).getCardType();
-            } else {
-                // spell Level
-                attribute += "\nTYPE      : LVL";
-            }
-        }
-        return attribute;
-    }
 
+    /* 
+     *  HOVER CARD 
+     *  - Melakukan hover card di board dan hand
+     */
 
     public void initHoveredCardBoard() {
         // Untuk hover card di board dan menampilkan informasi kartu yang di-hover
@@ -509,6 +531,9 @@ public class guiController implements Initializable {
                     cardAttribute.setText(getCardAttributes(board1.getCard(0)));
                     cardDescription.setText("\"" + board1.getCard(0).getDesc() + "\"");
                     cardDescription.setStyle("-fx-font-style: italic;");
+                    if (!((Character) board1.getCard(0)).getListSpell().isEmpty()) {
+                        markHasSpell(0);
+                    }
                 }
             }
         });
@@ -518,6 +543,7 @@ public class guiController implements Initializable {
                 hoveredCard.setImage(null);
                 cardAttribute.setText("");
                 cardDescription.setText("");
+                unmarkHasSpell();
             }
         });         
 
@@ -530,6 +556,9 @@ public class guiController implements Initializable {
                     cardAttribute.setText(getCardAttributes(board1.getCard(1)));
                     cardDescription.setText("\"" + board1.getCard(1).getDesc() + "\"");
                     cardDescription.setStyle("-fx-font-style: italic;");
+                    if (!((Character) board1.getCard(1)).getListSpell().isEmpty()) {
+                        markHasSpell(1);
+                    }
                 }
             }
         });
@@ -539,6 +568,7 @@ public class guiController implements Initializable {
                 hoveredCard.setImage(null);
                 cardAttribute.setText("");
                 cardDescription.setText("");
+                unmarkHasSpell();
             }
         });
 
@@ -551,6 +581,9 @@ public class guiController implements Initializable {
                     cardAttribute.setText(getCardAttributes(board1.getCard(2)));
                     cardDescription.setText("\"" + board1.getCard(2).getDesc() + "\"");
                     cardDescription.setStyle("-fx-font-style: italic;");
+                    if (!((Character) board1.getCard(2)).getListSpell().isEmpty()) {
+                        markHasSpell(2);
+                    }
                 }
             }
         }); 
@@ -560,6 +593,7 @@ public class guiController implements Initializable {
                 hoveredCard.setImage(null);
                 cardAttribute.setText("");
                 cardDescription.setText("");
+                unmarkHasSpell();
             }
         });
 
@@ -572,6 +606,9 @@ public class guiController implements Initializable {
                     cardAttribute.setText(getCardAttributes(board1.getCard(3)));
                     cardDescription.setText("\"" + board1.getCard(3).getDesc() + "\"");
                     cardDescription.setStyle("-fx-font-style: italic;");
+                    if (!((Character) board1.getCard(3)).getListSpell().isEmpty()) {
+                        markHasSpell(3);
+                    }
                 }
             }
         });
@@ -581,6 +618,7 @@ public class guiController implements Initializable {
                 hoveredCard.setImage(null);
                 cardAttribute.setText("");
                 cardDescription.setText("");
+                unmarkHasSpell();
             }
         });
 
@@ -593,6 +631,9 @@ public class guiController implements Initializable {
                     cardAttribute.setText(getCardAttributes(board1.getCard(4)));
                     cardDescription.setText("\"" + board1.getCard(4).getDesc() + "\"");
                     cardDescription.setStyle("-fx-font-style: italic;");
+                    if (!((Character) board1.getCard(4)).getListSpell().isEmpty()) {
+                        markHasSpell(4);
+                    }
                 }
             }
         });
@@ -602,6 +643,7 @@ public class guiController implements Initializable {
                 hoveredCard.setImage(null);
                 cardAttribute.setText("");
                 cardDescription.setText("");
+                unmarkHasSpell();
             }
         });
 
@@ -614,6 +656,9 @@ public class guiController implements Initializable {
                     cardAttribute.setText(getCardAttributes(board2.getCard(0)));
                     cardDescription.setText("\"" + board2.getCard(0).getDesc() + "\"");
                     cardDescription.setStyle("-fx-font-style: italic;");
+                    if (!((Character) board2.getCard(0)).getListSpell().isEmpty()) {
+                        markHasSpell(5);
+                    }
                 }
             }
         });
@@ -623,6 +668,7 @@ public class guiController implements Initializable {
                 hoveredCard.setImage(null);
                 cardAttribute.setText("");
                 cardDescription.setText("");
+                unmarkHasSpell();
             }
         });
 
@@ -635,6 +681,9 @@ public class guiController implements Initializable {
                     cardAttribute.setText(getCardAttributes(board2.getCard(1)));
                     cardDescription.setText("\"" + board2.getCard(1).getDesc() + "\"");
                     cardDescription.setStyle("-fx-font-style: italic;");
+                    if (!((Character) board2.getCard(1)).getListSpell().isEmpty()) {
+                        markHasSpell(6);
+                    }
                 }
             }
         });
@@ -644,6 +693,7 @@ public class guiController implements Initializable {
                 hoveredCard.setImage(null);
                 cardAttribute.setText("");
                 cardDescription.setText("");
+                unmarkHasSpell();
             }
         });
 
@@ -656,6 +706,9 @@ public class guiController implements Initializable {
                     cardAttribute.setText(getCardAttributes(board2.getCard(2)));
                     cardDescription.setText("\"" + board2.getCard(2).getDesc() + "\"");
                     cardDescription.setStyle("-fx-font-style: italic;");
+                    if (!((Character) board2.getCard(2)).getListSpell().isEmpty()) {
+                        markHasSpell(7);
+                    }
                 }
             }
         });
@@ -665,6 +718,7 @@ public class guiController implements Initializable {
                 hoveredCard.setImage(null);
                 cardAttribute.setText("");
                 cardDescription.setText("");
+                unmarkHasSpell();
             }
         });
 
@@ -677,6 +731,9 @@ public class guiController implements Initializable {
                     cardAttribute.setText(getCardAttributes(board2.getCard(3)));
                     cardDescription.setText("\"" + board2.getCard(3).getDesc() + "\"");
                     cardDescription.setStyle("-fx-font-style: italic;");
+                    if (!((Character) board2.getCard(3)).getListSpell().isEmpty()) {
+                        markHasSpell(8);
+                    }
                 }
             }
         });
@@ -686,6 +743,7 @@ public class guiController implements Initializable {
                 hoveredCard.setImage(null);
                 cardAttribute.setText("");
                 cardDescription.setText("");
+                unmarkHasSpell();
             }
         });
 
@@ -698,6 +756,9 @@ public class guiController implements Initializable {
                     cardAttribute.setText(getCardAttributes(board2.getCard(4)));
                     cardDescription.setText("\"" + board2.getCard(4).getDesc() + "\"");
                     cardDescription.setStyle("-fx-font-style: italic;");
+                    if (!((Character) board2.getCard(4)).getListSpell().isEmpty()) {
+                        markHasSpell(9);
+                    }
                 }
             }
         });
@@ -707,6 +768,7 @@ public class guiController implements Initializable {
                 hoveredCard.setImage(null);
                 cardAttribute.setText("");
                 cardDescription.setText("");
+                unmarkHasSpell();
             }
         });
     }
@@ -829,31 +891,10 @@ public class guiController implements Initializable {
     }
 
 
-    public void alignImageCentre(ImageView imageView) {
-        // Mengatur posisi imageView agar posisinya di tengah
-        Image img = imageView.getImage();
-        if (img != null) {
-            double w = 0;
-            double h = 0;
-
-            double ratioX = imageView.getFitWidth() / img.getWidth();
-            double ratioY = imageView.getFitHeight() / img.getHeight();
-
-            double reducCoeff = 0;
-            if (ratioX >= ratioY) {
-                reducCoeff = ratioY;
-            } else {
-                reducCoeff = ratioX;
-            }
-
-            w = img.getWidth() * reducCoeff;
-            h = img.getHeight() * reducCoeff;
-
-            imageView.setX((imageView.getFitWidth() - w) / 2);
-            imageView.setY((imageView.getFitHeight() - h) / 2);
-        }
-    }
-
+    
+    /* 
+     *  DRAG AND DROP 
+     */
 
     public void initDragAndDropBoardPlayer1(){
         Hand currentHand=pemain1.getHand();
@@ -868,11 +909,15 @@ public class guiController implements Initializable {
                 System.out.println(currentDragHand);
                 //System.out.println("Set mana, mana = "+pemain1.getMana()+" card = "+currentHand.getCard(currentDragHand).getMana()+" size hand = "+currentHand.numberOfCards());
                 if(currentBoard.isCharacterAvailable(0) && currentHand.getCard(currentDragHand) instanceof Spell && pemain1.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
-                    Spell s = (Spell) currentHand.getCard(currentDragHand);
-                    pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
-                    currentHand.removeCardfromHand(currentDragHand);
-
+                    // Spell s = (Spell) currentHand.getCard(currentDragHand);
+                    // pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
+                    // currentHand.removeCardfromHand(currentDragHand);
                     // tambah spell ke character
+                    try {
+                        pemain1.useSpell(currentDragHand, 0, cardReader.getCards());
+                    } catch (InvalidException e) {
+                        e.printStackTrace();
+                    }
                 }else if(!currentBoard.isCharacterAvailable(0) && currentHand.getCard(currentDragHand) instanceof Character && pemain1.getMana()>=currentHand.getCard(currentDragHand).getMana()){
                     currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),0);
                     pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
@@ -904,11 +949,15 @@ public class guiController implements Initializable {
                 System.out.println(event.getTarget());
                 System.out.println(currentDragHand);
                 if(currentBoard.isCharacterAvailable(1) && currentHand.getCard(currentDragHand) instanceof Spell && pemain1.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
-                    Spell s = (Spell) currentHand.getCard(currentDragHand);
-                    pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
-                    currentHand.removeCardfromHand(currentDragHand);
-
+                    // Spell s = (Spell) currentHand.getCard(currentDragHand);
+                    // pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
+                    // currentHand.removeCardfromHand(currentDragHand);
                     // tambah spell ke character
+                    try {
+                        pemain1.useSpell(currentDragHand, 1, cardReader.getCards());
+                    } catch (InvalidException e) {
+                        e.printStackTrace();
+                    }
                 }else if(!currentBoard.isCharacterAvailable(1) && currentHand.getCard(currentDragHand) instanceof Character && pemain1.getMana()>=currentHand.getCard(currentDragHand).getMana()){
                     currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),1);
                     pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
@@ -940,11 +989,15 @@ public class guiController implements Initializable {
                 System.out.println(event.getTarget());
                 System.out.println(currentDragHand);
                 if(currentBoard.isCharacterAvailable(2) && currentHand.getCard(currentDragHand) instanceof Spell && pemain1.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
-                    Spell s = (Spell) currentHand.getCard(currentDragHand);
-                    pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
-                    currentHand.removeCardfromHand(currentDragHand);
-
+                    // Spell s = (Spell) currentHand.getCard(currentDragHand);
+                    // pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
+                    // currentHand.removeCardfromHand(currentDragHand);
                     // tambah spell ke character
+                    try {
+                        pemain1.useSpell(currentDragHand, 2, cardReader.getCards());
+                    } catch (InvalidException e) {
+                        e.printStackTrace();
+                    }
                 }else if(!currentBoard.isCharacterAvailable(2) && currentHand.getCard(currentDragHand) instanceof Character && pemain1.getMana()>=currentHand.getCard(currentDragHand).getMana()){
                     currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),2);
                     pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
@@ -976,11 +1029,15 @@ public class guiController implements Initializable {
                 System.out.println(event.getTarget());
                 System.out.println(currentDragHand);
                 if(currentBoard.isCharacterAvailable(3) && currentHand.getCard(currentDragHand) instanceof Spell && pemain1.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
-                    Spell s = (Spell) currentHand.getCard(currentDragHand);
-                    pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
-                    currentHand.removeCardfromHand(currentDragHand);
-
+                    // Spell s = (Spell) currentHand.getCard(currentDragHand);
+                    // pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
+                    // currentHand.removeCardfromHand(currentDragHand);
                     // tambah spell ke character
+                    try {
+                        pemain1.useSpell(currentDragHand, 3, cardReader.getCards());
+                    } catch (InvalidException e) {
+                        e.printStackTrace();
+                    }
                 }else if(!currentBoard.isCharacterAvailable(3) && currentHand.getCard(currentDragHand) instanceof Character && pemain1.getMana()>=currentHand.getCard(currentDragHand).getMana()){
                     currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),3);
                     pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
@@ -1012,11 +1069,15 @@ public class guiController implements Initializable {
                 System.out.println(event.getTarget());
                 System.out.println(currentDragHand);
                 if (currentBoard.isCharacterAvailable(4) && currentHand.getCard(currentDragHand) instanceof Spell && pemain1.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
-                    Spell s = (Spell) currentHand.getCard(currentDragHand);
-                    pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
-                    currentHand.removeCardfromHand(currentDragHand);
-
+                    // Spell s = (Spell) currentHand.getCard(currentDragHand);
+                    // pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
+                    // currentHand.removeCardfromHand(currentDragHand);
                     // tambah spell ke character
+                    try {
+                        pemain1.useSpell(currentDragHand, 4, cardReader.getCards());
+                    } catch (InvalidException e) {
+                        e.printStackTrace();
+                    }
                 } else if (!currentBoard.isCharacterAvailable(4) && currentHand.getCard(currentDragHand) instanceof Character && pemain1.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
                     currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand), 4);
                     pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
@@ -1054,11 +1115,15 @@ public class guiController implements Initializable {
                 System.out.println(event.getTarget());
                 System.out.println(currentDragHand);
                 if(currentBoard.isCharacterAvailable(0) && currentHand.getCard(currentDragHand) instanceof Spell && pemain2.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
-                    Spell s = (Spell) currentHand.getCard(currentDragHand);
-                    pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
-                    currentHand.removeCardfromHand(currentDragHand);
-
+                    // Spell s = (Spell) currentHand.getCard(currentDragHand);
+                    // pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
+                    // currentHand.removeCardfromHand(currentDragHand);
                     // tambah spell ke character
+                    try {
+                        pemain2.useSpell(currentDragHand, 0, cardReader.getCards());
+                    } catch (InvalidException e) {
+                        e.printStackTrace();
+                    }
                 }else if(!currentBoard.isCharacterAvailable(0) && currentHand.getCard(currentDragHand) instanceof Character && pemain2.getMana()>=currentHand.getCard(currentDragHand).getMana()){
                     currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),0);
                     pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
@@ -1090,11 +1155,15 @@ public class guiController implements Initializable {
                 System.out.println(event.getTarget());
                 System.out.println(currentDragHand);
                 if(currentBoard.isCharacterAvailable(1) && currentHand.getCard(currentDragHand) instanceof Spell && pemain2.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
-                    Spell s = (Spell) currentHand.getCard(currentDragHand);
-                    pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
-                    currentHand.removeCardfromHand(currentDragHand);
-
+                    // Spell s = (Spell) currentHand.getCard(currentDragHand);
+                    // pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
+                    // currentHand.removeCardfromHand(currentDragHand);
                     // tambah spell ke character
+                    try {
+                        pemain2.useSpell(currentDragHand, 1, cardReader.getCards());
+                    } catch (InvalidException e) {
+                        e.printStackTrace();
+                    }
                 }else if(!currentBoard.isCharacterAvailable(1) && currentHand.getCard(currentDragHand) instanceof Character && pemain2.getMana()>=currentHand.getCard(currentDragHand).getMana()){
                     currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),1);
                     pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
@@ -1126,11 +1195,15 @@ public class guiController implements Initializable {
                 System.out.println(event.getTarget());
                 System.out.println(currentDragHand);
                 if(currentBoard.isCharacterAvailable(2) && currentHand.getCard(currentDragHand) instanceof Spell && pemain2.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
-                    Spell s = (Spell) currentHand.getCard(currentDragHand);
-                    pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
-                    currentHand.removeCardfromHand(currentDragHand);
-
+                    // Spell s = (Spell) currentHand.getCard(currentDragHand);
+                    // pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
+                    // currentHand.removeCardfromHand(currentDragHand);
                     // tambah spell ke character
+                    try {
+                        pemain2.useSpell(currentDragHand, 2, cardReader.getCards());
+                    } catch (InvalidException e) {
+                        e.printStackTrace();
+                    }
                 }else if(!currentBoard.isCharacterAvailable(2) && currentHand.getCard(currentDragHand) instanceof Character && pemain2.getMana()>=currentHand.getCard(currentDragHand).getMana()){
                     currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),2);
                     pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
@@ -1162,11 +1235,15 @@ public class guiController implements Initializable {
                 System.out.println(event.getTarget());
                 System.out.println(currentDragHand);
                 if(currentBoard.isCharacterAvailable(3) && currentHand.getCard(currentDragHand) instanceof Spell && pemain2.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
-                    Spell s = (Spell) currentHand.getCard(currentDragHand);
-                    pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
-                    currentHand.removeCardfromHand(currentDragHand);
-
+                    // Spell s = (Spell) currentHand.getCard(currentDragHand);
+                    // pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
+                    // currentHand.removeCardfromHand(currentDragHand);
                     // tambah spell ke character
+                    try {
+                        pemain2.useSpell(currentDragHand, 3, cardReader.getCards());
+                    } catch (InvalidException e) {
+                        e.printStackTrace();
+                    }
                 }else if(!currentBoard.isCharacterAvailable(3) && currentHand.getCard(currentDragHand) instanceof Character && pemain2.getMana()>=currentHand.getCard(currentDragHand).getMana()){
                     currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),3);
                     pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
@@ -1198,11 +1275,15 @@ public class guiController implements Initializable {
                 System.out.println(event.getTarget());
                 System.out.println(currentDragHand);
                 if (currentBoard.isCharacterAvailable(4) && currentHand.getCard(currentDragHand) instanceof Spell && pemain2.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
-                    Spell s = (Spell) currentHand.getCard(currentDragHand);
-                    pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
-                    currentHand.removeCardfromHand(currentDragHand);
-
+                    // Spell s = (Spell) currentHand.getCard(currentDragHand);
+                    // pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
+                    // currentHand.removeCardfromHand(currentDragHand);
                     // tambah spell ke character
+                    try {
+                        pemain2.useSpell(currentDragHand, 4, cardReader.getCards());
+                    } catch (InvalidException e) {
+                        e.printStackTrace();
+                    }
                 } else if (!currentBoard.isCharacterAvailable(4) && currentHand.getCard(currentDragHand) instanceof Character && pemain2.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
                     currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand), 4);
                     pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
@@ -1628,6 +1709,67 @@ public class guiController implements Initializable {
     }
 
 
+    public void markHasSpell(int id) {
+        // cardAttribute.getStyleClass().add("backgroundHasSpell");
+        // cardDescription.getStyleClass().add("backgroundHasSpell");
+        switch (id) {
+            case 0:
+                player1BoardA.getStyleClass().add("backgroundHasSpell");
+                break;
+            case 1:
+                player1BoardB.getStyleClass().add("backgroundHasSpell");
+                break;
+            case 2:
+                player1BoardC.getStyleClass().add("backgroundHasSpell");
+                break;
+            case 3:
+                player1BoardD.getStyleClass().add("backgroundHasSpell");
+                break;
+            case 4:
+                player1BoardE.getStyleClass().add("backgroundHasSpell");
+                break;
+            case 5:
+                player2BoardA.getStyleClass().add("backgroundHasSpell");
+                break;
+            case 6:
+                player2BoardB.getStyleClass().add("backgroundHasSpell");
+                break;
+            case 7:
+                player2BoardC.getStyleClass().add("backgroundHasSpell");
+                break;
+            case 8:
+                player2BoardD.getStyleClass().add("backgroundHasSpell");
+                break;
+            case 9:
+                player2BoardE.getStyleClass().add("backgroundHasSpell");
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    public void unmarkHasSpell() {
+        // cardAttribute.getStyleClass().removeIf(style -> style.equals("backgroundHasPotion"));
+        // cardDescription.getStyleClass().removeIf(style -> style.equals("backgroundHasPotion"));
+        player1BoardA.getStyleClass().removeIf(style -> style.equals("backgroundHasSpell"));
+        player1BoardB.getStyleClass().removeIf(style -> style.equals("backgroundHasSpell"));
+        player1BoardC.getStyleClass().removeIf(style -> style.equals("backgroundHasSpell"));
+        player1BoardD.getStyleClass().removeIf(style -> style.equals("backgroundHasSpell"));
+        player1BoardE.getStyleClass().removeIf(style -> style.equals("backgroundHasSpell"));
+        player2BoardA.getStyleClass().removeIf(style -> style.equals("backgroundHasSpell"));
+        player2BoardB.getStyleClass().removeIf(style -> style.equals("backgroundHasSpell"));
+        player2BoardC.getStyleClass().removeIf(style -> style.equals("backgroundHasSpell"));
+        player2BoardD.getStyleClass().removeIf(style -> style.equals("backgroundHasSpell"));
+        player2BoardE.getStyleClass().removeIf(style -> style.equals("backgroundHasSpell"));
+    }
+
+
+
+    /* 
+     *  ATTACK 
+     */
+
     public void initSelectAttack() {
         // mekanisme pada stage attack
         if (turn % 2 == 1) {
@@ -1635,127 +1777,6 @@ public class guiController implements Initializable {
         } else {
             initSelectP2AttackP1();
         }
-    }
-    
-
-    public void selectBoardCard(int id) {
-        // meng-highlight kartu yang dipilih
-        switch (id) {
-            case 0:
-                player1BoardAFrame.getStyleClass().add("backgroundBtnActive");
-                break;
-            case 1:
-                player1BoardBFrame.getStyleClass().add("backgroundBtnActive");
-                break;
-            case 2:
-                player1BoardCFrame.getStyleClass().add("backgroundBtnActive");
-                break;
-            case 3:
-                player1BoardDFrame.getStyleClass().add("backgroundBtnActive");
-                break;
-            case 4:
-                player1BoardEFrame.getStyleClass().add("backgroundBtnActive");
-                break;
-            case 5:
-                player2BoardAFrame.getStyleClass().add("backgroundBtnActive");
-                break;
-            case 6:
-                player2BoardBFrame.getStyleClass().add("backgroundBtnActive");
-                break;
-            case 7:
-                player2BoardCFrame.getStyleClass().add("backgroundBtnActive");
-                break;
-            case 8:
-                player2BoardDFrame.getStyleClass().add("backgroundBtnActive");
-                break;
-            case 9:
-                player2BoardEFrame.getStyleClass().add("backgroundBtnActive");
-                break;
-            case 10:
-                player1Img.getStyleClass().add("backgroundBtnActive");
-                break;
-            case 11:
-                player2Img.getStyleClass().add("backgroundBtnActive");
-                break;
-            default:
-                break;
-        }
-
-    }
-
-
-    public void unselectBoardCard(int id) {
-        // menghilangkan highlight kartu yang dipilih
-        switch (id) {
-            case 0:
-                player1BoardAFrame.getStyleClass().removeIf(style -> style.equals("backgroundBtnActive"));
-                break;
-            case 1:
-                player1BoardBFrame.getStyleClass().removeIf(style -> style.equals("backgroundBtnActive"));
-                break;
-            case 2:
-                player1BoardCFrame.getStyleClass().removeIf(style -> style.equals("backgroundBtnActive"));
-                break;
-            case 3:
-                player1BoardDFrame.getStyleClass().removeIf(style -> style.equals("backgroundBtnActive"));
-                break;
-            case 4:
-                player1BoardEFrame.getStyleClass().removeIf(style -> style.equals("backgroundBtnActive"));
-                break;
-            case 5:
-                player2BoardAFrame.getStyleClass().removeIf(style -> style.equals("backgroundBtnActive"));
-                break;
-            case 6:
-                player2BoardBFrame.getStyleClass().removeIf(style -> style.equals("backgroundBtnActive"));
-                break;
-            case 7:
-                player2BoardCFrame.getStyleClass().removeIf(style -> style.equals("backgroundBtnActive"));
-                break;
-            case 8:
-                player2BoardDFrame.getStyleClass().removeIf(style -> style.equals("backgroundBtnActive"));
-                break;
-            case 9:
-                player2BoardEFrame.getStyleClass().removeIf(style -> style.equals("backgroundBtnActive"));
-                break;
-            case 10:
-                player1Img.getStyleClass().removeIf(style -> style.equals("backgroundBtnActive"));
-                break;
-            case 11:
-                player2Img.getStyleClass().removeIf(style -> style.equals("backgroundBtnActive"));
-                break;
-            default:
-                break;
-        }
-    }
-
-
-    public void clearAttack() {
-        // set variabel yang akan digunakan saat stage attack
-        unselectBoardCard(selectedAttCard);
-        unselectBoardCard(selectedAttCard+5);
-        unselectBoardCard(selectedDefCard);
-        unselectBoardCard(selectedDefCard+5);
-        selectedAttCard = -1;
-        selectedDefCard = -1;
-        hasAttacked = false;
-        disableAttackButton();
-    }
-
-
-    public void disableAttackButton() {
-        // menonaktifkan tombol attack
-        P1atkBoardA.setVisible(false);
-        P1atkBoardB.setVisible(false);
-        P1atkBoardC.setVisible(false);
-        P1atkBoardD.setVisible(false);
-        P1atkBoardE.setVisible(false);
-        P1atkP2.setVisible(false);
-        P2atkBoardA.setVisible(false);
-        P2atkBoardB.setVisible(false);
-        P2atkBoardC.setVisible(false);
-        P2atkBoardD.setVisible(false);
-        P2atkBoardE.setVisible(false);
-        P2atkP1.setVisible(false);
     }
 
     
@@ -1873,8 +1894,11 @@ public class guiController implements Initializable {
                             @Override
                             public void handle(MouseEvent event) {
                                 if (!hasAttacked) {
+                                    displayDamage(selectedAttCard, ((Character) defenderBoard.getCard(selectedDefCard)).getDamage((Character) attackerBoard.getCard(selectedAttCard)));
+                                    displayDamage(selectedDefCard + 5, ((Character) attackerBoard.getCard(selectedAttCard)).getDamage((Character) defenderBoard.getCard(selectedDefCard)));
                                     pemain1.attack(selectedAttCard, selectedDefCard, pemain2);
                                     hasAttacked = true;
+                                    markHasAttacked(selectedAttCard);
                                 }
                             }
                         });
@@ -1901,8 +1925,11 @@ public class guiController implements Initializable {
                             @Override
                             public void handle(MouseEvent event) {
                                 if (!hasAttacked) {
+                                    displayDamage(selectedAttCard, ((Character) defenderBoard.getCard(selectedDefCard)).getDamage((Character) attackerBoard.getCard(selectedAttCard)));
+                                    displayDamage(selectedDefCard + 5, ((Character) attackerBoard.getCard(selectedAttCard)).getDamage((Character) defenderBoard.getCard(selectedDefCard)));
                                     pemain1.attack(selectedAttCard, selectedDefCard, pemain2);
                                     hasAttacked = true;
+                                    markHasAttacked(selectedAttCard);
                                 }
                             }
                         });
@@ -1929,8 +1956,11 @@ public class guiController implements Initializable {
                             @Override
                             public void handle(MouseEvent event) {
                                 if (!hasAttacked) {
+                                    displayDamage(selectedAttCard, ((Character) defenderBoard.getCard(selectedDefCard)).getDamage((Character) attackerBoard.getCard(selectedAttCard)));
+                                    displayDamage(selectedDefCard + 5, ((Character) attackerBoard.getCard(selectedAttCard)).getDamage((Character) defenderBoard.getCard(selectedDefCard)));
                                     pemain1.attack(selectedAttCard, selectedDefCard, pemain2);
                                     hasAttacked = true;
+                                    markHasAttacked(selectedAttCard);
                                 }
                             }
                         });
@@ -1957,8 +1987,11 @@ public class guiController implements Initializable {
                             @Override
                             public void handle(MouseEvent event) {
                                 if (!hasAttacked) {
+                                    displayDamage(selectedAttCard, ((Character) defenderBoard.getCard(selectedDefCard)).getDamage((Character) attackerBoard.getCard(selectedAttCard)));
+                                    displayDamage(selectedDefCard + 5, ((Character) attackerBoard.getCard(selectedAttCard)).getDamage((Character) defenderBoard.getCard(selectedDefCard)));
                                     pemain1.attack(selectedAttCard, selectedDefCard, pemain2);
                                     hasAttacked = true;
+                                    markHasAttacked(selectedAttCard);
                                 }
                             }
                         });
@@ -1985,8 +2018,11 @@ public class guiController implements Initializable {
                             @Override
                             public void handle(MouseEvent event) {
                                 if (!hasAttacked) {
+                                    displayDamage(selectedAttCard, ((Character) defenderBoard.getCard(selectedDefCard)).getDamage((Character) attackerBoard.getCard(selectedAttCard)));
+                                    displayDamage(selectedDefCard + 5, ((Character) attackerBoard.getCard(selectedAttCard)).getDamage((Character) defenderBoard.getCard(selectedDefCard)));
                                     pemain1.attack(selectedAttCard, selectedDefCard, pemain2);
                                     hasAttacked = true;
+                                    markHasAttacked(selectedAttCard);
                                 }
                             }
                         });
@@ -2017,6 +2053,8 @@ public class guiController implements Initializable {
                                         hasAttacked = true;
                                         lifeBar1.setProgress(((double) pemain1.getHp()) / 80.0);
                                         lifeBar2.setProgress(((double) pemain2.getHp()) / 80.0);
+                                        hpPlayer1.setText("HP  " + pemain1.getHp() + "/80");
+                                        hpPlayer2.setText(pemain2.getHp() + "/80" + "  HP");
                                     } catch (Exception e) {
                                         System.out.println(e.getMessage());
                                     }
@@ -2148,8 +2186,11 @@ public class guiController implements Initializable {
                             @Override
                             public void handle(MouseEvent event) {
                                 if (!hasAttacked) {
+                                    displayDamage(selectedAttCard + 5, ((Character) defenderBoard.getCard(selectedDefCard)).getDamage((Character) attackerBoard.getCard(selectedAttCard)));
+                                    displayDamage(selectedDefCard, ((Character) attackerBoard.getCard(selectedAttCard)).getDamage((Character) defenderBoard.getCard(selectedDefCard)));
                                     pemain2.attack(selectedAttCard, selectedDefCard, pemain1);
                                     hasAttacked = true;
+                                    markHasAttacked(selectedAttCard + 5);
                                 }
                             }
                         });
@@ -2176,8 +2217,11 @@ public class guiController implements Initializable {
                             @Override
                             public void handle(MouseEvent event) {
                                 if (!hasAttacked) {
+                                    displayDamage(selectedAttCard + 5, ((Character) defenderBoard.getCard(selectedDefCard)).getDamage((Character) attackerBoard.getCard(selectedAttCard)));
+                                    displayDamage(selectedDefCard, ((Character) attackerBoard.getCard(selectedAttCard)).getDamage((Character) defenderBoard.getCard(selectedDefCard)));
                                     pemain2.attack(selectedAttCard, selectedDefCard, pemain1);
                                     hasAttacked = true;
+                                    markHasAttacked(selectedAttCard + 5);
                                 }
                             }
                         });
@@ -2204,8 +2248,11 @@ public class guiController implements Initializable {
                             @Override
                             public void handle(MouseEvent event) {
                                 if (!hasAttacked) {
+                                    displayDamage(selectedAttCard + 5, ((Character) defenderBoard.getCard(selectedDefCard)).getDamage((Character) attackerBoard.getCard(selectedAttCard)));
+                                    displayDamage(selectedDefCard, ((Character) attackerBoard.getCard(selectedAttCard)).getDamage((Character) defenderBoard.getCard(selectedDefCard)));
                                     pemain2.attack(selectedAttCard, selectedDefCard, pemain1);
                                     hasAttacked = true;
+                                    markHasAttacked(selectedAttCard + 5);
                                 }
                             }
                         });
@@ -2232,8 +2279,11 @@ public class guiController implements Initializable {
                             @Override
                             public void handle(MouseEvent event) {
                                 if (!hasAttacked) {
+                                    displayDamage(selectedAttCard + 5, ((Character) defenderBoard.getCard(selectedDefCard)).getDamage((Character) attackerBoard.getCard(selectedAttCard)));
+                                    displayDamage(selectedDefCard, ((Character) attackerBoard.getCard(selectedAttCard)).getDamage((Character) defenderBoard.getCard(selectedDefCard)));
                                     pemain2.attack(selectedAttCard, selectedDefCard, pemain1);
                                     hasAttacked = true;
+                                    markHasAttacked(selectedAttCard + 5);
                                 }
                             }
                         });
@@ -2260,8 +2310,11 @@ public class guiController implements Initializable {
                             @Override
                             public void handle(MouseEvent event) {
                                 if (!hasAttacked) {
+                                    displayDamage(selectedAttCard + 5, ((Character) defenderBoard.getCard(selectedDefCard)).getDamage((Character) attackerBoard.getCard(selectedAttCard)));
+                                    displayDamage(selectedDefCard, ((Character) attackerBoard.getCard(selectedAttCard)).getDamage((Character) defenderBoard.getCard(selectedDefCard)));
                                     pemain2.attack(selectedAttCard, selectedDefCard, pemain1);
                                     hasAttacked = true;
+                                    markHasAttacked(selectedAttCard + 5);
                                 }
                             }
                         });
@@ -2292,6 +2345,8 @@ public class guiController implements Initializable {
                                         hasAttacked = true;
                                         lifeBar1.setProgress(((double) pemain1.getHp()) / 80.0);
                                         lifeBar2.setProgress(((double) pemain2.getHp()) / 80.0);
+                                        hpPlayer1.setText("HP  " + pemain1.getHp() + "/80");
+                                        hpPlayer2.setText(pemain2.getHp() + "/80" + "  HP");
                                     } catch (Exception e) {
                                         System.out.println(e.getMessage());
                                     }
@@ -2306,6 +2361,187 @@ public class guiController implements Initializable {
                 }
             }
         });
+    }
+    
+
+    public void selectBoardCard(int id) {
+        // meng-highlight kartu yang dipilih
+        switch (id) {
+            case 0:
+                player1BoardAFrame.getStyleClass().add("backgroundSelectedCard");
+                break;
+            case 1:
+                player1BoardBFrame.getStyleClass().add("backgroundSelectedCard");
+                break;
+            case 2:
+                player1BoardCFrame.getStyleClass().add("backgroundSelectedCard");
+                break;
+            case 3:
+                player1BoardDFrame.getStyleClass().add("backgroundSelectedCard");
+                break;
+            case 4:
+                player1BoardEFrame.getStyleClass().add("backgroundSelectedCard");
+                break;
+            case 5:
+                player2BoardAFrame.getStyleClass().add("backgroundSelectedCard");
+                break;
+            case 6:
+                player2BoardBFrame.getStyleClass().add("backgroundSelectedCard");
+                break;
+            case 7:
+                player2BoardCFrame.getStyleClass().add("backgroundSelectedCard");
+                break;
+            case 8:
+                player2BoardDFrame.getStyleClass().add("backgroundSelectedCard");
+                break;
+            case 9:
+                player2BoardEFrame.getStyleClass().add("backgroundSelectedCard");
+                break;
+            case 10:
+                player1Img.getStyleClass().add("backgroundSelectedCard");
+                break;
+            case 11:
+                player2Img.getStyleClass().add("backgroundSelectedCard");
+                break;
+            default:
+                break;
+        }
+
+    }
+
+
+    public void unselectBoardCard(int id) {
+        // menghilangkan highlight kartu yang dipilih
+        switch (id) {
+            case 0:
+                player1BoardAFrame.getStyleClass().removeIf(style -> style.equals("backgroundSelectedCard"));
+                break;
+            case 1:
+                player1BoardBFrame.getStyleClass().removeIf(style -> style.equals("backgroundSelectedCard"));
+                break;
+            case 2:
+                player1BoardCFrame.getStyleClass().removeIf(style -> style.equals("backgroundSelectedCard"));
+                break;
+            case 3:
+                player1BoardDFrame.getStyleClass().removeIf(style -> style.equals("backgroundSelectedCard"));
+                break;
+            case 4:
+                player1BoardEFrame.getStyleClass().removeIf(style -> style.equals("backgroundSelectedCard"));
+                break;
+            case 5:
+                player2BoardAFrame.getStyleClass().removeIf(style -> style.equals("backgroundSelectedCard"));
+                break;
+            case 6:
+                player2BoardBFrame.getStyleClass().removeIf(style -> style.equals("backgroundSelectedCard"));
+                break;
+            case 7:
+                player2BoardCFrame.getStyleClass().removeIf(style -> style.equals("backgroundSelectedCard"));
+                break;
+            case 8:
+                player2BoardDFrame.getStyleClass().removeIf(style -> style.equals("backgroundSelectedCard"));
+                break;
+            case 9:
+                player2BoardEFrame.getStyleClass().removeIf(style -> style.equals("backgroundSelectedCard"));
+                break;
+            case 10:
+                player1Img.getStyleClass().removeIf(style -> style.equals("backgroundSelectedCard"));
+                break;
+            case 11:
+                player2Img.getStyleClass().removeIf(style -> style.equals("backgroundSelectedCard"));
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    public void markHasAttacked(int id) {
+        switch (id) {
+            case 0:
+                player1BoardAFrame.getStyleClass().add("backgroundHasAttacked");
+                break;
+            case 1:
+                player1BoardBFrame.getStyleClass().add("backgroundHasAttacked");
+                break;
+            case 2:
+                player1BoardCFrame.getStyleClass().add("backgroundHasAttacked");
+                break;
+            case 3:
+                player1BoardDFrame.getStyleClass().add("backgroundHasAttacked");
+                break;
+            case 4:
+                player1BoardEFrame.getStyleClass().add("backgroundHasAttacked");
+                break;
+            case 5:
+                player2BoardAFrame.getStyleClass().add("backgroundHasAttacked");
+                break;
+            case 6:
+                player2BoardBFrame.getStyleClass().add("backgroundHasAttacked");
+                break;
+            case 7:
+                player2BoardCFrame.getStyleClass().add("backgroundHasAttacked");
+                break;
+            case 8:
+                player2BoardDFrame.getStyleClass().add("backgroundHasAttacked");
+                break;
+            case 9:
+                player2BoardEFrame.getStyleClass().add("backgroundHasAttacked");
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    public void unmarkHasAttacked(int id) {
+        switch (id) {
+            case 0:
+                player1BoardAFrame.getStyleClass().removeIf(style -> style.equals("backgroundHasAttacked"));
+                break;
+            case 1:
+                player1BoardBFrame.getStyleClass().removeIf(style -> style.equals("backgroundHasAttacked"));
+                break;
+            case 2:
+                player1BoardCFrame.getStyleClass().removeIf(style -> style.equals("backgroundHasAttacked"));
+                break;
+            case 3:
+                player1BoardDFrame.getStyleClass().removeIf(style -> style.equals("backgroundHasAttacked"));
+                break;
+            case 4:
+                player1BoardEFrame.getStyleClass().removeIf(style -> style.equals("backgroundHasAttacked"));
+                break;
+            case 5:
+                player2BoardAFrame.getStyleClass().removeIf(style -> style.equals("backgroundHasAttacked"));
+                break;
+            case 6:
+                player2BoardBFrame.getStyleClass().removeIf(style -> style.equals("backgroundHasAttacked"));
+                break;
+            case 7:
+                player2BoardCFrame.getStyleClass().removeIf(style -> style.equals("backgroundHasAttacked"));
+                break;
+            case 8:
+                player2BoardDFrame.getStyleClass().removeIf(style -> style.equals("backgroundHasAttacked"));
+                break;
+            case 9:
+                player2BoardEFrame.getStyleClass().removeIf(style -> style.equals("backgroundHasAttacked"));
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    public void clearAttack() {
+        // set variabel yang akan digunakan saat stage attack
+        unselectBoardCard(selectedAttCard);
+        unselectBoardCard(selectedAttCard+5);
+        unselectBoardCard(selectedDefCard);
+        unselectBoardCard(selectedDefCard+5);
+        selectedAttCard = -1;
+        selectedDefCard = -1;
+        hasAttacked = false;
+        disableAttackButton();
+        hideDamage();
     }
 
 
@@ -2340,20 +2576,91 @@ public class guiController implements Initializable {
     }
 
 
-    public void removeDeadCard() {
-        // menghapus kartu yang sudah mati dari board
-        for (int i = 0; i < 5; i++) {
-            if (pemain1.getBoard().isCharacterAvailable(i) && ((Character) pemain1.getBoard().getCard(i)).getHealth() <= 0) {
-                pemain1.getBoard().removeCardfromBoard(i);
-            }
-        }
-        for (int i = 0; i < 5; i++) {
-            if (pemain2.getBoard().isCharacterAvailable(i) && ((Character) pemain2.getBoard().getCard(i)).getHealth() <= 0) {
-                pemain2.getBoard().removeCardfromBoard(i);
-            }
+    public void disableAttackButton() {
+        // menonaktifkan tombol attack
+        P1atkBoardA.setVisible(false);
+        P1atkBoardB.setVisible(false);
+        P1atkBoardC.setVisible(false);
+        P1atkBoardD.setVisible(false);
+        P1atkBoardE.setVisible(false);
+        P1atkP2.setVisible(false);
+        P2atkBoardA.setVisible(false);
+        P2atkBoardB.setVisible(false);
+        P2atkBoardC.setVisible(false);
+        P2atkBoardD.setVisible(false);
+        P2atkBoardE.setVisible(false);
+        P2atkP1.setVisible(false);
+    }
+
+
+    public void displayDamage(int id, double damage) {
+        // menampilkan damage yang didapat
+        switch (id) {
+            case 0:
+                damagetoBoardAP1.setText(Double.toString(damage));
+                damagetoBoardAP1.setVisible(true);
+                break;
+            case 1:
+                damagetoBoardBP1.setText(Double.toString(damage));
+                damagetoBoardBP1.setVisible(true);
+                break;
+            case 2:
+                damagetoBoardCP1.setText(Double.toString(damage));
+                damagetoBoardCP1.setVisible(true);
+                break;
+            case 3:
+                damagetoBoardDP1.setText(Double.toString(damage));
+                damagetoBoardDP1.setVisible(true);
+                break;
+            case 4:
+                damagetoBoardEP1.setText(Double.toString(damage));
+                damagetoBoardEP1.setVisible(true);
+                break;
+            case 5:
+                damagetoBoardAP2.setText(Double.toString(damage));
+                damagetoBoardAP2.setVisible(true);
+                break;
+            case 6:
+                damagetoBoardBP2.setText(Double.toString(damage));
+                damagetoBoardBP2.setVisible(true);
+                break;
+            case 7:
+                damagetoBoardCP2.setText(Double.toString(damage));
+                damagetoBoardCP2.setVisible(true);
+                break;
+            case 8:
+                damagetoBoardDP2.setText(Double.toString(damage));
+                damagetoBoardDP2.setVisible(true);
+                break;
+            case 9:
+                damagetoBoardEP2.setText(Double.toString(damage));
+                damagetoBoardEP2.setVisible(true);
+                break;
+            default:
+                break;
         }
     }
 
+
+    public void hideDamage() {
+        // menyembunyikan damage yang didapat
+        damagetoBoardAP1.setVisible(false);
+        damagetoBoardBP1.setVisible(false);
+        damagetoBoardCP1.setVisible(false);
+        damagetoBoardDP1.setVisible(false);
+        damagetoBoardEP1.setVisible(false);
+        damagetoBoardAP2.setVisible(false);
+        damagetoBoardBP2.setVisible(false);
+        damagetoBoardCP2.setVisible(false);
+        damagetoBoardDP2.setVisible(false);
+        damagetoBoardEP2.setVisible(false);
+    }
+
+
+
+    /*
+     *  LEVEL UP USING MANA
+     */
 
     public void initLevelUpUseMana() {
         if (turn % 2 == 1) {
@@ -2631,10 +2938,23 @@ public class guiController implements Initializable {
     }
 
 
+
+    /* 
+     * CHANGE STAGE
+     */
+
     public void changeStageClicked(){
         // kalau button untuk pindah stage diclick
         if(idStage==-1){
             turn++;
+            if (turn % 2 == 1) {
+                framePlayer1.setVisible(true);
+                framePlayer2.setVisible(false);
+            }
+            else {
+                framePlayer1.setVisible(false);
+                framePlayer2.setVisible(true);
+            }
             numTurn.setText(Integer.toString((turn+1)/2));
             setDisplayDeckNum();
             if(turn%2==1) {
@@ -2649,6 +2969,7 @@ public class guiController implements Initializable {
             }else{
                 updateHand2();
             }
+            initHoveredCardHand();
             activateStageLabel(stageEndLabel,stageDrawLabel);
             setDisplayMana();
             setDisplayDeckNum();
@@ -2692,6 +3013,18 @@ public class guiController implements Initializable {
             activateStageLabel(stageAttackLabel,stageEndLabel);
         }else if(idStage==3){
             turn++;
+            if (turn % 2 == 1) {
+                framePlayer1.setVisible(true);
+                framePlayer2.setVisible(false);
+                updateSpellBoard1();
+                updateBoard1();
+            }
+            else {
+                framePlayer1.setVisible(false);
+                framePlayer2.setVisible(true);
+                updateSpellBoard2();
+                updateBoard2();
+            }
             numTurn.setText(Integer.toString((turn+1)/2));
             setDisplayDeckNum();
             setDisplayMana();
@@ -2706,6 +3039,7 @@ public class guiController implements Initializable {
             }else{
                 updateHand2();
             }
+            initHoveredCardHand();
             setDisplayDeckNum();
             activateStageLabel(stageEndLabel,stageDrawLabel);
             // endMouseClickAttack();
@@ -2716,6 +3050,170 @@ public class guiController implements Initializable {
         // panggil method sesuai dengan apa yang ingin dilakuin di stage itu
     }
 
+
+
+    /* 
+     * FUNGSI PEMBANTU 
+     */
+
+    public String getCardAttributes(Card c) {
+        // Menampilkan informasi kartu
+        String attribute = "";
+        attribute += c.getName().toUpperCase();
+        if (c instanceof Character){
+            // Kartu karakter
+            attribute += "\nATK   : " + ((Character) c).getAttack();
+            attribute += "\nHP     : " + ((Character) c).getHealth();
+            attribute += "\nEXP    : " + ((Character) c).getExp();
+            attribute += "\nLVL    : " + ((Character) c).getLevel();
+            attribute += "\nTYPE  : " + ((Character) c).getType();
+            attribute += getAllSpell((Character) c);
+        } else {
+            // Kartu spell
+            if (((Spell) c).getDuration() != 0) {
+                attribute += "\nDURATION  : " + ((Spell) c).getDuration();
+            } else {
+                attribute += "\nDURATION  : PERMANENT";
+            }
+            if (c instanceof PtnSpell) {
+                // spell Potion
+                attribute += "\nTYPE      : " + ((PtnSpell) c).getCardType();
+                attribute += "\nATK+      : " + ((PtnSpell) c).getPtnAttack();
+                attribute += "\nHP+       : " + ((PtnSpell) c).getPtnHp();
+            } else if (c instanceof SwapSpell) {
+                // spell Swap
+                attribute += "\nTYPE      : " + ((SwapSpell) c).getCardType();
+            } else if (c instanceof MorphSpell){
+                // spell Morph
+                attribute += "\nTYPE      : " + ((MorphSpell) c).getCardType();
+            } else {
+                // spell Level
+                attribute += "\nTYPE      : LVL";
+            }
+        }
+        return attribute;
+    }
+
+
+    public String getAtkHealth(Card c){
+        if(c instanceof  Character){
+            return "ATK " + ((Character) c).getAttack() + "/HP "+((Character) c).getHealth();
+        }else if(c instanceof MorphSpell){
+            return "MORPH";
+        }else if(c instanceof  PtnSpell){
+            return "ATK+" + ((PtnSpell) c).getPtnAttack() + "/HP+"+((PtnSpell) c).getPtnHp();
+        }else if(c instanceof LvlSpell){
+            return "LEVEL";
+        }else{ // swap
+            return "ATK <--> HP";
+        }
+    }
+
+
+    public String getExpLevel(Character c) {
+        String info = "";
+        int expNeeded = c.getLevel() * 2 - 1;
+        info += c.getExp() + "/" + expNeeded + " [" + c.getLevel() + "]";
+        return info;
+    }
+
+
+    public String getAllSpell(Character c) {
+        String info = "";
+        if (!c.getListSpell().isEmpty()) {
+            info += "\nPTN SPELL : ";
+        }
+        for (int i = 0; i < c.getListSpell().size(); i++) {
+            info += c.getListSpell().get(i).getName();
+            info += "(A" + c.getListSpell().get(i).getPtnAttack() + ",H";
+            info += c.getListSpell().get(i).getPtnHp() + ")";
+            if (i != c.getListSpell().size() - 1) {
+                info += ", ";
+            }
+        }
+        if (c.getSwapDur() > 0) {
+            info += "\nSWAP DURATION : " + c.getSwapDur();
+        }
+        return info;
+    }
+    
+
+    public void alignImageCentre(ImageView imageView) {
+        // Mengatur posisi imageView agar posisinya di tengah
+        Image img = imageView.getImage();
+        if (img != null) {
+            double w = 0;
+            double h = 0;
+
+            double ratioX = imageView.getFitWidth() / img.getWidth();
+            double ratioY = imageView.getFitHeight() / img.getHeight();
+
+            double reducCoeff = 0;
+            if (ratioX >= ratioY) {
+                reducCoeff = ratioY;
+            } else {
+                reducCoeff = ratioX;
+            }
+
+            w = img.getWidth() * reducCoeff;
+            h = img.getHeight() * reducCoeff;
+
+            imageView.setX((imageView.getFitWidth() - w) / 2);
+            imageView.setY((imageView.getFitHeight() - h) / 2);
+        }
+    }
+
+
+    public void removeDeadCard() {
+        // menghapus kartu yang sudah mati dari board
+        System.out.println("removeDeadCard");
+        for (int i = 0; i < 5; i++) {
+            if (pemain1.getBoard().isCharacterAvailable(i) && ((Character) pemain1.getBoard().getCard(i)).getHealth() <= 0) {
+                unmarkHasAttacked(i);
+                System.out.println("Kartu " + i + " dihapus");
+                pemain1.getBoard().removeCardfromBoard(i);
+            }
+            if (pemain1.getBoard().isValidIdx(i)) {
+                unmarkHasAttacked(i);
+            }
+        }
+        for (int i = 0; i < 5; i++) {
+            if (pemain2.getBoard().isCharacterAvailable(i) && ((Character) pemain2.getBoard().getCard(i)).getHealth() <= 0) {
+                unmarkHasAttacked(i + 5);
+                System.out.println("Kartu " + i + " dihapus");
+                pemain2.getBoard().removeCardfromBoard(i);
+            }
+            if (pemain1.getBoard().isValidIdx(i)) {
+                unmarkHasAttacked(i);
+            }
+        }
+    }
+
+
+    public void updateSpellBoard1() {
+        System.out.println("updateSpell");
+        for (int i = 0; i < 5; i++) {
+            if (pemain1.getBoard().isCharacterAvailable(i)) {
+                ((Character) pemain1.getBoard().getCard(i)).updateDur((turn+1)/2);
+            }
+        }
+    }
+
+
+    public void updateSpellBoard2() {
+        System.out.println("updateSpell");
+        for (int i = 0; i < 5; i++) {
+            if (pemain2.getBoard().isCharacterAvailable(i)) {
+                ((Character) pemain2.getBoard().getCard(i)).updateDur((turn+1)/2);
+            }
+        }
+    }
+
+
+
+    /* 
+     *  Fungsi fungsi set display 
+     */
 
     public void activateStageLabel(Label lastStage,Label newStage){
         lastStage.getStyleClass().removeIf(style -> style.equals("backgroundBtnActive"));
@@ -2774,6 +3272,43 @@ public class guiController implements Initializable {
         }
     }
 
+
+    public void setDisplayMana(){
+        System.out.println("Set mana");
+        if(turn%2==1){
+            pemain1.setMana(min((turn+1)/2,10));
+            manaNum.setText("Mana\n"+pemain1.getMana()+"/"+(turn+1)/2);
+        }else{
+            pemain2.setMana(min((turn+1)/2,10));
+            manaNum.setText("Mana\n"+pemain2.getMana()+"/"+(turn+1)/2);
+        }
+    }
+
+
+    public void updateDisplayMana(){
+        if(turn%2==1){
+            manaNum.setText("Mana\n"+pemain1.getMana()+"/"+min((turn+1)/2,10));
+        }else{
+            manaNum.setText("Mana\n"+pemain2.getMana()+"/"+min((turn+1)/2,10));
+        }
+    }
+
+
+    public void setDisplayDeckNum(){
+        System.out.println("Set mana");
+        if(turn%2==1){
+            deckNum.setText("Deck\n"+pemain1.getDeck().getSize()+"/"+deckCapacityPemain1);
+        }else{
+            deckNum.setText("Deck\n"+pemain2.getDeck().getSize()+"/"+deckCapacityPemain2);
+        }
+    }
+
+
+
+    /*  
+     *  UPDATE HAND, BOARD
+     *  Melakukan update tampilan kartu yang ada di board dan hand
+     */
 
     public void updateHand(){
         if(turn%2==1){
@@ -2907,30 +3442,16 @@ public class guiController implements Initializable {
             }
         }
     }
+    
 
-
-    public String getAtkHealth(Card c){
-        if(c instanceof  Character){
-            return "ATK " + ((Character) c).getAttack() + "/HP "+((Character) c).getHealth();
-        }else if(c instanceof MorphSpell){
-            return "MORPH";
-        }else if(c instanceof  PtnSpell){
-            return "ATK+" + ((PtnSpell) c).getPtnAttack() + "/HP+"+((PtnSpell) c).getPtnHp();
-        }else if(c instanceof LvlSpell){
-            return "LEVEL";
-        }else{ // swap
-            return "ATK <--> HP";
+    public void updateBoard(){
+        if(turn%2==1){
+            updateBoard1();
+        }else{
+            updateBoard2();
         }
     }
 
-
-    public String expLevelInfo(Character c) {
-        String info = "";
-        int expNeeded = c.getLevel() * 2 - 1;
-        info += c.getExp() + "/" + expNeeded + " [" + c.getLevel() + "]";
-        return info;
-    }
-    
 
     public void updateBoard1(){
         Board currentBoard = pemain1.getBoard();
@@ -2952,7 +3473,7 @@ public class guiController implements Initializable {
                     alignImageCentre(player1BoardA);
                     player1BoardAAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
                     player1BoardAHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
-                    player1BoardALvl.setText(expLevelInfo((Character)currentBoard.getCard(i)));
+                    player1BoardALvl.setText(getExpLevel((Character)currentBoard.getCard(i)));
 
                 }else if(i==1){
                     player1BoardBAttack.setVisible(true);
@@ -2966,7 +3487,7 @@ public class guiController implements Initializable {
                     alignImageCentre(player1BoardB);
                     player1BoardBAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
                     player1BoardBHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
-                    player1BoardBLvl.setText(expLevelInfo((Character)currentBoard.getCard(i)));
+                    player1BoardBLvl.setText(getExpLevel((Character)currentBoard.getCard(i)));
 
                 }else if(i==2){
                     player1BoardCAttack.setVisible(true);
@@ -2980,7 +3501,7 @@ public class guiController implements Initializable {
                     alignImageCentre(player1BoardC);
                     player1BoardCAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
                     player1BoardCHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
-                    player1BoardCLvl.setText(expLevelInfo((Character)currentBoard.getCard(i)));
+                    player1BoardCLvl.setText(getExpLevel((Character)currentBoard.getCard(i)));
 
                 }else if(i==3){
                     player1BoardDAttack.setVisible(true);
@@ -2994,7 +3515,7 @@ public class guiController implements Initializable {
                     alignImageCentre(player1BoardD);
                     player1BoardDAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
                     player1BoardDHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
-                    player1BoardDLvl.setText(expLevelInfo((Character)currentBoard.getCard(i)));
+                    player1BoardDLvl.setText(getExpLevel((Character)currentBoard.getCard(i)));
 
                 }else if(i==4){
                     player1BoardEAttack.setVisible(true);
@@ -3008,7 +3529,7 @@ public class guiController implements Initializable {
                     alignImageCentre(player1BoardE);
                     player1BoardEAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
                     player1BoardEHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
-                    player1BoardELvl.setText(expLevelInfo((Character)currentBoard.getCard(i)));
+                    player1BoardELvl.setText(getExpLevel((Character)currentBoard.getCard(i)));
                 }
 
             }else{
@@ -3075,7 +3596,7 @@ public class guiController implements Initializable {
                     alignImageCentre(player2BoardA);
                     player2BoardAAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
                     player2BoardAHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
-                    player2BoardALvl.setText(expLevelInfo((Character)currentBoard.getCard(i)));
+                    player2BoardALvl.setText(getExpLevel((Character)currentBoard.getCard(i)));
 
                 }else if(i==1){
                     player2BoardBAttack.setVisible(true);
@@ -3089,7 +3610,7 @@ public class guiController implements Initializable {
                     alignImageCentre(player2BoardB);
                     player2BoardBAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
                     player2BoardBHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
-                    player2BoardBLvl.setText(expLevelInfo((Character)currentBoard.getCard(i)));
+                    player2BoardBLvl.setText(getExpLevel((Character)currentBoard.getCard(i)));
 
                 }else if(i==2){
                     player2BoardCAttack.setVisible(true);
@@ -3103,7 +3624,7 @@ public class guiController implements Initializable {
                     alignImageCentre(player2BoardC);
                     player2BoardCAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
                     player2BoardCHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
-                    player2BoardCLvl.setText(expLevelInfo((Character)currentBoard.getCard(i)));
+                    player2BoardCLvl.setText(getExpLevel((Character)currentBoard.getCard(i)));
 
                 }else if(i==3){
                     player2BoardDAttack.setVisible(true);
@@ -3117,7 +3638,7 @@ public class guiController implements Initializable {
                     alignImageCentre(player2BoardD);
                     player2BoardDAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
                     player2BoardDHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
-                    player2BoardDLvl.setText(expLevelInfo((Character)currentBoard.getCard(i)));
+                    player2BoardDLvl.setText(getExpLevel((Character)currentBoard.getCard(i)));
 
                 }else if(i==4){
                     player2BoardEAttack.setVisible(true);
@@ -3131,7 +3652,7 @@ public class guiController implements Initializable {
                     alignImageCentre(player2BoardE);
                     player2BoardEAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
                     player2BoardEHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
-                    player2BoardELvl.setText(expLevelInfo((Character)currentBoard.getCard(i)));
+                    player2BoardELvl.setText(getExpLevel((Character)currentBoard.getCard(i)));
                 }
 
             }else{
@@ -3181,45 +3702,10 @@ public class guiController implements Initializable {
     }
 
 
-    public void updateBoard(){
-        if(turn%2==1){
-            updateBoard1();
-        }else{
-            updateBoard2();
-        }
-    }
 
-
-    public void setDisplayMana(){
-        System.out.println("Set mana");
-        if(turn%2==1){
-            pemain1.setMana(min((turn+1)/2,10));
-            manaNum.setText("Mana\n"+pemain1.getMana()+"/"+(turn+1)/2);
-        }else{
-            pemain2.setMana(min((turn+1)/2,10));
-            manaNum.setText("Mana\n"+pemain2.getMana()+"/"+(turn+1)/2);
-        }
-    }
-
-
-    public void updateDisplayMana(){
-        if(turn%2==1){
-            manaNum.setText("Mana\n"+pemain1.getMana()+"/"+min((turn+1)/2,10));
-        }else{
-            manaNum.setText("Mana\n"+pemain2.getMana()+"/"+min((turn+1)/2,10));
-        }
-    }
-
-
-    public void setDisplayDeckNum(){
-        System.out.println("Set mana");
-        if(turn%2==1){
-            deckNum.setText("Deck\n"+pemain1.getDeck().getSize()+"/"+deckCapacityPemain1);
-        }else{
-            deckNum.setText("Deck\n"+pemain2.getDeck().getSize()+"/"+deckCapacityPemain2);
-        }
-    }
-
+    /* 
+     *  Debugging
+     */
 
     public static void debugging(){
         try {

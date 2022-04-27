@@ -112,6 +112,10 @@ public class Character extends Card  {
 
   public void levelUp(int lvl) {
     this.level += lvl;
+    for (int i = 0; i < lvl; i++) {
+      this.attack += this.attackUp;
+      this.health += this.healthUp;
+    }
   }
 
   public boolean isDead(){

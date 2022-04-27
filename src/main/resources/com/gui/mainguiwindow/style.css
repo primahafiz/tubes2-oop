@@ -35,6 +35,18 @@
     -fx-background-color:#FFC300;
 }
 
+.backgroundSelectedCard{
+    -fx-background-color:#FFC300;
+}
+
+.backgroundHasAttacked{
+    -fx-background-color:#ffa6a6;
+}
+
+.backgroundHasSpell{
+    -fx-background-color:#a6ffd0;
+}
+
 .boardIdLabel{
     -fx-font-weight:bold;
     -fx-font-size:20;

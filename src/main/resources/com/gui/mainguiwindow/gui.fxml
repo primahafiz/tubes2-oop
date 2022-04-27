@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="960.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
@@ -16,8 +17,8 @@
       <AnchorPane prefHeight="121.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
             <Circle fill="WHITE" layoutX="480.0" layoutY="61.0" radius="33.0" stroke="BLACK" strokeType="INSIDE" />
-            <ProgressBar fx:id="lifeBar1" layoutX="59.0" layoutY="19.0" prefHeight="18.0" prefWidth="333.0" progress="0.0" style="-fx-accent: #00bb00;" />
-            <ProgressBar fx:id="lifeBar2" layoutX="570.0" layoutY="19.0" prefHeight="18.0" prefWidth="333.0" progress="0.0" style="-fx-accent: #00bb00;" />
+            <ProgressBar fx:id="lifeBar1" layoutX="59.0" layoutY="19.0" prefHeight="28.0" prefWidth="334.0" progress="0.0" style="-fx-accent: #00bb00;" />
+            <ProgressBar fx:id="lifeBar2" layoutX="570.0" layoutY="19.0" prefHeight="28.0" prefWidth="334.0" progress="0.0" style="-fx-accent: #00bb00;" />
             <Label layoutX="464.0" layoutY="39.0" prefHeight="18.0" prefWidth="33.0" text="Turn">
                <font>
                   <Font name="Stencil" size="12.0" />
@@ -26,14 +27,24 @@
                <font>
                   <Font name="Impact" size="24.0" />
                </font></Label>
-            <Label layoutX="59.0" layoutY="77.0" prefHeight="27.0" prefWidth="53.0" text="Steve" textFill="WHITE">
+            <Label fx:id="namaPlayer1" layoutX="59.0" layoutY="80.0" prefHeight="27.0" prefWidth="53.0" text="Steve" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font></Label>
-            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="853.0" layoutY="77.0" prefHeight="27.0" prefWidth="50.0" text="Alex" textFill="WHITE">
+            <Label fx:id="namaPlayer2" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="853.0" layoutY="77.0" prefHeight="27.0" prefWidth="50.0" text="Alex" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font></Label>
+            <Label fx:id="hpPlayer1" layoutX="59.0" layoutY="47.0" prefHeight="27.0" prefWidth="120.0" text="HP   80/80" textFill="WHITE">
+               <font>
+                  <Font name="Bauhaus 93" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="hpPlayer2" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="783.0" layoutY="47.0" prefHeight="27.0" prefWidth="120.0" text="80/80   HP" textFill="WHITE">
+               <font>
+                  <Font name="Bauhaus 93" size="18.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </top>
@@ -151,6 +162,7 @@
    <left>
       <AnchorPane prefHeight="240.0" prefWidth="487.0" styleClass="playerHand" BorderPane.alignment="CENTER">
          <children>
+            <Rectangle fx:id="framePlayer1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="105.0" layoutX="33.0" layoutY="63.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="104.0" />
             <ImageView fx:id="player1Img" fitHeight="90.0" fitWidth="90.0" layoutX="40.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@image/steve.png" />
@@ -173,6 +185,11 @@
                   </ImageView>
                   <Label fx:id="player1BoardAHealth" alignment="CENTER" layoutX="66.0" layoutY="35.0" prefHeight="20.0" prefWidth="20.0" text="1" visible="false" />
                   <Label fx:id="player1BoardALvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
+                  <Label fx:id="damagetoBoardAP1" alignment="CENTER" layoutX="25.0" layoutY="25.0" prefHeight="40.0" prefWidth="40.0" textFill="RED" visible="false">
+                     <font>
+                        <Font name="Forte" size="18.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="player1BoardBFrame" layoutX="240.0" layoutY="19.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
@@ -192,6 +209,11 @@
                   </ImageView>
                   <Label fx:id="player1BoardBHealth" alignment="CENTER" layoutX="66.0" layoutY="35.0" prefHeight="20.0" prefWidth="20.0" text="1" visible="false" />
                   <Label fx:id="player1BoardBLvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
+                  <Label fx:id="damagetoBoardBP1" alignment="CENTER" layoutX="25.0" layoutY="25.0" prefHeight="40.0" prefWidth="40.0" textFill="RED" visible="false">
+                     <font>
+                        <Font name="Forte" size="18.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="player1BoardCFrame" layoutX="148.0" layoutY="111.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
@@ -211,6 +233,11 @@
                   </ImageView>
                   <Label fx:id="player1BoardCHealth" alignment="CENTER" layoutX="66.0" layoutY="35.0" prefHeight="20.0" prefWidth="20.0" text="1" visible="false" />
                   <Label fx:id="player1BoardCLvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
+                  <Label fx:id="damagetoBoardCP1" alignment="CENTER" layoutX="25.0" layoutY="25.0" prefHeight="40.0" prefWidth="40.0" textFill="RED" visible="false">
+                     <font>
+                        <Font name="Forte" size="18.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="player1BoardDFrame" layoutX="240.0" layoutY="111.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
@@ -230,6 +257,11 @@
                   </ImageView>
                   <Label fx:id="player1BoardDHealth" alignment="CENTER" layoutX="66.0" layoutY="35.0" prefHeight="20.0" prefWidth="20.0" text="1" visible="false" />
                   <Label fx:id="player1BoardDLvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
+                  <Label fx:id="damagetoBoardDP1" alignment="CENTER" layoutX="25.0" layoutY="25.0" prefHeight="40.0" prefWidth="40.0" textFill="RED" visible="false">
+                     <font>
+                        <Font name="Forte" size="18.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="player1BoardEFrame" layoutX="332.0" layoutY="65.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
@@ -249,6 +281,11 @@
                   </ImageView>
                   <Label fx:id="player1BoardEHealth" alignment="CENTER" layoutX="66.0" layoutY="35.0" prefHeight="20.0" prefWidth="20.0" text="1" visible="false" />
                   <Label fx:id="player1BoardELvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
+                  <Label fx:id="damagetoBoardEP1" alignment="CENTER" layoutX="25.0" layoutY="25.0" prefHeight="40.0" prefWidth="40.0" textFill="RED" visible="false">
+                     <font>
+                        <Font name="Forte" size="18.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
             <ImageView fx:id="player1BoardDDelete" fitHeight="21.0" fitWidth="21.0" layoutX="337.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -337,6 +374,7 @@
    <right>
       <AnchorPane prefHeight="229.0" prefWidth="563.0" styleClass="playerHand" BorderPane.alignment="CENTER">
          <children>
+            <Rectangle fx:id="framePlayer2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="105.0" layoutX="336.0" layoutY="58.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="104.0" />
             <ImageView fx:id="player2Img" fitHeight="90.0" fitWidth="90.0" layoutX="343.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@image/alex.jpg" />
@@ -359,6 +397,11 @@
                   </ImageView>
                   <Label fx:id="player2BoardEHealth" alignment="CENTER" layoutX="66.0" layoutY="35.0" prefHeight="20.0" prefWidth="20.0" text="1" visible="false" />
                   <Label fx:id="player2BoardELvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
+                  <Label fx:id="damagetoBoardEP2" alignment="CENTER" layoutX="25.0" layoutY="25.0" prefHeight="40.0" prefWidth="40.0" textFill="RED" visible="false">
+                     <font>
+                        <Font name="Forte" size="18.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="player2BoardDFrame" layoutX="143.0" layoutY="111.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
@@ -378,6 +421,11 @@
                   </ImageView>
                   <Label fx:id="player2BoardDHealth" alignment="CENTER" layoutX="66.0" layoutY="35.0" prefHeight="20.0" prefWidth="20.0" text="1" visible="false" />
                   <Label fx:id="player2BoardDLvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
+                  <Label fx:id="damagetoBoardDP2" alignment="CENTER" layoutX="25.0" layoutY="25.0" prefHeight="40.0" prefWidth="40.0" textFill="RED" visible="false">
+                     <font>
+                        <Font name="Forte" size="18.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="player2BoardBFrame" layoutX="143.0" layoutY="19.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
@@ -397,6 +445,11 @@
                   </ImageView>
                   <Label fx:id="player2BoardBHealth" alignment="CENTER" layoutX="66.0" layoutY="35.0" prefHeight="20.0" prefWidth="20.0" text="1" visible="false" />
                   <Label fx:id="player2BoardBLvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
+                  <Label fx:id="damagetoBoardBP2" alignment="CENTER" layoutX="25.0" layoutY="25.0" prefHeight="40.0" prefWidth="40.0" textFill="RED" visible="false">
+                     <font>
+                        <Font name="Forte" size="18.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="player2BoardAFrame" layoutX="235.0" layoutY="19.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
@@ -416,6 +469,11 @@
                   </ImageView>
                   <Label fx:id="player2BoardAHealth" alignment="CENTER" layoutX="66.0" layoutY="35.0" prefHeight="20.0" prefWidth="20.0" text="1" visible="false" />
                   <Label fx:id="player2BoardALvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
+                  <Label fx:id="damagetoBoardAP2" alignment="CENTER" layoutX="25.0" layoutY="25.0" prefHeight="40.0" prefWidth="40.0" textFill="RED" visible="false">
+                     <font>
+                        <Font name="Forte" size="18.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="player2BoardCFrame" layoutX="235.0" layoutY="111.0" prefHeight="90.0" prefWidth="90.0" styleClass="containerBoard">
@@ -435,6 +493,11 @@
                   </ImageView>
                   <Label fx:id="player2BoardCHealth" alignment="CENTER" layoutX="66.0" layoutY="35.0" prefHeight="20.0" prefWidth="20.0" text="1" visible="false" />
                   <Label fx:id="player2BoardCLvl" alignment="CENTER" layoutX="9.0" layoutY="68.0" prefHeight="18.0" prefWidth="77.0" text="0/1 [1]" visible="false" />
+                  <Label fx:id="damagetoBoardCP2" alignment="CENTER" layoutX="25.0" layoutY="25.0" prefHeight="40.0" prefWidth="40.0" textFill="RED" visible="false">
+                     <font>
+                        <Font name="Forte" size="18.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
             <ImageView fx:id="player2BoardEDelete" fitHeight="21.0" fitWidth="21.0" layoutX="14.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" visible="false">

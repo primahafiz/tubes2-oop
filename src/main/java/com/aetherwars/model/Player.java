@@ -179,7 +179,7 @@ public class Player {
                 this.hand.removeCardfromHand(spellCardIdx);
             } else {
                 System.out.println("Spell card can only be used to Character");
-                //throw new InvalidException("Spell card can only be used to Character");
+                throw new InvalidException("Spell card can only be used to Character");
             }
 
         } else {
