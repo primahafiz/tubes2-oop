@@ -521,9 +521,11 @@ public class guiController implements Initializable {
         // initialize stage
         idStage = -1;
 
+        // initialize hover card
         updateHand();
         initHoveredCardBoard();
         initHoveredCardHand();
+        hideHand();
     }
 
 
@@ -2877,7 +2879,7 @@ public class guiController implements Initializable {
                     ((Character) P1board.getCard(1)).addExp(1);
                     pemain1.setMana(pemain1.getMana() - 1);
                     if ((((Character) P1board.getCard(1)).getExp() >= ((Character) P1board.getCard(1)).getLevel() * 2 - 1) && (((Character) P1board.getCard(1)).getLevel() < 10)) {
-                        ((Character) P1board.getCard(1)).addExp(-((Character) P1board.getCard(0)).getLevel() * 2 + 1);
+                        ((Character) P1board.getCard(1)).addExp(-((Character) P1board.getCard(1)).getLevel() * 2 + 1);
                         ((Character) P1board.getCard(1)).levelUp(1);
                     }
                 }
@@ -2894,7 +2896,7 @@ public class guiController implements Initializable {
                     ((Character) P1board.getCard(2)).addExp(1);
                     pemain1.setMana(pemain1.getMana() - 1);
                     if ((((Character) P1board.getCard(2)).getExp() >= ((Character) P1board.getCard(2)).getLevel() * 2 - 1) && (((Character) P1board.getCard(2)).getLevel() < 10)) {
-                        ((Character) P1board.getCard(2)).addExp(-((Character) P1board.getCard(0)).getLevel() * 2 + 1);
+                        ((Character) P1board.getCard(2)).addExp(-((Character) P1board.getCard(2)).getLevel() * 2 + 1);
                         ((Character) P1board.getCard(2)).levelUp(1);
                     }
                 }
@@ -2911,7 +2913,7 @@ public class guiController implements Initializable {
                     ((Character) P1board.getCard(3)).addExp(1);
                     pemain1.setMana(pemain1.getMana() - 1);
                     if ((((Character) P1board.getCard(3)).getExp() >= ((Character) P1board.getCard(3)).getLevel() * 2 - 1) && (((Character) P1board.getCard(3)).getLevel() < 10)) {
-                        ((Character) P1board.getCard(3)).addExp(-((Character) P1board.getCard(0)).getLevel() * 2 + 1);
+                        ((Character) P1board.getCard(3)).addExp(-((Character) P1board.getCard(3)).getLevel() * 2 + 1);
                         ((Character) P1board.getCard(3)).levelUp(1);
                     }
                 }
@@ -2928,7 +2930,7 @@ public class guiController implements Initializable {
                     ((Character) P1board.getCard(4)).addExp(1);
                     pemain1.setMana(pemain1.getMana() - 1);
                     if ((((Character) P1board.getCard(4)).getExp() >= ((Character) P1board.getCard(4)).getLevel() * 2 - 1) && (((Character) P1board.getCard(4)).getLevel() < 10)) {
-                        ((Character) P1board.getCard(4)).addExp(-((Character) P1board.getCard(0)).getLevel() * 2 + 1);
+                        ((Character) P1board.getCard(4)).addExp(-((Character) P1board.getCard(4)).getLevel() * 2 + 1);
                         ((Character) P1board.getCard(4)).levelUp(1);
                     }
                 }
@@ -2967,7 +2969,7 @@ public class guiController implements Initializable {
                     ((Character) P2board.getCard(1)).addExp(1);
                     pemain2.setMana(pemain2.getMana() - 1);
                     if ((((Character) P2board.getCard(1)).getExp() >= ((Character) P2board.getCard(1)).getLevel() * 2 - 1) && (((Character) P2board.getCard(1)).getLevel() < 10)) {
-                        ((Character) P2board.getCard(1)).addExp((-((Character) P2board.getCard(0)).getLevel() * 2 + 1));
+                        ((Character) P2board.getCard(1)).addExp((-((Character) P2board.getCard(1)).getLevel() * 2 + 1));
                         ((Character) P2board.getCard(1)).levelUp(1);
                     }
                 }
@@ -2984,7 +2986,7 @@ public class guiController implements Initializable {
                     ((Character) P2board.getCard(2)).addExp(1);
                     pemain2.setMana(pemain2.getMana() - 1);
                     if ((((Character) P2board.getCard(2)).getExp() >= ((Character) P2board.getCard(2)).getLevel() * 2 - 1) && (((Character) P2board.getCard(2)).getLevel() < 10)) {
-                        ((Character) P2board.getCard(2)).addExp(-((Character) P2board.getCard(0)).getLevel() * 2 + 1);
+                        ((Character) P2board.getCard(2)).addExp(-((Character) P2board.getCard(2)).getLevel() * 2 + 1);
                         ((Character) P2board.getCard(2)).levelUp(1);
                     }
                 }
@@ -3001,7 +3003,7 @@ public class guiController implements Initializable {
                     ((Character) P2board.getCard(3)).addExp(1);
                     pemain2.setMana(pemain2.getMana() - 1);
                     if ((((Character) P2board.getCard(3)).getExp() >= ((Character) P2board.getCard(3)).getLevel() * 2 - 1) && (((Character) P2board.getCard(3)).getLevel() < 10)) {
-                        ((Character) P2board.getCard(3)).addExp(-((Character) P2board.getCard(0)).getLevel() * 2 + 1);
+                        ((Character) P2board.getCard(3)).addExp(-((Character) P2board.getCard(3)).getLevel() * 2 + 1);
                         ((Character) P2board.getCard(3)).levelUp(1);
                     }
                 }
@@ -3018,7 +3020,7 @@ public class guiController implements Initializable {
                     ((Character) P2board.getCard(4)).addExp(1);
                     pemain2.setMana(pemain2.getMana() - 1);
                     if ((((Character) P2board.getCard(4)).getExp() >= ((Character) P2board.getCard(4)).getLevel() * 2 - 1) && (((Character) P2board.getCard(4)).getLevel() < 10)) {
-                        ((Character) P2board.getCard(4)).addExp(-((Character) P2board.getCard(0)).getLevel() * 2 + 1);
+                        ((Character) P2board.getCard(4)).addExp(-((Character) P2board.getCard(4)).getLevel() * 2 + 1);
                         ((Character) P2board.getCard(4)).levelUp(1);
                     }
                 }
@@ -3143,8 +3145,11 @@ public class guiController implements Initializable {
 
     public void changeStageClicked(){
         // kalau button untuk pindah stage diclick
-        if(idStage==-1){
+        if(idStage==-1){    // stage saat baru start program
+            viewHand();
             turn++;
+            numTurn.setText(Integer.toString((turn+1)/2));
+            // menampilkan penanda giliran saat ini
             if (turn % 2 == 1) {
                 framePlayer1.setVisible(true);
                 framePlayer2.setVisible(false);
@@ -3153,96 +3158,100 @@ public class guiController implements Initializable {
                 framePlayer1.setVisible(false);
                 framePlayer2.setVisible(true);
             }
-            numTurn.setText(Integer.toString((turn+1)/2));
+            // menampilkan jumlah kartu di deck
             setDisplayDeckNum();
+            // mengupdate tampilan hand sesuai giliran saat ini
             if(turn%2==1) {
                 updateHand1();
             }else{
                 updateHand2();
             }
-            System.out.println(2);
+            // menampilkan layar draw dan update tampilan hand
             displayWindowDraw();
+            // update hand, mana, decknum setelah draw
             if(turn%2==1) {
                 updateHand1();
             }else{
                 updateHand2();
             }
-            initHoveredCardHand();
-            activateStageLabel(stageEndLabel,stageDrawLabel);
             setDisplayMana();
             setDisplayDeckNum();
-        } else if(idStage==0){
-            initDragAndDropHand();
-            initDelete();
-            initLevelUpUseMana();
-            updateHand();
-            updateDeleteHand();
+            // inisiasi hover hand setelah draw
+            initHoveredCardHand();
+            // inisiasi ganti stage
+            activateStageLabel(stageEndLabel,stageDrawLabel);
+        } else if(idStage==0){  // fase planning
+            initDragAndDropHand();              // inisiasi drag and drop                       
+            initDelete();                       // inisiasi tombol delete hand dan board  
+            initLevelUpUseMana();               // inisiasi tombol level up pakai mana              
+            updateHand();                       // update hand jika ada yang didelete               
+            updateDeleteHand();                 // update display tombol delete jika ada yang didelete      
             updateLevelUpButton();
             System.out.println("Hand 1 besar : "+pemain1.getHand().numberOfCards());
             if(turn%2==1){
-                initDragAndDropBoardPlayer1();
-                updateDeleteBoard1();
-                updateLevelUpButtonP1();
+                initDragAndDropBoardPlayer1();  // inisiasi drag and drop board player 1
+                updateDeleteBoard1();           // update display tombol delete board player 1
+                updateLevelUpButtonP1();        // update display tombol level up board player 1
             }else{
-                initDragAndDropBoardPlayer2(); //
-                updateDeleteBoard2();
-                updateLevelUpButtonP2();
+                initDragAndDropBoardPlayer2();  // inisiasi drag and drop board player 2
+                updateDeleteBoard2();           // update display tombol delete board player 2
+                updateLevelUpButtonP2();        // update display tombol level up board player 2
             }
-            initHoveredCardBoard();
-            setDisplayDeckNum();
+            initHoveredCardBoard();             // inisiasi hover board
+            setDisplayDeckNum();                // update tampilan decknum
             activateStageLabel(stageDrawLabel,stagePlanLabel);
-        }else if(idStage==1){
-            updateBoard1();
-            updateBoard2();
-            endLevelUpButton();
-            endDelete();
-            endDragAndDropHand();
+        }else if(idStage==1){ // fase attack
+            updateBoard1();                     // update board player 1
+            updateBoard2();                     // update board player 2
+            endLevelUpButton();                 // akhiri display tombol level up
+            endDelete();                        // akhiri display tombol delete hand dan board
+            endDragAndDropHand();               // akhiri proses drag and drop hand
             if(turn%2==1){
-                endDragAndDrop1();
+                endDragAndDrop1();              // akhiri proses drag and drop board player 1
             }else{
-                endDragAndDrop2();
+                endDragAndDrop2();              // akhiri proses drag and drop board player 2
             }
+            initSelectAttack();                 // inisiasi attack
             activateStageLabel(stagePlanLabel,stageAttackLabel);
-            initSelectAttack();
-        }else if(idStage==2){
-            initHoveredPlayerImg();
-            updateBoard1();
-            updateBoard2();
-            clearAttack();
-            endMouseClickAttack();
+        }else if(idStage==2){ // fase end
+            initHoveredPlayerImg();             // inisiasi hover player img
+            updateBoard1();                     // update board player 1 setelah attack
+            updateBoard2();                     // update board player 2 setelah attack
+            clearAttack();                      // akhiri attack
+            endMouseClickAttack();              // akhiri attack
             activateStageLabel(stageAttackLabel,stageEndLabel);
-        }else if(idStage==3){
+        }else if(idStage==3){ // fase draw
             turn++;
+            numTurn.setText(Integer.toString((turn+1)/2));
             if (turn % 2 == 1) {
-                framePlayer1.setVisible(true);
+                framePlayer1.setVisible(true);  
                 framePlayer2.setVisible(false);
-                updateSpellBoard1();
-                updateBoard1();
+                updateSpellBoard1();            // update durasi spell board player 1
+                updateBoard1();                 // update board player 1
             }
             else {
                 framePlayer1.setVisible(false);
                 framePlayer2.setVisible(true);
-                updateSpellBoard2();
-                updateBoard2();
+                updateSpellBoard2();            // update durasi spell board player 2
+                updateBoard2();                 // update board player 2
             }
-            numTurn.setText(Integer.toString((turn+1)/2));
-            setDisplayDeckNum();
-            setDisplayMana();
-            if(turn%2==1) {
+            setDisplayDeckNum();                // update tampilan decknum
+            setDisplayMana();                   // update mana
+            if(turn%2==1) {                     // update tampilan hand
                 updateHand1();
             }else{
                 updateHand2();
             }
-            if (!endGame()) {
+            if (!endGame()) {                   // tampilkan draw phase jika belum end game
                 displayWindowDraw();
             }
-            if(turn%2==1) {
+            if(turn%2==1) {                     // update tampilan hand setelah draw
                 updateHand1();
             }else{
                 updateHand2();
             }
-            initHoveredCardHand();
-            setDisplayDeckNum();
+            setDisplayDeckNum();                // update tampilan decknum
+            initHoveredCardHand();              // inisiasi hover hand setelah draw
             activateStageLabel(stageEndLabel,stageDrawLabel);
         }
         idStage++;
@@ -3384,7 +3393,7 @@ public class guiController implements Initializable {
                 pemain2.getBoard().removeCardfromBoard(i);
             }
             if (pemain2.getBoard().isValidIdx(i)) {
-                unmarkHasAttacked(i);
+                unmarkHasAttacked(i + 5);
             }
         }
     }
@@ -3407,6 +3416,44 @@ public class guiController implements Initializable {
                 ((Character) pemain2.getBoard().getCard(i)).updateDur((turn+1)/2);
             }
         }
+    }
+
+    public void hideHand() {
+        System.out.println("Hide Hand");
+        handCard1.setVisible(false);
+        handCard1Mana.setVisible(false);
+        handCard1AtkHealth.setVisible(false);
+        handCard2.setVisible(false);
+        handCard2Mana.setVisible(false);
+        handCard2AtkHealth.setVisible(false);
+        handCard3.setVisible(false);
+        handCard3Mana.setVisible(false);
+        handCard3AtkHealth.setVisible(false);
+        handCard4.setVisible(false);
+        handCard4Mana.setVisible(false);
+        handCard4AtkHealth.setVisible(false);
+        handCard5.setVisible(false);
+        handCard5Mana.setVisible(false);
+        handCard5AtkHealth.setVisible(false);
+    }
+
+    public void viewHand() {
+        System.out.println("View Hand");
+        handCard1.setVisible(true);
+        handCard1Mana.setVisible(true);
+        handCard1AtkHealth.setVisible(true);
+        handCard2.setVisible(true);
+        handCard2Mana.setVisible(true);
+        handCard2AtkHealth.setVisible(true);
+        handCard3.setVisible(true);
+        handCard3Mana.setVisible(true);
+        handCard3AtkHealth.setVisible(true);
+        handCard4.setVisible(true);
+        handCard4Mana.setVisible(true);
+        handCard4AtkHealth.setVisible(true);
+        handCard5.setVisible(true);
+        handCard5Mana.setVisible(true);
+        handCard5AtkHealth.setVisible(true);
     }
 
 

@@ -235,7 +235,9 @@ public class Player {
                     enemyCharacter.addExp(attacker.getLevel());
                 }
                 this.board.removeCardfromBoard(attackerCharacterIdx);
-            } else { // duaduanya mati
+
+            } else if (attacker.isDead() && enemyCharacter.isDead()) { // duaduanya mati
+                System.out.println("Karakter pemain dan lawan mati");
                 this.board.removeCardfromBoard(attackerCharacterIdx);
                 enemy.board.removeCardfromBoard(enemyCharacterIdx);
             }
@@ -254,6 +256,7 @@ public class Player {
 
             // satu karakter hanya dapat menyerang satu kali
             attacker.setHasAttackedTrue();
+            
         } else {
             System.out.println("A Character can only attack once");
         }
