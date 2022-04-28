@@ -13,8 +13,8 @@ public class Deck {
             c.addAllCards();
             for (i = 0;i < capacity; i++){
                 int random = rand.nextInt(c.getCards().size());
-                //Card cardclone = (Card) c.getCards().get(random).clone();
-                Card cardclone = cctorCard(c.getCards().get(random));
+                Card cardclone = (Card) c.getCards().get(random).clone();
+                //Card cardclone = cctorCard(c.getCards().get(random));
                 CardDeck.add(cardclone);
             }
         } catch (Exception e) {

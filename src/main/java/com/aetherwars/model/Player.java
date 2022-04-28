@@ -16,7 +16,7 @@ import java.util.Random;
 
 public class Player {
     private String Name;
-    private int hp;
+    private double hp;
     private int Mana;
 
     private Board board;
@@ -61,12 +61,12 @@ public class Player {
     }
 
     // Getter HP
-    public int getHp() {
+    public double getHp() {
         return this.hp;
     }
 
     // Setter HP
-    public void setHp(int hp) {
+    public void setHp(double hp) {
         if (hp < 0) {
             this.hp = 0;
         } else {
@@ -204,7 +204,7 @@ public class Player {
             // Health karakter musuh berkurang sesuai dengan attack karakter
             // pemain dan attack modifier tipe kedua karakter
             double damageByAttacker = attacker.getDamage(enemyCharacter);
-            enemyCharacter.minusHealth((int)damageByAttacker);
+            enemyCharacter.minusHealth(damageByAttacker);
             // enemyCharacter.setHealth((int) (enemyCharacter.getHealth() - damageByAttacker));
             System.out.println("Damage yang diberikan : " + damageByAttacker);
 

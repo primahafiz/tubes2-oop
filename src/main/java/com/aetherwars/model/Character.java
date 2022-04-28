@@ -7,17 +7,17 @@ import java.lang.Math;
 
 public class Character extends Card  {
   private Type type;
-  private int attack;
-  private int health;
-  private int attackUp;
-  private int healthUp;
+  private double attack;
+  private double health;
+  private double attackUp;
+  private double healthUp;
   private int exp;
   private int level;
   private boolean hasAttacked;
   private int swapDur;
   private List<PtnSpell> listPtnSpell;
 
-  public Character(int id, String name, String desc, String path, int mana, Type type, int attack, int health, int attackUp, int healthUp) {
+  public Character(int id, String name, String desc, String path, int mana, Type type, double attack, double health, double attackUp, double healthUp) {
     super(id, name, desc, path, mana);
     this.type = type;
     this.attack = attack;
@@ -37,19 +37,19 @@ public class Character extends Card  {
     return this.type;
   }
 
-  public int getAttack(){
+  public double getAttack(){
     return Math.max(this.attack + this.getTempAttack(), 0);
   }
 
-  public int getHealth(){
+  public double getHealth(){
     return Math.max(this.health + this.getTempHealth(), 0);
   }
 
-  public int getAttackUp(){
+  public double getAttackUp(){
     return this.attackUp;
   }
 
-  public int getHealthUp(){
+  public double getHealthUp(){
     return this.healthUp;
   }
 
@@ -107,15 +107,18 @@ public class Character extends Card  {
     }
   }
 
-  public void setHealth(int health){
+  public void setHealth(double health){
     this.health = Math.max(health, 0);
   }
 
   public void levelUp(int lvl) {
-    this.level += lvl;
+    int predictLvl = this.level + lvl;
+    this.level = Math.min(predictLvl, 10);
     for (int i = 0; i < lvl; i++) {
-      this.attack += this.attackUp;
-      this.health += this.healthUp;
+      if (lvl < 10) {
+        this.attack += this.attackUp;
+        this.health += this.healthUp;
+      }
     }
   }
 
@@ -139,16 +142,16 @@ public class Character extends Card  {
     return mana;
   }
 
-  private int getTempAttack(){
-    int tempAttack = 0;
+  private double getTempAttack(){
+    double tempAttack = 0;
     for (PtnSpell s : this.listPtnSpell){
       tempAttack += s.getPtnAttack();
     }
     return tempAttack;
   }
 
-  private int getTempHealth(){
-    int tempHealth = 0;
+  private double getTempHealth(){
+    double tempHealth = 0;
     for (PtnSpell s : this.listPtnSpell){
       tempHealth += s.getPtnHp();
     }
@@ -188,10 +191,14 @@ public class Character extends Card  {
     int predictLvl = s.getAdd() + this.getLevel();
     if (predictLvl >= 1 && predictLvl <= 10){
       this.level = predictLvl;
+      this.attack += this.attackUp;
+      this.health += this.healthUp;
     } else if (predictLvl > 10){
       this.level = 10;
     } else {
       this.level = 1;
+      this.attack += this.attackUp;
+      this.health += this.healthUp;
     }
   }
 
@@ -216,7 +223,7 @@ public class Character extends Card  {
       this.swapDur += s.getDuration();
     } else {
       this.swapDur = s.getDuration();
-      int val = this.attack;
+      double val = this.attack;
       this.attack = this.health;
       this.health = val;
       this.swapPtnSpellList();
@@ -224,7 +231,7 @@ public class Character extends Card  {
   }
 
   public void swapBack(){
-    int val = this.attack;
+    double val = this.attack;
     this.attack = this.health;
     this.health = val;
     this.swapPtnSpellList();
@@ -264,7 +271,7 @@ public class Character extends Card  {
     System.out.println("CharExp: " + getExp());
   }
 
-  public void minusHealth(int damage){
+  public void minusHealth(double damage){
     // kalo damage >= getHealth() -> langsung this.health = 0
     // kalo damage < getHealth():
       // kalo getTempHealth() > 0 -> minus dari tempHealth dulu
@@ -297,9 +304,9 @@ public class Character extends Card  {
     this.level = level;
   }
 
-  private void minusHelper(int damage){
+  private void minusHelper(double damage){
     List<Integer> listidx = new ArrayList<Integer>();
-    int total = 0;
+    double total = 0;
     int i = 0;
     // reverse
     Collections.reverse(this.listPtnSpell);

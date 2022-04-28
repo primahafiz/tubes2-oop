@@ -2063,7 +2063,7 @@ public class guiController implements Initializable {
         player2BoardA.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (defenderBoard.isCharacterAvailable(0) && selectedAttCard != -1 && !hasAttacked) {
+                if (defenderBoard.isCharacterAvailable(0) && selectedAttCard != -1 && !hasAttacked && !((Character) attackerBoard.getCard(selectedAttCard)).hasAttacked()) {
                     if (selectedDefCard == -1 || selectedDefCard != 0) {
                         unselectBoardCard(selectedDefCard + 5);
                         selectBoardCard(5);
@@ -2094,7 +2094,7 @@ public class guiController implements Initializable {
         player2BoardB.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (defenderBoard.isCharacterAvailable(1) && selectedAttCard != -1 && !hasAttacked) {
+                if (defenderBoard.isCharacterAvailable(1) && selectedAttCard != -1 && !hasAttacked && !((Character) attackerBoard.getCard(selectedAttCard)).hasAttacked()) {
                     if (selectedDefCard == -1 || selectedDefCard != 1) {
                         unselectBoardCard(selectedDefCard + 5);
                         selectBoardCard(6);
@@ -2125,7 +2125,7 @@ public class guiController implements Initializable {
         player2BoardC.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (defenderBoard.isCharacterAvailable(2) && selectedAttCard != -1 && !hasAttacked) {
+                if (defenderBoard.isCharacterAvailable(2) && selectedAttCard != -1 && !hasAttacked && !((Character) attackerBoard.getCard(selectedAttCard)).hasAttacked()) {
                     if (selectedDefCard == -1 || selectedDefCard != 2) {
                         unselectBoardCard(selectedDefCard + 5);
                         selectBoardCard(7);
@@ -2156,7 +2156,7 @@ public class guiController implements Initializable {
         player2BoardD.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (defenderBoard.isCharacterAvailable(3) && selectedAttCard != -1 && !hasAttacked) {
+                if (defenderBoard.isCharacterAvailable(3) && selectedAttCard != -1 && !hasAttacked && !((Character) attackerBoard.getCard(selectedAttCard)).hasAttacked()) {
                     if (selectedDefCard == -1 || selectedDefCard != 3) {
                         unselectBoardCard(selectedDefCard + 5);
                         selectBoardCard(8);
@@ -2187,7 +2187,7 @@ public class guiController implements Initializable {
         player2BoardE.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (defenderBoard.isCharacterAvailable(4) && selectedAttCard != -1 && !hasAttacked) {
+                if (defenderBoard.isCharacterAvailable(4) && selectedAttCard != -1 && !hasAttacked && !((Character) attackerBoard.getCard(selectedAttCard)).hasAttacked()) {
                     if (selectedDefCard == -1 || selectedDefCard != 4) {
                         unselectBoardCard(selectedDefCard + 5);
                         selectBoardCard(9);
@@ -2355,7 +2355,7 @@ public class guiController implements Initializable {
         player1BoardA.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (defenderBoard.isCharacterAvailable(0) && selectedAttCard != -1 && !hasAttacked) {
+                if (defenderBoard.isCharacterAvailable(0) && selectedAttCard != -1 && !hasAttacked && !((Character) attackerBoard.getCard(selectedAttCard)).hasAttacked()) {
                     if (selectedDefCard == -1 || selectedDefCard != 0) {
                         unselectBoardCard(selectedDefCard);
                         selectBoardCard(0);
@@ -2386,7 +2386,7 @@ public class guiController implements Initializable {
         player1BoardB.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (defenderBoard.isCharacterAvailable(1) && selectedAttCard != -1 && !hasAttacked) {
+                if (defenderBoard.isCharacterAvailable(1) && selectedAttCard != -1 && !hasAttacked && !((Character) attackerBoard.getCard(selectedAttCard)).hasAttacked()) {
                     if (selectedDefCard == -1 || selectedDefCard != 1) {
                         unselectBoardCard(selectedDefCard);
                         selectBoardCard(1);
@@ -2417,7 +2417,7 @@ public class guiController implements Initializable {
         player1BoardC.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (defenderBoard.isCharacterAvailable(2) && selectedAttCard != -1 && !hasAttacked) {
+                if (defenderBoard.isCharacterAvailable(2) && selectedAttCard != -1 && !hasAttacked && !((Character) attackerBoard.getCard(selectedAttCard)).hasAttacked()) {
                     if (selectedDefCard == -1 || selectedDefCard != 2) {
                         unselectBoardCard(selectedDefCard);
                         selectBoardCard(2);
@@ -2448,7 +2448,7 @@ public class guiController implements Initializable {
         player1BoardD.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (defenderBoard.isCharacterAvailable(3) && selectedAttCard != -1 && !hasAttacked) {
+                if (defenderBoard.isCharacterAvailable(3) && selectedAttCard != -1 && !hasAttacked && !((Character) attackerBoard.getCard(selectedAttCard)).hasAttacked()) {
                     if (selectedDefCard == -1 || selectedDefCard != 3) {
                         unselectBoardCard(selectedDefCard);
                         selectBoardCard(3);
@@ -2479,7 +2479,7 @@ public class guiController implements Initializable {
         player1BoardE.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (defenderBoard.isCharacterAvailable(4) && selectedAttCard != -1 && !hasAttacked) {
+                if (defenderBoard.isCharacterAvailable(4) && selectedAttCard != -1 && !hasAttacked && !((Character) attackerBoard.getCard(selectedAttCard)).hasAttacked()) {
                     if (selectedDefCard == -1 || selectedDefCard != 4) {
                         unselectBoardCard(selectedDefCard);
                         selectBoardCard(4);
@@ -3718,8 +3718,8 @@ public class guiController implements Initializable {
 
                     player1BoardA.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
                     alignImageCentre(player1BoardA);
-                    player1BoardAAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
-                    player1BoardAHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
+                    player1BoardAAttack.setText(Double.toString(((Character)currentBoard.getCard(i)).getAttack()));
+                    player1BoardAHealth.setText(Double.toString(((Character)currentBoard.getCard(i)).getHealth()));
                     player1BoardALvl.setText(getExpLevel((Character)currentBoard.getCard(i)));
 
                 }else if(i==1){
@@ -3732,8 +3732,8 @@ public class guiController implements Initializable {
 
                     player1BoardB.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
                     alignImageCentre(player1BoardB);
-                    player1BoardBAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
-                    player1BoardBHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
+                    player1BoardBAttack.setText(Double.toString(((Character)currentBoard.getCard(i)).getAttack()));
+                    player1BoardBHealth.setText(Double.toString(((Character)currentBoard.getCard(i)).getHealth()));
                     player1BoardBLvl.setText(getExpLevel((Character)currentBoard.getCard(i)));
 
                 }else if(i==2){
@@ -3746,8 +3746,8 @@ public class guiController implements Initializable {
 
                     player1BoardC.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
                     alignImageCentre(player1BoardC);
-                    player1BoardCAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
-                    player1BoardCHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
+                    player1BoardCAttack.setText(Double.toString(((Character)currentBoard.getCard(i)).getAttack()));
+                    player1BoardCHealth.setText(Double.toString(((Character)currentBoard.getCard(i)).getHealth()));
                     player1BoardCLvl.setText(getExpLevel((Character)currentBoard.getCard(i)));
 
                 }else if(i==3){
@@ -3760,8 +3760,8 @@ public class guiController implements Initializable {
 
                     player1BoardD.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
                     alignImageCentre(player1BoardD);
-                    player1BoardDAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
-                    player1BoardDHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
+                    player1BoardDAttack.setText(Double.toString(((Character)currentBoard.getCard(i)).getAttack()));
+                    player1BoardDHealth.setText(Double.toString(((Character)currentBoard.getCard(i)).getHealth()));
                     player1BoardDLvl.setText(getExpLevel((Character)currentBoard.getCard(i)));
 
                 }else if(i==4){
@@ -3774,8 +3774,8 @@ public class guiController implements Initializable {
 
                     player1BoardE.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
                     alignImageCentre(player1BoardE);
-                    player1BoardEAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
-                    player1BoardEHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
+                    player1BoardEAttack.setText(Double.toString(((Character)currentBoard.getCard(i)).getAttack()));
+                    player1BoardEHealth.setText(Double.toString(((Character)currentBoard.getCard(i)).getHealth()));
                     player1BoardELvl.setText(getExpLevel((Character)currentBoard.getCard(i)));
                 }
 
@@ -3841,8 +3841,8 @@ public class guiController implements Initializable {
 
                     player2BoardA.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
                     alignImageCentre(player2BoardA);
-                    player2BoardAAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
-                    player2BoardAHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
+                    player2BoardAAttack.setText(Double.toString(((Character)currentBoard.getCard(i)).getAttack()));
+                    player2BoardAHealth.setText(Double.toString(((Character)currentBoard.getCard(i)).getHealth()));
                     player2BoardALvl.setText(getExpLevel((Character)currentBoard.getCard(i)));
 
                 }else if(i==1){
@@ -3855,8 +3855,8 @@ public class guiController implements Initializable {
 
                     player2BoardB.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
                     alignImageCentre(player2BoardB);
-                    player2BoardBAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
-                    player2BoardBHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
+                    player2BoardBAttack.setText(Double.toString(((Character)currentBoard.getCard(i)).getAttack()));
+                    player2BoardBHealth.setText(Double.toString(((Character)currentBoard.getCard(i)).getHealth()));
                     player2BoardBLvl.setText(getExpLevel((Character)currentBoard.getCard(i)));
 
                 }else if(i==2){
@@ -3869,8 +3869,8 @@ public class guiController implements Initializable {
 
                     player2BoardC.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
                     alignImageCentre(player2BoardC);
-                    player2BoardCAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
-                    player2BoardCHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
+                    player2BoardCAttack.setText(Double.toString(((Character)currentBoard.getCard(i)).getAttack()));
+                    player2BoardCHealth.setText(Double.toString(((Character)currentBoard.getCard(i)).getHealth()));
                     player2BoardCLvl.setText(getExpLevel((Character)currentBoard.getCard(i)));
 
                 }else if(i==3){
@@ -3883,8 +3883,8 @@ public class guiController implements Initializable {
 
                     player2BoardD.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
                     alignImageCentre(player2BoardD);
-                    player2BoardDAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
-                    player2BoardDHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
+                    player2BoardDAttack.setText(Double.toString(((Character)currentBoard.getCard(i)).getAttack()));
+                    player2BoardDHealth.setText(Double.toString(((Character)currentBoard.getCard(i)).getHealth()));
                     player2BoardDLvl.setText(getExpLevel((Character)currentBoard.getCard(i)));
 
                 }else if(i==4){
@@ -3897,8 +3897,8 @@ public class guiController implements Initializable {
 
                     player2BoardE.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
                     alignImageCentre(player2BoardE);
-                    player2BoardEAttack.setText(Integer.toString(((Character)currentBoard.getCard(i)).getAttack()));
-                    player2BoardEHealth.setText(Integer.toString(((Character)currentBoard.getCard(i)).getHealth()));
+                    player2BoardEAttack.setText(Double.toString(((Character)currentBoard.getCard(i)).getAttack()));
+                    player2BoardEHealth.setText(Double.toString(((Character)currentBoard.getCard(i)).getHealth()));
                     player2BoardELvl.setText(getExpLevel((Character)currentBoard.getCard(i)));
                 }
 

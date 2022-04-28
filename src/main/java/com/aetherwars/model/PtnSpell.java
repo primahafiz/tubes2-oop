@@ -1,30 +1,30 @@
 package com.aetherwars.model;
 
 public class PtnSpell extends Spell {
-    private int attack;
-    private int hp;
+    private double attack;
+    private double hp;
 
-    public PtnSpell(int id, String name, String desc, String path, int mana, int duration, int attack, int hp){
+    public PtnSpell(int id, String name, String desc, String path, int mana, int duration, double attack, double hp){
         super(id, name, desc, path, mana, duration);
         this.attack = attack;
         this.hp = hp;
     }
 
-    public int getPtnAttack(){
+    public double getPtnAttack(){
         return this.attack;
     }
 
-    public int getPtnHp(){
+    public double getPtnHp(){
         return this.hp;
     }
 
     public void swapAttackHp(){
-        int temp = this.attack;
+        double temp = this.attack;
         this.attack = this.hp;
         this.hp = temp;
     }
 
-    public void setPtnHp(int hp){
+    public void setPtnHp(double hp){
         this.hp = hp;
     }
 

@@ -37,12 +37,12 @@ public class CardReader {
         for (String[] line: charLines){
             // Character(int id, String name, String desc, String path,
             // int mana, Type type,
-            // int attack, int health,
-            // int attackUp, int healthUp)
+            // double attack, double health,
+            // double attackUp, double healthUp)
             Character character = new Character(Integer.parseInt(line[0]), line[1], line[3], line[4],
                                                 Integer.parseInt(line[7]), Type.valueOf(line[2]),
-                                                Integer.parseInt(line[5]), Integer.parseInt(line[6]),
-                                                Integer.parseInt(line[8]), Integer.parseInt(line[9]));
+                                                Double.parseDouble(line[5]), Double.parseDouble(line[6]),
+                                                Double.parseDouble(line[8]), Double.parseDouble(line[9]));
             cards.add(character);
         }
     }
@@ -81,9 +81,9 @@ public class CardReader {
         ptnReader.setSkipHeader(true);
         List<String[]> ptnLines = ptnReader.read();
         for (String[] line: ptnLines){
-            // PtnSpell(int id, String name, String desc, String path, int mana, int duration, int attack, int hp)
+            // PtnSpell(int id, String name, String desc, String path, int mana, int duration, double attack, double hp)
             PtnSpell ptn = new PtnSpell(Integer.parseInt(line[0]), line[1], line[2], line[3], Integer.parseInt(line[6]),
-                    Integer.parseInt(line[7]), Integer.parseInt(line[4]), Integer.parseInt(line[5]));
+                    Integer.parseInt(line[7]), Double.parseDouble(line[4]), Double.parseDouble(line[5]));
             this.cards.add(ptn);
         }
     }
