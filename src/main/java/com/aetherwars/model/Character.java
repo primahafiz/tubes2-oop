@@ -3,6 +3,7 @@ package com.aetherwars.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.*;
+import java.lang.Math;
 
 public class Character extends Card  {
   private Type type;
@@ -37,11 +38,11 @@ public class Character extends Card  {
   }
 
   public int getAttack(){
-    return this.attack + this.getTempAttack();
+    return Math.max(this.attack + this.getTempAttack(), 0);
   }
 
   public int getHealth(){
-    return this.health + this.getTempHealth();
+    return Math.max(this.health + this.getTempHealth(), 0);
   }
 
   public int getAttackUp(){
@@ -107,7 +108,7 @@ public class Character extends Card  {
   }
 
   public void setHealth(int health){
-    this.health = health;
+    this.health = Math.max(health, 0);
   }
 
   public void levelUp(int lvl) {

@@ -13,7 +13,8 @@ public class Deck {
             c.addAllCards();
             for (i = 0;i < capacity; i++){
                 int random = rand.nextInt(c.getCards().size());
-                Card cardclone = (Card) c.getCards().get(random).clone();
+                //Card cardclone = (Card) c.getCards().get(random).clone();
+                Card cardclone = cctorCard(c.getCards().get(random));
                 CardDeck.add(cardclone);
             }
         } catch (Exception e) {
@@ -53,5 +54,24 @@ public class Deck {
 
     public void addCard(Card c){
         CardDeck.add(c);
+    }
+
+    public Card cctorCard(Card c){
+        if (c instanceof Character) {
+            Character cc = (Character) c;
+            return (Card) new Character(cc.getId(), cc.getName(), cc.getDesc(), cc.getImagePath(), cc.getMana(), cc.getType(), cc.getAttack(), cc.getHealth(), cc.getAttackUp(), cc.getHealthUp());
+        } else if (c instanceof PtnSpell) {
+            PtnSpell cc = (PtnSpell) c;
+            return (Card) new PtnSpell(cc.getId(), cc.getName(), cc.getDesc(), cc.getImagePath(), cc.getMana(), cc.getDuration(), cc.getPtnAttack(), cc.getPtnHp());
+        } else if (c instanceof MorphSpell) {
+            MorphSpell cc = (MorphSpell) c;
+            return (Card) new MorphSpell(cc.getId(), cc.getName(), cc.getDesc(), cc.getImagePath(), cc.getMana(), cc.getDuration(), cc.getTargetId());
+        } else if (c instanceof SwapSpell) {
+            SwapSpell cc = (SwapSpell) c;
+            return (Card) new SwapSpell(cc.getId(), cc.getName(), cc.getDesc(), cc.getImagePath(), cc.getMana(), cc.getDuration());
+        } else {
+            LvlSpell cc = (LvlSpell) c;
+            return (Card) new LvlSpell(cc.getId(), cc.getName(), cc.getDesc(), cc.getImagePath(), cc.getMana(), cc.getDuration(), cc.getAdd());
+        }
     }
 }

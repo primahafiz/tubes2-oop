@@ -67,7 +67,11 @@ public class Player {
 
     // Setter HP
     public void setHp(int hp) {
-        this.hp = hp;
+        if (hp < 0) {
+            this.hp = 0;
+        } else {
+            this.hp = hp;
+        }
     }
 
     // Getter Mana
@@ -238,8 +242,14 @@ public class Player {
 
             // Jika exp karakter pemain melebihi batas yang diperlukan, level karakter pemain akan meningkat
             while ((attacker.getExp() >= (attacker.getLevel() * 2) - 1) && (attacker.getLevel() < 10)) {
+                attacker.addExp(-(attacker.getLevel() * 2) + 1);
                 attacker.levelUp(1);
-                attacker.addExp(-2);
+            }
+
+            // Jika exp karakter musuh melebihi batas yang diperlukan, level karakter musuh akan meningkat
+            while ((enemyCharacter.getExp() >= (enemyCharacter.getLevel() * 2) - 1) && (enemyCharacter.getLevel() < 10)) {
+                enemyCharacter.addExp(-(enemyCharacter.getLevel() * 2) + 1);
+                enemyCharacter.levelUp(1);
             }
 
             // satu karakter hanya dapat menyerang satu kali

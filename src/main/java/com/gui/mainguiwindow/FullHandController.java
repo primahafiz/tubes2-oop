@@ -5,6 +5,8 @@ import com.aetherwars.model.Character;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -98,6 +100,7 @@ public class FullHandController implements Initializable {
         fullHand4AtkHealth.setText(getAtkHealth(hand.getCard(3)));
         fullHand5AtkHealth.setText(getAtkHealth(hand.getCard(4)));
 
+        initHoveredFullHand();
         initClickedCard();
 
     }
@@ -200,5 +203,97 @@ public class FullHandController implements Initializable {
             imageView.setX((imageView.getFitWidth() - w) / 2);
             imageView.setY((imageView.getFitHeight() - h) / 2);
         }
+    }
+
+    public void initHoveredFullHand() {
+        containerFullHand1.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.HAND);
+            }
+        });
+
+        containerFullHand1.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.DEFAULT);
+            }
+        });
+
+        containerFullHand2.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.HAND);
+            }
+        });
+
+        containerFullHand2.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.DEFAULT);
+            }
+        });
+
+        containerFullHand3.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.HAND);
+            }
+        });
+
+        containerFullHand3.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.DEFAULT);
+            }
+        });
+
+        containerFullHand4.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.HAND);
+            }
+        });
+
+        containerFullHand4.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.DEFAULT);
+            }
+        });
+
+        containerFullHand5.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.HAND);
+            }
+        });
+
+        containerFullHand5.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.DEFAULT);
+            }
+        });
     }
 }

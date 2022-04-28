@@ -1,12 +1,17 @@
 package com.gui.mainguiwindow;
 
 import com.aetherwars.model.Card;
+import com.aetherwars.model.Character;
+import com.aetherwars.model.MorphSpell;
+import com.aetherwars.model.PtnSpell;
+import com.aetherwars.model.LvlSpell;
 import com.aetherwars.model.Deck;
 import com.aetherwars.model.Hand;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -15,9 +20,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -73,6 +76,10 @@ public class DrawController implements Initializable {
         manaDeck1.setText("MANA "+Integer.toString(c.get(0).getMana()));
         manaDeck2.setText("MANA "+Integer.toString(c.get(1).getMana()));
         manaDeck3.setText("MANA "+Integer.toString(c.get(2).getMana()));
+        atkHealthDeck1.setText(getAtkHealth(c.get(0)));
+        atkHealthDeck2.setText(getAtkHealth(c.get(1)));
+        atkHealthDeck3.setText(getAtkHealth(c.get(2)));
+        initHoveredDrawCard();
         initClickedCard();
     }
 
@@ -162,5 +169,77 @@ public class DrawController implements Initializable {
             imageView.setX((imageView.getFitWidth() - w) / 2);
             imageView.setY((imageView.getFitHeight() - h) / 2);
         }
+    }
+
+
+    public String getAtkHealth(Card c){
+        if(c instanceof  Character){
+            return "ATK " + ((Character) c).getAttack() + "/HP "+((Character) c).getHealth();
+        }else if(c instanceof MorphSpell){
+            return "MORPH";
+        }else if(c instanceof  PtnSpell){
+            return "ATK+" + ((PtnSpell) c).getPtnAttack() + "/HP+"+((PtnSpell) c).getPtnHp();
+        }else if(c instanceof LvlSpell){
+            return "LEVEL";
+        }else{ // swap
+            return "ATK <--> HP";
+        }
+    }
+
+
+    public void initHoveredDrawCard() {
+        containerDeck1.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.HAND);
+            }
+        });
+
+        containerDeck1.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.DEFAULT);
+            }
+        });
+
+        containerDeck2.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.HAND);
+            }
+        });
+
+        containerDeck2.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.DEFAULT);
+            }
+        });
+
+        containerDeck3.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.HAND);
+            }
+        });
+
+        containerDeck3.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.DEFAULT);
+            }
+        });
     }
 }

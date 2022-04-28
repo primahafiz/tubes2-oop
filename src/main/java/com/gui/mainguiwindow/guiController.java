@@ -8,6 +8,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -434,6 +435,19 @@ public class guiController implements Initializable {
     @FXML
     ImageView player2BoardEDelete;
 
+    // End game
+    @FXML
+    ImageView EndGameLayer;
+    @FXML
+    ImageView crownP1;
+    @FXML
+    ImageView crownP2;
+    @FXML
+    Label winnerP1;
+    @FXML
+    Label winnerP2;
+
+
     // All types of card
 
     CardReader cardReader = new CardReader();
@@ -466,6 +480,7 @@ public class guiController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        hoveredCard.setImage(null);
         // initialize board, hand, deck
 
         pemain1 = new Player("Steve",1);
@@ -526,6 +541,11 @@ public class guiController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (board1.isCharacterAvailable(0)) {
+                    if (idStage == 2) {
+                        Node node = (Node) event.getSource();
+                        Stage stage = (Stage) node.getScene().getWindow();
+                        stage.getScene().setCursor(Cursor.HAND);
+                    }
                     hoveredCard.setImage(player1BoardA.getImage());
                     alignImageCentre(hoveredCard);
                     cardAttribute.setText(getCardAttributes(board1.getCard(0)));
@@ -540,6 +560,9 @@ public class guiController implements Initializable {
         player1BoardA.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.DEFAULT);
                 hoveredCard.setImage(null);
                 cardAttribute.setText("");
                 cardDescription.setText("");
@@ -551,6 +574,11 @@ public class guiController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (board1.isCharacterAvailable(1)) {
+                    if (idStage == 2) {
+                        Node node = (Node) event.getSource();
+                        Stage stage = (Stage) node.getScene().getWindow();
+                        stage.getScene().setCursor(Cursor.HAND);
+                    }
                     hoveredCard.setImage(player1BoardB.getImage());
                     alignImageCentre(hoveredCard);
                     cardAttribute.setText(getCardAttributes(board1.getCard(1)));
@@ -565,6 +593,9 @@ public class guiController implements Initializable {
         player1BoardB.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.DEFAULT);
                 hoveredCard.setImage(null);
                 cardAttribute.setText("");
                 cardDescription.setText("");
@@ -576,6 +607,11 @@ public class guiController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (board1.isCharacterAvailable(2)) {
+                    if (idStage == 2) {
+                        Node node = (Node) event.getSource();
+                        Stage stage = (Stage) node.getScene().getWindow();
+                        stage.getScene().setCursor(Cursor.HAND);
+                    }
                     hoveredCard.setImage(player1BoardC.getImage());
                     alignImageCentre(hoveredCard);
                     cardAttribute.setText(getCardAttributes(board1.getCard(2)));
@@ -590,6 +626,9 @@ public class guiController implements Initializable {
         player1BoardC.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.DEFAULT);
                 hoveredCard.setImage(null);
                 cardAttribute.setText("");
                 cardDescription.setText("");
@@ -601,6 +640,11 @@ public class guiController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (board1.isCharacterAvailable(3)) {
+                    if (idStage == 2) {
+                        Node node = (Node) event.getSource();
+                        Stage stage = (Stage) node.getScene().getWindow();
+                        stage.getScene().setCursor(Cursor.HAND);
+                    }
                     hoveredCard.setImage(player1BoardD.getImage());
                     alignImageCentre(hoveredCard);
                     cardAttribute.setText(getCardAttributes(board1.getCard(3)));
@@ -615,6 +659,9 @@ public class guiController implements Initializable {
         player1BoardD.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.DEFAULT);
                 hoveredCard.setImage(null);
                 cardAttribute.setText("");
                 cardDescription.setText("");
@@ -626,6 +673,11 @@ public class guiController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (board1.isCharacterAvailable(4)) {
+                    if (idStage == 2) {
+                        Node node = (Node) event.getSource();
+                        Stage stage = (Stage) node.getScene().getWindow();
+                        stage.getScene().setCursor(Cursor.HAND);
+                    }
                     hoveredCard.setImage(player1BoardE.getImage());
                     alignImageCentre(hoveredCard);
                     cardAttribute.setText(getCardAttributes(board1.getCard(4)));
@@ -640,6 +692,9 @@ public class guiController implements Initializable {
         player1BoardE.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.DEFAULT);
                 hoveredCard.setImage(null);
                 cardAttribute.setText("");
                 cardDescription.setText("");
@@ -651,6 +706,11 @@ public class guiController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (board2.isCharacterAvailable(0)) {
+                    if (idStage == 2) {
+                        Node node = (Node) event.getSource();
+                        Stage stage = (Stage) node.getScene().getWindow();
+                        stage.getScene().setCursor(Cursor.HAND);
+                    }
                     hoveredCard.setImage(player2BoardA.getImage());
                     alignImageCentre(hoveredCard);
                     cardAttribute.setText(getCardAttributes(board2.getCard(0)));
@@ -665,6 +725,9 @@ public class guiController implements Initializable {
         player2BoardA.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.DEFAULT);
                 hoveredCard.setImage(null);
                 cardAttribute.setText("");
                 cardDescription.setText("");
@@ -676,6 +739,11 @@ public class guiController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (board2.isCharacterAvailable(1)) {
+                    if (idStage == 2) {
+                        Node node = (Node) event.getSource();
+                        Stage stage = (Stage) node.getScene().getWindow();
+                        stage.getScene().setCursor(Cursor.HAND);
+                    }
                     hoveredCard.setImage(player2BoardB.getImage());
                     alignImageCentre(hoveredCard);
                     cardAttribute.setText(getCardAttributes(board2.getCard(1)));
@@ -690,6 +758,9 @@ public class guiController implements Initializable {
         player2BoardB.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.DEFAULT);
                 hoveredCard.setImage(null);
                 cardAttribute.setText("");
                 cardDescription.setText("");
@@ -701,6 +772,11 @@ public class guiController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (board2.isCharacterAvailable(2)) {
+                    if (idStage == 2) {
+                        Node node = (Node) event.getSource();
+                        Stage stage = (Stage) node.getScene().getWindow();
+                        stage.getScene().setCursor(Cursor.HAND);
+                    }
                     hoveredCard.setImage(player2BoardC.getImage());
                     alignImageCentre(hoveredCard);
                     cardAttribute.setText(getCardAttributes(board2.getCard(2)));
@@ -715,6 +791,9 @@ public class guiController implements Initializable {
         player2BoardC.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.DEFAULT);
                 hoveredCard.setImage(null);
                 cardAttribute.setText("");
                 cardDescription.setText("");
@@ -726,6 +805,11 @@ public class guiController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (board2.isCharacterAvailable(3)) {
+                    if (idStage == 2) {
+                        Node node = (Node) event.getSource();
+                        Stage stage = (Stage) node.getScene().getWindow();
+                        stage.getScene().setCursor(Cursor.HAND);
+                    }
                     hoveredCard.setImage(player2BoardD.getImage());
                     alignImageCentre(hoveredCard);
                     cardAttribute.setText(getCardAttributes(board2.getCard(3)));
@@ -740,6 +824,9 @@ public class guiController implements Initializable {
         player2BoardD.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.DEFAULT);
                 hoveredCard.setImage(null);
                 cardAttribute.setText("");
                 cardDescription.setText("");
@@ -751,6 +838,11 @@ public class guiController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (board2.isCharacterAvailable(4)) {
+                    if (idStage == 2) {
+                        Node node = (Node) event.getSource();
+                        Stage stage = (Stage) node.getScene().getWindow();
+                        stage.getScene().setCursor(Cursor.HAND);
+                    }
                     hoveredCard.setImage(player2BoardE.getImage());
                     alignImageCentre(hoveredCard);
                     cardAttribute.setText(getCardAttributes(board2.getCard(4)));
@@ -765,6 +857,9 @@ public class guiController implements Initializable {
         player2BoardE.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.DEFAULT);
                 hoveredCard.setImage(null);
                 cardAttribute.setText("");
                 cardDescription.setText("");
@@ -788,6 +883,11 @@ public class guiController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (currHand.numberOfCards() > 0 && currHand.getCard(0) != null) {
+                    if (idStage == 1) {
+                        Node node = (Node) event.getSource();
+                        Stage stage = (Stage) node.getScene().getWindow();
+                        stage.getScene().setCursor(Cursor.OPEN_HAND);
+                    }
                     hoveredCard.setImage(handCard1.getImage());
                     alignImageCentre(hoveredCard);
                     cardAttribute.setText(getCardAttributes(currHand.getCard(0)));
@@ -799,6 +899,9 @@ public class guiController implements Initializable {
         handCard1.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.DEFAULT);
                 hoveredCard.setImage(null);
                 cardAttribute.setText("");
                 cardDescription.setText("");
@@ -809,6 +912,11 @@ public class guiController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (currHand.numberOfCards() > 1 && currHand.getCard(1) != null) {
+                    if (idStage == 1) {
+                        Node node = (Node) event.getSource();
+                        Stage stage = (Stage) node.getScene().getWindow();
+                        stage.getScene().setCursor(Cursor.OPEN_HAND);
+                    }
                     hoveredCard.setImage(handCard2.getImage());
                     alignImageCentre(hoveredCard);
                     cardAttribute.setText(getCardAttributes(currHand.getCard(1)));
@@ -820,6 +928,9 @@ public class guiController implements Initializable {
         handCard2.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.DEFAULT);
                 hoveredCard.setImage(null);
                 cardAttribute.setText("");
                 cardDescription.setText("");
@@ -830,6 +941,11 @@ public class guiController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (currHand.numberOfCards() > 2 && currHand.getCard(2) != null) {
+                    if (idStage == 1) {
+                        Node node = (Node) event.getSource();
+                        Stage stage = (Stage) node.getScene().getWindow();
+                        stage.getScene().setCursor(Cursor.OPEN_HAND);
+                    }
                     hoveredCard.setImage(handCard3.getImage());
                     alignImageCentre(hoveredCard);
                     cardAttribute.setText(getCardAttributes(currHand.getCard(2)));
@@ -841,6 +957,9 @@ public class guiController implements Initializable {
         handCard3.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.DEFAULT);
                 hoveredCard.setImage(null);
                 cardAttribute.setText("");
                 cardDescription.setText("");
@@ -851,6 +970,11 @@ public class guiController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (currHand.numberOfCards() > 3 && currHand.getCard(3) != null) {
+                    if (idStage == 1) {
+                        Node node = (Node) event.getSource();
+                        Stage stage = (Stage) node.getScene().getWindow();
+                        stage.getScene().setCursor(Cursor.OPEN_HAND);
+                    }
                     hoveredCard.setImage(handCard4.getImage());
                     alignImageCentre(hoveredCard);
                     cardAttribute.setText(getCardAttributes(currHand.getCard(3)));
@@ -862,6 +986,9 @@ public class guiController implements Initializable {
         handCard4.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.DEFAULT);
                 hoveredCard.setImage(null);
                 cardAttribute.setText("");
                 cardDescription.setText("");
@@ -872,6 +999,11 @@ public class guiController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (currHand.numberOfCards() > 4 && currHand.getCard(4) != null) {
+                    if (idStage == 1) {
+                        Node node = (Node) event.getSource();
+                        Stage stage = (Stage) node.getScene().getWindow();
+                        stage.getScene().setCursor(Cursor.OPEN_HAND);
+                    }
                     hoveredCard.setImage(handCard5.getImage());
                     alignImageCentre(hoveredCard);
                     cardAttribute.setText(getCardAttributes(currHand.getCard(4)));
@@ -883,9 +1015,55 @@ public class guiController implements Initializable {
         handCard5.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.DEFAULT);
                 hoveredCard.setImage(null);
                 cardAttribute.setText("");
                 cardDescription.setText("");
+            }
+        });
+    }
+
+
+    public void initHoveredPlayerImg() {
+        player1Img.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (idStage == 2 && (turn % 2 == 0)) {
+                    Node node = (Node) event.getSource();
+                    Stage stage = (Stage) node.getScene().getWindow();
+                    stage.getScene().setCursor(Cursor.HAND);
+                }
+            }
+        });
+
+        player1Img.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.DEFAULT);
+            }
+        });
+
+        player2Img.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (idStage == 2 && (turn % 2 == 1)) {
+                    Node node = (Node) event.getSource();
+                    Stage stage = (Stage) node.getScene().getWindow();
+                    stage.getScene().setCursor(Cursor.HAND);
+                }
+            }
+        });
+
+        player2Img.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.getScene().setCursor(Cursor.DEFAULT);
             }
         });
     }
@@ -2682,8 +2860,8 @@ public class guiController implements Initializable {
                     ((Character) P1board.getCard(0)).addExp(1);
                     pemain1.setMana(pemain1.getMana() - 1);
                     if ((((Character) P1board.getCard(0)).getExp() >= ((Character) P1board.getCard(0)).getLevel() * 2 - 1) && (((Character) P1board.getCard(0)).getLevel() < 10)) {
+                        ((Character) P1board.getCard(0)).addExp(-((Character) P1board.getCard(0)).getLevel() * 2 + 1);
                         ((Character) P1board.getCard(0)).levelUp(1);
-                        ((Character) P1board.getCard(0)).addExp(-2);
                     }
                 }
                 updateDisplayMana();
@@ -2699,8 +2877,8 @@ public class guiController implements Initializable {
                     ((Character) P1board.getCard(1)).addExp(1);
                     pemain1.setMana(pemain1.getMana() - 1);
                     if ((((Character) P1board.getCard(1)).getExp() >= ((Character) P1board.getCard(1)).getLevel() * 2 - 1) && (((Character) P1board.getCard(1)).getLevel() < 10)) {
+                        ((Character) P1board.getCard(1)).addExp(-((Character) P1board.getCard(0)).getLevel() * 2 + 1);
                         ((Character) P1board.getCard(1)).levelUp(1);
-                        ((Character) P1board.getCard(1)).addExp(-2);
                     }
                 }
                 updateDisplayMana();
@@ -2716,8 +2894,8 @@ public class guiController implements Initializable {
                     ((Character) P1board.getCard(2)).addExp(1);
                     pemain1.setMana(pemain1.getMana() - 1);
                     if ((((Character) P1board.getCard(2)).getExp() >= ((Character) P1board.getCard(2)).getLevel() * 2 - 1) && (((Character) P1board.getCard(2)).getLevel() < 10)) {
+                        ((Character) P1board.getCard(2)).addExp(-((Character) P1board.getCard(0)).getLevel() * 2 + 1);
                         ((Character) P1board.getCard(2)).levelUp(1);
-                        ((Character) P1board.getCard(2)).addExp(-2);
                     }
                 }
                 updateDisplayMana();
@@ -2733,8 +2911,8 @@ public class guiController implements Initializable {
                     ((Character) P1board.getCard(3)).addExp(1);
                     pemain1.setMana(pemain1.getMana() - 1);
                     if ((((Character) P1board.getCard(3)).getExp() >= ((Character) P1board.getCard(3)).getLevel() * 2 - 1) && (((Character) P1board.getCard(3)).getLevel() < 10)) {
+                        ((Character) P1board.getCard(3)).addExp(-((Character) P1board.getCard(0)).getLevel() * 2 + 1);
                         ((Character) P1board.getCard(3)).levelUp(1);
-                        ((Character) P1board.getCard(3)).addExp(-2);
                     }
                 }
                 updateDisplayMana();
@@ -2750,8 +2928,8 @@ public class guiController implements Initializable {
                     ((Character) P1board.getCard(4)).addExp(1);
                     pemain1.setMana(pemain1.getMana() - 1);
                     if ((((Character) P1board.getCard(4)).getExp() >= ((Character) P1board.getCard(4)).getLevel() * 2 - 1) && (((Character) P1board.getCard(4)).getLevel() < 10)) {
+                        ((Character) P1board.getCard(4)).addExp(-((Character) P1board.getCard(0)).getLevel() * 2 + 1);
                         ((Character) P1board.getCard(4)).levelUp(1);
-                        ((Character) P1board.getCard(4)).addExp(-2);
                     }
                 }
                 updateDisplayMana();
@@ -2772,8 +2950,8 @@ public class guiController implements Initializable {
                     ((Character) P2board.getCard(0)).addExp(1);
                     pemain2.setMana(pemain2.getMana() - 1);
                     if ((((Character) P2board.getCard(0)).getExp() >= ((Character) P2board.getCard(0)).getLevel() * 2 - 1) && (((Character) P2board.getCard(0)).getLevel() < 10)) {
+                        ((Character) P2board.getCard(0)).addExp(-((Character) P2board.getCard(0)).getLevel() * 2 + 1);
                         ((Character) P2board.getCard(0)).levelUp(1);
-                        ((Character) P2board.getCard(0)).addExp(-2);
                     }
                 }
                 updateDisplayMana();
@@ -2789,8 +2967,8 @@ public class guiController implements Initializable {
                     ((Character) P2board.getCard(1)).addExp(1);
                     pemain2.setMana(pemain2.getMana() - 1);
                     if ((((Character) P2board.getCard(1)).getExp() >= ((Character) P2board.getCard(1)).getLevel() * 2 - 1) && (((Character) P2board.getCard(1)).getLevel() < 10)) {
+                        ((Character) P2board.getCard(1)).addExp((-((Character) P2board.getCard(0)).getLevel() * 2 + 1));
                         ((Character) P2board.getCard(1)).levelUp(1);
-                        ((Character) P2board.getCard(1)).addExp(-2);
                     }
                 }
                 updateDisplayMana();
@@ -2806,8 +2984,8 @@ public class guiController implements Initializable {
                     ((Character) P2board.getCard(2)).addExp(1);
                     pemain2.setMana(pemain2.getMana() - 1);
                     if ((((Character) P2board.getCard(2)).getExp() >= ((Character) P2board.getCard(2)).getLevel() * 2 - 1) && (((Character) P2board.getCard(2)).getLevel() < 10)) {
+                        ((Character) P2board.getCard(2)).addExp(-((Character) P2board.getCard(0)).getLevel() * 2 + 1);
                         ((Character) P2board.getCard(2)).levelUp(1);
-                        ((Character) P2board.getCard(2)).addExp(-2);
                     }
                 }
                 updateDisplayMana();
@@ -2823,8 +3001,8 @@ public class guiController implements Initializable {
                     ((Character) P2board.getCard(3)).addExp(1);
                     pemain2.setMana(pemain2.getMana() - 1);
                     if ((((Character) P2board.getCard(3)).getExp() >= ((Character) P2board.getCard(3)).getLevel() * 2 - 1) && (((Character) P2board.getCard(3)).getLevel() < 10)) {
+                        ((Character) P2board.getCard(3)).addExp(-((Character) P2board.getCard(0)).getLevel() * 2 + 1);
                         ((Character) P2board.getCard(3)).levelUp(1);
-                        ((Character) P2board.getCard(3)).addExp(-2);
                     }
                 }
                 updateDisplayMana();
@@ -2840,8 +3018,8 @@ public class guiController implements Initializable {
                     ((Character) P2board.getCard(4)).addExp(1);
                     pemain2.setMana(pemain2.getMana() - 1);
                     if ((((Character) P2board.getCard(4)).getExp() >= ((Character) P2board.getCard(4)).getLevel() * 2 - 1) && (((Character) P2board.getCard(4)).getLevel() < 10)) {
+                        ((Character) P2board.getCard(4)).addExp(-((Character) P2board.getCard(0)).getLevel() * 2 + 1);
                         ((Character) P2board.getCard(4)).levelUp(1);
-                        ((Character) P2board.getCard(4)).addExp(-2);
                     }
                 }
                 updateDisplayMana();
@@ -2938,6 +3116,26 @@ public class guiController implements Initializable {
     }
 
 
+    /* 
+     *  END GAME
+     */
+    public boolean endGame() {
+        if (pemain1.getHp() <= 0) {
+            System.out.println("Player 2 Win");
+            EndGameLayer.setVisible(true);
+            crownP2.setVisible(true);
+            winnerP2.setVisible(true);
+            return true;
+        } else if (pemain2.getHp() <= 0) {
+            System.out.println("Player 1 Win");
+            EndGameLayer.setVisible(true);
+            crownP1.setVisible(true);
+            winnerP1.setVisible(true);
+            return true;
+        }
+        return false;
+    }
+    
 
     /* 
      * CHANGE STAGE
@@ -2990,6 +3188,7 @@ public class guiController implements Initializable {
                 updateDeleteBoard2();
                 updateLevelUpButtonP2();
             }
+            initHoveredCardBoard();
             setDisplayDeckNum();
             activateStageLabel(stageDrawLabel,stagePlanLabel);
         }else if(idStage==1){
@@ -3006,6 +3205,7 @@ public class guiController implements Initializable {
             activateStageLabel(stagePlanLabel,stageAttackLabel);
             initSelectAttack();
         }else if(idStage==2){
+            initHoveredPlayerImg();
             updateBoard1();
             updateBoard2();
             clearAttack();
@@ -3033,7 +3233,9 @@ public class guiController implements Initializable {
             }else{
                 updateHand2();
             }
-            displayWindowDraw();
+            if (!endGame()) {
+                displayWindowDraw();
+            }
             if(turn%2==1) {
                 updateHand1();
             }else{
@@ -3042,7 +3244,6 @@ public class guiController implements Initializable {
             initHoveredCardHand();
             setDisplayDeckNum();
             activateStageLabel(stageEndLabel,stageDrawLabel);
-            // endMouseClickAttack();
         }
         idStage++;
         idStage%=4;
@@ -3125,8 +3326,7 @@ public class guiController implements Initializable {
         }
         for (int i = 0; i < c.getListSpell().size(); i++) {
             info += c.getListSpell().get(i).getName();
-            info += "(A" + c.getListSpell().get(i).getPtnAttack() + ",H";
-            info += c.getListSpell().get(i).getPtnHp() + ")";
+            info += "(" + c.getListSpell().get(i).getDuration() + ")";
             if (i != c.getListSpell().size() - 1) {
                 info += ", ";
             }
@@ -3183,7 +3383,7 @@ public class guiController implements Initializable {
                 System.out.println("Kartu " + i + " dihapus");
                 pemain2.getBoard().removeCardfromBoard(i);
             }
-            if (pemain1.getBoard().isValidIdx(i)) {
+            if (pemain2.getBoard().isValidIdx(i)) {
                 unmarkHasAttacked(i);
             }
         }
@@ -3277,10 +3477,10 @@ public class guiController implements Initializable {
         System.out.println("Set mana");
         if(turn%2==1){
             pemain1.setMana(min((turn+1)/2,10));
-            manaNum.setText("Mana\n"+pemain1.getMana()+"/"+(turn+1)/2);
+            manaNum.setText("Mana\n"+pemain1.getMana()+"/"+min((turn+1)/2,10));
         }else{
             pemain2.setMana(min((turn+1)/2,10));
-            manaNum.setText("Mana\n"+pemain2.getMana()+"/"+(turn+1)/2);
+            manaNum.setText("Mana\n"+pemain2.getMana()+"/"+min((turn+1)/2,10));
         }
     }
 
