@@ -36,4 +36,13 @@ public class Hand implements cardSlot {
         }
         throw new HandFullExp();
     }
+
+    @Override
+    public String toString(){
+        String res = "";
+        for(int i=0;i<this.onHandCards.size();i++){
+            res=this.onHandCards.get(i).toString()+"\n";
+        }
+        return res;
+    }
 }

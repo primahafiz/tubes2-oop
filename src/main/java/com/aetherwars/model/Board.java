@@ -75,4 +75,17 @@ public class Board implements cardSlot {
         return (count == 5);
     }
 
+    @Override
+    public String toString(){
+        String res="";
+        for(int i=0;i<5;i++){
+            if(this.onBoardCards[i]==null){
+                res+="null\n";
+            }else{
+                res+=this.onBoardCards[i].toString()+"\n";
+            }
+        }
+        return res;
+    }
+
 }

@@ -38,11 +38,7 @@ abstract public class Card implements Cloneable{
     }
 
     public void printCardInfo(){
-        System.out.println("Id: " + getId());
-        System.out.println("Name: " + getName());
-        System.out.println("Desc: " + getDesc());
-        System.out.println("Image Path: " + getImagePath());
-        System.out.println("Mana: " + getMana());
+        System.out.println(this.toString());
     }
 
     public Object clone() throws CloneNotSupportedException {
@@ -50,4 +46,10 @@ abstract public class Card implements Cloneable{
     }
 
     public abstract Type getCardType();
+
+    @Override
+
+    public String toString(){
+       return "Id: " + getId()+ "\n" + "Name: " + getName() + "\n" + "Desc: " + getDesc() + "\n" + "Image Path: " + getImagePath() + "\n" + "Mana: " + getMana();
+    }
 }
