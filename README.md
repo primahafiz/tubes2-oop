@@ -14,45 +14,45 @@ JDK 17, Gradle 7.3.3, library JavaFx
 Masukkan command ```./gradlew run```
 
 ## Struktur program
-📦main
- ┣ 📂java
- ┃ ┣ 📂com
- ┃ ┃ ┣ 📂aetherwars
- ┃ ┃ ┃ ┣ 📂model
- ┃ ┃ ┃ ┃ ┣ 📂Characters
- ┃ ┃ ┃ ┃ ┃ ┗ 📜Character.java
- ┃ ┃ ┃ ┃ ┣ 📂Spells
- ┃ ┃ ┃ ┃ ┃ ┣ 📜LvlSpell.java
- ┃ ┃ ┃ ┃ ┃ ┣ 📜MorphSpell.java
- ┃ ┃ ┃ ┃ ┃ ┣ 📜PtnSpell.java
- ┃ ┃ ┃ ┃ ┃ ┣ 📜Spell.java
- ┃ ┃ ┃ ┃ ┃ ┗ 📜SwapSpell.java
- ┃ ┃ ┃ ┃ ┣ 📜Board.java
- ┃ ┃ ┃ ┃ ┣ 📜Card.java
- ┃ ┃ ┃ ┃ ┣ 📜CardReader.java
- ┃ ┃ ┃ ┃ ┣ 📜cardSlot.java
- ┃ ┃ ┃ ┃ ┣ 📜Deck.java
- ┃ ┃ ┃ ┃ ┣ 📜Hand.java
- ┃ ┃ ┃ ┃ ┣ 📜Player.java
- ┃ ┃ ┃ ┃ ┗ 📜Type.java
- ┃ ┃ ┃ ┣ 📂util
- ┃ ┃ ┃ ┃ ┣ 📜CSVReader.java
- ┃ ┃ ┃ ┃ ┣ 📜HandFullExp.java
- ┃ ┃ ┃ ┃ ┗ 📜InvalidException.java
- ┃ ┃ ┗ 📂gui
- ┃ ┃ ┃ ┗ 📂mainguiwindow
- ┃ ┃ ┃ ┃ ┣ 📜DrawController.java
- ┃ ┃ ┃ ┃ ┣ 📜FullHandController.java
- ┃ ┃ ┃ ┃ ┣ 📜guiController.java
- ┃ ┃ ┃ ┃ ┗ 📜mainGui.java
- ┃ ┗ 📜module-info.java
- ┗ 📂resources
- ┃ ┗ 📂com
- ┃ ┃ ┗ 📂gui
- ┃ ┃ ┃ ┗ 📂mainguiwindow
- ┃ ┃ ┃ ┃ ┣ 📜drawPhase.fxml
- ┃ ┃ ┃ ┃ ┣ 📜fullHand.fxml
- ┃ ┃ ┃ ┃ ┣ 📜gui.fxml
- ┃ ┃ ┃ ┃ ┣ 📜style.css
- ┃ ┃ ┃ ┃ ┣ 📜styleDrawPhase.css
- ┃ ┃ ┃ ┃ ┗ 📜styleFullHand.css
+📦main </br>
+ ┣ 📂java </br>
+ ┃ ┣ 📂com </br>
+ ┃ ┃ ┣ 📂aetherwars </br>
+ ┃ ┃ ┃ ┣ 📂model </br>
+ ┃ ┃ ┃ ┃ ┣ 📂Characters </br>
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜Character.java </br>
+ ┃ ┃ ┃ ┃ ┣ 📂Spells </br>
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜LvlSpell.java </br>
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜MorphSpell.java </br>
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜PtnSpell.java </br>
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜Spell.java </br>
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜SwapSpell.java </br>
+ ┃ ┃ ┃ ┃ ┣ 📜Board.java </br>
+ ┃ ┃ ┃ ┃ ┣ 📜Card.java </br>
+ ┃ ┃ ┃ ┃ ┣ 📜CardReader.java </br>
+ ┃ ┃ ┃ ┃ ┣ 📜cardSlot.java </br>
+ ┃ ┃ ┃ ┃ ┣ 📜Deck.java </br>
+ ┃ ┃ ┃ ┃ ┣ 📜Hand.java </br>
+ ┃ ┃ ┃ ┃ ┣ 📜Player.java </br>
+ ┃ ┃ ┃ ┃ ┗ 📜Type.java </br>
+ ┃ ┃ ┃ ┣ 📂util </br>
+ ┃ ┃ ┃ ┃ ┣ 📜CSVReader.java </br>
+ ┃ ┃ ┃ ┃ ┣ 📜HandFullExp.java </br>
+ ┃ ┃ ┃ ┃ ┗ 📜InvalidException.java </br>
+ ┃ ┃ ┗ 📂gui </br>
+ ┃ ┃ ┃ ┗ 📂mainguiwindow </br>
+ ┃ ┃ ┃ ┃ ┣ 📜DrawController.java </br>
+ ┃ ┃ ┃ ┃ ┣ 📜FullHandController.java </br>
+ ┃ ┃ ┃ ┃ ┣ 📜guiController.java </br>
+ ┃ ┃ ┃ ┃ ┗ 📜mainGui.java </br>
+ ┃ ┗ 📜module-info.java </br>
+ ┗ 📂resources </br>
+ ┃ ┗ 📂com </br>
+ ┃ ┃ ┗ 📂gui </br>
+ ┃ ┃ ┃ ┗ 📂mainguiwindow </br>
+ ┃ ┃ ┃ ┃ ┣ 📜drawPhase.fxml </br>
+ ┃ ┃ ┃ ┃ ┣ 📜fullHand.fxml </br>
+ ┃ ┃ ┃ ┃ ┣ 📜gui.fxml </br>
+ ┃ ┃ ┃ ┃ ┣ 📜style.css </br>
+ ┃ ┃ ┃ ┃ ┣ 📜styleDrawPhase.css </br>
+ ┃ ┃ ┃ ┃ ┗ 📜styleFullHand.css </br>
