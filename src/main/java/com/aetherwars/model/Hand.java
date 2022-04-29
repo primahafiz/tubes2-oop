@@ -3,7 +3,7 @@ package com.aetherwars.model;
 import java.util.*;
 
 import com.aetherwars.util.HandFullExp;
-public class Hand {
+public class Hand implements cardSlot {
     private final List<Card> onHandCards;
     public Hand() {
         this.onHandCards = new ArrayList<Card>(5);

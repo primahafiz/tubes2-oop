@@ -5,7 +5,7 @@ package com.aetherwars.model;
 // import com.aetherwars.model.Card.*;
 // import com.aetherwars.util.InvalidException;
 
-public class Board {
+public class Board implements cardSlot {
     private Card[] onBoardCards;
 
     // Constructor
