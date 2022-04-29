@@ -532,6 +532,7 @@ public class guiController implements Initializable {
                 if (i != j && !pemain1.getDeck().getAll().get(i).getName().equals(pemain1.getDeck().getAll().get(j).getName())) {
                     if (System.identityHashCode(pemain1.getDeck().getAll().get(i)) ==  System.identityHashCode(pemain1.getDeck().getAll().get(j))) {
                         System.out.println("samaa");
+                        break;
                     }
                     else {
                         System.out.println(System.identityHashCode(pemain1.getDeck().getAll().get(i)));
@@ -1124,6 +1125,7 @@ public class guiController implements Initializable {
                 updateHand();
                 updateDeleteHand();
                 updateDeleteBoard1();
+                updateLevelUpButtonP1();
                 event.consume();
             }
         });
@@ -1164,6 +1166,7 @@ public class guiController implements Initializable {
                 updateHand();
                 updateDeleteHand();
                 updateDeleteBoard1();
+                updateLevelUpButtonP1();
                 event.consume();
             }
         });
@@ -1204,6 +1207,7 @@ public class guiController implements Initializable {
                 updateHand();
                 updateDeleteHand();
                 updateDeleteBoard1();
+                updateLevelUpButtonP1();
                 event.consume();
             }
         });
@@ -1244,6 +1248,7 @@ public class guiController implements Initializable {
                 updateHand();
                 updateDeleteHand();
                 updateDeleteBoard1();
+                updateLevelUpButtonP1();
                 event.consume();
             }
         });
@@ -1284,6 +1289,7 @@ public class guiController implements Initializable {
                 updateHand();
                 updateDeleteHand();
                 updateDeleteBoard1();
+                updateLevelUpButtonP1();
                 event.consume();
             }
         });
@@ -1330,6 +1336,7 @@ public class guiController implements Initializable {
                 updateHand();
                 updateDeleteHand();
                 updateDeleteBoard2();
+                updateLevelUpButtonP2();
                 event.consume();
             }
         });
@@ -1370,6 +1377,7 @@ public class guiController implements Initializable {
                 updateHand();
                 updateDeleteHand();
                 updateDeleteBoard2();
+                updateLevelUpButtonP2();
                 event.consume();
             }
         });
@@ -1410,6 +1418,7 @@ public class guiController implements Initializable {
                 updateHand();
                 updateDeleteHand();
                 updateDeleteBoard2();
+                updateLevelUpButtonP2();
                 event.consume();
             }
         });
@@ -1450,6 +1459,7 @@ public class guiController implements Initializable {
                 updateHand();
                 updateDeleteHand();
                 updateDeleteBoard2();
+                updateLevelUpButtonP2();
                 event.consume();
             }
         });
@@ -1490,6 +1500,7 @@ public class guiController implements Initializable {
                 updateHand();
                 updateDeleteHand();
                 updateDeleteBoard2();
+                updateLevelUpButtonP2();
                 event.consume();
             }
         });
@@ -3150,9 +3161,46 @@ public class guiController implements Initializable {
             crownP1.setVisible(true);
             winnerP1.setVisible(true);
             return true;
+        } else if (noMoreCards(pemain1) || noMoreCards(pemain2)) {
+            EndGameLayer.setVisible(true);
+            if (pemain1.getHp() > pemain2.getHp()) {
+                System.out.println("Player 1 Win");
+                crownP1.setVisible(true);
+                winnerP1.setVisible(true);
+            } else if (pemain1.getHp() < pemain2.getHp()) {
+                System.out.println("Player 2 Win");
+                crownP2.setVisible(true);
+                winnerP2.setVisible(true);
+            } else {
+                System.out.println("Draw");
+                crownP1.setVisible(true);
+                crownP2.setVisible(true);
+                winnerP1.setText("Draw");
+                winnerP1.setVisible(true);
+                winnerP2.setText("Draw");
+                winnerP2.setVisible(true);
+            }
+            return true;
         }
         return false;
     }
+
+
+    public boolean noMoreCards(Player p) {
+        return (p.getDeck().getSize() == 0) && (p.getHand().isEmpty()) && (p.getBoard().isEmpty() || allBoardCardsHasAttacked(p));
+    }
+
+
+    public boolean allBoardCardsHasAttacked(Player p) {
+        boolean result = true;
+        for (int i = 0; i < 5; i++) {
+            if (p.getBoard().isCharacterAvailable(i)) {
+                result = result && ((Character) p.getBoard().getCard(i)).hasAttacked();
+            }
+        }
+        return result;
+    }
+
     
 
     /* 
