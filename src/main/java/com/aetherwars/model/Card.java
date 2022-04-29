@@ -1,6 +1,6 @@
 package com.aetherwars.model;
 
-abstract public class Card implements Cloneable{
+abstract public class Card {
     protected int id;
     protected String name;
     protected String desc;
@@ -43,10 +43,6 @@ abstract public class Card implements Cloneable{
         System.out.println("Desc: " + getDesc());
         System.out.println("Image Path: " + getImagePath());
         System.out.println("Mana: " + getMana());
-    }
-
-    public Object clone() throws CloneNotSupportedException {
-        return (Card) super.clone();
     }
 
     public abstract Type getCardType();
