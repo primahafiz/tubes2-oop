@@ -537,24 +537,6 @@ public class guiController implements Initializable {
         initHoveredCardBoard();
         initHoveredCardHand();
         hideHand();
-        for (int i = 0; i < pemain1.getDeck().getSize(); i++) {
-            //System.out.println(pemain1.getDeck().getAll().get(0));
-            for (int j = 0; j < pemain1.getDeck().getSize(); j++) {
-                if (i != j && !pemain1.getDeck().getAll().get(i).getName().equals(pemain1.getDeck().getAll().get(j).getName())) {
-                    if (System.identityHashCode(pemain1.getDeck().getAll().get(i)) ==  System.identityHashCode(pemain1.getDeck().getAll().get(j))) {
-                        System.out.println("samaa");
-                        break;
-                    }
-                    else {
-                        System.out.println(System.identityHashCode(pemain1.getDeck().getAll().get(i)));
-                        System.out.println(System.identityHashCode(pemain1.getDeck().getAll().get(j)));
-                        System.out.println();
-                        //System.out.println("beda");
-                    }
-                }
-            }
-        }
-        debug();
     }
 
 
@@ -1111,16 +1093,8 @@ public class guiController implements Initializable {
 
         player1BoardA.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
-                // Dragboard db = event.getDragboard();
-                System.out.println("dropped");
-                System.out.println(event.getSource());
-                System.out.println(event.getTarget());
-                System.out.println(currentDragHand);
                 //System.out.println("Set mana, mana = "+pemain1.getMana()+" card = "+currentHand.getCard(currentDragHand).getMana()+" size hand = "+currentHand.numberOfCards());
                 if(currentBoard.isCharacterAvailable(0) && currentHand.getCard(currentDragHand) instanceof Spell && pemain1.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
-                    // Spell s = (Spell) currentHand.getCard(currentDragHand);
-                    // pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
-                    // currentHand.removeCardfromHand(currentDragHand);
                     // tambah spell ke character
                     try {
                         pemain1.useSpell(currentDragHand, 0, cardReader.getCards());
@@ -1157,16 +1131,7 @@ public class guiController implements Initializable {
 
         player1BoardB.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
-                // Dragboard db = event.getDragboard();
-                System.out.println("dropped");
-                System.out.println(event.getSource());
-                System.out.println(event.getTarget());
-                System.out.println(currentDragHand);
                 if(currentBoard.isCharacterAvailable(1) && currentHand.getCard(currentDragHand) instanceof Spell && pemain1.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
-                    // Spell s = (Spell) currentHand.getCard(currentDragHand);
-                    // pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
-                    // currentHand.removeCardfromHand(currentDragHand);
-                    // tambah spell ke character
                     try {
                         pemain1.useSpell(currentDragHand, 1, cardReader.getCards());
                     } catch (InvalidException e) {
@@ -1202,16 +1167,7 @@ public class guiController implements Initializable {
 
         player1BoardC.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
-                // Dragboard db = event.getDragboard();
-                System.out.println("dropped");
-                System.out.println(event.getSource());
-                System.out.println(event.getTarget());
-                System.out.println(currentDragHand);
                 if(currentBoard.isCharacterAvailable(2) && currentHand.getCard(currentDragHand) instanceof Spell && pemain1.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
-                    // Spell s = (Spell) currentHand.getCard(currentDragHand);
-                    // pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
-                    // currentHand.removeCardfromHand(currentDragHand);
-                    // tambah spell ke character
                     try {
                         pemain1.useSpell(currentDragHand, 2, cardReader.getCards());
                     } catch (InvalidException e) {
@@ -1247,16 +1203,7 @@ public class guiController implements Initializable {
 
         player1BoardD.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
-                // Dragboard db = event.getDragboard();
-                System.out.println("dropped");
-                System.out.println(event.getSource());
-                System.out.println(event.getTarget());
-                System.out.println(currentDragHand);
                 if(currentBoard.isCharacterAvailable(3) && currentHand.getCard(currentDragHand) instanceof Spell && pemain1.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
-                    // Spell s = (Spell) currentHand.getCard(currentDragHand);
-                    // pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
-                    // currentHand.removeCardfromHand(currentDragHand);
-                    // tambah spell ke character
                     try {
                         pemain1.useSpell(currentDragHand, 3, cardReader.getCards());
                     } catch (InvalidException e) {
@@ -1292,16 +1239,7 @@ public class guiController implements Initializable {
 
         player1BoardE.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
-                // Dragboard db = event.getDragboard();
-                System.out.println("dropped");
-                System.out.println(event.getSource());
-                System.out.println(event.getTarget());
-                System.out.println(currentDragHand);
                 if (currentBoard.isCharacterAvailable(4) && currentHand.getCard(currentDragHand) instanceof Spell && pemain1.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
-                    // Spell s = (Spell) currentHand.getCard(currentDragHand);
-                    // pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
-                    // currentHand.removeCardfromHand(currentDragHand);
-                    // tambah spell ke character
                     try {
                         pemain1.useSpell(currentDragHand, 4, cardReader.getCards());
                     } catch (InvalidException e) {
@@ -1343,16 +1281,7 @@ public class guiController implements Initializable {
 
         player2BoardA.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
-                // Dragboard db = event.getDragboard();
-                System.out.println("dropped");
-                System.out.println(event.getSource());
-                System.out.println(event.getTarget());
-                System.out.println(currentDragHand);
                 if(currentBoard.isCharacterAvailable(0) && currentHand.getCard(currentDragHand) instanceof Spell && pemain2.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
-                    // Spell s = (Spell) currentHand.getCard(currentDragHand);
-                    // pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
-                    // currentHand.removeCardfromHand(currentDragHand);
-                    // tambah spell ke character
                     try {
                         pemain2.useSpell(currentDragHand, 0, cardReader.getCards());
                     } catch (InvalidException e) {
@@ -1388,15 +1317,7 @@ public class guiController implements Initializable {
 
         player2BoardB.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
-                // Dragboard db = event.getDragboard();
-                System.out.println("dropped");
-                System.out.println(event.getSource());
-                System.out.println(event.getTarget());
-                System.out.println(currentDragHand);
                 if(currentBoard.isCharacterAvailable(1) && currentHand.getCard(currentDragHand) instanceof Spell && pemain2.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
-                    // Spell s = (Spell) currentHand.getCard(currentDragHand);
-                    // pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
-                    // currentHand.removeCardfromHand(currentDragHand);
                     // tambah spell ke character
                     try {
                         pemain2.useSpell(currentDragHand, 1, cardReader.getCards());
@@ -1433,15 +1354,7 @@ public class guiController implements Initializable {
 
         player2BoardC.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
-                // Dragboard db = event.getDragboard();
-                System.out.println("dropped");
-                System.out.println(event.getSource());
-                System.out.println(event.getTarget());
-                System.out.println(currentDragHand);
                 if(currentBoard.isCharacterAvailable(2) && currentHand.getCard(currentDragHand) instanceof Spell && pemain2.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
-                    // Spell s = (Spell) currentHand.getCard(currentDragHand);
-                    // pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
-                    // currentHand.removeCardfromHand(currentDragHand);
                     // tambah spell ke character
                     try {
                         pemain2.useSpell(currentDragHand, 2, cardReader.getCards());
@@ -1478,15 +1391,7 @@ public class guiController implements Initializable {
 
         player2BoardD.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
-                // Dragboard db = event.getDragboard();
-                System.out.println("dropped");
-                System.out.println(event.getSource());
-                System.out.println(event.getTarget());
-                System.out.println(currentDragHand);
                 if(currentBoard.isCharacterAvailable(3) && currentHand.getCard(currentDragHand) instanceof Spell && pemain2.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
-                    // Spell s = (Spell) currentHand.getCard(currentDragHand);
-                    // pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
-                    // currentHand.removeCardfromHand(currentDragHand);
                     // tambah spell ke character
                     try {
                         pemain2.useSpell(currentDragHand, 3, cardReader.getCards());
@@ -1523,15 +1428,7 @@ public class guiController implements Initializable {
 
         player2BoardE.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
-                // Dragboard db = event.getDragboard();
-                System.out.println("dropped");
-                System.out.println(event.getSource());
-                System.out.println(event.getTarget());
-                System.out.println(currentDragHand);
                 if (currentBoard.isCharacterAvailable(4) && currentHand.getCard(currentDragHand) instanceof Spell && pemain2.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
-                    // Spell s = (Spell) currentHand.getCard(currentDragHand);
-                    // pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
-                    // currentHand.removeCardfromHand(currentDragHand);
                     // tambah spell ke character
                     try {
                         pemain2.useSpell(currentDragHand, 4, cardReader.getCards());
@@ -2009,8 +1906,6 @@ public class guiController implements Initializable {
 
 
     public void unmarkHasSpell() {
-        // cardAttribute.getStyleClass().removeIf(style -> style.equals("backgroundHasPotion"));
-        // cardDescription.getStyleClass().removeIf(style -> style.equals("backgroundHasPotion"));
         player1BoardA.getStyleClass().removeIf(style -> style.equals("backgroundHasSpell"));
         player1BoardB.getStyleClass().removeIf(style -> style.equals("backgroundHasSpell"));
         player1BoardC.getStyleClass().removeIf(style -> style.equals("backgroundHasSpell"));
@@ -3830,9 +3725,6 @@ public class guiController implements Initializable {
                     player1BoardALvl.setVisible(true);
                     player1BoardALabel.setVisible(false);
 
-                    System.out.println("Board 1");
-                    System.out.println(currentBoard.getCard(i).getImagePath());
-
                     player1BoardA.setImage(new Image(getClass().getResourceAsStream(currentBoard.getCard(i).getImagePath())));
                     alignImageCentre(player1BoardA);
                     player1BoardAAttack.setText(Double.toString(((Character)currentBoard.getCard(i)).getAttack()));
@@ -4062,80 +3954,6 @@ public class guiController implements Initializable {
                     player2BoardELabel.setVisible(true);
                 }
             }
-        }
-    }
-
-
-
-    /* 
-     *  Debugging
-     */
-
-    public static void debugging(){
-
-
-        try {
-            System.out.println("Hello World");
-            CardReader c = new CardReader(); // ctor
-            c.addAllCards(); // masukin card ke c
-            int i = 0;
-            for (Card card : c.getCards()){
-                i += 1;
-                System.out.println("Kartu ke-" + i);
-                card.printCardInfo(); // print setiap card
-                System.out.println();
-            }
-
-
-            // kalo mau debug di sini
-
-        } catch (Exception e){
-            e.printStackTrace();
-        }finally {
-            System.out.println("Finished");
-        }
-    }
-
-    public void debug(){
-        for(int i=0;i<pemain1.getDeck().getSize();i++){
-            System.out.println(pemain1.getDeck().getAll().get(i).getName()+" = "+pemain1.getDeck().getAll().get(i));
-        }
-    }
-
-    public void debugOnGoing(){
-        System.out.println("Pemain 1:");
-        System.out.println("Hand 1:");
-        for(int i=0;i<pemain1.getHand().numberOfCards();i++){
-            if(pemain1.getHand().getCard(i)==null){
-                System.out.println("null card");
-                continue;
-            }
-            System.out.println(pemain1.getHand().getCard(i).getName()+" = "+pemain1.getHand().getCard(i));
-        }
-        System.out.println("Board 1 :");
-        for(int i=0;i<5;i++){
-            if(pemain1.getBoard().getCard(i)==null){
-                System.out.println("null card");
-                continue;
-            }
-            System.out.println(pemain1.getBoard().getCard(i).getName()+" = "+pemain1.getBoard().getCard(i));
-        }
-        System.out.println("Pemain 2:");
-        System.out.println("Hand 2:");
-        for(int i=0;i<pemain2.getHand().numberOfCards();i++){
-            if(pemain2.getHand().getCard(i)==null){
-                System.out.println("null card");
-                continue;
-            }
-            System.out.println(pemain2.getHand().getCard(i).getName()+" = "+pemain2.getHand().getCard(i));
-        }
-        System.out.println("Board 2 :");
-        for(int i=0;i<5;i++){
-            if(pemain2.getBoard().getCard(i)==null){
-                System.out.println("null card");
-                continue;
-            }
-            System.out.println(pemain2.getBoard().getCard(i).getName()+" = "+pemain2.getBoard().getCard(i));
         }
     }
 }
