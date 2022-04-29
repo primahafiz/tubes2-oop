@@ -1,16 +1,23 @@
 package com.gui.mainguiwindow;
 
 import com.aetherwars.model.*;
-import com.aetherwars.model.Character;
-import com.aetherwars.model.CardReader;
+import com.aetherwars.model.Characters.Character;
+import com.aetherwars.model.Spells.LvlSpell;
+import com.aetherwars.model.Spells.MorphSpell;
+import com.aetherwars.model.Spells.PtnSpell;
+import com.aetherwars.model.Spells.Spell;
+import com.aetherwars.model.Spells.SwapSpell;
+import com.aetherwars.util.HandFullExp;
 import com.aetherwars.util.InvalidException;
+
 import javafx.event.EventHandler;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+
 import javafx.scene.Cursor;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -18,20 +25,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
 import java.util.ResourceBundle;
 
-import com.aetherwars.util.CSVReader;
-
-import com.aetherwars.*;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -1110,7 +1111,7 @@ public class guiController implements Initializable {
 
         player1BoardA.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
-                Dragboard db = event.getDragboard();
+                // Dragboard db = event.getDragboard();
                 System.out.println("dropped");
                 System.out.println(event.getSource());
                 System.out.println(event.getTarget());
@@ -1156,7 +1157,7 @@ public class guiController implements Initializable {
 
         player1BoardB.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
-                Dragboard db = event.getDragboard();
+                // Dragboard db = event.getDragboard();
                 System.out.println("dropped");
                 System.out.println(event.getSource());
                 System.out.println(event.getTarget());
@@ -1201,7 +1202,7 @@ public class guiController implements Initializable {
 
         player1BoardC.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
-                Dragboard db = event.getDragboard();
+                // Dragboard db = event.getDragboard();
                 System.out.println("dropped");
                 System.out.println(event.getSource());
                 System.out.println(event.getTarget());
@@ -1246,7 +1247,7 @@ public class guiController implements Initializable {
 
         player1BoardD.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
-                Dragboard db = event.getDragboard();
+                // Dragboard db = event.getDragboard();
                 System.out.println("dropped");
                 System.out.println(event.getSource());
                 System.out.println(event.getTarget());
@@ -1291,7 +1292,7 @@ public class guiController implements Initializable {
 
         player1BoardE.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
-                Dragboard db = event.getDragboard();
+                // Dragboard db = event.getDragboard();
                 System.out.println("dropped");
                 System.out.println(event.getSource());
                 System.out.println(event.getTarget());
@@ -1342,7 +1343,7 @@ public class guiController implements Initializable {
 
         player2BoardA.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
-                Dragboard db = event.getDragboard();
+                // Dragboard db = event.getDragboard();
                 System.out.println("dropped");
                 System.out.println(event.getSource());
                 System.out.println(event.getTarget());
@@ -1387,7 +1388,7 @@ public class guiController implements Initializable {
 
         player2BoardB.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
-                Dragboard db = event.getDragboard();
+                // Dragboard db = event.getDragboard();
                 System.out.println("dropped");
                 System.out.println(event.getSource());
                 System.out.println(event.getTarget());
@@ -1432,7 +1433,7 @@ public class guiController implements Initializable {
 
         player2BoardC.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
-                Dragboard db = event.getDragboard();
+                // Dragboard db = event.getDragboard();
                 System.out.println("dropped");
                 System.out.println(event.getSource());
                 System.out.println(event.getTarget());
@@ -1477,7 +1478,7 @@ public class guiController implements Initializable {
 
         player2BoardD.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
-                Dragboard db = event.getDragboard();
+                // Dragboard db = event.getDragboard();
                 System.out.println("dropped");
                 System.out.println(event.getSource());
                 System.out.println(event.getTarget());
@@ -1522,7 +1523,7 @@ public class guiController implements Initializable {
 
         player2BoardE.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
-                Dragboard db = event.getDragboard();
+                // Dragboard db = event.getDragboard();
                 System.out.println("dropped");
                 System.out.println(event.getSource());
                 System.out.println(event.getTarget());
@@ -2296,7 +2297,7 @@ public class guiController implements Initializable {
         player2Img.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (selectedAttCard != -1 && !hasAttacked && defenderBoard.isEmpty()) {
+                if (selectedAttCard != -1 && !hasAttacked && defenderBoard.isEmpty() && !((Character) attackerBoard.getCard(selectedAttCard)).hasAttacked()) {
                     if (selectedDefCard == -1) {
                         selectBoardCard(11);
                         selectedDefCard = 11;
@@ -2588,7 +2589,7 @@ public class guiController implements Initializable {
         player1Img.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (selectedAttCard != -1 && !hasAttacked && defenderBoard.isEmpty()) {
+                if (selectedAttCard != -1 && !hasAttacked && defenderBoard.isEmpty() && !((Character) attackerBoard.getCard(selectedAttCard)).hasAttacked()) {
                     if (selectedDefCard == -1) {
                         selectBoardCard(10);
                         selectedDefCard = 10;
@@ -2943,6 +2944,9 @@ public class guiController implements Initializable {
                         ((Character) P1board.getCard(0)).addExp(-((Character) P1board.getCard(0)).getLevel() * 2 + 1);
                         ((Character) P1board.getCard(0)).levelUp(1);
                     }
+                    if (pemain1.getMana() == 0) {
+                        endLevelUpButton();
+                    }
                 }
                 updateDisplayMana();
                 updateBoard1();
@@ -2959,6 +2963,9 @@ public class guiController implements Initializable {
                     if ((((Character) P1board.getCard(1)).getExp() >= ((Character) P1board.getCard(1)).getLevel() * 2 - 1) && (((Character) P1board.getCard(1)).getLevel() < 10)) {
                         ((Character) P1board.getCard(1)).addExp(-((Character) P1board.getCard(1)).getLevel() * 2 + 1);
                         ((Character) P1board.getCard(1)).levelUp(1);
+                    }
+                    if (pemain1.getMana() == 0) {
+                        endLevelUpButton();
                     }
                 }
                 updateDisplayMana();
@@ -2977,6 +2984,9 @@ public class guiController implements Initializable {
                         ((Character) P1board.getCard(2)).addExp(-((Character) P1board.getCard(2)).getLevel() * 2 + 1);
                         ((Character) P1board.getCard(2)).levelUp(1);
                     }
+                    if (pemain1.getMana() == 0) {
+                        endLevelUpButton();
+                    }
                 }
                 updateDisplayMana();
                 updateBoard1();
@@ -2994,6 +3004,9 @@ public class guiController implements Initializable {
                         ((Character) P1board.getCard(3)).addExp(-((Character) P1board.getCard(3)).getLevel() * 2 + 1);
                         ((Character) P1board.getCard(3)).levelUp(1);
                     }
+                    if (pemain1.getMana() == 0) {
+                        endLevelUpButton();
+                    }
                 }
                 updateDisplayMana();
                 updateBoard1();
@@ -3010,6 +3023,9 @@ public class guiController implements Initializable {
                     if ((((Character) P1board.getCard(4)).getExp() >= ((Character) P1board.getCard(4)).getLevel() * 2 - 1) && (((Character) P1board.getCard(4)).getLevel() < 10)) {
                         ((Character) P1board.getCard(4)).addExp(-((Character) P1board.getCard(4)).getLevel() * 2 + 1);
                         ((Character) P1board.getCard(4)).levelUp(1);
+                    }
+                    if (pemain1.getMana() == 0) {
+                        endLevelUpButton();
                     }
                 }
                 updateDisplayMana();
@@ -3033,6 +3049,9 @@ public class guiController implements Initializable {
                         ((Character) P2board.getCard(0)).addExp(-((Character) P2board.getCard(0)).getLevel() * 2 + 1);
                         ((Character) P2board.getCard(0)).levelUp(1);
                     }
+                    if (pemain2.getMana() == 0) {
+                        endLevelUpButton();
+                    }
                 }
                 updateDisplayMana();
                 updateBoard2();
@@ -3049,6 +3068,9 @@ public class guiController implements Initializable {
                     if ((((Character) P2board.getCard(1)).getExp() >= ((Character) P2board.getCard(1)).getLevel() * 2 - 1) && (((Character) P2board.getCard(1)).getLevel() < 10)) {
                         ((Character) P2board.getCard(1)).addExp((-((Character) P2board.getCard(1)).getLevel() * 2 + 1));
                         ((Character) P2board.getCard(1)).levelUp(1);
+                    }
+                    if (pemain2.getMana() == 0) {
+                        endLevelUpButton();
                     }
                 }
                 updateDisplayMana();
@@ -3067,6 +3089,9 @@ public class guiController implements Initializable {
                         ((Character) P2board.getCard(2)).addExp(-((Character) P2board.getCard(2)).getLevel() * 2 + 1);
                         ((Character) P2board.getCard(2)).levelUp(1);
                     }
+                    if (pemain2.getMana() == 0) {
+                        endLevelUpButton();
+                    }
                 }
                 updateDisplayMana();
                 updateBoard2();
@@ -3084,6 +3109,9 @@ public class guiController implements Initializable {
                         ((Character) P2board.getCard(3)).addExp(-((Character) P2board.getCard(3)).getLevel() * 2 + 1);
                         ((Character) P2board.getCard(3)).levelUp(1);
                     }
+                    if (pemain2.getMana() == 0) {
+                        endLevelUpButton();
+                    }
                 }
                 updateDisplayMana();
                 updateBoard2();
@@ -3100,6 +3128,9 @@ public class guiController implements Initializable {
                     if ((((Character) P2board.getCard(4)).getExp() >= ((Character) P2board.getCard(4)).getLevel() * 2 - 1) && (((Character) P2board.getCard(4)).getLevel() < 10)) {
                         ((Character) P2board.getCard(4)).addExp(-((Character) P2board.getCard(4)).getLevel() * 2 + 1);
                         ((Character) P2board.getCard(4)).levelUp(1);
+                    }
+                    if (pemain2.getMana() == 0) {
+                        endLevelUpButton();
                     }
                 }
                 updateDisplayMana();
@@ -3200,56 +3231,20 @@ public class guiController implements Initializable {
      *  END GAME
      */
     public boolean endGame() {
-        if (pemain1.getHp() <= 0) {
+        if (pemain1.getHp() <= 0 || pemain1.getDeck().getSize() == 0) {
             System.out.println("Player 2 Win");
             EndGameLayer.setVisible(true);
             crownP2.setVisible(true);
             winnerP2.setVisible(true);
             return true;
-        } else if (pemain2.getHp() <= 0) {
+        } else if (pemain2.getHp() <= 0 || pemain2.getDeck().getSize() == 0) {
             System.out.println("Player 1 Win");
             EndGameLayer.setVisible(true);
             crownP1.setVisible(true);
             winnerP1.setVisible(true);
             return true;
-        } else if (noMoreCards(pemain1) || noMoreCards(pemain2)) {
-            EndGameLayer.setVisible(true);
-            if (pemain1.getHp() > pemain2.getHp()) {
-                System.out.println("Player 1 Win");
-                crownP1.setVisible(true);
-                winnerP1.setVisible(true);
-            } else if (pemain1.getHp() < pemain2.getHp()) {
-                System.out.println("Player 2 Win");
-                crownP2.setVisible(true);
-                winnerP2.setVisible(true);
-            } else {
-                System.out.println("Draw");
-                crownP1.setVisible(true);
-                crownP2.setVisible(true);
-                winnerP1.setText("Draw");
-                winnerP1.setVisible(true);
-                winnerP2.setText("Draw");
-                winnerP2.setVisible(true);
-            }
-            return true;
         }
         return false;
-    }
-
-
-    public boolean noMoreCards(Player p) {
-        return (p.getDeck().getSize() == 0) && (p.getHand().isEmpty()) && (p.getBoard().isEmpty() || allBoardCardsHasAttacked(p));
-    }
-
-
-    public boolean allBoardCardsHasAttacked(Player p) {
-        boolean result = true;
-        for (int i = 0; i < 5; i++) {
-            if (p.getBoard().isCharacterAvailable(i)) {
-                result = result && ((Character) p.getBoard().getCard(i)).hasAttacked();
-            }
-        }
-        return result;
     }
 
     

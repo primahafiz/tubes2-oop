@@ -1,6 +1,9 @@
-package com.aetherwars.model;
+package com.aetherwars.model.Spells;
 
-import com.aetherwars.model.Character;
+import com.aetherwars.model.Type;
+import com.aetherwars.model.Characters.Character;
+
+// import com.aetherwars.model.Character;
 
 public class LvlSpell extends Spell {
     private int add;

@@ -1,4 +1,6 @@
-package com.aetherwars.model;
+package com.aetherwars.model.Spells;
+
+import com.aetherwars.model.Type;
 
 public class MorphSpell extends Spell {
     private int targetId;

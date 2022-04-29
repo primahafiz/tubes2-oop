@@ -6,11 +6,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import com.aetherwars.model.Type;
-import com.aetherwars.model.Character;
-import com.aetherwars.model.Card;
-import com.aetherwars.util.CSVReader;
-import com.aetherwars.model.CardReader;
+// import com.aetherwars.model.Type;
+// import com.aetherwars.model.Character;
+// import com.aetherwars.model.Card;
+// import com.aetherwars.util.CSVReader;
+// import com.aetherwars.model.CardReader;
 
 public class mainGui extends Application {
     @Override

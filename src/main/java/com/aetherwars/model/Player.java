@@ -1,16 +1,23 @@
 package com.aetherwars.model;
 
-import com.aetherwars.model.Card.*;
-import com.aetherwars.model.Character.*;
-import com.aetherwars.model.Spell.*;
-import com.aetherwars.model.Board.*;
-import com.aetherwars.model.Hand.*;
-import com.aetherwars.model.Deck.*;
+import com.aetherwars.model.Characters.Character;
+import com.aetherwars.model.Spells.LvlSpell;
+import com.aetherwars.model.Spells.MorphSpell;
+import com.aetherwars.model.Spells.PtnSpell;
+import com.aetherwars.model.Spells.Spell;
+import com.aetherwars.model.Spells.SwapSpell;
+
+// import com.aetherwars.model.Card.*;
+// import com.aetherwars.model.Character.*;
+// import com.aetherwars.model.Spell.*;
+// import com.aetherwars.model.Board.*;
+// import com.aetherwars.model.Hand.*;
+// import com.aetherwars.model.Deck.*;
 
 import com.aetherwars.util.InvalidException;
 
 import java.util.List;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -179,6 +186,8 @@ public class Player {
                         int targetId = morphSpellCard.getTargetId();
                         charCard.MorphEffect(targetId, card);
                         break;
+                    default:
+                        break;
                 }
                 this.hand.removeCardfromHand(spellCardIdx);
             } else {
@@ -212,7 +221,7 @@ public class Player {
             // musuh dan attack modifier tipe kedua karakter (tetap berkurang
             // meskipun karakter musuh mati).
             double damageByEnemy = enemyCharacter.getDamage(attacker);
-            attacker.minusHealth((int)damageByEnemy);
+            attacker.minusHealth(damageByEnemy);
             // attacker.setHealth((int) (attacker.getHealth() - damageByEnemy));
             System.out.println("Damage yang diterima : " + damageByEnemy);
 

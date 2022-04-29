@@ -1,5 +1,10 @@
 package com.aetherwars.model;
 
+import com.aetherwars.model.Characters.Character;
+import com.aetherwars.model.Spells.LvlSpell;
+import com.aetherwars.model.Spells.MorphSpell;
+import com.aetherwars.model.Spells.PtnSpell;
+import com.aetherwars.model.Spells.SwapSpell;
 import com.aetherwars.util.CSVReader;
 import java.io.File;
 import java.io.IOException;

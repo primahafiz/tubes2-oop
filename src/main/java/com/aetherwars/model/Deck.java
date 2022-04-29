@@ -1,5 +1,11 @@
 package com.aetherwars.model;
 import java.util.*;
+
+import com.aetherwars.model.Characters.Character;
+import com.aetherwars.model.Spells.LvlSpell;
+import com.aetherwars.model.Spells.MorphSpell;
+import com.aetherwars.model.Spells.PtnSpell;
+import com.aetherwars.model.Spells.SwapSpell;
 public class Deck {
 
     private List<Card> CardDeck= new ArrayList<Card>();

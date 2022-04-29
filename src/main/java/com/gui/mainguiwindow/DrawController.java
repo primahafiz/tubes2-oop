@@ -1,12 +1,13 @@
 package com.gui.mainguiwindow;
 
 import com.aetherwars.model.Card;
-import com.aetherwars.model.Character;
-import com.aetherwars.model.MorphSpell;
-import com.aetherwars.model.PtnSpell;
-import com.aetherwars.model.LvlSpell;
 import com.aetherwars.model.Deck;
 import com.aetherwars.model.Hand;
+import com.aetherwars.model.Characters.Character;
+import com.aetherwars.model.Spells.LvlSpell;
+import com.aetherwars.model.Spells.MorphSpell;
+import com.aetherwars.model.Spells.PtnSpell;
+
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

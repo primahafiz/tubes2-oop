@@ -1,4 +1,7 @@
-package com.aetherwars.model;
+package com.aetherwars.model.Spells;
+
+import com.aetherwars.model.Card;
+import com.aetherwars.model.Type;
 
 abstract public class Spell extends Card{
     protected int duration;
@@ -25,5 +28,5 @@ abstract public class Spell extends Card{
         System.out.println("Duration: " + getDuration());
     }
 
-    abstract Type getCardType();
+    public abstract Type getCardType();
 }

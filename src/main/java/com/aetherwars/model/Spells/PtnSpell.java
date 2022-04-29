@@ -1,4 +1,6 @@
-package com.aetherwars.model;
+package com.aetherwars.model.Spells;
+
+import com.aetherwars.model.Type;
 
 public class PtnSpell extends Spell {
     private double attack;

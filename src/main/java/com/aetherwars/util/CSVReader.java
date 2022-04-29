@@ -55,24 +55,25 @@ public class CSVReader {
         String line;
         boolean firstLine = true;
         FileReader fileReader = new FileReader(this.csvFile);
-        BufferedReader br = new BufferedReader(fileReader);
-        ArrayList<String[]> list = new ArrayList<String[]>();
+        try (BufferedReader br = new BufferedReader(fileReader)) {
+            ArrayList<String[]> list = new ArrayList<String[]>();
 
-        while ((line = br.readLine()) != null) {
-            if (!firstLine || !this.skipFirstLine) {
-                String[] row = line.split(this.separator);
-                // This code will ignore double quotes, if present as first and last character
-                for (int i = 0; i < row.length; i++) {
-                    String val = row[i];
-                    if (val.length() >= 2 && val.charAt(0) == '"' && val.charAt(val.length() - 1) == '"') {
-                        row[i] = val.substring(1, val.length() - 1);
+            while ((line = br.readLine()) != null) {
+                if (!firstLine || !this.skipFirstLine) {
+                    String[] row = line.split(this.separator);
+                    // This code will ignore double quotes, if present as first and last character
+                    for (int i = 0; i < row.length; i++) {
+                        String val = row[i];
+                        if (val.length() >= 2 && val.charAt(0) == '"' && val.charAt(val.length() - 1) == '"') {
+                            row[i] = val.substring(1, val.length() - 1);
+                        }
                     }
+                    list.add(row);
                 }
-                list.add(row);
+                firstLine = false;
             }
-            firstLine = false;
+            return list;
         }
-        return list;
     }
 
 }

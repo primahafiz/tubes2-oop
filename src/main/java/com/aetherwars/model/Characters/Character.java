@@ -1,7 +1,15 @@
-package com.aetherwars.model;
+package com.aetherwars.model.Characters;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.aetherwars.model.Card;
+import com.aetherwars.model.Type;
+import com.aetherwars.model.Spells.LvlSpell;
+import com.aetherwars.model.Spells.PtnSpell;
+import com.aetherwars.model.Spells.Spell;
+import com.aetherwars.model.Spells.SwapSpell;
+
 import java.util.*;
 import java.lang.Math;
 
@@ -191,14 +199,17 @@ public class Character extends Card  {
     int predictLvl = s.getAdd() + this.getLevel();
     if (predictLvl >= 1 && predictLvl <= 10){
       this.level = predictLvl;
-      this.attack += this.attackUp;
-      this.health += this.healthUp;
+      if (s.getAdd() > 0){
+        this.attack += s.getAdd();
+        this.health += s.getAdd();
+      } else {
+        this.attack -= s.getAdd();
+        this.health -= s.getAdd();
+      }
     } else if (predictLvl > 10){
       this.level = 10;
     } else {
       this.level = 1;
-      this.attack += this.attackUp;
-      this.health += this.healthUp;
     }
   }
 

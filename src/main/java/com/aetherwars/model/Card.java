@@ -49,5 +49,5 @@ abstract public class Card implements Cloneable{
         return (Card) super.clone();
     }
 
-    abstract Type getCardType();
+    public abstract Type getCardType();
 }
