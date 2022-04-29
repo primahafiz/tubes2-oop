@@ -526,6 +526,22 @@ public class guiController implements Initializable {
         initHoveredCardBoard();
         initHoveredCardHand();
         hideHand();
+        for (int i = 0; i < pemain1.getDeck().getSize(); i++) {
+            //System.out.println(pemain1.getDeck().getAll().get(0));
+            for (int j = 0; j < pemain1.getDeck().getSize(); j++) {
+                if (i != j && !pemain1.getDeck().getAll().get(i).getName().equals(pemain1.getDeck().getAll().get(j).getName())) {
+                    if (System.identityHashCode(pemain1.getDeck().getAll().get(i)) ==  System.identityHashCode(pemain1.getDeck().getAll().get(j))) {
+                        System.out.println("samaa");
+                    }
+                    else {
+                        System.out.println(System.identityHashCode(pemain1.getDeck().getAll().get(i)));
+                        System.out.println(System.identityHashCode(pemain1.getDeck().getAll().get(j)));
+                        System.out.println();
+                        //System.out.println("beda");
+                    }
+                }
+            }
+        }
     }
 
 
@@ -3628,6 +3644,9 @@ public class guiController implements Initializable {
                 handCard5AtkHealth.setText(null);
             }
         }
+        for (int i=0;i<handPemain1.numberOfCards();i++){
+            System.out.println( System.identityHashCode(handPemain1.getCard(i)));
+        }
     }
 
 
@@ -3687,6 +3706,9 @@ public class guiController implements Initializable {
                 handCard5Mana.setText(null);
                 handCard5AtkHealth.setText(null);
             }
+        }
+        for (int i=0;i<handPemain2.numberOfCards();i++){
+            System.out.println( System.identityHashCode(handPemain2.getCard(i)));
         }
     }
     

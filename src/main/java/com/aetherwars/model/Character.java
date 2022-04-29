@@ -280,6 +280,7 @@ public class Character extends Card  {
       // kalo ga ada langsung minus dari this.health
         // kalo damage >= this.health set this.health = 0
         // kalo damage < this.health set this.health -= damage
+    System.out.println("minus Health");
     if (damage >= this.getHealth()){
       this.health = 0;
     } else {
