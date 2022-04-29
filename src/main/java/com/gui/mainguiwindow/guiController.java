@@ -518,7 +518,6 @@ public class guiController implements Initializable {
             }
         }
 
-        debugging();
 
         // initialize health
         lifeBar1.setProgress(1);
@@ -3259,7 +3258,6 @@ public class guiController implements Initializable {
             initHoveredCardHand();              // inisiasi hover hand setelah draw
             activateStageLabel(stageEndLabel,stageDrawLabel);
         }
-        debugOnGoing();
         idStage++;
         idStage%=4;
 
@@ -3381,7 +3379,6 @@ public class guiController implements Initializable {
 
     public void removeDeadCard() {
         // menghapus kartu yang sudah mati dari board
-        System.out.println("removeDeadCard");
         for (int i = 0; i < 5; i++) {
             if (pemain1.getBoard().isCharacterAvailable(i) && ((Character) pemain1.getBoard().getCard(i)).getHealth() <= 0) {
                 unmarkHasAttacked(i);
@@ -3611,31 +3608,28 @@ public class guiController implements Initializable {
                 handCard5AtkHealth.setText(getAtkHealth(handPemain1.getCard(i)));
             }
         }
-        for(int i=handPemain1.numberOfCards();i<5;i++){
-            if(i==0){
+        for(int i=handPemain1.numberOfCards();i<5;i++) {
+            if (i == 0) {
                 handCard1.setImage(null);
                 handCard1Mana.setText(null);
                 handCard1AtkHealth.setText(null);
-            }else if(i==1){
+            } else if (i == 1) {
                 handCard2.setImage(null);
                 handCard2Mana.setText(null);
                 handCard2AtkHealth.setText(null);
-            }else if(i==2){
+            } else if (i == 2) {
                 handCard3.setImage(null);
                 handCard3Mana.setText(null);
                 handCard3AtkHealth.setText(null);
-            }else if(i==3){
+            } else if (i == 3) {
                 handCard4.setImage(null);
                 handCard4Mana.setText(null);
                 handCard4AtkHealth.setText(null);
-            }else if(i==4){
+            } else if (i == 4) {
                 handCard5.setImage(null);
                 handCard5Mana.setText(null);
                 handCard5AtkHealth.setText(null);
             }
-        }
-        for (int i=0;i<handPemain1.numberOfCards();i++){
-            System.out.println( System.identityHashCode(handPemain1.getCard(i)));
         }
     }
 
@@ -3696,9 +3690,6 @@ public class guiController implements Initializable {
                 handCard5Mana.setText(null);
                 handCard5AtkHealth.setText(null);
             }
-        }
-        for (int i=0;i<handPemain2.numberOfCards();i++){
-            System.out.println( System.identityHashCode(handPemain2.getCard(i)));
         }
     }
     
