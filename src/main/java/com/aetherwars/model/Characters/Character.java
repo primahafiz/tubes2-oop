@@ -17,6 +17,8 @@ public class Character extends Card  {
   private Type type;
   private double attack;
   private double health;
+  private double baseAttack;
+  private double baseHealth;
   private double attackUp;
   private double healthUp;
   private int exp;
@@ -30,6 +32,8 @@ public class Character extends Card  {
     this.type = type;
     this.attack = attack;
     this.health = health;
+    this.baseAttack = attack;
+    this.baseHealth = health;
     this.attackUp = attackUp;
     this.healthUp = healthUp;
     this.exp = 0;
@@ -51,6 +55,14 @@ public class Character extends Card  {
 
   public double getHealth(){
     return Math.max(this.health + this.getTempHealth(), 0);
+  }
+
+  public double getBaseAttack(){
+    return this.baseAttack;
+  }
+
+  public double getBaseHealth(){
+    return this.baseHealth;
   }
 
   public double getAttackUp(){
@@ -122,12 +134,8 @@ public class Character extends Card  {
   public void levelUp(int lvl) {
     int predictLvl = this.level + lvl;
     this.level = Math.min(predictLvl, 10);
-    for (int i = 0; i < lvl; i++) {
-      if (lvl < 10) {
-        this.attack += this.attackUp;
-        this.health += this.healthUp;
-      }
-    }
+    this.attack = this.baseAttack + this.attackUp * (this.level - 1);
+    this.health = this.baseHealth + this.healthUp * (this.level - 1);
   }
 
   public boolean isDead(){
@@ -199,18 +207,13 @@ public class Character extends Card  {
     int predictLvl = s.getAdd() + this.getLevel();
     if (predictLvl >= 1 && predictLvl <= 10){
       this.level = predictLvl;
-      if (s.getAdd() > 0){
-        this.attack += s.getAdd();
-        this.health += s.getAdd();
-      } else {
-        this.attack -= s.getAdd();
-        this.health -= s.getAdd();
-      }
     } else if (predictLvl > 10){
       this.level = 10;
     } else {
       this.level = 1;
     }
+    this.attack = this.baseAttack + this.attackUp * (this.level - 1);
+    this.health = this.baseHealth + this.healthUp * (this.level - 1);
   }
 
   public void MorphEffect(int targetId, List<Card> cards){
