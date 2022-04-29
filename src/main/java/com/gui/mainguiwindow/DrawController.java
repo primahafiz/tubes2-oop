@@ -57,7 +57,7 @@ public class DrawController implements Initializable {
     List<Card> c;
     Hand hand;
 
-    public DrawController(Deck deck, Hand hand){
+    public DrawController(Deck deck, Hand hand) throws CloneNotSupportedException {
         c = deck.getCard();
         this.hand=hand;
         this.deck=deck;
@@ -90,11 +90,11 @@ public class DrawController implements Initializable {
 
                 if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
                     try{
-                        hand.addCard(c.get(0));
+                        hand.addCard((Card)c.get(0).clone());
                         System.out.println(c.get(0).getName());
                         c.remove(0);
                         for(int i=0;i<c.size();i++){
-                            deck.addCard(c.get(i));
+                            deck.addCard((Card)c.get(i).clone());
                         }
                     }catch (Exception e){
                         System.out.println(e.getMessage());
@@ -110,11 +110,11 @@ public class DrawController implements Initializable {
 
                 if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
                     try{
-                        hand.addCard(c.get(1));
+                        hand.addCard((Card)c.get(1).clone());
                         System.out.println(c.get(1).getName());
                         c.remove(1);
                         for(int i=0;i<c.size();i++){
-                            deck.addCard(c.get(i));
+                            deck.addCard((Card)c.get(i).clone());
                         }
                     }catch (Exception e){
                         System.out.println(e.getMessage());
@@ -130,11 +130,11 @@ public class DrawController implements Initializable {
 
                 if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
                     try{
-                        hand.addCard(c.get(2));
+                        hand.addCard((Card)c.get(2).clone());
                         System.out.println(c.get(2).getName());
                         c.remove(2);
                         for(int i=0;i<c.size();i++){
-                            deck.addCard(c.get(i));
+                            deck.addCard((Card)c.get(i).clone());
                         }
                     }catch (Exception e){
                         System.out.println(e.getMessage());

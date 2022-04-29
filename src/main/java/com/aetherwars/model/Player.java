@@ -85,7 +85,7 @@ public class Player {
     }
 
     // Mengambil kartu dari Deck
-    public void drawCard() {
+    public void drawCard() throws CloneNotSupportedException {
         // draw 3 kartu teratas dari deck
         this.deck.getCard();
 

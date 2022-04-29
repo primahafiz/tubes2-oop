@@ -22,12 +22,12 @@ public class Deck {
         }
     }
 
-    public List<Card> getCard() {
+    public List<Card> getCard() throws CloneNotSupportedException {
         List<Card> C = new ArrayList<Card>();
         int i;
         if (this.CardDeck.size() >= 3){
             for (i = 0; i < 3; i++){
-                C.add(this.CardDeck.get(i));
+                C.add((Card) this.CardDeck.get(i).clone());
             }
             for (i = 0; i < 3; i++){
                 this.CardDeck.remove(i);
@@ -35,7 +35,7 @@ public class Deck {
         }
         else if(this.CardDeck.size() > 0){
             for (i = 0; i < this.CardDeck.size(); i++){
-                C.add(this.CardDeck.get(i));
+                C.add((Card) this.CardDeck.get(i).clone());
             }
             for (i =0; i< this.CardDeck.size(); i++){
                 this.CardDeck.remove(i);

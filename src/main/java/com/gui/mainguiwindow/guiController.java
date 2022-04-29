@@ -489,7 +489,12 @@ public class guiController implements Initializable {
         deckCapacityPemain1=pemain1.getDeck().getSize();
         deckCapacityPemain2=pemain2.getDeck().getSize();
 
-        List<Card> c1 = pemain1.getDeck().getCard();
+        List<Card> c1 = null;
+        try {
+            c1 = pemain1.getDeck().getCard();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
         for(int i=0;i<3;i++){
             try{
                 (pemain1.getHand()).addCard(c1.get(i));
@@ -498,7 +503,12 @@ public class guiController implements Initializable {
             }
         }
 
-        List<Card> c2 = pemain2.getDeck().getCard();
+        List<Card> c2 = null;
+        try {
+            c2 = pemain2.getDeck().getCard();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
         for(int i=0;i<3;i++){
             try{
                 (pemain2.getHand()).addCard(c2.get(i));
@@ -542,6 +552,7 @@ public class guiController implements Initializable {
                 }
             }
         }
+        debug();
     }
 
 
@@ -1115,7 +1126,11 @@ public class guiController implements Initializable {
                         e.printStackTrace();
                     }
                 }else if(!currentBoard.isCharacterAvailable(0) && currentHand.getCard(currentDragHand) instanceof Character && pemain1.getMana()>=currentHand.getCard(currentDragHand).getMana()){
-                    currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),0);
+                    try {
+                        currentBoard.addCardtoBoard((Card)currentHand.getCard(currentDragHand).clone(),0);
+                    } catch (CloneNotSupportedException e) {
+                        e.printStackTrace();
+                    }
                     pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
                     currentHand.removeCardfromHand(currentDragHand);
                 }
@@ -1155,7 +1170,11 @@ public class guiController implements Initializable {
                         e.printStackTrace();
                     }
                 }else if(!currentBoard.isCharacterAvailable(1) && currentHand.getCard(currentDragHand) instanceof Character && pemain1.getMana()>=currentHand.getCard(currentDragHand).getMana()){
-                    currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),1);
+                    try {
+                        currentBoard.addCardtoBoard((Card)currentHand.getCard(currentDragHand).clone(),1);
+                    } catch (CloneNotSupportedException e) {
+                        e.printStackTrace();
+                    }
                     pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
                     currentHand.removeCardfromHand(currentDragHand);
                 }
@@ -1195,7 +1214,11 @@ public class guiController implements Initializable {
                         e.printStackTrace();
                     }
                 }else if(!currentBoard.isCharacterAvailable(2) && currentHand.getCard(currentDragHand) instanceof Character && pemain1.getMana()>=currentHand.getCard(currentDragHand).getMana()){
-                    currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),2);
+                    try {
+                        currentBoard.addCardtoBoard((Card)currentHand.getCard(currentDragHand).clone(),2);
+                    } catch (CloneNotSupportedException e) {
+                        e.printStackTrace();
+                    }
                     pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
                     currentHand.removeCardfromHand(currentDragHand);
                 }
@@ -1235,7 +1258,11 @@ public class guiController implements Initializable {
                         e.printStackTrace();
                     }
                 }else if(!currentBoard.isCharacterAvailable(3) && currentHand.getCard(currentDragHand) instanceof Character && pemain1.getMana()>=currentHand.getCard(currentDragHand).getMana()){
-                    currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),3);
+                    try {
+                        currentBoard.addCardtoBoard((Card)currentHand.getCard(currentDragHand).clone(),3);
+                    } catch (CloneNotSupportedException e) {
+                        e.printStackTrace();
+                    }
                     pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
                     currentHand.removeCardfromHand(currentDragHand);
                 }
@@ -1275,7 +1302,11 @@ public class guiController implements Initializable {
                         e.printStackTrace();
                     }
                 } else if (!currentBoard.isCharacterAvailable(4) && currentHand.getCard(currentDragHand) instanceof Character && pemain1.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
-                    currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand), 4);
+                    try {
+                        currentBoard.addCardtoBoard((Card)currentHand.getCard(currentDragHand).clone(), 4);
+                    } catch (CloneNotSupportedException e) {
+                        e.printStackTrace();
+                    }
                     pemain1.setMana(pemain1.getMana()-currentHand.getCard(currentDragHand).getMana());
                     currentHand.removeCardfromHand(currentDragHand);
                 }
@@ -1321,7 +1352,11 @@ public class guiController implements Initializable {
                         e.printStackTrace();
                     }
                 }else if(!currentBoard.isCharacterAvailable(0) && currentHand.getCard(currentDragHand) instanceof Character && pemain2.getMana()>=currentHand.getCard(currentDragHand).getMana()){
-                    currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),0);
+                    try {
+                        currentBoard.addCardtoBoard((Card)currentHand.getCard(currentDragHand).clone(),0);
+                    } catch (CloneNotSupportedException e) {
+                        e.printStackTrace();
+                    }
                     pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
                     currentHand.removeCardfromHand(currentDragHand);
                 }
@@ -1361,7 +1396,11 @@ public class guiController implements Initializable {
                         e.printStackTrace();
                     }
                 }else if(!currentBoard.isCharacterAvailable(1) && currentHand.getCard(currentDragHand) instanceof Character && pemain2.getMana()>=currentHand.getCard(currentDragHand).getMana()){
-                    currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),1);
+                    try {
+                        currentBoard.addCardtoBoard((Card)currentHand.getCard(currentDragHand).clone(),1);
+                    } catch (CloneNotSupportedException e) {
+                        e.printStackTrace();
+                    }
                     pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
                     currentHand.removeCardfromHand(currentDragHand);
                 }
@@ -1401,7 +1440,11 @@ public class guiController implements Initializable {
                         e.printStackTrace();
                     }
                 }else if(!currentBoard.isCharacterAvailable(2) && currentHand.getCard(currentDragHand) instanceof Character && pemain2.getMana()>=currentHand.getCard(currentDragHand).getMana()){
-                    currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),2);
+                    try {
+                        currentBoard.addCardtoBoard((Card)currentHand.getCard(currentDragHand).clone(),2);
+                    } catch (CloneNotSupportedException e) {
+                        e.printStackTrace();
+                    }
                     pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
                     currentHand.removeCardfromHand(currentDragHand);
                 }
@@ -1441,7 +1484,11 @@ public class guiController implements Initializable {
                         e.printStackTrace();
                     }
                 }else if(!currentBoard.isCharacterAvailable(3) && currentHand.getCard(currentDragHand) instanceof Character && pemain2.getMana()>=currentHand.getCard(currentDragHand).getMana()){
-                    currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand),3);
+                    try {
+                        currentBoard.addCardtoBoard((Card)currentHand.getCard(currentDragHand).clone(),3);
+                    } catch (CloneNotSupportedException e) {
+                        e.printStackTrace();
+                    }
                     pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
                     currentHand.removeCardfromHand(currentDragHand);
                 }
@@ -1481,7 +1528,11 @@ public class guiController implements Initializable {
                         e.printStackTrace();
                     }
                 } else if (!currentBoard.isCharacterAvailable(4) && currentHand.getCard(currentDragHand) instanceof Character && pemain2.getMana()>=currentHand.getCard(currentDragHand).getMana()) {
-                    currentBoard.addCardtoBoard(currentHand.getCard(currentDragHand), 4);
+                    try {
+                        currentBoard.addCardtoBoard((Card)currentHand.getCard(currentDragHand).clone(), 4);
+                    } catch (CloneNotSupportedException e) {
+                        e.printStackTrace();
+                    }
                     pemain2.setMana(pemain2.getMana()-currentHand.getCard(currentDragHand).getMana());
                     currentHand.removeCardfromHand(currentDragHand);
                 }
@@ -3270,6 +3321,7 @@ public class guiController implements Initializable {
             initHoveredCardHand();              // inisiasi hover hand setelah draw
             activateStageLabel(stageEndLabel,stageDrawLabel);
         }
+        debugOnGoing();
         idStage++;
         idStage%=4;
 
@@ -3977,6 +4029,8 @@ public class guiController implements Initializable {
      */
 
     public static void debugging(){
+
+
         try {
             System.out.println("Hello World");
             CardReader c = new CardReader(); // ctor
@@ -3996,6 +4050,49 @@ public class guiController implements Initializable {
             e.printStackTrace();
         }finally {
             System.out.println("Finished");
+        }
+    }
+
+    public void debug(){
+        for(int i=0;i<pemain1.getDeck().getSize();i++){
+            System.out.println(pemain1.getDeck().getAll().get(i).getName()+" = "+pemain1.getDeck().getAll().get(i));
+        }
+    }
+
+    public void debugOnGoing(){
+        System.out.println("Pemain 1:");
+        System.out.println("Hand 1:");
+        for(int i=0;i<pemain1.getHand().numberOfCards();i++){
+            if(pemain1.getHand().getCard(i)==null){
+                System.out.println("null card");
+                continue;
+            }
+            System.out.println(pemain1.getHand().getCard(i).getName()+" = "+pemain1.getHand().getCard(i));
+        }
+        System.out.println("Board 1 :");
+        for(int i=0;i<5;i++){
+            if(pemain1.getBoard().getCard(i)==null){
+                System.out.println("null card");
+                continue;
+            }
+            System.out.println(pemain1.getBoard().getCard(i).getName()+" = "+pemain1.getBoard().getCard(i));
+        }
+        System.out.println("Pemain 2:");
+        System.out.println("Hand 2:");
+        for(int i=0;i<pemain2.getHand().numberOfCards();i++){
+            if(pemain2.getHand().getCard(i)==null){
+                System.out.println("null card");
+                continue;
+            }
+            System.out.println(pemain2.getHand().getCard(i).getName()+" = "+pemain2.getHand().getCard(i));
+        }
+        System.out.println("Board 2 :");
+        for(int i=0;i<5;i++){
+            if(pemain2.getBoard().getCard(i)==null){
+                System.out.println("null card");
+                continue;
+            }
+            System.out.println(pemain2.getBoard().getCard(i).getName()+" = "+pemain2.getBoard().getCard(i));
         }
     }
 }
